@@ -1,51 +1,51 @@
 How To Install and Use PyBrain on TJHSST Windows Machines
-————————————————————————————————————————————————————————————————————————
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 Part A: Downloading
 
 1. Open a web browser
-2. Copy “https://github.com/pybrain/pybrain/archive/master.zip” into the search bar
-3. Wait for “pybrain-master.zip” to download
+2. Copy â€œhttps://github.com/pybrain/pybrain/archive/master.zipâ€ into the search bar
+3. Wait for â€œpybrain-master.zipâ€ to download
 4. Double click on the zip file and extract all.
 5. Copy the extracted folder to your desktop (or somewhere else) for easy access.
-————————————————————————————————————————————————————————————————————————
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 Part B: Installing
 
 1. Open cmd
-2. type “cd ..” twice to get to C:/
+2. type â€œcd ..â€ twice to get to C:/
 3. type cd Python34
 4. open the pybrain-master folder from earlier
-5. type into cmd “python “, then drag the file “setup.py” from the pybrain-master folder into cmd. Then type “ install”.
+5. type into cmd â€œpython â€œ, then drag the file â€œsetup.pyâ€ from the pybrain-master folder into cmd. Then type â€œ installâ€.
 
-This should look like “python C:/…/…/../setup.py install”
+This should look like â€œpython C:/â€¦/â€¦/../setup.py installâ€
 
 6. Press enter and wait for Pybrain to install
-————————————————————————————————————————————————————————————————————————
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 Part C: Testing
 
 1. Open your favorite IDE and create a python file.
 2. Type:
 
 import pybrain
-print(“Hello”)
+print(â€œHelloâ€)
 
 3. Save the file as test.py WITHIN THE PYBRAIN-MASTER folder
-4. Go back to cmd and type “python “, then drag your test.py from within the pybrain-master folder into cmd.
+4. Go back to cmd and type â€œpython â€œ, then drag your test.py from within the pybrain-master folder into cmd.
 
-This should look like “python C:/…/…/../test.py”
+This should look like "python C:/â€¦/â€¦/../test.py"
 
-5. Press enter. If you see the word “Hello”, you are finished. 
+5. Press enter. If you see the word â€œHelloâ€, you are finished. 
 
 Note that all programs using pybrain must be saved within the pybrain-master folder.
-————————————————————————————————————————————————————————————————————————
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 Part D: Errors
 
 1. If you get an error, download putty and type  yourusername@remote.tjhsst.edu. 
 2. Press enter and enter your password when prompted.
-3. ssh into a specific computer, like so: “ssh lucario”
-4. Type “python” into the terminal and type “import pybrain”. If this works, you are done.
+3. ssh into a specific computer, like so: â€œssh lucarioâ€
+4. Type "python" into the terminal and type "import pybrain". If this works, you are done.
 
 5. If this does not work, you're screwed.
-————————————————————————————————————————————————————————————————————————
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 Nikhil Sardana, TJHSST Class of 2018
 github.com
 codeload.github.com
