@@ -29,7 +29,7 @@ import pybrain
 print("Hello")
 
 3. Save the file as test.py WITHIN THE PYBRAIN-MASTER folder
-4. Go back to cmd and type “python “, then drag your test.py from within the pybrain-master folder into cmd.
+4. Go back to cmd and type "python ", then drag your test.py from within the pybrain-master folder into cmd.
 
 This should look like "python C:/…/…/../test.py"
 
