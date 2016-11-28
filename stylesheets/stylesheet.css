@@ -59,7 +59,7 @@ a {
   background-color: #159957;
   background-image: url("../images/jeffferson.jpg"); =
   background-position: left bottom;
-  background-size: auto 100%;
+  background-size: 100% auto;
 }
 
 
