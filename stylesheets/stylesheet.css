@@ -60,6 +60,7 @@ a {
   background-image: url("../images/jeffferson.jpg"); =
   background-position: left bottom;
   background-size: 100% auto;
+  background-repeat: no-repeat;
 }
 
 
