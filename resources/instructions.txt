@@ -42,8 +42,6 @@ Part D: Errors
 1. If you get an error, download putty and type  yourusername@remote.tjhsst.edu. 
 2. Press enter and enter your password when prompted.
 3. ssh into a specific computer, like so: “ssh lucario”
-4. Type "python" into the terminal and type "import pybrain". If this works, you are done.
-
-5. If this does not work, you're screwed.
+4. Type "python" into the terminal and type "import pybrain".
 ________________________________________________________________________
 Nikhil Sardana, TJHSST Class of 2018
