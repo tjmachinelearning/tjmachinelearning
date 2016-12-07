@@ -57,7 +57,7 @@ a {
   color: #000;
   text-align: center;
   background-color: #ffffff;
-  background-image: url("../images/jefferson.jpg");
+  background-image: url("../images/jefferson.jpg"); =
   background-position: left bottom;
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -70,7 +70,7 @@ a {
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .page-header {
-    padding: 3rem 4rem; } 
+    padding: 3rem 4rem; } }
 
 @media screen and (max-width: 42em) {
   .page-header {
@@ -90,7 +90,7 @@ a {
 
 @media screen and (max-width: 42em) {
   .project-name {
-    font-size: 1.75rem; }}
+    font-size: 1.75rem; } }
 
 .project-tagline {
   margin-bottom: 2rem;
