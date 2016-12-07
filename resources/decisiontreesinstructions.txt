@@ -16,4 +16,11 @@ Then you will need to compute the entropy decrease of each parameter, and make t
 Repeat this for all parameters until the decision tree is complete.
 To make sure your decision tree works, use about 3/4ths of the 295 data points as training data and 1/4th as test data.
 Don't overfit the data! You want to minimize test error, not train error.
+
 Lastly, don't try to cheat (we know that the data is public). This problem is just to help you learn the basics.
+And if you try to cheat, it won't work. We will be retraining your algorithm on the data before testing accuracy.
+
+A few more rules:
+- All programs must be in python3
+- No libraries
+- Submit your code by Sunday night to tjmachinelearning.com/submit.html
