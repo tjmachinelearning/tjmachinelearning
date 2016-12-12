@@ -1,0 +1,26 @@
+The data (bupadata.txt) is actual data of patients with liver disorders. There are two categories of patients.
+These categories are represented in the 7th parameter of each line.
+
+Each line of data contains:
+1. mcv mean corpuscular volume
+2. alkphos alkaline phosphotase
+3. sgpt alamine aminotransferase
+4. sgot aspartate aminotransferase
+5. gammagt gamma-glutamyl transpeptidase
+6. drinks number of half-pint equivalents of alcoholic beverages drunk per day
+7. category
+
+Your goal is to create a decision tree that best sorts the data into the categories indicated by the 7th parameter.
+For each of the six characteristics, you will need to find a value that best splits the data into two categories.
+Then you will need to compute the entropy decrease of each parameter, and make the decision tree using the parameter that decreases entropy the most.
+Repeat this for all parameters until the decision tree is complete.
+To make sure your decision tree works, use about 3/4ths of the 295 data points as training data and 1/4th as test data.
+Don't overfit the data! You want to minimize test error, not train error.
+
+Lastly, don't try to cheat (we know that the data is public). This problem is just to help you learn the basics.
+And if you try to cheat, it won't work. We will be retraining your algorithm on the data before testing accuracy.
+
+A few more rules:
+- All programs must be in python3
+- No libraries
+- Submit your code by Sunday night to tjmachinelearning.com/submit.html
