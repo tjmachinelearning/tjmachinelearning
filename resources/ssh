@@ -1,8 +1,0 @@
-To ssh into the syslab computers:
-
-Step 1 (Mac): open terminal and type "ssh yourusername@remote.tjhsst.edu"
-Step 1 (Windows): install putty. Open it and in the box type "yourusername@remote.tjhsst.edu" and then click Enter
-Step 2: type in your password
-Step 3: ssh into a machine by typing "ssh machinename" (Machines include "lucario", "link", "peach", "mario" and many more. choose any one.)
-Step 4: enter your password again
-Step 5: To edit code, use your favorite text editor
