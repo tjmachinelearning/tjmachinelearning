@@ -2,7 +2,7 @@ from sklearn import svm
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
-def getData():
+def getData(): #modify this to work with the data (hint: output is not the last thing but the....)
 	x = []
 	y = []
 	input = open("data.txt").read().split("\n")
