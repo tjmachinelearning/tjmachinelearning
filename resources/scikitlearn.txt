@@ -3,18 +3,9 @@ ____________________________________________
 1. Download and install the latest version of Python3 (3.5.2 as of now) from https://www.python.org/downloads/
 2. After installing, open up cmd or terminal
 3. type "pip3 install scikit-learn"
-4. to make sure it worked, after it installs, type "python3" and then "from sklearn import tree" into cmd/terminal.
+4. to make sure it worked, after it installs, type "python3" and then "import sklearn" into cmd/terminal.
 If you have no errors, everything works!
 
-If for some reason it doeesn't work, run it on the syslab computers:
-Step 1 (Mac): open terminal and type "ssh yourusername@remote.tjhsst.edu"
-Step 1 (Windows): install putty. Open it and in the box type "yourusername@remote.tjhsst.edu" and then click Enter
-Step 2: type in your password
-Step 3: ssh into a machine by typing "ssh machinename" (Machines include "lucario", "link", "peach", "mario" and many more. choose any one.)
-Step 4: enter your password again
-Step 5: To edit code, use your favorite text editor.
-
 any questions: email us at tjmachinelearning.com
-
 __________________________
 Nikhil Sardana 12/14/16
