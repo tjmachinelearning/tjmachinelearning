@@ -1,0 +1,24 @@
+Classify flowers!
+
+   #  Attribute                     Domain
+   -- -----------------------------------------
+
+   1. sepal length in cm	~4.0 to ~6.0
+   2. sepal width in cm		~2.0 to ~4.0
+   3. petal length in cm	~3.0 to ~7.0
+   4. petal width in cm		~0.1 to ~2.5
+   5. class: 
+      -- Iris Setosa
+      -- Iris Versicolour
+      -- Iris Virginica
+
+Your goal is to obtain the highest accuracy
+
+A rew rules:
+- All programs must be python3
+- Use Scikit-learn
+- Submit your code by the end of the week
+
+What to do:
+- Modify the sample to take in the inputs and deal with 3 output categories
+- (This shouldn't take more than 15-20 minutes)
