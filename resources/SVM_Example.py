@@ -14,8 +14,8 @@ def getData(): #modify this to work with the data (hint: output is not the last 
 	return x,y
 
 
-x = [[0, 0], [1, 1]] # 2-dimensional inputs (2)
-y = [0, 1] # Respective outputs
+x = [[0, 0], [1, 1]] # random input configuration (will get overwritten by getData())
+y = [0, 1] # random output configuration (will get overwritten by getData())
 x, y = getData()
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42)
