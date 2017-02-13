@@ -22,4 +22,5 @@ scipy-0.18.1-cp34-cp34m-win32.whl
 pip3 install (location of downloaded numpy file)
 pip3 install (location of downloaded scipy file)
 pip3 install scikit-learn
-
+_______________________________________________
+Nikhil Sardana, 2/12/2017
