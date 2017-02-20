@@ -1,11 +1,16 @@
 ----------- Your Task ---------------------------------
 
 Modify the shell to take in the mushroom data.
-(You may want to refer to the SVM shell for data input)
+(The mushroom data basically has a "p" for poisonous or an "e" for edible in the first column, 
+and bunch of other letters for different attributes in the other columns. You want to classify
+the mushrooms based on whether they are edible or poisonous.)
+
+You may want to refer to the SVM shell for data input.
+
 Use 25% of the data for testing.
 Tune the hyperparameters to increase your accuracy.
 
-Turn in your code by Sunday to tjmachinelearning.com/submit.
+Turn in your code by Monday night (2/20) to tjmachinelearning.com/submit.
 Submissions will be ranked by testing accuracy.
 
 Any questions? Email tjmachinelearning@gmail.com
