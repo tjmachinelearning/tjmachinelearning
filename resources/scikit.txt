@@ -16,8 +16,8 @@ http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
 
 Download the following files:
 
-numpy‑1.12.0+mkl‑cp34‑cp34m‑win_amd64.whl
-scipy‑0.18.1‑cp34‑cp34m‑win_amd64.whl
+numpy‑1.12.0+mkl‑cp34‑cp34m‑win32.whl
+scipy‑0.18.1‑cp34‑cp34m‑win32.whl
 
 pip3 install (location of downloaded numpy file)
 pip3 install (location of downloaded scipy file)
