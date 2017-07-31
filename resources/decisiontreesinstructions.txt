@@ -1,0 +1,20 @@
+The data (bupadata.txt) is actual data of patients with liver disorders. There are two categories of patients.
+These categories are represented in the 7th parameter of each line.
+
+Each line of data contains:
+1. mcv mean corpuscular volume
+2. alkphos alkaline phosphotase
+3. sgpt alamine aminotransferase
+4. sgot aspartate aminotransferase
+5. gammagt gamma-glutamyl transpeptidase
+6. drinks number of half-pint equivalents of alcoholic beverages drunk per day
+7. category
+
+Your goal is to create a decision tree that best sorts the data into the categories indicated by the 7th parameter.
+
+We will be retraining your algorithm on the data before testing accuracy.
+
+A few more rules:
+- All programs must be in python3
+- You can use Scikit-learn to make your life easier
+- Submit your code by Monday Jan 2nd (last day of winter break) to tjmachinelearning.com/submit
