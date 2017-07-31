@@ -10,9 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
     <link rel="stylesheet" type="text/css" href="../../css/component.css" />
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?...">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
   </head>
   <body>
     <div class="container">
@@ -32,34 +31,40 @@
          </section>
     </div>
     <section class="main-content">
-        <h2 style="text-align:center; color:#000">Introduction to Machine Learning</h2>
-        <h3 style="text-align:center; color:#000">Sylesh Suresh</h2>
-        <h3 style="text-align:center; color:#000">September 2017</h2>
+        <h2 style="text-align:center; color:#000">Image Segmentation</h2>
+        <h3 style="text-align:center; color:#000">Mihir Patel</h2>
+        <h3 style="text-align:center; color:#000">January 2018</h2>
 
-        <h1 id="introduction">Introduction</h1>
-        <p>Machine Learning is a subfield of computer science focusing on programming computers to learn from data without being explicitly programmed. Machine learning algorithms learn and recognize patterns in seen data (<em>training data</em>) and use these patterns to predict characteristics of unseen data.</p>
-        <h1 id="types-of-machine-learning">Types of Machine Learning</h1>
-        <p>Machine learning algorithms generally fall into one of the three categories: Supervised Learning, Unsupervised Learning, and Reinforcement Learning.</p>
-        <h2 id="supervised-learning">Supervised Learning</h2>
-        <p>Supervised learning algorithms analyze known training data with labels, the characteristics of the data that we want to predict, to predict the labels of unseen data. For example, an e-mail spam filtering algorithm would analyze previously seen e-mails that are already labeled as being spam or non-spam to predict whether new, unseen e-mails are spam or non-spam. A supervised learning problem where the class labels are discrete (i.e. are made up of separate categories), such as the spam filter example, is called a classification task. Regression is another type of supervised task where the predicted value is continuous (e.g. predicting a student’s SAT score based on their GPA).</p>
-        <h2 id="unsupervised-learning">Unsupervised Learning</h2>
-        <p>Unsupervised learning algorithms analyze unlabeled training data. One common unsupervised learning task is clustering, which creates different groups for data and categorizes similar data into each group. An example might be categorizing similar visitors of your website into different groups.</p>
-        <h2 id="reinforcement-learning">Reinforcement Learning</h2>
-        <p>Reinforcement learning is a different subset of Machine Learning where the learning system (agent) can perform different actions and receives rewards or penalties in return and must learn the correct policy, which dictates which action the agent should take in a given situation, to get the most rewards over time.</p>
-        <h1 id="topics">Topics</h1>
-        <p>Throughout the year, we will cover a variety of topics that fall in these categories. We will cover:</p>
-        <ul>
-        <li><p>Decision Trees and Random Forests</p></li>
-        <li><p>Naive Bayes</p></li>
-        <li><p>Support Vector Machines</p></li>
-        <li><p>k Nearest Neighbors</p></li>
-        <li><p>Neural Networks</p></li>
-        <li><p>Convolutional Neural Networks and Image Analysis</p></li>
-        <li><p>Recurrent Neural Networks and Natural Language Processing</p></li>
-        <li><p>Generative Adversarial Models</p></li>
-        <li><p>Reinforcement Learning</p></li>
-        </ul>
-        <p>We will be using Python and several machine learning libraries including scikit-learn, TensorFlow, Keras, and PyTorch over the course of the year.</p>
+          <h1 id="introduction">Introduction</h1>
+          <p>As of now, we have dealt with classifying images. We have said that our network will take a picture of something and tell us what it is. However, in almost all cases, there are multiple objects in an image. How can we possibly identify all of these?</p>
+          <h1 id="rcnn">RCNN</h1>
+          <p style="text-align:center"><img src="RCNN.png" alt="image" /></p>
+          <h2 id="definition">Definition</h2>
+          <p>To do this, we introduce RCNNs. RCNNs work by first breaking an image into different bounding boxes, or regions where an object exists. Then, each bounding box is classified using an SVM on all of the features and readjusted slightly to better fit the object using a regression learner. Lets look at each part in a bit more depth.</p>
+          <h1 id="bounding-box-proposal">Bounding Box Proposal</h1>
+          <p>The first step in identifying the bounding boxes, or regions of interest, is using a technique called sliding windows. We first make the assumption that objects of are a certain size, such as squares, 4:3 rectangles, etc. We then scan the image looking for objects of this size similar to how a convolutional filter scans an image. In practice, a method called selective search is used to bring it down to only 2000 region proposals.</p>
+          <h1 id="classification">Classification</h1>
+          <p>From each proposed region, a CNN is run to classify the image. RCNNs use an SVM instead of a fully connectected region because while this does dip performance, it runs considerably faster. As we are running the classifier over 2000+ images, speed is essential. This gives a classification based on whatever labels we train it on. Typically this section is trained independently.</p>
+          <h1 id="regression">Regression</h1>
+          <p>The last part of this model is regression. This model takes in the locations of the bounding box borders and tries to tune them to better fit the object because our original assumption of their sizes might not be correct. This allows for tighter boxes and better image segmentation.</p>
+          <h1 id="results">Results</h1>
+          <p style="text-align:center"><img src="RCNNRun.JPG" alt="image" /></p>
+          <h2 id="definition-1">Definition</h2>
+          <p>This results in a fairly accurate model! However, it turns out to be very slow and takes about a minute even on optimized situations. It also is a huge pain to train and involves three seperate components that have to be trained seperately.</p>
+          <h1 id="fast-rcnn">Fast RCNN</h1>
+          <p style="text-align:center"><img src="FRCNN.JPG" alt="image" /></p>
+          <h2 id="definition-2">Definition</h2>
+          <p>Eventually, someone realized that hey look, many of these bounding boxes overlap. What if share convolutional information! In the new structure, the convolutional extraction is done accross the image to begin with and localizations are done using a layer called ROI pooling, which essentially extracts the relevant localized features. The feature extraction is done by a standard classifying network such as VGG or ResNet. In addition, the entire model is combined and instead of an SVM a softmax classifier is used. This allows for streamlined training and gives a run time of nearly an order of magnititude faster!</p>
+          <h1 id="faster-rcnn">Faster RCNN</h1>
+          <p style="text-align:center"><img src="fasterRCNN.png" alt="image" /></p>
+          <h2 id="definition-3">Definition</h2>
+          <p>As we can see, computer scientists are great at naming. So to get even better results, researchers realized that they could use the convolutional features to extract the bounding boxes themselves! In order to do this, the selective search that proposes regions is replaced by a ROI (region of interest) layer that proposes boxes based on the filters. This streamlines the model even more and further speeds it up by nearly another order of magnititude!</p>
+          <h1 id="mask-rcnn">Mask RCNN</h1>
+          <p style="text-align:center"><img src="maskRCNN.JPG" alt="image" style="max-width:25em"/></p>
+          <h2 id="definition-4">Definition</h2>
+          <p>Impressed by the results, researchers further hypothesized that this structure could even do pixel level segmentation! In conjunction with the classifier, another parallel level was added that generates the image again with the object highlighted. In order to do this, the ROI pooling is tweaked to isolate decimal pixel values, preventing rounding errors and allowing for more accurate segmentation. Essentially, this means that the ROI pooling will break down the features even in the middle of pixels, giving pixel level accuracy. In order to regenerate the image, deconvolutional layers. These are originally from autoencoders, a topic we will discuss later. Essentially however, they can regenerate the original image from the features.</p>
+          <h1 id="single-shot-detectors">Single Shot Detectors</h1>
+          <p>Within the last several months, a new structure has been developed called single shot detectors. This allows for real time video analysis and can run at 60+ FPS on good GPUs! We will cover this in another lecture as this is something we want to use for many competitions and is something we will get much more into.</p>
 
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
