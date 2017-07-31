@@ -38,14 +38,15 @@
     </div>
     <section class="main-content">
         <p> Machine Learning Club proudly supports ML research at TJ. We encourage our members to apply the knowledge they've gained from
-        the lectures and competitions to real-world data: from biology to computer security, the applications are endless!</p>
+        the lectures and competitions to real-world data: from biology to computer security, the applications are endless! Here are a brief sample of the many projects, both completed and ongoing, we have helped mentor.</p>
         <h3>
             <a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Projects We've Supported</h3>
             <h4>EEG-Controlled Exoskeleton</h4>
             <p><i>Nithin Dass, Yash Bollisetty, and Srinidhi Krishnamurthy</i></p>
             <p>Modern exoskeletons cost thousands of dollars and are far too expensive for the majority of the paralyzed population.
-              Nithin and his friends set out to create an inexpensive exoskeleton that a paralyzed patient could control with their brain, and they turned to machine learning to classify EEG signals.
+              This project set out to create an inexpensive exoskeleton that a paralyzed patient could control with their brain, and they turned to machine learning to classify EEG signals.
               Using a Discrete Wavelength Transform to convert EEG signals into vectors, they then used a support vector machine to differentiate the EEG signals into two classes of motion.
+              This allowed for a basic exoskeleton to allow for upperbody movement and body stabilization.
             </p>
 
         <h4>
@@ -67,13 +68,23 @@
          This project used Scikit-Learn, rather than Tensorflow or Keras or PyTorch, partially because there was no deep learning involved.
          </p>
 
+         <h4>
+            FreshAI
+        </h4>
+         <p><i>Mihir Patel and MPBALab</i></p>
+         <p>Farms and other agricultural groups often struggle with estimating yields and potential crop damage.
+          Information about the quantity and quality of crops can serve as valuable economic indiciators and help maximize productivity.
+          To solve this problem, FreshAI can automatically scan thousands of trees per hour with drones and use object detection algorithms such as faster-RCNN to automatically count and classify the health of fruits. Early proof of concept versions have already been completed and tested on apple fields in northern Italy, and future versions have already been contracted out by companies such as Melinda.
+         </p>
+
         <h4>
             Detecting Terrorism on Social Media
         </h4>
           <p><i>Mihir Patel and Nikhil Sardana</i></p>
-          <p>When Mihir and Nikhil saw the numerous terrorist accounts on social media, they realized that they could use the logos and flags of the extremists against them.
-          They used computer vision techniques to crop around the flag and a convolutional neural network to learn the patterns of the logo.
-          They combined this image detection with caption analysis and user statistics, and a support vector machine learned which features were most important for classifying terrorist accounts.
+          <p>Many extremists such as ISIS have used social media to recruit and influence thousands of potential jihadists and foreign fighters.
+          TerroristTracker aims to stop this form of propaganda by turning the techniques these organizations use against them.
+          By following specific symbols, such as the ISIS flag, using computer vision techniques and convolutional neural networks, a new system has been developed to track image features with 93.5% accuracy. 
+          These features, along with those extracted from caption analysis and user content, has allowed for classification with an SVM with 90.5% accuracy for identifying terrorist accounts.
           </p>
 
     </section>
