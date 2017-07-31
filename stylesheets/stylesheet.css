@@ -111,6 +111,10 @@ a {
 .main-content figure {
     display: inline-block;
 }
+p.caption {
+  font-variant: small-caps;
+  text-align: center;
+}
 .main-content :first-child {
   margin-top: 0; }
 .main-content img {
