@@ -41,7 +41,7 @@
           <p>A single node of a neural network (a neuron) differs from a perceptron in one way: the activation function. Consider this diagram of a neuron:</p>
           <p style="text-align:center"><img src="neuron.svg" alt="neuron" style="max-width:25em"/></p>
           <p>The symbol <span class="math inline">\(\sigma\)</span> represents the Sigmoid activation function <span class="math inline">\(\sigma(x) = \frac{1}{1 + e^{-x}}\)</span>.</p>
-          <p style="text-align:center"><img src="sigmoid.png" alt="sigmoid"/></p>
+          <p style="text-align:center"><img src="sigmoid.PNG" alt="sigmoid"/></p>
           <p>Notice how as the coefficent of <span class="math inline">\(x\)</span> approaches infinity, <span class="math inline">\(\sigma(x)\)</span> approaches the step function from before. We use <span class="math inline">\(\sigma(x)\)</span> is because it is differenciable, which is necessary for networks to learn. Other activation functions include <span class="math inline">\(\tanh(x)\)</span> and ReLU, but we will use Sigmoid for our examples.</p>
           <p>The rest of a neuron is identical to a perceptron: multipy each input by its weight, add them up and the bias and compute the activation function of the sum.</p>
           <h1 id="forward-propagation">Forward Propagation</h1>
