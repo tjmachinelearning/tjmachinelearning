@@ -80,7 +80,7 @@
           </tbody>
           </table>
           <p>Let’s graph this data.</p>
-          <p style="text-align:center"><img src="plot1.png" alt="plot1" style="max-width:30em"/></p>
+          <p style="text-align:center"><img src="plot1.PNG" alt="plot1" style="max-width:30em"/></p>
           <p>The line <span class="math inline">\(y = -x + 1.5\)</span> splits this data the best. Let’s rearrange this to get <span class="math inline">\(x + y - 1.5 = 0\)</span>. Going back to the perceptron formula <span class="math display">\[f(x) = w_1x_1 + w_2x_2 + b\]</span> we can see that for the optimal perceptron, <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are the coefficients of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and <span class="math inline">\(b=-1.5\)</span>. If <span class="math inline">\(f(x) &gt; 0\)</span>, then <span class="math inline">\(x + y - 1.5&gt;0\)</span>. We can see through this example that perceptrons are nothing more than linear functions. Above a line, perceptrons classify data points <span class="math inline">\(1\)</span>, below the line, they are <span class="math inline">\(0\)</span>.</p>
           <h2 id="learning">Learning</h2>
           <p>How do perceptrons “learn” the best possible linear function to split the data? Perceptrons adjust the weights and bias to iteratively approach a solution.</p>
@@ -128,7 +128,7 @@
           </tbody>
           </table>
           <p>Let’s graph this data.</p>
-          <p style="text-align:center"><img src="plot5.png" alt="plot5"  style="max-width:30em"/></p>
+          <p style="text-align:center"><img src="plot5.PNG" alt="plot5"  style="max-width:30em"/></p>
           <p>We need two lines to separate this data! A perceptron will never reach the optimal solution. However, multiple perceptrons can learn multiple lines, which can be used to classify non-linearly separable data.</p>
           <h1 id="multi-layer-perceptron">Multi-Layer Perceptron</h1>
           <p>A neural network (NN) or Multi-Layer Perceptron (MLP) is a bunch of these perceptrons glued together, and can be used to approximate multi-dimensional non-linearly separable data. Let us again consider XOR. How do we arrange perceptrons to represent the two functions?</p>
