@@ -10,9 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
     <link rel="stylesheet" type="text/css" href="../../css/component.css" />
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?...">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
@@ -32,34 +30,34 @@
          </section>
     </div>
     <section class="main-content">
-        <h2 style="text-align:center; color:#000">Introduction to Machine Learning</h2>
-        <h3 style="text-align:center; color:#000">Sylesh Suresh</h2>
-        <h3 style="text-align:center; color:#000">September 2017</h2>
+        <h2 style="text-align:center; color:#000">Deep Networks And ImageNet</h2>
+        <h3 style="text-align:center; color:#000">Mihir Patel</h2>
+        <h3 style="text-align:center; color:#000">December 2017</h2>
 
-        <h1 id="introduction">Introduction</h1>
-        <p>Machine Learning is a subfield of computer science focusing on programming computers to learn from data without being explicitly programmed. Machine learning algorithms learn and recognize patterns in seen data (<em>training data</em>) and use these patterns to predict characteristics of unseen data.</p>
-        <h1 id="types-of-machine-learning">Types of Machine Learning</h1>
-        <p>Machine learning algorithms generally fall into one of the three categories: Supervised Learning, Unsupervised Learning, and Reinforcement Learning.</p>
-        <h2 id="supervised-learning">Supervised Learning</h2>
-        <p>Supervised learning algorithms analyze known training data with labels, the characteristics of the data that we want to predict, to predict the labels of unseen data. For example, an e-mail spam filtering algorithm would analyze previously seen e-mails that are already labeled as being spam or non-spam to predict whether new, unseen e-mails are spam or non-spam. A supervised learning problem where the class labels are discrete (i.e. are made up of separate categories), such as the spam filter example, is called a classification task. Regression is another type of supervised task where the predicted value is continuous (e.g. predicting a student’s SAT score based on their GPA).</p>
-        <h2 id="unsupervised-learning">Unsupervised Learning</h2>
-        <p>Unsupervised learning algorithms analyze unlabeled training data. One common unsupervised learning task is clustering, which creates different groups for data and categorizes similar data into each group. An example might be categorizing similar visitors of your website into different groups.</p>
-        <h2 id="reinforcement-learning">Reinforcement Learning</h2>
-        <p>Reinforcement learning is a different subset of Machine Learning where the learning system (agent) can perform different actions and receives rewards or penalties in return and must learn the correct policy, which dictates which action the agent should take in a given situation, to get the most rewards over time.</p>
-        <h1 id="topics">Topics</h1>
-        <p>Throughout the year, we will cover a variety of topics that fall in these categories. We will cover:</p>
-        <ul>
-        <li><p>Decision Trees and Random Forests</p></li>
-        <li><p>Naive Bayes</p></li>
-        <li><p>Support Vector Machines</p></li>
-        <li><p>k Nearest Neighbors</p></li>
-        <li><p>Neural Networks</p></li>
-        <li><p>Convolutional Neural Networks and Image Analysis</p></li>
-        <li><p>Recurrent Neural Networks and Natural Language Processing</p></li>
-        <li><p>Generative Adversarial Models</p></li>
-        <li><p>Reinforcement Learning</p></li>
-        </ul>
-        <p>We will be using Python and several machine learning libraries including scikit-learn, TensorFlow, Keras, and PyTorch over the course of the year.</p>
+          <h1 id="introduction">Introduction</h1>
+          <p>One of the greatest problems in AI has been in working with images and visual input. As we learned before, convolutional neural networks are very effective at doing this. One of the great challenges that has pushed this field forward is ImageNet. ImageNet is a classification challenge where 1 million images are given and must be classified. Many groups all over the world strive to improve modern AI technology in order to top the charts annually. In order to produce more succesful results, many optimizations have been done to the standard neural network.</p>
+          <h1 id="softmax">Softmax</h1>
+          <p style="text-align:center"><img src="softmax.jpg" alt="image" /></p>
+          <h2 id="definition">Definition</h2>
+          <p>The first challenge in this is how we can optimize determining which class something is. At the end of the network, we have one neuron per each output class (say 2 with dog and cat). We want to know which output class the image is. In simple cases, you can just take the highest. However, ImageNet allows you to take your top 5 best guesses since many classes turn out to be similar with thousands of classes (say different breeds of dogs). We want a way to estimate the probability of each label. To do this, we use the softmax layer. This function essentially takes the sum of all the outputs and raises it to e to make it positive. It then calculates the probability of each label by taking its value raised to e over the total sum just calculated, which essentially shows us how much of the sum it consists of, nicely giving us a probability.</p>
+          <h1 id="vgg16">VGG16</h1>
+          <p style="text-align:center"><img src="vgg16.png" alt="image" /></p>
+          <h2 id="definition-1">Definition</h2>
+          <p>One of the first networks that performed well combining all this so far was vgg16. This network was able to classify images across thousands of categories with 90 percent accuracy given top 5 class guesses and 70.5 percent with top 1. This structure is still commonly used for many modern problems and has the benefits of being simple and easy to train. It has a slightly more powerful older cousin called vgg19 which is also very popular.</p>
+          <h1 id="residual-connections">Residual Connections</h1>
+          <p style="text-align:center"><img src="resnet.png" alt="image" /></p>
+          <h2 id="definition-2">Definition</h2>
+          <p>For some years, the trend in machine learning was always adding more layers. With the constant improvement in GPUs, if something didn’t work now, the solution was to wait a year and add more layers. However, one big issue that exists with this is the vanishing gradient. At some point, the connection between the input and the output is too spaced away and the network can no longer learn significant features at the lower layers. However, we know that deeper networks can learn more complex features more easily and are much better suited to handle hard problems. To solve this, researchers produced residual connections. Residual connections are essentially these nodes which consist of a set of layers. Each node extracts some features from the raw image and then combines this information with the original input to pass into the subsequent layer. In this way, features can be extracted in depth and subsequent layers can maintain access to the original information.</p>
+          <h1 id="resnet">ResNet</h1>
+          <p style="text-align:center"><img src="resnet.jpg" alt="image" /></p>
+          <h2 id="definition-3">Definition</h2>
+          <p>As you can see, ResNet allows for much greater depth compared to VGG. This, too, is the smallest size of ResNet. Typical applications use ResNet-50 at least and high-end ones use ResNet-152. The sheer power of these structures has allowed for 92.9 percent accuracy on ImageNet and the usage of training on fancy GPUs with lots of data.</p>
+          <h1 id="inception">Inception</h1>
+          <p style="text-align:center"><img src="inception.png" alt="image" /></p>
+          <h2 id="definition-4">Definition</h2>
+          <p>The last major improvement in recent years in image classification has been in the usage of multiple parallel layers in each residual node. Each of these sets of layers, as seen in the image above, contains different filter sizes, allowing for a varying size of features to be extracted. From this, each residual node can learn much more and increased information can be packed in. This has culminated in Inception-ResNet structures capable of producing results more accurate than humans on image classification.</p>
+          <h1 id="to-the-future">To the Future</h1>
+          <p>In large part, following these advances, image classification has been solved. Without massive amounts of data, performance enhancements will largely be negligible. However, as these structures have gotten bigger, they have also gotten slower and slower. In recent years, the next step has been in breaking down multiple objects and analyzing complex images.</p>
 
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
