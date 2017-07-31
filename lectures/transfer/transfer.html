@@ -10,9 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
     <link rel="stylesheet" type="text/css" href="../../css/component.css" />
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?...">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
   </head>
   <body>
     <div class="container">
@@ -32,34 +31,18 @@
          </section>
     </div>
     <section class="main-content">
-        <h2 style="text-align:center; color:#000">Introduction to Machine Learning</h2>
-        <h3 style="text-align:center; color:#000">Sylesh Suresh</h2>
-        <h3 style="text-align:center; color:#000">September 2017</h2>
+        <h2 style="text-align:center; color:#000">Transfer Learning</h2>
+        <h3 style="text-align:center; color:#000">Mihir Patel</h2>
+        <h3 style="text-align:center; color:#000">January 2018</h2>
 
-        <h1 id="introduction">Introduction</h1>
-        <p>Machine Learning is a subfield of computer science focusing on programming computers to learn from data without being explicitly programmed. Machine learning algorithms learn and recognize patterns in seen data (<em>training data</em>) and use these patterns to predict characteristics of unseen data.</p>
-        <h1 id="types-of-machine-learning">Types of Machine Learning</h1>
-        <p>Machine learning algorithms generally fall into one of the three categories: Supervised Learning, Unsupervised Learning, and Reinforcement Learning.</p>
-        <h2 id="supervised-learning">Supervised Learning</h2>
-        <p>Supervised learning algorithms analyze known training data with labels, the characteristics of the data that we want to predict, to predict the labels of unseen data. For example, an e-mail spam filtering algorithm would analyze previously seen e-mails that are already labeled as being spam or non-spam to predict whether new, unseen e-mails are spam or non-spam. A supervised learning problem where the class labels are discrete (i.e. are made up of separate categories), such as the spam filter example, is called a classification task. Regression is another type of supervised task where the predicted value is continuous (e.g. predicting a student’s SAT score based on their GPA).</p>
-        <h2 id="unsupervised-learning">Unsupervised Learning</h2>
-        <p>Unsupervised learning algorithms analyze unlabeled training data. One common unsupervised learning task is clustering, which creates different groups for data and categorizes similar data into each group. An example might be categorizing similar visitors of your website into different groups.</p>
-        <h2 id="reinforcement-learning">Reinforcement Learning</h2>
-        <p>Reinforcement learning is a different subset of Machine Learning where the learning system (agent) can perform different actions and receives rewards or penalties in return and must learn the correct policy, which dictates which action the agent should take in a given situation, to get the most rewards over time.</p>
-        <h1 id="topics">Topics</h1>
-        <p>Throughout the year, we will cover a variety of topics that fall in these categories. We will cover:</p>
-        <ul>
-        <li><p>Decision Trees and Random Forests</p></li>
-        <li><p>Naive Bayes</p></li>
-        <li><p>Support Vector Machines</p></li>
-        <li><p>k Nearest Neighbors</p></li>
-        <li><p>Neural Networks</p></li>
-        <li><p>Convolutional Neural Networks and Image Analysis</p></li>
-        <li><p>Recurrent Neural Networks and Natural Language Processing</p></li>
-        <li><p>Generative Adversarial Models</p></li>
-        <li><p>Reinforcement Learning</p></li>
-        </ul>
-        <p>We will be using Python and several machine learning libraries including scikit-learn, TensorFlow, Keras, and PyTorch over the course of the year.</p>
+          <h1 id="introduction">Introduction</h1>
+          <p>We have learned a lot about image classification and using convolutional neural networks for a host of problems. However, we also know that training all of these structures takes a lot of time and computational power we don’t have. So how can we utilize these structures?</p>
+          <h1 id="imagenet">ImageNet</h1>
+          <p>As we’ve mentioned before, most of these structures and trained and tested on ImageNet. It turns out that this is very, very useful. Since ImageNet contains a very large variety of classes and labels, it can be hypothesized that the features it learns at the very lowest of levels are simple, generalizable features that are not problem specific. It turns out that this can be empirically demonstrated as if these networks are trained to learn additional classes, they converge must faster than random weight initilization.</p>
+          <h1 id="transferring-knowledge">Transferring Knowledge</h1>
+          <p>How is this useful? In humans, if we see a new object we try to describe it certain terms we already know, using things such as smooth, red, etc. which are all features we know. In the same regard, neural networks can transfer over generic image-based knowledge to new patterns. By using the weights that other organizations have trained and obtained on ImageNet, we can have a baseline that already gives us the core image analysis power needed. This knowledge can easily be exploited by us! In fact, many modern machine learning libraries such as keras already have several common models such as VGG and ResNet built in for transfer learning.</p>
+          <h1 id="applying-our-data">Applying Our Data</h1>
+          <p>In general, the process for transfer learning is pretty straightforward. We take the weights, and instead of randomly initilizating, we use the pretrained weights and begin from there. We then run as normal. However, often this is either too slow or we don’t have enough data. In that case, we do something called freezing. When layers are “frozen”, their weights won’t change throughout backpropagation. A common approach is to freeze the convolutional layers, which are image specific, and add on a new top portion consisting of fully connected layers that we train. This way, we can use transfer learning as a method to go from image to some extracted features we can train on.</p>
 
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
