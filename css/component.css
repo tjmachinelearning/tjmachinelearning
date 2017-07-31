@@ -59,6 +59,8 @@
 .menu--alonso .menu__link:hover,
 .menu--alonso .menu__link:focus {
 	color: #929292;
+	text-decoration: none;
+
 }
 
 .menu--alonso .menu__item--current .menu__link {

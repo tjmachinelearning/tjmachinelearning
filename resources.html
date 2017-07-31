@@ -26,25 +26,57 @@
              <nav class="menu menu--alonso">
                  <ul class="menu__list">
                      <li class="menu__item"><a href="index.html" class="menu__link">Home</a></li>
-                     <li class="menu__item"><a href="schedule.html" class="menu__link">Schedule</a></li>
+                     <li class="menu__item"><a href="schedule.html" class="menu__link">Lectures</a></li>
                      <li class="menu__item"><a href="rankings.html" class="menu__link">Rankings</a></li>
                      <li class="menu__item menu__item--current"><a href="#" class="menu__link">Resources</a></li>
-                     <li class="menu__item"><a href="submit.html" class="menu__link">Submit</a></li>
+                     <li class="menu__item"><a href="submit.html" class="menu__link">Updates</a></li>
                      <li class="menu__line"></li>
                  </ul>
              </nav>
          </section>
     </div>
     <section class="main-content">
-      <h3>
-<a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h3>
-      <p>Machine Learning Club recommends using Scikit-learn, unless specified that a different library, or no library at all, should be used.</p>
+        <h3>Computational Resources
+        </h3>
+        <p>Unfortunately, TJ has a severe lack of GPUs. When the Computer Systems lab was upgraded a few years ago, the aging CPUs were replaced with then-modern i5-4690s. However, the GPUs remain GT 730s.
+            If you would like to run your code on TJ machines, we recommend you use the computer called <code>zoidberg</code>, which is the only computer with a modern GPU. Simply ssh using the following commands:
+        <br><code>ssh username@remote.tjhsst.edu<br>
+                 ssh zoidberg
+            </code>
+        </p>
+        <h3>
+  <a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Libraries on Linux Machines</h3>
+
+        <p>
+        All the necessary dependencies (CUDA, CuDNN) have been installed for Tensorflow, Keras, and PyTorch on the Linux machines.
+        Due to user restrictions, each user must install the library themselves. Use these commands on <code>zoidberg</code> for Tensorflow and Keras, respectively:
+        <br>
+        <code>
+                 pip3 install tensorflow-gpu --user
+                 <br>pip3 install keras --user
+        </code>
+    </p>
+    <p>
+        For PyTorch, check the latest commands on <a href="http://www.pytorch.org">the official website</a>. Select Python 2.7 and CUDA 8.0.
+        You must use Python 2 for PyTorch on <code>zoidberg</code> because <code>zoidberg</code> has Python 2.7 and 3.4, but PyTorch supports
+            Python 2.7, 3.5, and 3.6. The commands as of right now are:
+            <br>
+            <code>pip install http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp27-none-linux_x86_64.whl --user
+                <br>pip install torchvision --user
+            </code>
+        </p>
+        <p>
+    <h3>Libraries on Windows Machines</h3>
+      <p>Machine Learning Club recommends using Scikit-Learn for simple machine learning. For deep learning, ML Club highly recommends <a href="http://www.keras.io">Keras</a> with the
+      <a href="https://www.tensorflow.org">Tensorflow</a> backend.</p>
       <p><a href = "resources/scikitlearn.txt">Instructions for installing Scikit-learn on your computer</a></p>
+      <p>If you are trying to run on TJ windows machines, a bit of a workaround is required due to restrictions. Follow these instructions for scikit-learn.</p>
       <p><a href= "resources/scikit.txt">Instructions for installing Scikit-learn on TJHSST Windows Machines</a></p>
       <p>If you can't get that to work, use our <a href = "resources/ssh.txt">Instructions for ssh'ing into the syslab</a></p>
       <p><a href = "resources/vimandnano.txt">Basic Vim and Nano Instructions</a></p>
-      <h4>Useful commands</h4>
-      <p>For testing scikit-learn, use "import sklearn" to test for errors</p>
+      <h3>Python 2 or 3?</h3>
+      <p>Machine Learning Club recommends Python 3 whenever possible. Almost all libraries have support for Python 3.5 and 3.6.
+      Even though most support Python 2.7 as well, Python 2 support ends in <a href="https://pythonclock.org/">2020</a>, so make the switch if you haven't already!</p>
     </section>
 
   </body>
