@@ -1,0 +1,18 @@
+Classify handwritten digits!
+
+Variable	Description	Example
+---------------------------------------
+Label		0-9		3
+Pixel 0		0-255		122
+Pixel 1		0-255		0
+...
+Pixel 783	0-255		0
+
+Each input is an image that is 28x28. The pixel values have been given.
+
+Train on the given data and make sure it works. We will retrain your model and test on another dataset.
+
+Rules:
+- All programs must be python3
+- Use keras or tensorflow
+- Submit your code by the end of the week
