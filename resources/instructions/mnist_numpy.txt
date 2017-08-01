@@ -1,0 +1,13 @@
+Classifying Handwriting Digits
+__________________________________________
+You will be classifying the famous MNIST dataset.
+The raining data is available in csv form at the link.
+While most libraries have a built-in function to access the MNIST data, you will not.
+
+This is because your task is to:
+
+1. Write a neural network in Python.
+2. You are only allowed to use the Numpy Library.
+No scikit-learn, Tensorflow, or Keras.
+
+As usual, we will re-train your network on the training set, and test on the testing set.
