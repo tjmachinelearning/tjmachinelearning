@@ -1,0 +1,7 @@
+from keras.datasets import mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train_noisy = x_train + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=x_train.shape)
+x_test_noisy = x_test + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=x_test.shape)
+
+Your goal is to maximize the noise factor and accuracy in conjunction.

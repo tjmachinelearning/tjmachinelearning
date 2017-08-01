@@ -1,0 +1,8 @@
+This competition involves understanding basic motor signals, such as moving an arm, from EEG wave measurements.
+
+The idea is if someone wants to move their hand, the EEG waves should contain this information.
+
+Rules:
+- All programs must be python3
+- Use keras or tensorflow
+- Submit your code by the end of the week

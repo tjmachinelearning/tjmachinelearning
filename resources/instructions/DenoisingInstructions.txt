@@ -1,0 +1,10 @@
+This challenge involves taking MNIST images with noise, and trying to generate ones with the noise stripped away. 
+
+The goal is to create a system which can successfully denoise it to the level that a human can understand it with the highest amount of noise possible. 
+
+In order to generate the training and testing data, load in the MNIST dataset from keras and follow the instructions in the data file. 
+
+Rules:
+- All programs must be python3
+- Use keras or tensorflow
+- Submit your code by the end of the week

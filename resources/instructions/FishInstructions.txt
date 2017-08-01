@@ -4,5 +4,5 @@ It is recommended to use faster-RCNN.
 
 Rules:
 - All programs must be python3
-- Use scikit-learn
+- Use keras or tensorflow
 - Submit your code by the end of the week

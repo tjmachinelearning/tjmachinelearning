@@ -1,0 +1,3 @@
+This competition will be part of the NIPS GAN competition. Best of luck facing others! No submission this time.
+
+https://www.kaggle.com/c/nips-2017-targeted-adversarial-attack
