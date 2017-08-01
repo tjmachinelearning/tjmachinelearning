@@ -1,0 +1,5 @@
+from keras.datasets import mnist
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+You can recombine and change splits as you like, though we recommend using the given ones so you can compare it to others.

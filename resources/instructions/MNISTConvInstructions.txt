@@ -1,0 +1,12 @@
+Classify handwritten digits!
+
+Each input is an image that is 28x28. This is similar to the previous challenge except we will work on the images to see how CNNs perform better.
+
+Train on the given data and make sure it works. We will retrain your model and test it.
+
+The data file describes how you can import the dataset using keras.
+
+Rules:
+- All programs must be python3
+- Use keras or tensorflow
+- Submit your code by the end of the week
