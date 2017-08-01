@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>TJHSST Machine Learning Club - Schedule</title>
+    <title>Lectures | TJHSST Machine Learning Club</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -10,8 +10,16 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/style1.css" />
+    <script src="js/modernizr.custom.js"></script>
   </head>
   <body>
+
+    <div class="mobile-menu">
+      <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
+        <img src="img/menu.png" alt="Menu" style="max-width:2em">
+      </button>
+    </div>
 
     <section class="page-header">
       <h1 class="project-name">TJHSST Machine Learning</h1>
@@ -20,6 +28,21 @@
     <!--  <a href="https://github.com/nikhilsardana/tjmachinelearning/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/nikhilsardana/tjmachinelearning/tarball/master" class="btn">Download .tar.gz</a> -->
     </section>
+
+        <div class="overlay overlay-hugeinc">
+    			<button type="button" class="overlay-close">Close</button>
+    			<nav>
+    				<ul>
+    					<li><a href="index.html">Home</a></li>
+    					<li><a href="#">Lectures</a></li>
+    					<li><a href="rankings.html">Rankings</a></li>
+    					<li><a href="resources.html">Resources</a></li>
+    					<li><a href="projects.html">Projects</a></li>
+              <li><a href="submit.html">Updates</a></li>
+    				</ul>
+    			</nav>
+    		</div>
+
     <div class="container">
          <section class="section section--menu" id="Alonso">
              <span class="link-copy"></span>
@@ -48,7 +71,8 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
     <th>Description</th>
     <th>Course Materials</th>
   </tr>
-  <td colspan="3" style="text-align: center"><strong>The Basics</strong></td>
+  <tr>
+  <td colspan="3" style="text-align: center"><strong><br>The Basics</strong></td>
   <tr>
     <td>September 2017</td>
     <td><a href="lectures/intro/intro.html">Introduction to Machine Learning</a></td>
@@ -80,22 +104,22 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
   </tr>
   <tr>
     <td>November 2017</td>
-    <td>Random Forests</td>
+    <td><a href="lectures/rf/rf.html">Random Forests</a></td>
     <td>
-        pdf
+        <a href="lectures/rf/randomforest.pdf">pdf</a>
     </td>
   </tr>
-  <td colspan="3" style="text-align: center"><strong>Neural Networks</strong></td>
+  <td colspan="3" style="text-align: center"><strong><br>Neural Networks</strong></td>
   <tr>
     <td>November 2017</td>
-    <td><a href="lectures/nn1/nn1.html">Neural Networks: Intro & Overview</a></td>
+    <td><a href="lectures/nn1/nn1.html">Neural Networks: Intro &amp; Overview</a></td>
     <td>
         <a href="lectures/nn1/nn1.pdf">pdf</a>
     </td>
   </tr>
   <tr>
     <td>November 2017</td>
-    <td><a href="lectures/nn2/nn2.html">Neural Networks: Forward & Backpropagation</a></td>
+    <td><a href="lectures/nn2/nn2.html">Neural Networks: Forward &amp; Backpropagation</a></td>
     <td>
         <a href="lectures/nn2/nn2.pdf">pdf</a><br>competition<br>sample code<br>data
     </td>
@@ -107,7 +131,7 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
         <a href="lectures/library/keras.pdf">pdf</a>
     </td>
   </tr>
-  <td colspan="3" style="text-align: center"><strong>Convolutional Neural Networks and Image Processing</strong></td>
+  <td colspan="3" style="text-align: center"><strong><br>Convolutional Neural Networks and Image Processing</strong></td>
   <tr>
     <td>December 2017</td>
     <td><a href="lectures/cnn/cnn.html">Convolutional Neural Networks</a></td>
@@ -143,12 +167,12 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
         <a href="lectures/seg/seg.pdf">pdf</a>
     </td>
   </tr>
-  <td colspan="3" style="text-align: center"><strong>Recurrent Neural Networks and Language Processing</strong></td>
+  <td colspan="3" style="text-align: center"><strong><br>Recurrent Neural Networks and Language Processing</strong></td>
   <tr>
     <td>January 2018</td>
-    <td>Recurrent Neural Networks</td>
+    <td><a href="lectures/rnn/rnn.html">Recurrent Neural Networks</a></td>
     <td>
-        pdf<br>competition
+        <a href="lectures/rnn/rnn.pdf">pdf</a><br>competition
     </td>
   </tr>
   <tr style="color: #b5b5b5">
@@ -179,7 +203,7 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
         coming soon
     </td>
   </tr>
-  <td colspan="3" style="text-align: center"><strong>Generative Models</strong></td>
+  <td colspan="3" style="text-align: center"><strong><br>Generative Models</strong></td>
   <tr>
     <td>March 2018</td>
     <td><a href="lectures/gan/gan.html">Generative Adversarial Networks</a></td>
@@ -196,16 +220,16 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
   </tr>
   <tr style="color: #b5b5b5">
     <td>March 2018</td>
-    <td>PixelRNN & CNN</td>
+    <td>PixelRNN &amp; CNN</td>
     <td>
         coming soon
     </td>
   </tr>
   <tr style="color: #b5b5b5">
     <td>March 2018</td>
-    <td>Autoencoders</td>
+    <td><a href="lectures/auto/auto.html">Autoencoders</a></td>
     <td>
-        coming soon
+        <a href="lectures/auto/autoencoder.pdf">pdf</a>
     </td>
   </tr>
   <tr style="color: #b5b5b5">
@@ -215,7 +239,7 @@ We're currently updating our lectures for 2017-2018. Here is our approximate sch
         coming soon
     </td>
   </tr>
-  <td colspan="3" style="text-align: center"><strong>Reinforcement Learning</strong></td>
+  <td colspan="3" style="text-align: center"><strong><br>Reinforcement Learning</strong></td>
   <tr style="color: #b5b5b5">
     <td>April 2018</td>
     <td>Intro to Reinforcement Learning</td>
@@ -304,6 +328,7 @@ from the lectures and internal competitions to the Kaggle competitions and datas
 </table>
 -->
     </section>
-
+    <script src="js/classie.js"></script>
+		<script src="js/demo1.js"></script>
   </body>
 </html>

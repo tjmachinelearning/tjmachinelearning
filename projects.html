@@ -10,8 +10,16 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/style1.css" />
+    <script src="js/modernizr.custom.js"></script>
   </head>
   <body>
+
+    <div class="mobile-menu">
+      <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
+        <img src="img/menu.png" alt="Menu" style="max-width:2em">
+      </button>
+    </div>
 
     <section class="page-header">
       <h1 class="project-name">TJHSST Machine Learning</h1>
@@ -20,6 +28,21 @@
     <!--  <a href="https://github.com/nikhilsardana/tjmachinelearning/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/nikhilsardana/tjmachinelearning/tarball/master" class="btn">Download .tar.gz</a> -->
     </section>
+
+    <div class="overlay overlay-hugeinc">
+      <button type="button" class="overlay-close">Close</button>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="schedule.html">Lectures</a></li>
+          <li><a href="rankings.html">Rankings</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="submit.html">Updates</a></li>
+        </ul>
+      </nav>
+    </div>
+
     <div class="container">
          <section class="section section--menu" id="Alonso">
              <span class="link-copy"></span>
@@ -86,13 +109,14 @@
           <p><i>Mihir Patel and Nikhil Sardana</i></p>
           <p>Many extremists such as ISIS have used social media to recruit and influence thousands of potential jihadists and foreign fighters.
           TerroristTracker aims to stop this form of propaganda by turning the techniques these organizations use against them.
-          By following specific symbols, such as the ISIS flag, using computer vision techniques and convolutional neural networks, a new system has been developed to track image features with 93.5% accuracy. 
+          By following specific symbols, such as the ISIS flag, using computer vision techniques and convolutional neural networks, a new system has been developed to track image features with 93.5% accuracy.
           These features, along with those extracted from caption analysis and user content, has allowed for classification with an SVM with 90.5% accuracy for identifying terrorist accounts.
           </p>
           <p>&#9733;&#9733;&#9733; Intel ISEF Finalist &#9733;&#9733;&#9733;</p>
 
 
     </section>
-
+    <script src="js/classie.js"></script>
+		<script src="js/demo1.js"></script>
   </body>
 </html>

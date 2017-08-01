@@ -11,9 +11,17 @@
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
     <link rel="stylesheet" href="css/grid12.css">
+
+    <link rel="stylesheet" type="text/css" href="css/style1.css" />
+  	<script src="js/modernizr.custom.js"></script>
+
   </head>
   <body>
-
+    <div class="mobile-menu">
+      <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
+        <img src="img/menu.png" alt="Menu" style="max-width:2em">
+      </button>
+    </div>
     <section class="page-header">
       <h1 class="project-name">TJHSST Machine Learning</h1>
       <h2 class="project-tagline">Machine Learning from Alexandria, VA</h2>
@@ -37,6 +45,21 @@
              </nav>
          </section>
     </div>
+
+    <div class="overlay overlay-hugeinc">
+			<button type="button" class="overlay-close">Close</button>
+			<nav>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="schedule.html">Lectures</a></li>
+					<li><a href="rankings.html">Rankings</a></li>
+					<li><a href="resources.html">Resources</a></li>
+					<li><a href="projects.html">Projects</a></li>
+          <li><a href="submit.html">Updates</a></li>
+				</ul>
+			</nav>
+		</div>
+
     <section class="main-content">
       <h3>
 <a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to TJHSST Machine Learning!</h3>
@@ -115,6 +138,9 @@ Rohan Suri<br>Nathaniel Choe<br>Nikhil Sardana<br>Mihir Patel
       </footer>
 
     </section>
+
+    <script src="js/classie.js"></script>
+		<script src="js/demo1.js"></script>
 
   </body>
 

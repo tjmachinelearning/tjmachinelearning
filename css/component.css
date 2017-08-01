@@ -111,6 +111,11 @@
 	transform: translate3d(400%, 0, 0);
 }
 
+.menu--alonso .menu__item:nth-child(6).menu__item--current ~ .menu__line {
+	-webkit-transform: translate3d(500%, 0, 0);
+	transform: translate3d(500%, 0, 0);
+}
+
 @media screen and (max-width:55em) {
 	.menu--alonso .menu__line {
 		top: 3em;
@@ -140,11 +145,16 @@
 		-webkit-transform: translate3d(0, 12em, 0);
 		transform: translate3d(0, 12em, 0);
 	}
+
+	.menu--alonso .menu__item:nth-child(6).menu__item--current ~ .menu__line {
+		-webkit-transform: translate3d(0, 15em, 0);
+		transform: translate3d(0, 15em, 0);
+	}
 }
 /* Stack items for smaller screens */
 @media screen and (max-width:55em) {
 	.menu__list {
-		display: block;
+		display: none;
 		margin: 0 auto;
 	}
 }

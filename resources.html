@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>TJHSST Machine Learning Club - Resources</title>
+    <title>Resources | TJHSST Machine Learning Club</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -10,8 +10,16 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/style1.css" />
+    <script src="js/modernizr.custom.js"></script>
   </head>
   <body>
+
+    <div class="mobile-menu">
+      <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
+        <img src="img/menu.png" alt="Menu" style="max-width:2em">
+      </button>
+    </div>
 
     <section class="page-header">
       <h1 class="project-name">TJHSST Machine Learning</h1>
@@ -20,6 +28,21 @@
     <!--  <a href="https://github.com/nikhilsardana/tjmachinelearning/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/nikhilsardana/tjmachinelearning/tarball/master" class="btn">Download .tar.gz</a> -->
     </section>
+
+        <div class="overlay overlay-hugeinc">
+    			<button type="button" class="overlay-close">Close</button>
+    			<nav>
+    				<ul>
+    					<li><a href="index.html">Home</a></li>
+    					<li><a href="schedule.html">Lectures</a></li>
+    					<li><a href="rankings.html">Rankings</a></li>
+    					<li><a href="#">Resources</a></li>
+    					<li><a href="projects.html">Projects</a></li>
+              <li><a href="submit.html">Updates</a></li>
+    				</ul>
+    			</nav>
+    		</div>
+
     <div class="container">
          <section class="section section--menu" id="Alonso">
              <span class="link-copy"></span>
@@ -79,6 +102,7 @@
       <p>Machine Learning Club recommends Python 3 whenever possible. Almost all libraries have support for Python 3.5 and 3.6.
       Even though most support Python 2.7 as well, Python 2 support ends in <a href="https://pythonclock.org/">2020</a>, so make the switch if you haven't already!</p>
     </section>
-
+    <script src="js/classie.js"></script>
+		<script src="js/demo1.js"></script>
   </body>
 </html>
