@@ -1,4 +1,5 @@
 Classify breast cancer tumors as malignant or benign.
+
    #  Attribute                     Domain
    -- -----------------------------------------
    1. Sample code number            id number (Ignore)
@@ -15,11 +16,7 @@ Classify breast cancer tumors as malignant or benign.
 
 Your goal is to obtain the highest accuracy
 
-A rew rules:
+Rules:
 - All programs must be python3
-- Use Scikit-learn
+- Use scikit-learn
 - Submit your code by the end of the week
-
-What to do:
-- Modify the sample to take in the inputs and classify the tumors
-- (This shouldn't take more than 15-20 minutes)

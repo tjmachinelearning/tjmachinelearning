@@ -1,4 +1,4 @@
-The data (bupadata.txt) is actual data of patients with liver disorders. There are two categories of patients.
+The data is actual data of patients with liver disorders. There are two categories of patients.
 These categories are represented in the 7th parameter of each line.
 
 Each line of data contains:
@@ -14,7 +14,7 @@ Your goal is to create a decision tree that best sorts the data into the categor
 
 We will be retraining your algorithm on the data before testing accuracy.
 
-A few more rules:
-- All programs must be in python3
-- You can use Scikit-learn to make your life easier
-- Submit your code by Monday Jan 2nd (last day of winter break) to tjmachinelearning.com/submit
+Rules:
+- All programs must be python3
+- Use scikit-learn
+- Submit your code by the end of the week
