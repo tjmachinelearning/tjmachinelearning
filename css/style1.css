@@ -5,17 +5,17 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-	background: rgba(255,255,255,0.8);
+	background: rgba(255,255,255,0.9);
 	z-index: 999;
 }
 
 /* Overlay closing cross */
 .overlay .overlay-close {
-	width: 80px;
-	height: 80px;
+	width: 2em;
+	height: 2em;
 	position: absolute;
-	right: 20px;
-	top: 20px;
+	right: 1em;
+	top: 1em;
 	overflow: hidden;
 	border: none;
 	background: url(../img/cross.png) no-repeat center center;
@@ -31,7 +31,7 @@
 	position: relative;
 	top: 50%;
 	height: 60%;
-	font-size: 40px;
+	font-size: 2em;
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
