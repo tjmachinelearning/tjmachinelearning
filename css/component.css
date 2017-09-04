@@ -64,7 +64,7 @@
 }
 
 .menu--alonso .menu__item--current .menu__link {
-	color: #159957;
+	color: #4285F4;
 	-webkit-transition: color 0.5s;
 	transition: color 0.5s;
 }
@@ -78,7 +78,7 @@
 	pointer-events: none;
 	border: 1px solid #fff;
 	border-width: 0 45px;
-	background: #159957;
+	background: #4285F4;
 	-webkit-transition: -webkit-transform 0.5s;
 	transition: transform 0.5s;
 	-webkit-transition-timing-function: cubic-bezier(1, 0.01, 0, 1);

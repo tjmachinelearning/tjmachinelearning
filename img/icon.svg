@@ -1,0 +1,42 @@
+<svg width="364" height="398" viewBox="0 0 364 398" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>icon</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(1106 -2408)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M -1106 2408L -742 2408L -742 2806L -1106 2806L -1106 2408Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="icon" clip-path="url(#clip-0)">
+<path d="M -1106 2408L -742 2408L -742 2806L -1106 2806L -1106 2408Z" fill="#FFFFFF"/>
+<g id="Line">
+<use xlink:href="#path0_stroke" transform="translate(-1057 2542)" fill="#4285F4"/>
+</g>
+<g id="Line">
+<use xlink:href="#path0_stroke" transform="translate(-887 2664)" fill="#4285F4"/>
+</g>
+<g id="Line">
+<use xlink:href="#path1_stroke" transform="matrix(0.5 0.866025 -0.866025 0.5 -962 2534)" fill="#4285F4"/>
+</g>
+<g id="Polygon">
+<mask id="mask0_outline_ins">
+<use xlink:href="#path2_fill" fill="white" transform="matrix(6.12323e-17 -1 1 6.12323e-17 -1106 2781)"/>
+</mask>
+<g mask="url(#mask0_outline_ins)">
+<use xlink:href="#path3_stroke_2x" transform="matrix(6.12323e-17 -1 1 6.12323e-17 -1106 2781)" fill="#4285F4"/>
+</g>
+</g>
+<g id="Ellipse">
+<use xlink:href="#path4_fill" transform="translate(-912 2632)" fill="#4285F4"/>
+</g>
+<g id="Ellipse">
+<use xlink:href="#path4_fill" transform="translate(-975 2509)" fill="#4285F4"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 0 0L 108 0L 108 -15L 0 -15L 0 0Z"/>
+<path id="path1_stroke" d="M 0 0L 150 0L 150 -15L 0 -15L 0 0Z"/>
+<path id="path2_fill" d="M 182 0L 339.617 91L 339.617 273L 182 364L 24.3834 273L 24.3834 91L 182 0Z"/>
+<path id="path3_stroke_2x" d="M 182 0L 189.5 -12.9904L 182 -17.3205L 174.5 -12.9904L 182 0ZM 339.617 91L 354.617 91L 354.617 82.3397L 347.117 78.0096L 339.617 91ZM 339.617 273L 347.117 285.99L 354.617 281.66L 354.617 273L 339.617 273ZM 182 364L 174.5 376.99L 182 381.321L 189.5 376.99L 182 364ZM 24.3834 273L 9.38338 273L 9.38338 281.66L 16.8834 285.99L 24.3834 273ZM 24.3834 91L 16.8834 78.0096L 9.38338 82.3397L 9.38338 91L 24.3834 91ZM 174.5 12.9904L 332.117 103.99L 347.117 78.0096L 189.5 -12.9904L 174.5 12.9904ZM 324.617 91L 324.617 273L 354.617 273L 354.617 91L 324.617 91ZM 332.117 260.01L 174.5 351.01L 189.5 376.99L 347.117 285.99L 332.117 260.01ZM 189.5 351.01L 31.8834 260.01L 16.8834 285.99L 174.5 376.99L 189.5 351.01ZM 39.3834 273L 39.3834 91L 9.38338 91L 9.38338 273L 39.3834 273ZM 31.8834 103.99L 189.5 12.9904L 174.5 -12.9904L 16.8834 78.0096L 31.8834 103.99Z"/>
+<path id="path4_fill" d="M 50 25C 50 38.8071 38.8071 50 25 50C 11.1929 50 0 38.8071 0 25C 0 11.1929 11.1929 0 25 0C 38.8071 0 50 11.1929 50 25Z"/>
+</defs>
+</svg>
