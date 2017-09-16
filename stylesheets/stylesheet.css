@@ -9,6 +9,12 @@ body {
   line-height: 1.5;
   color: #606c71; }
 
+.lecture p, .lecture ol, .lecture ul {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    line-height: 33px;
+}
+
 a {
   color: #D94F5D;
   text-decoration: none; }
@@ -124,6 +130,19 @@ p.caption {
   margin-bottom: 1rem;
   font-weight: normal;
   color: #4285F4; }
+.lecture h1 {
+    font-size: 1.8em;
+}
+.lecture h2 {
+      color: #000;
+      font-weight: bold;
+      font-size: 1.4em;
+}
+.lecture h3 {
+      color: #000;
+      font-weight: bold;
+      font-size: 1.2em;
+}
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {
@@ -133,6 +152,20 @@ p.caption {
   color: #383e41;
   background-color: #f3f6fa;
   border-radius: 0.3rem; }
+
+.lecture code, .lecture tr, .lecture th, .lecture td {
+    padding: 2px 4px;
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9rem;
+    color: #383e41;
+    background-color: #f3f6fa;
+    border-radius: 0.3rem;
+    font-size: 1em;
+}
+.lecture code {
+    font-size: 0.9em;
+}
+
 .main-content pre {
   padding: 0.8rem;
   margin-top: 0;

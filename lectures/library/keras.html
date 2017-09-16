@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
@@ -124,117 +125,118 @@
          </section>
     </div>
     <section class="main-content">
-        <h2 style="text-align:center; color:#000">Introduction to Keras</h2>
-        <h3 style="text-align:center; color:#000">Justin Zhang</h2>
-        <h3 style="text-align:center; color:#000">December 2017</h2>
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Introduction to Keras</h1>
+            <h3 style="text-align:center; color:#000">Justin Zhang</h2>
+            <h3 style="text-align:center; color:#000">December 2017</h2>
 
-          <h1 id="introduction">Introduction</h1>
-          <p>Keras is a high-level Python machine learning API, which allows you to easily run neural networks. Keras is simply a specification; it provides a set of methods that you can use, and it will use a backend (TensorFlow, Theano, or CNTK, as chosen by the user) to actually run your code. Like many machine learning frameworks, Keras is a so-called <em>define-and-run</em> framework. This means that it will define and optimize your neural network in a compilation step before training starts.</p>
-          <h1 id="first-steps">First Steps</h1>
-          <p>First, install Keras: <code>pip install keras</code></p>
-          <p>We’ll go over a fully-connected neural network designed for the MNIST (classifying handwritten digits) dataset.</p>
+              <h1 id="introduction">Introduction</h1>
+              <p>Keras is a high-level Python machine learning API, which allows you to easily run neural networks. Keras is simply a specification; it provides a set of methods that you can use, and it will use a backend (TensorFlow, Theano, or CNTK, as chosen by the user) to actually run your code. Like many machine learning frameworks, Keras is a so-called <em>define-and-run</em> framework. This means that it will define and optimize your neural network in a compilation step before training starts.</p>
+              <h1 id="first-steps">First Steps</h1>
+              <p>First, install Keras: <code>pip install keras</code></p>
+              <p>We’ll go over a fully-connected neural network designed for the MNIST (classifying handwritten digits) dataset.</p>
 
-          <div class="highlight"><pre><span></span>
-          <span class="c1"># Can be found at https://github.com/fchollet/keras</span>
-          <span class="c1"># Released under the MIT License</span>
+              <div class="highlight"><pre><span></span>
+              <span class="c1"># Can be found at https://github.com/fchollet/keras</span>
+              <span class="c1"># Released under the MIT License</span>
 
-          <span class="kn">import</span> <span class="nn">keras</span>
-          <span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
-          <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
-          <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
-          <span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">RMSprop</span>
-          </pre></div>
+              <span class="kn">import</span> <span class="nn">keras</span>
+              <span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+              <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+              <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
+              <span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">RMSprop</span>
+              </pre></div>
 
 
-          <p>First, we handle the imports. <code>keras.datasets</code> includes many popular machine learning datasets, including CIFAR and IMDB. <code>keras.layers</code> includes a variety of neural network layer types, including <code>Dense</code>, <code>Conv2D</code>, and <code>LSTM</code>. <code>Dense</code> simply refers to a fully-connected layer, and <code>Dropout</code> is a layer commonly used to address the problem of overfitting. <code>keras.optimizers</code> includes most widely used optimizers. Here, we opt to use RMSprop, an alternative to the classic stochastic gradient decent (SGD) algorithm. Regarding <code>keras.models</code>, <code>Sequential</code> is most widely used for simple networks; there is also a functional <code>Model</code> class you can use for more complex networks.
-          </p>
+              <p>First, we handle the imports. <code>keras.datasets</code> includes many popular machine learning datasets, including CIFAR and IMDB. <code>keras.layers</code> includes a variety of neural network layer types, including <code>Dense</code>, <code>Conv2D</code>, and <code>LSTM</code>. <code>Dense</code> simply refers to a fully-connected layer, and <code>Dropout</code> is a layer commonly used to address the problem of overfitting. <code>keras.optimizers</code> includes most widely used optimizers. Here, we opt to use RMSprop, an alternative to the classic stochastic gradient decent (SGD) algorithm. Regarding <code>keras.models</code>, <code>Sequential</code> is most widely used for simple networks; there is also a functional <code>Model</code> class you can use for more complex networks.
+              </p>
 
-          <div class="highlight"><pre>
-          <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
-          <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">10</span>
-          <span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>
-          </pre></div>
+              <div class="highlight"><pre>
+              <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+              <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">10</span>
+              <span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>
+              </pre></div>
 
-          <p>
-            Here, we define our constants...
-          </p>
-          <div class="highlight"><pre>
-            <span class="c1"># the data, shuffled and split between train and test sets</span>
-            <span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
-          </pre></div>
-          <p>
-            ...and the dataset.
-          </p>
+              <p>
+                Here, we define our constants...
+              </p>
+              <div class="highlight"><pre>
+                <span class="c1"># the data, shuffled and split between train and test sets</span>
+                <span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+              </pre></div>
+              <p>
+                ...and the dataset.
+              </p>
 
-          <div class="highlight"><pre>
-            <span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
-            <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
-            <span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-            <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-            <span class="n">x_train</span> <span class="o">/=</span> <span class="mi">255</span>
-            <span class="n">x_test</span> <span class="o">/=</span> <span class="mi">255</span>
-          </pre></div>
+              <div class="highlight"><pre>
+                <span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+                <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+                <span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+                <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+                <span class="n">x_train</span> <span class="o">/=</span> <span class="mi">255</span>
+                <span class="n">x_test</span> <span class="o">/=</span> <span class="mi">255</span>
+              </pre></div>
 
-          <p>
-            The training set will contain <span class="math inline">\(60000\)</span> <span class="math inline">\(28\)</span> by <span class="math inline">\(28\)</span> images; we resize this to <span class="math inline">\(60000\)</span> by <span class="math inline">\(784\)</span> since our MLP will take as input a vector of length <span class="math inline">\(784\)</span>. Similarly, the test set, which consists of <span class="math inline">\(10000\)</span> images is resized to <span class="math   inline">\(10000\)</span> by <span class="math inline">\(784\)</span>. We next convert these tensors to floats, and normalize the values to <span class="math inline">\([0,1]\)</span>.
-          </p>
+              <p>
+                The training set will contain <span class="math inline">\(60000\)</span> <span class="math inline">\(28\)</span> by <span class="math inline">\(28\)</span> images; we resize this to <span class="math inline">\(60000\)</span> by <span class="math inline">\(784\)</span> since our MLP will take as input a vector of length <span class="math inline">\(784\)</span>. Similarly, the test set, which consists of <span class="math inline">\(10000\)</span> images is resized to <span class="math   inline">\(10000\)</span> by <span class="math inline">\(784\)</span>. We next convert these tensors to floats, and normalize the values to <span class="math inline">\([0,1]\)</span>.
+              </p>
 
-          <div class="highlight"><pre>
-            <span class="c1"># convert class vectors to binary class matrices</span>
-            <span class="n">y_train</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
-            <span class="n">y_test</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
-          </pre></div>
+              <div class="highlight"><pre>
+                <span class="c1"># convert class vectors to binary class matrices</span>
+                <span class="n">y_train</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+                <span class="n">y_test</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+              </pre></div>
 
-          <p>
-            This code converts the ground-truth labels from a class vector (each digit is labeled with an integer <span class="math inline">\(0\)</span> through <span class="math inline">\(9\)</span>) to a one-hot encoding (each digit is labeled with a length <span class="math inline">\(9\)</span> vector which consists of zeros except for the index represented by the digit, which equals one). This is so that the ground-truth labels will be compatible with our categorical cross-entropy loss function.
-          </p>
+              <p>
+                This code converts the ground-truth labels from a class vector (each digit is labeled with an integer <span class="math inline">\(0\)</span> through <span class="math inline">\(9\)</span>) to a one-hot encoding (each digit is labeled with a length <span class="math inline">\(9\)</span> vector which consists of zeros except for the index represented by the digit, which equals one). This is so that the ground-truth labels will be compatible with our categorical cross-entropy loss function.
+              </p>
 
-          <div class="highlight"><pre>
-            <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,)))</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
-          </pre></div>
-          <p>
-            Here, the neural network is defined. The inputs are <span class="math inline">\(784 \rightarrow 512 \rightarrow 512 \rightarrow 10\)</span>, with the ReLU activation function (alternative to the classical sigmoid). A softmax is applied at the end to convert our ten outputs to probabilities, each output denoting a digit. Dropout is applied in between layers to avoid overfitting.
-          </p>
+              <div class="highlight"><pre>
+                <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,)))</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+              </pre></div>
+              <p>
+                Here, the neural network is defined. The inputs are <span class="math inline">\(784 \rightarrow 512 \rightarrow 512 \rightarrow 10\)</span>, with the ReLU activation function (alternative to the classical sigmoid). A softmax is applied at the end to convert our ten outputs to probabilities, each output denoting a digit. Dropout is applied in between layers to avoid overfitting.
+              </p>
 
-          <div class="highlight"><pre>
-            <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
-                          <span class="n">optimizer</span><span class="o">=</span><span class="n">RMSprop</span><span class="p">(),</span>
-                          <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
-          </pre></div>
+              <div class="highlight"><pre>
+                <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+                              <span class="n">optimizer</span><span class="o">=</span><span class="n">RMSprop</span><span class="p">(),</span>
+                              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+              </pre></div>
 
-          <p>
-            Here, the model is compiled. Our loss function is categorical cross-entropy, which is used for categorical data with more than two classes. The <code>metrics</code> keyword argument is a list of metrics we want to keep track of in throughout training, validation, and testing. We can provide our own functions, or provide strings denoting built-in metrics (e.g. accuracy).
-          </p>
+              <p>
+                Here, the model is compiled. Our loss function is categorical cross-entropy, which is used for categorical data with more than two classes. The <code>metrics</code> keyword argument is a list of metrics we want to keep track of in throughout training, validation, and testing. We can provide our own functions, or provide strings denoting built-in metrics (e.g. accuracy).
+              </p>
 
-          <div class="highlight"><pre>
-            <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
-                                <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-                                <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
-                                <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
-          </pre></div>
+              <div class="highlight"><pre>
+                <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+                                    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                                    <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+                                    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+              </pre></div>
 
-          <p>
-            Here, the model is trained. The <code>verbose</code> keyword argument gives us a nice progress bar as the training process progresses. Returned is a history of the metrics throughout training.
-          </p>
-          <div class="highlight"><pre>
-            <span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-          </pre></div>
+              <p>
+                Here, the model is trained. The <code>verbose</code> keyword argument gives us a nice progress bar as the training process progresses. Returned is a history of the metrics throughout training.
+              </p>
+              <div class="highlight"><pre>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+              </pre></div>
 
-          <p>
-          Finally, the model is evaluated on the test set. The metrics, as defined in the compile function, are returned.</p>
-          <h1 id="more-stuff">More Stuff</h1>
-          <p>Though this was a fairly simple example, it covers mostly what you will use in Keras. More advanced layers, optimizers, or losses can be found at Keras’s  <a href="https://keras.io">homepage</a>; Keras has great documentation! Things that may interest you are Keras’s functional API, which allows more flexible networks with multiple inputs/outputs, as well as the backend API, which allows for defining custom layers. Note that Keras and TensorFlow are interoperable; you can write TensorFlow code that operates on Keras tensors, for defining operations at an even lower level than that specified in the backend API (given that you use the TensorFlow backend for Keras).</p>
-          <h1 id="conclusion">Conclusion</h1>
-          <p>Keras is a great framework for rapid prototyping; it provides a high-level API with potential for lower level operations, when necessary. Note that, however, when working with large or customized models over long-term projects, you may want to look into other frameworks such as PyTorch, which doesn’t have a compile step and is much more low-level.</p>
-          <h1 id="practice">Practice</h1>
-          <p>Do Kaggle competitions!</p>
-
+              <p>
+              Finally, the model is evaluated on the test set. The metrics, as defined in the compile function, are returned.</p>
+              <h1 id="more-stuff">More Stuff</h1>
+              <p>Though this was a fairly simple example, it covers mostly what you will use in Keras. More advanced layers, optimizers, or losses can be found at Keras’s  <a href="https://keras.io">homepage</a>; Keras has great documentation! Things that may interest you are Keras’s functional API, which allows more flexible networks with multiple inputs/outputs, as well as the backend API, which allows for defining custom layers. Note that Keras and TensorFlow are interoperable; you can write TensorFlow code that operates on Keras tensors, for defining operations at an even lower level than that specified in the backend API (given that you use the TensorFlow backend for Keras).</p>
+              <h1 id="conclusion">Conclusion</h1>
+              <p>Keras is a great framework for rapid prototyping; it provides a high-level API with potential for lower level operations, when necessary. Note that, however, when working with large or customized models over long-term projects, you may want to look into other frameworks such as PyTorch, which doesn’t have a compile step and is much more low-level.</p>
+              <h1 id="practice">Practice</h1>
+              <p>Do Kaggle competitions!</p>
+          </div>
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
   </body>

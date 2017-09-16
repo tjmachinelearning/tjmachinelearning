@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
@@ -48,64 +49,65 @@
          </section>
     </div>
     <section class="main-content">
-        <h2 style="text-align:center; color:#000">Recurrent Neural Networks</h2>
-        <h3 style="text-align:center; color:#000">Justin Zhang</h2>
-        <h3 style="text-align:center; color:#000">February 2018</h2>
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Recurrent Neural Networks</h1>
+            <h3 style="text-align:center; color:#000">Justin Zhang</h2>
+            <h3 style="text-align:center; color:#000">February 2018</h2>
 
-          <h1 id="introduction">Introduction</h1>
-          <p>Recurrent Neural Networks (RNNs) are a type of neural network that specializes on sequential data; that is, data that is dependant on prior data. For instance, RNNs are often used for natural language processing, because a given word is more likely to appear depending on the prior words. In this vein, RNNs have been applied to tasks like machine translation, image caption generation, and word prediction. However, RNNs have also seen moderate successes in image generation and audio generation.</p>
-          <h1 id="intuition">Intuition</h1>
-          <p>In order to handle sequential data, a recurrent neural network has to be able to input a tensor of variable lengths. To do this, we design a <em>cell</em> that can be “unrolled,” or looped.</p>
-          <div class="figure">
-          <img src="RNN-unrolled.png" alt="An unrolled RNN." />
-          <p class="caption">An unrolled RNN.<span data-label="fig:rnn"></span></p>
+              <h1 id="introduction">Introduction</h1>
+              <p>Recurrent Neural Networks (RNNs) are a type of neural network that specializes on sequential data; that is, data that is dependant on prior data. For instance, RNNs are often used for natural language processing, because a given word is more likely to appear depending on the prior words. In this vein, RNNs have been applied to tasks like machine translation, image caption generation, and word prediction. However, RNNs have also seen moderate successes in image generation and audio generation.</p>
+              <h1 id="intuition">Intuition</h1>
+              <p>In order to handle sequential data, a recurrent neural network has to be able to input a tensor of variable lengths. To do this, we design a <em>cell</em> that can be “unrolled,” or looped.</p>
+              <div class="figure">
+              <img src="RNN-unrolled.png" alt="An unrolled RNN." />
+              <p class="caption">An unrolled RNN.<span data-label="fig:rnn"></span></p>
+              </div>
+              <p>This RNN also has to be able to use the previous context as a prior to the next output. This architecture alone works well with the immediate previous context; however, not so much for long-term dependencies.</p>
+              <p>Let’s take a word predictor, for instance. Given part of a sentence, predict the next word. This structure would work quite well for a sentence like “I ate some delicious ice ____”; “ice” provides a significant cue that the next word might be “cream.” However, given a sentence like “I went to the grocery store, but I forgot to bring my ____”, it will likely have trouble guessing “wallet.”</p>
+              <p>This is the problem of long-term dependencies; the network will “forget” words over time. To resolve this issue, we introduce a type of cell that can “choose” to remember or forget words.</p>
+              <h1 id="types-of-rnns">Types of RNNs</h1>
+              <div class="figure">
+              <img src="LSTM.png" alt="An LSTM cell." />
+              <p class="caption">An LSTM cell.<span data-label="fig:lstm"></span></p>
+              </div>
+              <p>An Long Short Term Memory network (LSTM) attempts to alleviate this issue by having a “forget gate,” which allows the network to select parts of an input vector to “remember” (i.e. pass on to the next cell) or “forget.” It additionally has a mechanism to store and update the cell state. Let’s walk through the cell step-by-step.</p>
+              <h2 id="lstm-walk-through">LSTM walk-through</h2>
+              <div class="figure">
+              <img src="LSTM0.png" alt="Cell state." />
+              <p class="caption">Cell state.<span data-label="fig:lstm0"></span></p>
+              </div>
+              <p>First off, the cell state. This is the pathway in which information flows from cell-to-cell. It was designed so that this would have little interaction, so as to store long-term data with little change.</p>
+              <div class="figure">
+              <img src="LSTM1.png" alt="The forget gate." />
+              <p class="caption">The forget gate.<span data-label="fig:lstm1"></span></p>
+              </div>
+              <p>This is the forget gate. We use a sigmoid activation conditioned on the input and prior output, which gives us outputs between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Since we’re multiplying this value to the cell state, an output of <span class="math inline">\(0\)</span> would correspond to completely forgetting everything, <span class="math inline">\(1\)</span> remembering everything. This is done so as to update old information with more the more recent context.</p>
+              <div class="figure">
+              <img src="LSTM2.png" alt="Updating the cell state." />
+              <p class="caption">Updating the cell state.<span data-label="fig:lstm2"></span></p>
+              </div>
+              <div class="figure">
+              <img src="LSTM3.png" alt="Outputting the cell state." />
+              <p class="caption">Outputting the cell state.<span data-label="fig:lstm3"></span></p>
+              </div>
+              <p>Next, we add a vector to the cell state based on the input and previous output, so as to update the state. Note that we’re adding values between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>; <span class="math inline">\(\tanh\)</span> outputs <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span>, and the sigmoid outputs <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span>, which determines the magnitude of the update.</p>
+              <div class="figure">
+              <img src="LSTM4.png" alt="Outputting the final value." />
+              <p class="caption">Outputting the final value.<span data-label="fig:lstm4"></span></p>
+              </div>
+              <p>Lastly, we want to output <span class="math inline">\(h_i\)</span>. This is determined by the cell state, which is run through <span class="math inline">\(\tanh\)</span> to bound the values between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. The sigmoid, whose output is conditioned on the previous cell output and current input, allows the cell to select which parts of the cell state to output (the sigmoid will output <span class="math inline">\(0\)</span> for the parts it does not want to output, and vice-versa).</p>
+              <p>Then, the process repeats, with the next input.</p>
+              <h2 id="grus">GRUs</h2>
+              <div class="figure">
+              <img src="GRU.png" alt="A GRU cell." />
+              <p class="caption">A GRU cell.<span data-label="fig:gru"></span></p>
+              </div>
+              <p>A Gated Recurrent Unit (GRU) is an alternative to an LSTM that is computationally simpler. It opts to combine the update and forget mechanisms into an “update” mechanism, and also combines the hidden state and the cell state. GRUs are becoming increasingly popular as the perform as well as LSTMs on some tasks at a significantly lower computational cost.</p>
+              <h1 id="conclusion">Conclusion</h1>
+              <p>There are many other types of RNNs; LSTMs and GRUs are two of the most popular. Additionally, there have been advancements on RNNs themselves; “attention” mechanisms are popular in tasks such as machine translation and caption generation.</p>
+              <p>For NLP tasks, we recommend investigating word vectors (Word2Vec, skip-thought vectors, etc.) to encode words to vectors. Also, using RNNs as the basis for an encoder/decoder model is widely used to translate sequences (e.g. machine translation). We encourage you to further investigate these areas!</p>
+              <p>Diagrams were obtained from <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">here</a>.</p>
           </div>
-          <p>This RNN also has to be able to use the previous context as a prior to the next output. This architecture alone works well with the immediate previous context; however, not so much for long-term dependencies.</p>
-          <p>Let’s take a word predictor, for instance. Given part of a sentence, predict the next word. This structure would work quite well for a sentence like “I ate some delicious ice ____”; “ice” provides a significant cue that the next word might be “cream.” However, given a sentence like “I went to the grocery store, but I forgot to bring my ____”, it will likely have trouble guessing “wallet.”</p>
-          <p>This is the problem of long-term dependencies; the network will “forget” words over time. To resolve this issue, we introduce a type of cell that can “choose” to remember or forget words.</p>
-          <h1 id="types-of-rnns">Types of RNNs</h1>
-          <div class="figure">
-          <img src="LSTM.png" alt="An LSTM cell." />
-          <p class="caption">An LSTM cell.<span data-label="fig:lstm"></span></p>
-          </div>
-          <p>An Long Short Term Memory network (LSTM) attempts to alleviate this issue by having a “forget gate,” which allows the network to select parts of an input vector to “remember” (i.e. pass on to the next cell) or “forget.” It additionally has a mechanism to store and update the cell state. Let’s walk through the cell step-by-step.</p>
-          <h2 id="lstm-walk-through">LSTM walk-through</h2>
-          <div class="figure">
-          <img src="LSTM0.png" alt="Cell state." />
-          <p class="caption">Cell state.<span data-label="fig:lstm0"></span></p>
-          </div>
-          <p>First off, the cell state. This is the pathway in which information flows from cell-to-cell. It was designed so that this would have little interaction, so as to store long-term data with little change.</p>
-          <div class="figure">
-          <img src="LSTM1.png" alt="The forget gate." />
-          <p class="caption">The forget gate.<span data-label="fig:lstm1"></span></p>
-          </div>
-          <p>This is the forget gate. We use a sigmoid activation conditioned on the input and prior output, which gives us outputs between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Since we’re multiplying this value to the cell state, an output of <span class="math inline">\(0\)</span> would correspond to completely forgetting everything, <span class="math inline">\(1\)</span> remembering everything. This is done so as to update old information with more the more recent context.</p>
-          <div class="figure">
-          <img src="LSTM2.png" alt="Updating the cell state." />
-          <p class="caption">Updating the cell state.<span data-label="fig:lstm2"></span></p>
-          </div>
-          <div class="figure">
-          <img src="LSTM3.png" alt="Outputting the cell state." />
-          <p class="caption">Outputting the cell state.<span data-label="fig:lstm3"></span></p>
-          </div>
-          <p>Next, we add a vector to the cell state based on the input and previous output, so as to update the state. Note that we’re adding values between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>; <span class="math inline">\(\tanh\)</span> outputs <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span>, and the sigmoid outputs <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span>, which determines the magnitude of the update.</p>
-          <div class="figure">
-          <img src="LSTM4.png" alt="Outputting the final value." />
-          <p class="caption">Outputting the final value.<span data-label="fig:lstm4"></span></p>
-          </div>
-          <p>Lastly, we want to output <span class="math inline">\(h_i\)</span>. This is determined by the cell state, which is run through <span class="math inline">\(\tanh\)</span> to bound the values between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. The sigmoid, whose output is conditioned on the previous cell output and current input, allows the cell to select which parts of the cell state to output (the sigmoid will output <span class="math inline">\(0\)</span> for the parts it does not want to output, and vice-versa).</p>
-          <p>Then, the process repeats, with the next input.</p>
-          <h2 id="grus">GRUs</h2>
-          <div class="figure">
-          <img src="GRU.png" alt="A GRU cell." />
-          <p class="caption">A GRU cell.<span data-label="fig:gru"></span></p>
-          </div>
-          <p>A Gated Recurrent Unit (GRU) is an alternative to an LSTM that is computationally simpler. It opts to combine the update and forget mechanisms into an “update” mechanism, and also combines the hidden state and the cell state. GRUs are becoming increasingly popular as the perform as well as LSTMs on some tasks at a significantly lower computational cost.</p>
-          <h1 id="conclusion">Conclusion</h1>
-          <p>There are many other types of RNNs; LSTMs and GRUs are two of the most popular. Additionally, there have been advancements on RNNs themselves; “attention” mechanisms are popular in tasks such as machine translation and caption generation.</p>
-          <p>For NLP tasks, we recommend investigating word vectors (Word2Vec, skip-thought vectors, etc.) to encode words to vectors. Also, using RNNs as the basis for an encoder/decoder model is widely used to translate sequences (e.g. machine translation). We encourage you to further investigate these areas!</p>
-          <p>Diagrams were obtained from <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">here</a>.</p>
-
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
   </body>

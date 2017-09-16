@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
@@ -48,118 +49,119 @@
          </section>
     </div>
     <section class="main-content">
-        <h2 style="text-align:center; color:#000">Neural Networks: Introduction and Overview</h2>
-        <h3 style="text-align:center; color:#000">Nikhil Sardana</h2>
-        <h3 style="text-align:center; color:#000">November 2017</h2>
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Neural Networks: Introduction and Overview</h1>
+            <h3 style="text-align:center; color:#000">Nikhil Sardana</h2>
+            <h3 style="text-align:center; color:#000">November 2017</h2>
 
-          <h1 id="introduction">Introduction</h1>
-          <p>Neural networks are fundamental to modern machine learning. In order to understand Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Generative Adversarial Networks (GANs), not only is it essential to understand the theory behind standard Neural Networks, but also the mathematics. To ensure complete understand, we only use numpy to build our network, removing any reliance on a library.</p>
-          <h1 id="the-perceptron">The Perceptron</h1>
-          <p style="text-align:center"><img src="2MVdW.png" alt="image" /></p>
-          <h2 id="definition">Definition</h2>
-          <p>A perceptron is the fundamental unit of a Neural Network (which is even called a Multi-Layer Perceptron for this reason). Refer to the diagram above. Perceptrons contain two or more inputs, a weight for each input, a bias, an activation function (the step function) and an output. For the perceptron above with <span class="math inline">\(2\)</span> inputs, the intermediate value <span class="math inline">\(f(x)\)</span> is as follows <span class="math display">\[f(x) = w_1x_1 + w_2x_2 + b\]</span> The final output <span class="math inline">\(y\)</span> is just the step function: <span class="math display">\[y =
-            \begin{cases}
-                                             0 &amp; \text{if $f(x) &lt; 0$} \\
-            1 &amp; \text{if $f(x) &gt; 0$}
-            \end{cases}\]</span></p>
-          <h2 id="visualization">Visualization</h2>
-          <p>The purpose of a perceptron is to classify data. Consider the function AND.</p>
-          <table>
-          <thead>
-          <tr class="header">
-          <th align="center">x1</th>
-          <th align="center">x2</th>
-          <th align="center">out</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="odd">
-          <td align="center">0</td>
-          <td align="center">0</td>
-          <td align="center">0</td>
-          </tr>
-          <tr class="even">
-          <td align="center">0</td>
-          <td align="center">1</td>
-          <td align="center">0</td>
-          </tr>
-          <tr class="odd">
-          <td align="center">1</td>
-          <td align="center">0</td>
-          <td align="center">0</td>
-          </tr>
-          <tr class="even">
-          <td align="center">1</td>
-          <td align="center">1</td>
-          <td align="center">1</td>
-          </tr>
-          </tbody>
-          </table>
-          <p>Let’s graph this data.</p>
-          <p style="text-align:center"><img src="plot1.PNG" alt="plot1" style="max-width:30em"/></p>
-          <p>The line <span class="math inline">\(y = -x + 1.5\)</span> splits this data the best. Let’s rearrange this to get <span class="math inline">\(x + y - 1.5 = 0\)</span>. Going back to the perceptron formula <span class="math display">\[f(x) = w_1x_1 + w_2x_2 + b\]</span> we can see that for the optimal perceptron, <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are the coefficients of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and <span class="math inline">\(b=-1.5\)</span>. If <span class="math inline">\(f(x) &gt; 0\)</span>, then <span class="math inline">\(x + y - 1.5&gt;0\)</span>. We can see through this example that perceptrons are nothing more than linear functions. Above a line, perceptrons classify data points <span class="math inline">\(1\)</span>, below the line, they are <span class="math inline">\(0\)</span>.</p>
-          <h2 id="learning">Learning</h2>
-          <p>How do perceptrons “learn” the best possible linear function to split the data? Perceptrons adjust the weights and bias to iteratively approach a solution.</p>
-          <p>Let’s consider this data:</p>
-          <p style="text-align:center"><img src="plot2.png" alt="plot2"  style="max-width:30em"/></p>
-          <p>The perceptron that represents the dashed line <span class="math inline">\(y+x-1.5=0\)</span> has two inputs, <span class="math inline">\(x_1, x_2,\)</span> with corresponding weights <span class="math inline">\(w_1=1, w_2=1\)</span>, and bias <span class="math inline">\(b = -1.5\)</span>. Let <span class="math inline">\(y\)</span> represent the output of this perceptron. In the data above, the point <span class="math inline">\((1, 0)\)</span> is the only misclassified point. The perceptron outputs 0 because it is below the line, but it should output a 1.</p>
-          <p>For some data point (input) <span class="math inline">\(i\)</span> with coordinates <span class="math inline">\((i_1, i_2)\)</span>, the perceptron adjusts its weights and bias according to this formula: <span class="math display">\[w_1 = w_1 + \alpha(d-y)(i_1)\]</span> <span class="math display">\[w_2 = w_2 + \alpha(d-y)(i_2)\]</span> <span class="math display">\[b = b + \alpha(d-y)\]</span> Where <span class="math inline">\(d\)</span> is the desired output, and <span class="math inline">\(\alpha\)</span> is the learning rate, a constant usually between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Notice that the equation degenerates to <span class="math inline">\(w = w\)</span> and <span class="math inline">\(b=b\)</span> when the desired output equals the perceptron output. In other words, the perceptron only learns from misclassified points.</p>
-          <p>In the case of the above data, the perceptron only learns from the point <span class="math inline">\((1, 0)\)</span>. Let’s set <span class="math inline">\(\alpha=0.2\)</span> and compute the learning steps: <span class="math display">\[w_1 = 1 + 0.2(1-0)(1) = 1.2\]</span> <span class="math display">\[w_2 = 1 + 0.2(1-0)(0) = 1\]</span> <span class="math display">\[b = -1.5 + 0.2(1-0) = -1.3\]</span></p>
-          <p>After 1 iteration, the perceptron now represents the function <span class="math inline">\(y+1.2x-1.3 = 0\)</span>, which is shown below:</p>
-          <p style="text-align:center"><img src="plot3.png" alt="plot3"  style="max-width:30em"/></p>
-          <p>The next iteration follows: <span class="math display">\[w_1 = 1.2 + 0.2(1-0)(1) = 1.4\]</span> <span class="math display">\[w_2 = 1 + 0.2(1-0)(0) = 1\]</span> <span class="math display">\[b = -1.3 + 0.2(1-0) = -1.1\]</span></p>
-          <p style="text-align:center"><img src="plot4.png" alt="plot4"  style="max-width:30em"/></p>
-          <p>All the points are now correctly classified. The perceptron has learned! Notice how it has not learned the best possible line, only the first one that zeroes the difference between expected and actual output.</p>
-          <h2 id="non-linearly-separable-data">Non-Linearly Separable Data</h2>
-          <p>Consider the function XOR:</p>
-          <table>
-          <thead>
-          <tr class="header">
-          <th align="center">x1</th>
-          <th align="center">x2</th>
-          <th align="center">out</th>
-          </tr>
-        </thead>
-          <tbody>
-          <tr class="odd">
-          <td align="center">0</td>
-          <td align="center">0</td>
-          <td align="center">1</td>
-          </tr>
-          <tr class="even">
-          <td align="center">0</td>
-          <td align="center">1</td>
-          <td align="center">0</td>
-          </tr>
-          <tr class="odd">
-          <td align="center">1</td>
-          <td align="center">0</td>
-          <td align="center">0</td>
-          </tr>
-          <tr class="even">
-          <td align="center">1</td>
-          <td align="center">1</td>
-          <td align="center">1</td>
-          </tr>
-          </tbody>
-          </table>
-          <p>Let’s graph this data.</p>
-          <p style="text-align:center"><img src="plot5.PNG" alt="plot5"  style="max-width:30em"/></p>
-          <p>We need two lines to separate this data! A perceptron will never reach the optimal solution. However, multiple perceptrons can learn multiple lines, which can be used to classify non-linearly separable data.</p>
-          <h1 id="multi-layer-perceptron">Multi-Layer Perceptron</h1>
-          <p>A neural network (NN) or Multi-Layer Perceptron (MLP) is a bunch of these perceptrons glued together, and can be used to approximate multi-dimensional non-linearly separable data. Let us again consider XOR. How do we arrange perceptrons to represent the two functions?</p>
-          <p>Clearly, we need two perceptrons, one for each function. The output of these two perceptrons can be used as inputs to a third perceptron, which will give us our output. Refer to the diagram below.</p>
-          <p><img src="Frame.png" alt="image" /></p>
-          <p>Let perceptron 1 model <span class="math inline">\(y + x - 1.5 = 0\)</span> (the upper line), and perceptron 2 model <span class="math inline">\(y + x - 0.5 = 0\)</span> (the lower line). Because the weights are the coefficients of these functions, <span class="math inline">\(w_1 = 1, w_2 = 1, w_3 = 1, w_4 = 1\)</span> and the biases <span class="math inline">\(b_1 = -1.5\)</span> and <span class="math inline">\(b_2 = -0.5\)</span>.</p>
-          <p>The output of Perceptron 1 will be a 1 for points above the upper line, and a 0 for the points below the upper line. The output of Perceptron 2 will be a 1 for points above the lower line, and a 0 for points below the lower line. In between the lines, we get a grand total of... 1. This doesn't help us at all! In order to create a threshold to separate the points between the lines from the points outside, we would like the outputs for points between the lines to be additive.</p>
-          <p>In other words, we would like the inputs of Perceptron 3 to both be 1 between the lines, and have a maximum of a single 1 for points outside the lines. Thus, we let <span class="math inline">\(w_6 = 1\)</span> and <span class="math inline">\(w_5 = -1\)</span>. This gives us an output of 2 for points between the lines, and a maximum output of 1 for points outside the lines. Thus, we can set the bias for Perceptron 3: <span class="math inline">\(b_3 = -1.5\)</span>.</p>
-          <h1 id="problems">Problems</h1>
-          <ol>
-          <li><p>Write out the weights, biases, and structure of the Perceptron that classifies the function OR.</p></li>
-          <li><p>Write out the weights, biases, and structure of the Multi-Layer perceptron that classifies the function XNOR.</p></li>
-          <li><p>Write an implementation of the XOR Multi-Layer Perceptron in Python.</p></li>
-          </ol>
-
+              <h1 id="introduction">Introduction</h1>
+              <p>Neural networks are fundamental to modern machine learning. In order to understand Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Generative Adversarial Networks (GANs), not only is it essential to understand the theory behind standard Neural Networks, but also the mathematics. To ensure complete understanding, we only use numpy to build our network, removing any reliance on a library.</p>
+              <h1 id="the-perceptron">The Perceptron</h1>
+              <p style="text-align:center"><img src="2MVdW.png" alt="image" /></p>
+              <h2 id="definition">Definition</h2>
+              <p>A perceptron is the fundamental unit of a Neural Network (which is even called a Multi-Layer Perceptron for this reason). Refer to the diagram above. Perceptrons contain two or more inputs, a weight for each input, a bias, an activation function (the step function) and an output. For the perceptron above with <span class="math inline">\(2\)</span> inputs, the intermediate value <span class="math inline">\(f(x)\)</span> is as follows <span class="math display">\[f(x) = w_1x_1 + w_2x_2 + b\]</span> The final output <span class="math inline">\(y\)</span> is just the step function: <span class="math display">\[y =
+                \begin{cases}
+                                                 0 &amp; \text{if $f(x) &lt; 0$} \\
+                1 &amp; \text{if $f(x) &gt; 0$}
+                \end{cases}\]</span></p>
+              <h2 id="visualization">Visualization</h2>
+              <p>The purpose of a perceptron is to classify data. Consider the function AND.</p>
+              <table>
+              <thead>
+              <tr class="header">
+              <th align="center">x1</th>
+              <th align="center">x2</th>
+              <th align="center">out</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="center">0</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              </tr>
+              <tr class="even">
+              <td align="center">0</td>
+              <td align="center">1</td>
+              <td align="center">0</td>
+              </tr>
+              <tr class="odd">
+              <td align="center">1</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              </tr>
+              <tr class="even">
+              <td align="center">1</td>
+              <td align="center">1</td>
+              <td align="center">1</td>
+              </tr>
+              </tbody>
+              </table>
+              <p>Let’s graph this data.</p>
+              <p style="text-align:center"><img src="plot1.PNG" alt="plot1" style="max-width:30em"/></p>
+              <p>The line <span class="math inline">\(y = -x + 1.5\)</span> splits this data the best. Let’s rearrange this to get <span class="math inline">\(x + y - 1.5 = 0\)</span>. Going back to the perceptron formula <span class="math display">\[f(x) = w_1x_1 + w_2x_2 + b\]</span> we can see that for the optimal perceptron, <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are the coefficients of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and <span class="math inline">\(b=-1.5\)</span>. If <span class="math inline">\(f(x) &gt; 0\)</span>, then <span class="math inline">\(x + y - 1.5&gt;0\)</span>. We can see through this example that perceptrons are nothing more than linear functions. Above a line, perceptrons classify data points <span class="math inline">\(1\)</span>, below the line, they are <span class="math inline">\(0\)</span>.</p>
+              <h2 id="learning">Learning</h2>
+              <p>How do perceptrons “learn” the best possible linear function to split the data? Perceptrons adjust the weights and bias to iteratively approach a solution.</p>
+              <p>Let’s consider this data:</p>
+              <p style="text-align:center"><img src="plot2.png" alt="plot2"  style="max-width:30em"/></p>
+              <p>The perceptron that represents the dashed line <span class="math inline">\(y+x-1.5=0\)</span> has two inputs, <span class="math inline">\(x_1, x_2,\)</span> with corresponding weights <span class="math inline">\(w_1=1, w_2=1\)</span>, and bias <span class="math inline">\(b = -1.5\)</span>. Let <span class="math inline">\(y\)</span> represent the output of this perceptron. In the data above, the point <span class="math inline">\((1, 0)\)</span> is the only misclassified point. The perceptron outputs 0 because it is below the line, but it should output a 1.</p>
+              <p>For some data point (input) <span class="math inline">\(i\)</span> with coordinates <span class="math inline">\((i_1, i_2)\)</span>, the perceptron adjusts its weights and bias according to this formula: <span class="math display">\[w_1 = w_1 + \alpha(d-y)(i_1)\]</span> <span class="math display">\[w_2 = w_2 + \alpha(d-y)(i_2)\]</span> <span class="math display">\[b = b + \alpha(d-y)\]</span> Where <span class="math inline">\(d\)</span> is the desired output, and <span class="math inline">\(\alpha\)</span> is the learning rate, a constant usually between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Notice that the equation degenerates to <span class="math inline">\(w = w\)</span> and <span class="math inline">\(b=b\)</span> when the desired output equals the perceptron output. In other words, the perceptron only learns from misclassified points.</p>
+              <p>In the case of the above data, the perceptron only learns from the point <span class="math inline">\((1, 0)\)</span>. Let’s set <span class="math inline">\(\alpha=0.2\)</span> and compute the learning steps: <span class="math display">\[w_1 = 1 + 0.2(1-0)(1) = 1.2\]</span> <span class="math display">\[w_2 = 1 + 0.2(1-0)(0) = 1\]</span> <span class="math display">\[b = -1.5 + 0.2(1-0) = -1.3\]</span></p>
+              <p>After 1 iteration, the perceptron now represents the function <span class="math inline">\(y+1.2x-1.3 = 0\)</span>, which is shown below:</p>
+              <p style="text-align:center"><img src="plot3.png" alt="plot3"  style="max-width:30em"/></p>
+              <p>The next iteration follows: <span class="math display">\[w_1 = 1.2 + 0.2(1-0)(1) = 1.4\]</span> <span class="math display">\[w_2 = 1 + 0.2(1-0)(0) = 1\]</span> <span class="math display">\[b = -1.3 + 0.2(1-0) = -1.1\]</span></p>
+              <p style="text-align:center"><img src="plot4.png" alt="plot4"  style="max-width:30em"/></p>
+              <p>All the points are now correctly classified. The perceptron has learned! Notice how it has not learned the best possible line, only the first one that zeroes the difference between expected and actual output.</p>
+              <h2 id="non-linearly-separable-data">Non-Linearly Separable Data</h2>
+              <p>Consider the function XOR:</p>
+              <table>
+              <thead>
+              <tr class="header">
+              <th align="center">x1</th>
+              <th align="center">x2</th>
+              <th align="center">out</th>
+              </tr>
+            </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="center">0</td>
+              <td align="center">0</td>
+              <td align="center">1</td>
+              </tr>
+              <tr class="even">
+              <td align="center">0</td>
+              <td align="center">1</td>
+              <td align="center">0</td>
+              </tr>
+              <tr class="odd">
+              <td align="center">1</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              </tr>
+              <tr class="even">
+              <td align="center">1</td>
+              <td align="center">1</td>
+              <td align="center">1</td>
+              </tr>
+              </tbody>
+              </table>
+              <p>Let’s graph this data.</p>
+              <p style="text-align:center"><img src="plot5.PNG" alt="plot5"  style="max-width:30em"/></p>
+              <p>We need two lines to separate this data! A perceptron will never reach the optimal solution. However, multiple perceptrons can learn multiple lines, which can be used to classify non-linearly separable data.</p>
+              <h1 id="multi-layer-perceptron">Multi-Layer Perceptron</h1>
+              <p>A neural network (NN) or Multi-Layer Perceptron (MLP) is a bunch of these perceptrons glued together, and can be used to approximate multi-dimensional non-linearly separable data. Let us again consider XOR. How do we arrange perceptrons to represent the two functions?</p>
+              <p>Clearly, we need two perceptrons, one for each function. The output of these two perceptrons can be used as inputs to a third perceptron, which will give us our output. Refer to the diagram below.</p>
+              <p><img src="Frame.png" alt="image" /></p>
+              <p>Let perceptron 1 model <span class="math inline">\(y + x - 1.5 = 0\)</span> (the upper line), and perceptron 2 model <span class="math inline">\(y + x - 0.5 = 0\)</span> (the lower line). Because the weights are the coefficients of these functions, <span class="math inline">\(w_1 = 1, w_2 = 1, w_3 = 1, w_4 = 1\)</span> and the biases <span class="math inline">\(b_1 = -1.5\)</span> and <span class="math inline">\(b_2 = -0.5\)</span>.</p>
+              <p>The output of Perceptron 1 will be a 1 for points above the upper line, and a 0 for the points below the upper line. The output of Perceptron 2 will be a 1 for points above the lower line, and a 0 for points below the lower line. In between the lines, we get a grand total of... 1. This doesn't help us at all! In order to create a threshold to separate the points between the lines from the points outside, we would like the outputs for points between the lines to be additive.</p>
+              <p>In other words, we would like the inputs of Perceptron 3 to both be 1 between the lines, and have a maximum of a single 1 for points outside the lines. Thus, we let <span class="math inline">\(w_6 = 1\)</span> and <span class="math inline">\(w_5 = -1\)</span>. This gives us an output of 2 for points between the lines, and a maximum output of 1 for points outside the lines. Thus, we can set the bias for Perceptron 3: <span class="math inline">\(b_3 = -1.5\)</span>.</p>
+              <h1 id="problems">Problems</h1>
+              <ol>
+              <li><p>Write out the weights, biases, and structure of the Perceptron that classifies the function OR.</p></li>
+              <li><p>Write out the weights, biases, and structure of the Multi-Layer perceptron that classifies the function XNOR.</p></li>
+              <li><p>Write an implementation of the XOR Multi-Layer Perceptron in Python.</p></li>
+              </ol>
+          </div>
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
   </body>
