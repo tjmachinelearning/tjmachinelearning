@@ -30,8 +30,18 @@ def getDataLabeled():
             print(len(inputArray))
     return x,y
 
+#pass array of labels and method will generate output txt
+def generateOutputFile(y_test):
+	with open('out.txt', 'w') as f:
+	    f.write("id,solution\n")
+	    for i in range(len(y_test)):
+	        f.write(str(i+1)+","+str(y_test[i]+"\n"))
+
 
 
 X_train, y_train = getDataLabeled()
 X_test = getDataUnlabeled()
 
+# TODO: Write some ML
+# TODO: use model to generate y_test from X_test
+# generateOutputFile(y_test)
