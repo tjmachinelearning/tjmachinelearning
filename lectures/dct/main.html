@@ -6,7 +6,7 @@
 <img src="dtree.jpg" alt="Real Life Decision Tree" />
 <p class="caption">Real Life Decision Tree<span data-label="fig:decisiontree"></span></p>
 </div>
-<p>Although this figure asks categorical variable-based questions, we can ask numerical-based questions like <span class="math inline">\(&quot;x_1 &lt; 5?&quot;\)</span> when the features are continuous. To build our tree, we start at the root node and ask a question that splits the data based on the feature such that the information gain is maximized. We continuously do this for each node until the decision tree can classify all the training data. Note that in practice this leads to overfitting, so the tree is usually pruned, i.e. a limit on the depth of the tree is set.</p>
+<p>Although this figure asks categorical variable-based questions, we can ask numerical-based questions like <span class="math inline">\(``x_1 &lt; 5?&quot;\)</span> when the features are continuous. To build our tree, we start at the root node and ask a question that splits the data based on the feature such that the information gain is maximized. We continuously do this for each node until the decision tree can classify all the training data. Note that in practice this leads to overfitting, so the tree is usually pruned, i.e. a limit on the depth of the tree is set.</p>
 <h2 id="information-gain">Information Gain</h2>
 <p>We split each node on the feature that yields the most information gain. The formula for information gain in a binary decision tree is as follows:</p>
 <p><span class="math display">\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\]</span></p>
@@ -17,7 +17,86 @@
 <p>An alternative impurity measure is entropy, which is defined as:</p>
 <p><span class="math display">\[-\sum_{k=1}^{c} p(k|i)log_2{p(k|i)}\]</span></p>
 <p>Note that this function has a maximum of 1.0, not 0.5. In practice, Gini impurity and entropy yield similar results, so it is more useful to test different pruning cut-offs rather than to evaluate trees with different impurity criteria.</p>
-<p>To decide on a split for a specific node, we will search for the feature and the threshold (e.g. “petal length &lt; 2.45 cm” for a flower classifier) that maximizes the information gain. One way to choose a good threshold is to select the best threshold from the 20%, 40%, 60%, and 80% quantiles of the feature set.</p>
-<p>An snippet from a basic implementation of a decision tree might look like this:</p>
-<h1 id="problems">Problems</h1>
-<p>1. Write a full implementation of a decision tree from scratch. 2. Write a function that returns the entropy of a node in a decision tree.</p>
+<p>To decide on a split for a specific node, we will search for the feature and the threshold (e.g. “petal length <span class="math inline">\(&lt;\)</span> 2.45 cm&quot; for a flower classifier) that maximizes the information gain. We can choose the best threshold for a feature from the feature values in the training data or from the averages of every pair of feature values in the training set. Another method is to select the best threshold from the quartiles (20%, 40%, 60%, and 80&amp; values) of the feature set.</p>
+<p>Here is the pseudocode for determining the best split:</p>
+<p><span class="math inline">\(\textit{IG} \gets 0\)</span> <span class="math inline">\(\textit{pot\_left, pot\_right} \gets \text{split}\textit{(parent, feature, threshold)}\)</span> <span class="math inline">\(\textit{pot\_ig} \gets \text{information\_gain}\textit{(parent, pot\_left, pot\_right)}\)</span> <span class="math inline">\(\textit{left} \gets \textit{pot\_left}\)</span> <span class="math inline">\(\textit{right} \gets \textit{pot\_right}\)</span> <span class="math inline">\(\textit{IG} \gets \textit{pot\_ig}\)</span> <em>left, right</em></p>
+<p><span class="math inline">\(\text{Initialize }\textit{left}\text{ and }\textit{right}\text{ lists}\)</span> append data point to <em>left</em> append data point to <em>right</em> <em>left, right</em></p>
+<p><span class="math inline">\(\textit{sum} \gets 0\)</span> <span class="math inline">\(\textit{ratio} \gets \text{(number of class labels } \textit{c}\text{)} / \text{size of dataset}\)</span> <span class="math inline">\(\textit{sum} \gets \textit{sum} + \textit{ratio}*\textit{ratio}\)</span> <em>sum</em></p>
+<h1 id="practice-problems">Practice Problems</h1>
+<p>Consider the following dataset:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">x3</th>
+<th align="center">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">-1</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">+1</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">+1</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">-1</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>What feature will we split on at the root of our decision tree, and what will our information gain be from splitting on that feature using the Gini impurity measure?</p></li>
+<li><p>Build a decision tree using the dataset. What is the depth of the tree?</p></li>
+<li><p>What will the decision tree classify a data point with the features x1 = 0, x2 = 0, and x3 = 0 as (y = -1 or y = +1)?</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">+1</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">+1</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">+1</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">-1</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>What will the information gain be after the first split in the above data set with the Gini impurity measure? With entropy as the impurity measure?</p></li>
+<li><p>What is the depth of the final decision tree?</p></li>
+</ol>

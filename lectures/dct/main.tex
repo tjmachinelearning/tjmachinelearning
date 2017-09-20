@@ -3,10 +3,20 @@
 
 \title{Decision Trees}
 \author{Sylesh Suresh }
-\date{July 2017}
+\date{October 2017}
 
 \usepackage{graphicx}
 \usepackage{minted}
+\usepackage{enumitem}
+
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
 \begin{document}
 
 \maketitle
@@ -18,12 +28,12 @@ In essence, decision trees asks a series of true/false questions to narrow down 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{dtree.jpg}
+\includegraphics[scale=0.14]{dtree.jpg}
 \caption{Real Life Decision Tree}
 \label{fig:decisiontree}
 \end{figure}
 
-Although this figure asks categorical variable-based questions, we can ask numerical-based questions like \("x_1 < 5?"\) when the features are continuous. To build our tree, we start at the root node and ask a question that splits the data based on the feature such that the information gain is maximized. We continuously do this for each node until the decision tree can classify all the training data. Note that in practice this leads to overfitting, so the tree is usually pruned, i.e. a limit on the depth of the tree is set. 
+Although this figure asks categorical variable-based questions, we can ask numerical-based questions like \(``x_1 < 5?"\) when the features are continuous. To build our tree, we start at the root node and ask a question that splits the data based on the feature such that the information gain is maximized. We continuously do this for each node until the decision tree can classify all the training data. Note that in practice this leads to overfitting, so the tree is usually pruned, i.e. a limit on the depth of the tree is set. 
 
 \subsection{Information Gain}
 We split each node on the feature that yields the most information gain. The formula for information gain in a binary decision tree is as follows:
@@ -46,14 +56,96 @@ An alternative impurity measure is entropy, which is defined as:
 
 Note that this function has a maximum of 1.0, not 0.5. In practice, Gini impurity and entropy yield similar results, so it is more useful to test different pruning cut-offs rather than to evaluate trees with different impurity criteria.
 
-To decide on a split for a specific node, we will search for the feature and the threshold (e.g. "petal length < 2.45 cm" for a flower classifier) that maximizes the information gain. One way to choose a good threshold is to select the best threshold from the 20\%, 40\%, 60\%, and 80\% quantiles of the feature set. 
+To decide on a split for a specific node, we will search for the feature and the threshold (e.g. ``petal length $<$ 2.45 cm" for a flower classifier) that maximizes the information gain. We can choose the best threshold for a feature from the feature values in the training data or from the averages of every pair of feature values in the training set. Another method is to select the best threshold from the quartiles (20\%, 40\%, 60\%, and 80\& values) of the feature set. 
 
-An snippet from a basic implementation of a decision tree might look like this:
+Here is the pseudocode for determining the best split:
 
-\inputminted{python}{decisiontree.py}
+\begin{algorithm}
+\caption{Best Split}\label{euclid}
+\begin{algorithmic}[1]
+\State $\textit{IG} \gets 0$
+\For{each feature}
+\For {each threshold}
+\State $\textit{pot\_left, pot\_right} \gets \text{split}\textit{(parent, feature, threshold)}$ 
+\State $\textit{pot\_ig} \gets \text{information\_gain}\textit{(parent, pot\_left, pot\_right)}$
+\If{$\textit{pot\_ig} > \textit{IG}$}
+\State $\textit{left} \gets \textit{pot\_left}$
+\State $\textit{right} \gets \textit{pot\_right}$
+\State $\textit{IG} \gets \textit{pot\_ig}$
+\EndIf
+\EndFor
+\EndFor
+\State \Return \textit{left, right}
+\end{algorithmic}
+\end{algorithm}
 
+\begin{algorithm}
+\caption{Split}
+\begin{algorithmic}[1]
+\Function{split}{\textit{feature, threshold}}
+\State $\text{Initialize }\textit{left}\text{ and }\textit{right}\text{ lists}$
+\For{each data point}
+\If{$\textit{feature}\text{ of data point} < \textit{threshold}$}
+\State append data point to \textit{left}
+\Else
+\State append data point to \textit{right}
+\EndIf
+\EndFor
+\State \Return \textit{left, right}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
-\section{Problems}
-1. Write a full implementation of a decision tree from scratch. \newline
-2. Write a function that returns the entropy of a node in a decision tree.
+\begin{algorithm}
+\caption{Gini Impurity}
+\begin{algorithmic}[1]
+\Function{split}{\textit{dataset}}
+\State $\textit{sum} \gets 0$
+\For{each class label \textit{c}}
+\State $\textit{ratio} \gets \text{(number of class labels } \textit{c}\text{)} / \text{size of dataset}$
+\State $\textit{sum} \gets \textit{sum} + \textit{ratio}*\textit{ratio}$
+\EndFor
+\State \Return \text{1 - }\textit{sum}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\section{Practice Problems}
+Consider the following dataset:
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+\hline
+x1 & x2 & x3 & y \\
+\hline
+0 & 1 & 0 & -1\\ 
+1 & 0 & 0 & +1\\ 
+0 & 1 & 1 & +1\\ 
+0 & 0 & 1 & -1\\ 
+\hline
+\end{tabular}
+\end{center}
+        
+\begin{enumerate}
+    \item What feature will we split on at the root of our decision tree, and what will our information gain be from splitting on that feature using the Gini impurity measure?
+    \item Build a decision tree using the dataset. What is the depth of the tree?
+    \item What will the decision tree classify a data point with the features x1 = 0, x2 = 0, and x3 = 0 as (y = -1 or y = +1)?
+    \end{enumerate}
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+\hline
+x1 & x2 & y \\
+\hline
+0 & 0 & +1\\ 
+0 & 1 & +1\\ 
+1 & 0 & +1\\ 
+1 & 1 & -1\\ 
+\hline
+\end{tabular}
+\end{center}
+\begin{enumerate}[resume]
+    \item What will the information gain be after the first split in the above data set with the Gini impurity measure? With entropy as the impurity measure?
+    \item What is the depth of the final decision tree?
+    
+\end{enumerate}
 \end{document}

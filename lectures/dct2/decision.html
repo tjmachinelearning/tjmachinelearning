@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Decision Trees | TJHSST Machine Learning Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/component.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+    <!---------------- ---------------------->
+    <!--Syntax Highlighting from Pygments -->
+    <!----------------- --------------------->
+    <!--------------- ----------------------->
+    <style type="text/css">
+        td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+        span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+        pre { line-height: 125%; }
+        body .hll { background-color: #ffffcc }
+        body  { background: #ffffff; }
+        body .c { color: #888888 } /* Comment */
+        body .err { color: #FF0000; background-color: #FFAAAA } /* Error */
+        body .k { color: #008800; font-weight: bold } /* Keyword */
+        body .o { color: #333333 } /* Operator */
+        body .ch { color: #888888 } /* Comment.Hashbang */
+        body .cm { color: #888888 } /* Comment.Multiline */
+        body .cp { color: #557799 } /* Comment.Preproc */
+        body .cpf { color: #888888 } /* Comment.PreprocFile */
+        body .c1 { color: #888888 } /* Comment.Single */
+        body .cs { color: #cc0000; font-weight: bold } /* Comment.Special */
+        body .gd { color: #A00000 } /* Generic.Deleted */
+        body .ge { font-style: italic } /* Generic.Emph */
+        body .gr { color: #FF0000 } /* Generic.Error */
+        body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+        body .gi { color: #00A000 } /* Generic.Inserted */
+        body .go { color: #888888 } /* Generic.Output */
+        body .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+        body .gs { font-weight: bold } /* Generic.Strong */
+        body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+        body .gt { color: #0044DD } /* Generic.Traceback */
+        body .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+        body .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+        body .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+        body .kp { color: #003388; font-weight: bold } /* Keyword.Pseudo */
+        body .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+        body .kt { color: #333399; font-weight: bold } /* Keyword.Type */
+        body .m { color: #6600EE; font-weight: bold } /* Literal.Number */
+        body .s { background-color: #fff0f0 } /* Literal.String */
+        body .na { color: #0000CC } /* Name.Attribute */
+        body .nb { color: #007020 } /* Name.Builtin */
+        body .nc { color: #BB0066; font-weight: bold } /* Name.Class */
+        body .no { color: #003366; font-weight: bold } /* Name.Constant */
+        body .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+        body .ni { color: #880000; font-weight: bold } /* Name.Entity */
+        body .ne { color: #FF0000; font-weight: bold } /* Name.Exception */
+        body .nf { color: #0066BB; font-weight: bold } /* Name.Function */
+        body .nl { color: #997700; font-weight: bold } /* Name.Label */
+        body .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+        body .nt { color: #007700 } /* Name.Tag */
+        body .nv { color: #996633 } /* Name.Variable */
+        body .ow { color: #000000; font-weight: bold } /* Operator.Word */
+        body .w { color: #bbbbbb } /* Text.Whitespace */
+        body .mb { color: #6600EE; font-weight: bold } /* Literal.Number.Bin */
+        body .mf { color: #6600EE; font-weight: bold } /* Literal.Number.Float */
+        body .mh { color: #005588; font-weight: bold } /* Literal.Number.Hex */
+        body .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+        body .mo { color: #4400EE; font-weight: bold } /* Literal.Number.Oct */
+        body .sb { background-color: #fff0f0 } /* Literal.String.Backtick */
+        body .sc { color: #0044DD } /* Literal.String.Char */
+        body .sd { color: #DD4422 } /* Literal.String.Doc */
+        body .s2 { background-color: #fff0f0 } /* Literal.String.Double */
+        body .se { color: #666666; font-weight: bold; background-color: #fff0f0 } /* Literal.String.Escape */
+        body .sh { background-color: #fff0f0 } /* Literal.String.Heredoc */
+        body .si { background-color: #eeeeee } /* Literal.String.Interpol */
+        body .sx { color: #DD2200; background-color: #fff0f0 } /* Literal.String.Other */
+        body .sr { color: #000000; background-color: #fff0ff } /* Literal.String.Regex */
+        body .s1 { background-color: #fff0f0 } /* Literal.String.Single */
+        body .ss { color: #AA6600 } /* Literal.String.Symbol */
+        body .bp { color: #007020 } /* Name.Builtin.Pseudo */
+        body .vc { color: #336699 } /* Name.Variable.Class */
+        body .vg { color: #dd7700; font-weight: bold } /* Name.Variable.Global */
+        body .vi { color: #3333BB } /* Name.Variable.Instance */
+        body .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+
+
+      </style>
+      <!-------------------------------------->
+      <!--Syntax Highlighting from Pygments -->
+      <!-------------------------------------->
+      <!-------------------------------------->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-105333430-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <h2 style="text-align:center"><a href="../../index.html"><img src="../../img/logo.svg" width="200px"></img></a></h2>
+         <section class="section section--menu" id="Alonso">
+             <span class="link-copy"></span>
+             <nav class="menu menu--alonso">
+                 <ul class="menu__list">
+                     <li class="menu__item"><a href="../../index.html" class="menu__link">Home</a></li>
+                     <li class="menu__item menu__item--current"><a href="../../schedule.html" class="menu__link">Lectures</a></li>
+                     <li class="menu__item "><a href="../../rankings.html" class="menu__link">Rankings</a></li>
+                     <li class="menu__item"><a href="../../resources.html" class="menu__link">Resources</a></li>
+                     <li class="menu__item"><a href="../../projects.html" class="menu__link">Projects</a></li>
+                     <li class="menu__item"><a href="../../submit.html" class="menu__link">Updates</a></li>
+                     <li class="menu__line"></li>
+                 </ul>
+             </nav>
+         </section>
+    </div>
+    <section class="main-content">
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Decision Trees</h1>
+            <h3 style="text-align:center; color:#000">Sylesh Suresh</h2>
+            <h3 style="text-align:center; color:#000">October 2017</h2>
+
+              <h1 id="introduction">Introduction</h1>
+              <p>Decision trees are powerful and interpretable classifiers that mirror human decisions unlike many other classifiers in supervised machine learning and are the building blocks of random forests.</p>
+              <h1 id="definition">Definition</h1>
+              <p>In essence, decision trees asks a series of true/false questions to narrow down what class a particular sample is. Here is an example of a decision tree one might use in real life to decide upon an activity on a given day:</p>
+              <div class="figure">
+              <img src="dtree.jpg" alt="Real Life Decision Tree" />
+              <p class="caption">Real Life Decision Tree<span data-label="fig:decisiontree"></span></p>
+              </div>
+              <p>Although this figure asks categorical variable-based questions, we can ask numerical-based questions like <span class="math inline">\(&quot;x_1 &lt; 5?&quot;\)</span> when the features are continuous. To build our tree, we start at the root node and ask a question that splits the data based on the feature such that the information gain is maximized. We continuously do this for each node until the decision tree can classify all the training data. Note that in practice this leads to overfitting, so the tree is usually pruned, i.e. a limit on the depth of the tree is set.</p>
+              <h2 id="information-gain">Information Gain</h2>
+              <p>We split each node on the feature that yields the most information gain. The formula for information gain in a binary decision tree is as follows:</p>
+              <p><span class="math display">\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\]</span></p>
+              <p><span class="math inline">\(D_p\)</span> is the dataset of the parent node (the node which we are splitting), <span class="math inline">\(f\)</span> is the feature of the dataset which we are splitting on, <span class="math inline">\(N_p\)</span> is the total number of samples in the parent node, <span class="math inline">\(N_{left}\)</span> and <span class="math inline">\(N_{right}\)</span> are the number of samples in the datasets of the left child node and right child node respectively, and <span class="math inline">\(I\)</span> is the impurity measure. A node is pure if all samples in its dataset belong to the same class and is most impure when an equal number of samples belong to each class. Essentially, information gain calculates the difference between the impurity of the parent node and the impurity of the child nodes.</p>
+              <p>One commonly used measure of impurity is Gini impurity:</p>
+              <p><span class="math display">\[I_G(i) = 1 - \sum_{k=1}^{c} p(k|i)^2\]</span></p>
+              <p><span class="math inline">\(p(k|i)\)</span> is the proportion of samples of class <span class="math inline">\(k\)</span> to the total number of samples in the dataset of the <span class="math inline">\(i^{th}\)</span> node. The impurity is maximized when the classes of the node are perfectly mixed (for this example, consider a situation in which there are 2 classes, meaning c = 2): <span class="math display">\[1 - \sum_{k=1}^{c} 0.5^2 = 0.5\]</span></p>
+              <p>An alternative impurity measure is entropy, which is defined as:</p>
+              <p><span class="math display">\[-\sum_{k=1}^{c} p(k|i)log_2{p(k|i)}\]</span></p>
+              <p>Note that this function has a maximum of 1.0, not 0.5. In practice, Gini impurity and entropy yield similar results, so it is more useful to test different pruning cut-offs rather than to evaluate trees with different impurity criteria.</p>
+              <p>To decide on a split for a specific node, we will search for the feature and the threshold (e.g. “petal length &lt; 2.45 cm” for a flower classifier) that maximizes the information gain. One way to choose a good threshold is to select the best threshold from the 20%, 40%, 60%, and 80% quantiles of the feature set.</p>
+              <p>An snippet from a basic implementation of a decision tree might look like this:</p>
+
+              <!------------------------------------->
+              <!--Python code formatted by Pygments-->
+              <!------------------------------------->
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">impurity</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+  <span class="c1">#gini impurity</span>
+  <span class="n">ginisum</span> <span class="o">=</span> <span class="mf">0.0</span>
+  <span class="n">class_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">sample</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">node</span><span class="p">]))</span>
+  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">class_values</span><span class="p">:</span>
+      <span class="n">ratio</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">class_value</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+      <span class="c1">#sample[-1] is the sample&#39;s class value</span>
+
+      <span class="n">ginisum</span> <span class="o">+=</span> <span class="n">ratio</span><span class="o">*</span><span class="n">ratio</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">ginisum</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">information_gain</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">leftchild</span><span class="p">,</span> <span class="n">rightchild</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">impurity</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">leftchild</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">parent</span><span class="p">))</span><span class="o">*</span><span class="n">impurity</span><span class="p">(</span><span class="n">leftchild</span><span class="p">)</span> \
+         <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rightchild</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">parent</span><span class="p">))</span><span class="o">*</span><span class="n">impurity</span><span class="p">(</span><span class="n">rightchild</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+  <span class="n">left</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">right</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+          <span class="n">left</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">right</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span>
+
+<span class="k">def</span> <span class="nf">best_split</span><span class="p">(</span><span class="n">parent</span><span class="p">):</span>
+  <span class="n">leftchild</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1">#placeholders</span>
+  <span class="n">rightchild</span> <span class="o">=</span> <span class="bp">None</span>
+  <span class="n">ig</span> <span class="o">=</span> <span class="mf">0.0</span>
+  <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#last element is class value, not feature</span>
+      <span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="p">[</span>
+          <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">parent</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">],</span> <span class="n">quartile</span><span class="p">)</span> <span class="k">for</span> <span class="n">quartile</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">]]:</span>
+          <span class="k">if</span> <span class="n">leftchild</span><span class="p">:</span>
+              <span class="n">p_leftchild</span><span class="p">,</span> <span class="n">p_rightchild</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+              <span class="n">p_ig</span> <span class="o">=</span> <span class="n">information_gain</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">p_leftchild</span><span class="p">,</span> <span class="n">p_rightchild</span><span class="p">)</span>
+              <span class="k">if</span> <span class="n">p_ig</span> <span class="o">&gt;</span> <span class="n">ig</span><span class="p">:</span> <span class="c1">#check if new split yields greater information gain</span>
+                  <span class="n">leftchild</span> <span class="o">=</span> <span class="n">p_leftchild</span>
+                  <span class="n">rightchild</span> <span class="o">=</span> <span class="n">p_rightchild</span>
+                  <span class="n">ig</span> <span class="o">=</span> <span class="n">p_ig</span>
+          <span class="k">else</span><span class="p">:</span>
+              <span class="n">leftchild</span><span class="p">,</span> <span class="n">rightchild</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+              <span class="n">ig</span> <span class="o">=</span> <span class="n">information_gain</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">leftchild</span><span class="p">,</span> <span class="n">rightchild</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">leftchild</span><span class="p">,</span> <span class="n">rightchild</span></pre></div>
+              <!------------------------------------->
+              <!--Python code formatted by Pygments-->
+              <!------------------------------------->
+
+              <h1 id="problems">Problems</h1>
+              <p>
+              <ul>
+                <ol>
+                1. Write a full implementation of a decision tree from scratch.
+                </ol>
+                <ol>
+                  2. Write a function that returns the entropy of a node in a decision tree.
+                </ol>
+              </p>
+          </div>
+        <p><a href="../../schedule.html">&larr; Back to lectures</a>
+    </section>
+
+  </body>
+</html>

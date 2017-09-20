@@ -30,7 +30,8 @@ def best_split(parent):
     rightchild = None
     ig = 0.0
     for feature in range(len(parent)-1): #last element is class value, not feature
-        for threshold in parent[:, feature]:
+        for threshold in [
+            np.percentile(parent[:, feature], quartile) for quartile in [20, 40, 60, 80]]:
             if leftchild:
                 p_leftchild, p_rightchild = split(parent, feature, threshold)
                 p_ig = information_gain(parent, p_leftchild, p_rightchild)
