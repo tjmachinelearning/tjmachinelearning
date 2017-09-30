@@ -51,30 +51,40 @@
     <section class="main-content">
         <div class="lecture">
             <h1 style="text-align:center; color:#000">Random Forests</h1>
-            <h3 style="text-align:center; color:#000">Sylesh Suresh</h2>
-            <h3 style="text-align:center; color:#000">November 2017</h2>
-
-              <h1 id="introduction">Introduction</h1>
-              <p>Random forests are an ensemble of decision trees, combining many weak learners to build a robust, strong learner that generalizes better to unseen data than the individual weak learners.</p>
-              <h1 id="building-a-random-forest">Building a Random Forest</h1>
-              <ol>
-              <li><p>Randomly choose <span class="math inline">\(n\)</span> samples from the training set with replacement (i.e. draw a bootstrap sample of size <span class="math inline">\(n\)</span>).</p></li>
-              <li><p>Build a decision tree using the bootstrap sample. At each node:</p>
-              <ol>
-              <li><p>Randomly select <span class="math inline">\(d\)</span> features without replacement.</p></li>
-              <li><p>Split the node using the feature among the <span class="math inline">\(d\)</span> features previously selected that provides the best split by maximizing the information gain.</p></li>
-              </ol></li>
-              <li><p>Repeat steps 1 to 2 <span class="math inline">\(k\)</span> times</p></li>
-              <li><p>Aggregate the prediction by each tree by majority vote to assign the final class label.</p></li>
-              </ol>
-              <p>Note that when building the decision trees, instead of evaluating all features to find the best split, we select the best feature among only a randomly chosen subset of those features. This creates more diversity among the trees, helping to prevent overfitting. Because of these overfitting-preventative measures, it is not necessary to prune the trees. Individually, each decision tree would perform poorly, but the aggregate of many of these trees leads to a model with a much higher performance.</p>
-              <h2 id="hyperparameters">Hyperparameters</h2>
-              <p>The most important hyperparameter to be optimized here is <span class="math inline">\(k\)</span>, the number of decision trees the random forest uses. Although more trees increase the performance of the classifier as a whole, they also increase the computational expense. The hyperparameters <span class="math inline">\(n\)</span> and <span class="math inline">\(d\)</span> can also be optimized. The bootstrap sample size <span class="math inline">\(n\)</span> correlates with the degree of overfitting; larger values of n decrease the randomness, increasing the likelihood of overfitting while smaller values of n increase the randomness at the cost of the model’s performance. A good balance is to set <span class="math inline">\(n\)</span> to the size of the training set. Similarly, the size of the feature subset <span class="math inline">\(d\)</span> must be less than the number of features in order to promote diversity among the trees, but must be large enough to not reduce the model’s performance. A common convention is to set <span class="math inline">\(d\)</span> to the square root of the number of features.</p>
-              <h2 id="extra-trees">Extra-Trees</h2>
-              <p>Instead of searching for the best threshold at each split when building each decision tree, another option is to randomly choose thresholds for each feature of the chosen feature subset and choose the best one from these. This further prevents overfitting at the cost of performance. A random forest built this way is called an Extremely Randomized Trees, or Extra-Trees.</p>
-              <h1 id="feature-importance">Feature Importance</h1>
-              <p>Random Forests can be helpful in ranking and evaluating feature importance. In an individual decision tree, intuitively, the most important features are split near the root of the tree while less important features are either split near the leaf nodes or are not split at all. In other words, the depth of a feature in a decision tree gives a measure of the importance of that feature. In a random forest, one can take advantage of this property by taking the average depth of a feature across all the individual trees to measure its importance. Here is an example of a random forest ranking the importance of pixels in a face recognition problem where the brighter pixels are more important:</p>
-              <p style="text-align:center"><img src="featureimportance.jpg" alt="image" /></p>
+            <h3 style="text-align:center; color:#000">Sylesh Suresh and Mihir Patel</h2>
+            <h3 style="text-align:center; color:#000">September 2017</h2>
+                <h1 id="overfitting">Overfitting</h1>
+                <p style="text-align:center"><img src="overfitting.png" alt="image" /></p>
+                <p>Before we cover random forests, we will firstly describe overfitting. The goal of our models is to learn the generalize pattern in data. However, by nature, our data has some random noise. If we look at the image above, we can clearly see the black line represents the semantic separation of the data but some points are misclassified. By contrast, the green line perfectly separates the data, but clearly is abusing the data points that are shifted due to noise. Our goal is to prevent overfitting, which is the green line and maintain our separation on the black line.</p>
+                <h2 id="identifying-overfitting">Identifying overfitting</h2>
+                <p style="text-align:center"><img src="overfittinglines.png" alt="image" /></p>
+                <p>We can identify overfitting by seeing increases in loss / error for validation data. If the training loss continues to go down, but testing for the generalizable pattern (the validation data) goes up, we have a problem!</p>
+                <h1 id="regularization">Regularization</h1>
+                <p>The most common technique used to prevent overfitting involves regularization. Essentially, some random noise is added to our model in order to prevent it from being overly tuned to the data. When we adjust parameters in the model, some adjustment is also made that is mostly random. In decision trees, this involves selecting random thresholds and selecting the best one of this set instead of calculating the ideal threshold. This accelerates training and minimizes cases where a threshold is picked to fit a specific case. However, this is often too much noise so isn’t commonly used.</p>
+                <h2 id="restricting-depth">Restricting Depth</h2>
+                <p style="text-align:center"><img src="decisiontreeoverfit.png" alt="image" /></p>
+                <p>In decision trees, the most common approach involves limiting the depth of the trees. For example, it is likely that the last node in the tree focuses on an ad hoc case where one data point causes issues. As seen in the image, we see that the decision tree creates odd lines for specific points. By restricting the depth, we prevent these ad hoc nodes.</p>
+                <h1 id="introduction">Introduction</h1>
+                <p>Random forests are an ensemble of decision trees, combining many weak learners to build a robust, strong learner that generalizes better to unseen data than the individual weak learners.</p>
+                <h1 id="building-a-random-forest">Building a Random Forest</h1>
+                <ol>
+                <li><p>Randomly choose <span class="math inline">\(n\)</span> samples from the training set with replacement (i.e. draw a bootstrap sample of size <span class="math inline">\(n\)</span>).</p></li>
+                <li><p>Build a decision tree using the bootstrap sample. At each node:</p>
+                <ol>
+                <li><p>Randomly select <span class="math inline">\(d\)</span> features without replacement.</p></li>
+                <li><p>Split the node using the feature among the <span class="math inline">\(d\)</span> features previously selected that provides the best split by maximizing the information gain.</p></li>
+                </ol></li>
+                <li><p>Repeat steps 1 to 2 <span class="math inline">\(k\)</span> times</p></li>
+                <li><p>Aggregate the prediction by each tree by majority vote to assign the final class label.</p></li>
+                </ol>
+                <p>Note that when building the decision trees, instead of evaluating all features to find the best split, we select the best feature among only a randomly chosen subset of those features. This creates more diversity among the trees, helping to prevent overfitting. Because of these overfitting-preventative measures, it is not necessary to prune the trees. Individually, each decision tree would perform poorly, but the aggregate of many of these trees leads to a model with a much higher performance.</p>
+                <h2 id="hyperparameters">Hyperparameters</h2>
+                <p>The most important hyperparameter to be optimized here is <span class="math inline">\(k\)</span>, the number of decision trees the random forest uses. Although more trees increase the performance of the classifier as a whole, they also increase the computational expense. The hyperparameters <span class="math inline">\(n\)</span> and <span class="math inline">\(d\)</span> can also be optimized. The bootstrap sample size <span class="math inline">\(n\)</span> correlates with the degree of overfitting; larger values of n decrease the randomness, increasing the likelihood of overfitting while smaller values of n increase the randomness at the cost of the model’s performance. A good balance is to set <span class="math inline">\(n\)</span> to the size of the training set. Similarly, the size of the feature subset <span class="math inline">\(d\)</span> must be less than the number of features in order to promote diversity among the trees, but must be large enough to not reduce the model’s performance. A common convention is to set <span class="math inline">\(d\)</span> to the square root of the number of features.</p>
+                <h2 id="extra-trees">Extra-Trees</h2>
+                <p>Instead of searching for the best threshold at each split when building each decision tree, another option is to randomly choose thresholds for each feature of the chosen feature subset and choose the best one from these. This further prevents overfitting at the cost of performance. A random forest built this way is called an Extremely Randomized Trees, or Extra-Trees.</p>
+                <h1 id="feature-importance">Feature Importance</h1>
+                <p>Random Forests can be helpful in ranking and evaluating feature importance. In an individual decision tree, intuitively, the most important features are split near the root of the tree while less important features are either split near the leaf nodes or are not split at all. In other words, the depth of a feature in a decision tree gives a measure of the importance of that feature. In a random forest, one can take advantage of this property by taking the average depth of a feature across all the individual trees to measure its importance. Here is an example of a random forest ranking the importance of pixels in a face recognition problem where the brighter pixels are more important:</p>
+                <p style="text-align:center"><img src="featureimportance.jpg" alt="image" /></p>
           </div>
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>

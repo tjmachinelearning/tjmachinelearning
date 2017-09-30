@@ -2,8 +2,8 @@
 \usepackage[utf8]{inputenc}
 
 \title{Random Forests}
-\author{Sylesh Suresh}
-\date{November 2017}
+\author{Sylesh Suresh and Mihir Patel}
+\date{September 2017}
 
 \usepackage{graphicx}
 
@@ -11,8 +11,30 @@
 
 \maketitle
 
+\section{Overfitting}
+\begin{center}
+    \includegraphics[scale=0.4]{overfitting.png}
+\end{center}
+Before we cover random forests, we will firstly describe overfitting. The goal of our models is to learn the generalize pattern in data. However, by nature, our data has some random noise. If we look at the image above, we can clearly see the black line represents the semantic separation of the data but some points are misclassified. By contrast, the green line perfectly separates the data, but clearly is abusing the data points that are shifted due to noise. Our goal is to prevent overfitting, which is the green line and maintain our separation on the black line. 
+
+\subsection{Identifying overfitting}
+\begin{center}
+    \includegraphics[scale=1.1]{overfittinglines.png}
+\end{center}
+We can identify overfitting by seeing increases in loss / error for validation data. If the training loss continues to go down, but testing for the generalizable pattern (the validation data) goes up, we have a problem!
+
+\section{Regularization}
+The most common technique used to prevent overfitting involves regularization. Essentially, some random noise is added to our model in order to prevent it from being overly tuned to the data. When we adjust parameters in the model, some adjustment is also made that is mostly random. In decision trees, this involves selecting random thresholds and selecting the best one of this set instead of calculating the ideal threshold. This accelerates training and minimizes cases where a threshold is picked to fit a specific case. However, this is often too much noise so isn't commonly used.
+
+\subsection{Restricting Depth}
+\begin{center}
+    \includegraphics[scale=0.3]{decisiontreeoverfit.png}
+\end{center}
+In decision trees, the most common approach involves limiting the depth of the trees. For example, it is likely that the last node in the tree focuses on an ad hoc case where one data point causes issues. As seen in the image, we see that the decision tree creates odd lines for specific points. By restricting the depth, we prevent these ad hoc nodes.
+
 \section{Introduction}
 Random forests are an ensemble of decision trees, combining many weak learners to build a robust, strong learner that generalizes better to unseen data than the individual weak learners. 
+
 \section{Building a Random Forest}
 \begin{enumerate}
     \item Randomly choose $n$ samples from the training set with replacement (i.e. draw a bootstrap sample of size $n$).
@@ -36,7 +58,8 @@ Instead of searching for the best threshold at each split when building each dec
 Random Forests can be helpful in ranking and evaluating feature importance. In an individual decision tree, intuitively, the most important features are split near the root of the tree while less important features are either split near the leaf nodes or are not split at all. In other words, the depth of a feature in a decision tree gives a measure of the importance of that feature. In a random forest, one can take advantage of this property by taking the average depth of a feature across all the individual trees to measure its importance. 
 Here is an example of a random forest ranking the importance of pixels in a face recognition problem where the brighter pixels are more important:
 
-\centering
-\includegraphics[scale=0.4]{featureimportance.jpg}
+\begin{center}
+    \includegraphics[scale=.4]{featureimportance.jpg}
+\end{center}
 
 \end{document}

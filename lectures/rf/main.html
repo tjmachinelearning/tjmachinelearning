@@ -1,3 +1,14 @@
+<h1 id="overfitting">Overfitting</h1>
+<p><img src="overfitting.png" alt="image" /></p>
+<p>Before we cover random forests, we will firstly describe overfitting. The goal of our models is to learn the generalize pattern in data. However, by nature, our data has some random noise. If we look at the image above, we can clearly see the black line represents the semantic separation of the data but some points are misclassified. By contrast, the green line perfectly separates the data, but clearly is abusing the data points that are shifted due to noise. Our goal is to prevent overfitting, which is the green line and maintain our separation on the black line.</p>
+<h2 id="identifying-overfitting">Identifying overfitting</h2>
+<p><img src="overfittinglines.png" alt="image" /></p>
+<p>We can identify overfitting by seeing increases in loss / error for validation data. If the training loss continues to go down, but testing for the generalizable pattern (the validation data) goes up, we have a problem!</p>
+<h1 id="regularization">Regularization</h1>
+<p>The most common technique used to prevent overfitting involves regularization. Essentially, some random noise is added to our model in order to prevent it from being overly tuned to the data. When we adjust parameters in the model, some adjustment is also made that is mostly random. In decision trees, this involves selecting random thresholds and selecting the best one of this set instead of calculating the ideal threshold. This accelerates training and minimizes cases where a threshold is picked to fit a specific case. However, this is often too much noise so isn’t commonly used.</p>
+<h2 id="restricting-depth">Restricting Depth</h2>
+<p><img src="decisiontreeoverfit.png" alt="image" /></p>
+<p>In decision trees, the most common approach involves limiting the depth of the trees. For example, it is likely that the last node in the tree focuses on an ad hoc case where one data point causes issues. As seen in the image, we see that the decision tree creates odd lines for specific points. By restricting the depth, we prevent these ad hoc nodes.</p>
 <h1 id="introduction">Introduction</h1>
 <p>Random forests are an ensemble of decision trees, combining many weak learners to build a robust, strong learner that generalizes better to unseen data than the individual weak learners.</p>
 <h1 id="building-a-random-forest">Building a Random Forest</h1>

@@ -1,0 +1,63 @@
+#box {
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: auto;
+  width: auto;
+  padding: 2em;
+  color: #4285F4;
+  text-align: center;
+  overflow: visible;
+}
+
+.google-visualization-table-tr-even,
+.google-visualization-table-tr-even td,
+.google-visualization-table-tr-even-nonstrict {
+  background-color: #fff !important;
+  color: #000 !important;
+  font-size: 1rem;
+}
+
+.google-visualization-table-tr-odd,
+.google-visualization-table-tr-odd td,
+.google-visualization-table-tr-odd-nonstrict {
+  background-color: #fff !important;
+  color: #000 !important;
+  font-size: 1rem;
+}
+
+.google-visualization-table-tr-sel,
+.google-visualization-table-tr-sel td,
+.google-visualization-table-tr-sel-nonstrict {
+  background-color: none !important;
+  color: #000 !important;
+}
+
+.google-visualization-table-tr-over,
+.google-visualization-table-tr-over td,
+.google-visualization-table-tr-over-nonstrict {
+  background-color: none !important;
+  color: #000 !important;
+}
+
+.google-visualization-table-td,
+.google-visualization-table-th {
+  border: 0.5px solid #e9ebec !important;
+  color: #000 !important;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.google-visualization-table-tr-head,
+.google-visualization-table-tr-head td,
+.google-visualization-table-tr-head-nonstrict {
+  background-color: #fff !important;
+  background-image: none !important;
+  color: #000 !important;
+  font-size: 1rem;
+}
+
+.google-visualization-table .gradient {
+  background-image: none !important;
+}

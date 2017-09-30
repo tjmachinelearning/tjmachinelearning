@@ -1,0 +1,1000 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Decision Trees: Part 2}
+\author{Nikhil Sardana}
+\date{September 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{mathtools}          %loads amsmath as well
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{ wasysym }
+\usepackage{forest}
+\usetikzlibrary{arrows.meta}
+\usepackage{minted}
+
+
+\forestset{
+    .style={
+        for tree={
+            base=bottom,
+            child anchor=north,
+            align=center,
+            s sep+=1cm,
+    straight edge/.style={
+        edge path={\noexpand\path[\forestoption{edge},thick,-{Latex}] 
+        (!u.parent anchor) -- (.child anchor);}
+    },
+    if n children={0}
+        {tier=word, draw, thick, rectangle}
+        {draw, diamond, thick, aspect=2},
+    if n=1{%
+        edge path={\noexpand\path[\forestoption{edge},thick,-{Latex}] 
+        (!u.parent anchor) -| (.child anchor) node[pos=.2, above] {Y};}
+        }{
+        edge path={\noexpand\path[\forestoption{edge},thick,-{Latex}] 
+        (!u.parent anchor) -| (.child anchor) node[pos=.2, above] {N};}
+        }
+        }
+    }
+}
+
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Part 1 of this lecture covered the mathematics of decision trees. This lecture will transition you from graphs and mathematics to writing the actual code for the competition.
+
+\section{Review}
+
+Decision trees are created by splitting on a threshold of a feature which results in the most information gain, and recursively continuing this process for each of the children. 
+
+Let us review Information Gain with an example. Remember, the equation is:
+
+\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right}) \]
+
+We will use the Gini Impurity measure:
+
+\[I(i) = 1 - \sum_{k=1}^{c} p(k|i)^2 \]
+
+
+Consider the following data. We have two features, $x1$ and $x2$. Our label is $y$.
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ x1 & x2 & y \\
+ \hline
+ 1 & 0 & 0 \\ 
+ 1 & 1 & 0 \\ 
+ 1 & 2 & 1 \\ 
+ 2 & 2 & 1 \\ 
+ 3 & 0 & 1 \\
+ 3 & 1 & 1 \\
+ 3 & 2 & 1 \\
+
+ \hline
+\end{tabular}
+\end{center}
+Let's graph this data. Let the $ \newmoon = 0$ and $\circ = 1$.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+]
+\addplot [only marks] table {
+1 0
+1 1
+};
+\addplot [only marks, mark=o] table {
+1 2
+2 2
+3 0
+3 1
+3 2
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+We want to draw a vertical or horizontal line that best separates the data (ie has the greatest information gain). Since we are restricted to the coordinates of data points, a human will look at the graph and choose:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+]
+\addplot [only marks] table {
+1 0
+1 1
+};
+\addplot [only marks, mark=o] table {
+1 2
+2 2
+3 0
+3 1
+3 2
+};
+\addplot +[mark=none][dashed] coordinates {(2, -1) (2, 4)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Since we are classifying things based on whether they are less than the threshold ($x<2$), the point in the middle goes with the right side.
+
+The decision tree that goes with this is:
+\begin{center}
+\begin{forest} 
+[$x_1<2$
+    [{$Yes$}
+        [0 0 1] 
+    ]   
+    [$No$
+        [1 1 1 1] 
+    ]   
+]
+\end{forest}
+\end{center}
+
+We can calculate the information gain.
+
+\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right}) \]
+\[N_{left} = 3\]
+\[N_{right} = 4\]
+\[N_p = 7\]
+
+Now we need the impurities.
+
+\[I(i) = 1 - \sum_{k=1}^{c} p(k|i)^2 \]
+
+For the parent, we calculate the impurity of the entire dataset, which is:
+
+\[I(D_p) = 1 - \left(\frac{2}{7} \right)^2 - \left(\frac{5}{7}\right)^2 = 1 - \frac{4}{49} - \frac{25}{49} = \frac{49-4-25}{49} = \frac{20}{49}\]
+
+And for the children:
+
+\[I(D_{left}) = 1 - \left( \frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 1 - \frac{4}{9} - \frac{1}{9} = \frac{4}{9}\]
+\[I(D_{right}) = 1 - \left(\frac{4}{4}\right)^2 - \left(\frac{0}{4}\right)^2 = 1 - 1 = 0\]
+
+Note that the most pure data $I(i)=0$ is all one type.
+
+Finally, we get the information gain:
+\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right}) \]
+\[IG(D_p, f) = \frac{20}{49} - \frac{3}{7}*\frac{4}{9} - \frac{4}{7}*0 = \frac{20}{49} - \frac{12}{63} = \frac{1}{7}*\left(\frac{20}{7} - \frac{12}{9} \right) = \frac{1}{7}*\left(\frac{180}{63} - \frac{84}{63}\right)\]
+\[IG(D_p, f) = \frac{1}{7}*\frac{96}{63} = \frac{96}{441}\]
+
+
+\section{Data Structure}
+
+Let's go back to the example from Section 2.1. 
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ x1 & x2 & y \\
+ \hline
+ 1 & 0 & 0 \\ 
+ 1 & 1 & 0 \\ 
+ 1 & 2 & 1 \\ 
+ 2 & 2 & 1 \\ 
+ 3 & 0 & 1 \\
+ 3 & 1 & 1 \\
+ 3 & 2 & 1 \\
+
+ \hline
+\end{tabular}
+\end{center}
+
+How will we represent this data in our code?
+It's simple! We'll use a list of lists, with each column a feature.
+
+\begin{center}
+\[
+\begin{bmatrix}
+\vspace{1mm}
+\begin{bmatrix}
+ 1, 0, 0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,1,0 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,2,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 2,2,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,0,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,1,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,2,1 \\
+\end{bmatrix} \\
+\end{bmatrix}
+\]
+\end{center}
+
+Alternatively, you can make the labels their own list. Our sample I/O code has it this way:
+\begin{center}
+\noindent\begin{minipage}[t]{.5\textwidth}
+\begin{gather*}
+Features = 
+\begin{bmatrix}
+\vspace{1mm}
+\begin{bmatrix}
+ 1, 0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,2 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 2,2 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,2 \\
+\end{bmatrix} \\
+\end{bmatrix}
+\end{gather*}
+\end{minipage}%
+\begin{minipage}[t]{.5\textwidth}
+\begin{gather*}
+Labels = 
+ \begin{bmatrix}
+ 0 \\
+ 0 \\
+ 1 \\
+ 1 \\
+ 1 \\
+ 1 \\
+ 1 \\
+\end{bmatrix}
+\end{gather*}
+\end{minipage}
+\end{center}
+
+To find the best information gain, we loop through each of the features (columns), and each of the thresholds, splitting the matrix and calculating the information gain. For example, in the previous example, we split on $x1<2$, so our left child matrix would be:
+\begin{center}
+\[
+\begin{bmatrix}
+\vspace{1mm}
+\begin{bmatrix}
+ 1, 0, 0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,1,0 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,2,1 \\ 
+ \end{bmatrix} \\
+ \end{bmatrix}
+\]
+\end{center}
+
+and the right child matrix:
+
+\begin{center}
+\[
+\begin{bmatrix}
+\vspace{1mm}
+ \begin{bmatrix}
+ 2,2,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,0,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,1,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,2,1 \\
+\end{bmatrix} \\
+ \end{bmatrix}
+\]
+\end{center}
+ 
+\section{Summary}
+To ensure complete understanding and summarize the topics we've covered, lets loop through all the features and each of the possible thresholds, splitting the matrix for each one.
+
+
+\noindent
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+    \begin{forest} 
+        [$x_1<1$
+            [{$Yes$}
+            ]   
+            [$No$
+                [0 0 1 1 1 1 1] 
+            ]   
+        ]
+        \end{forest}
+\end{minipage}\quad
+\begin{minipage}{0.6\textwidth}
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xmin=-1, xmax=4,
+            ymin=-1, ymax=4,
+            xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+        ]
+        \addplot [only marks] table {
+        1 0
+        1 1
+        };
+        \addplot [only marks, mark=o] table {
+        1 2
+        2 2
+        3 0
+        3 1
+        3 2
+        };
+        \addplot +[mark=none][dashed] coordinates {(1, -1) (1, 4)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+\raggedleft
+                $$D_{left} = [ ]
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+\end{minipage}\quad
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+    \begin{forest} 
+        [$x_1<2$
+            [{$Yes$}
+                [0 0 1] 
+            ]   
+            [$No$
+                [1 1 1 1] 
+            ]   
+        ]
+        \end{forest}
+\end{minipage}\quad
+\begin{minipage}{0.6\textwidth}
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xmin=-1, xmax=4,
+            ymin=-1, ymax=4,
+            xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+        ]
+        \addplot [only marks] table {
+        1 0
+        1 1
+        };
+        \addplot [only marks, mark=o] table {
+        1 2
+        2 2
+        3 0
+        3 1
+        3 2
+        };
+        \addplot +[mark=none][dashed] coordinates {(2, -1) (2, 4)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+\raggedleft
+                $$D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+             \end{bmatrix}
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+\end{minipage}\quad
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+    \begin{forest} 
+        [$x_1<3$
+            [{$Yes$}
+                [0 0 1 1] 
+            ]   
+            [$No$
+                [1 1 1] 
+            ]   
+        ]
+        \end{forest}
+\end{minipage}\quad
+\begin{minipage}{0.6\textwidth}
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xmin=-1, xmax=4,
+            ymin=-1, ymax=4,
+            xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+        ]
+        \addplot [only marks] table {
+        1 0
+        1 1
+        };
+        \addplot [only marks, mark=o] table {
+        1 2
+        2 2
+        3 0
+        3 1
+        3 2
+        };
+        \addplot +[mark=none][dashed] coordinates {(3, -1) (3, 4)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+\raggedleft
+                $$D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             2,2,1 \\ 
+             \end{bmatrix} \\
+             \end{bmatrix}
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+\end{minipage}\quad
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+    \begin{forest} 
+        [$x_2<0$
+            [{$Yes$}
+            ]   
+            [$No$
+                [0 0 1 1 1 1 1] 
+            ]   
+        ]
+        \end{forest}
+\end{minipage}\quad
+\begin{minipage}{0.6\textwidth}
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xmin=-1, xmax=4,
+            ymin=-1, ymax=4,
+            xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+        ]
+        \addplot [only marks] table {
+        1 0
+        1 1
+        };
+        \addplot [only marks, mark=o] table {
+        1 2
+        2 2
+        3 0
+        3 1
+        3 2
+        };
+        \addplot +[mark=none][dashed] coordinates {(-1, -0.01) (4, -0.01)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+\raggedleft
+                $$D_{left} = [ ]
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+\end{minipage}\quad
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+    \begin{forest} 
+        [$x_2<1$
+            [{$Yes$}
+                [0 1] 
+            ]   
+            [$No$
+                [0 1 1 1 1] 
+            ]   
+        ]
+        \end{forest}
+\end{minipage}\quad
+\begin{minipage}{0.6\textwidth}
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xmin=-1, xmax=4,
+            ymin=-1, ymax=4,
+            xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+        ]
+        \addplot [only marks] table {
+        1 0
+        1 1
+        };
+        \addplot [only marks, mark=o] table {
+        1 2
+        2 2
+        3 0
+        3 1
+        3 2
+        };
+        \addplot +[mark=none][dashed] coordinates {(-1, 1) (4, 1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+\raggedleft
+                $$D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             3,0,1 \\
+            \end{bmatrix} \\
+
+             \end{bmatrix}
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+        \begin{bmatrix}
+         1,1,0 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         1,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+\end{minipage}\quad
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+    \begin{forest} 
+        [$x_2<2$
+            [{$Yes$}
+                [0 1 0 1] 
+            ]   
+            [$No$
+                [1 1 1] 
+            ]   
+        ]
+        \end{forest}
+\end{minipage}\quad
+\begin{minipage}{0.6\textwidth}
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xmin=-1, xmax=4,
+            ymin=-1, ymax=4,
+            xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+        ]
+        \addplot [only marks] table {
+        1 0
+        1 1
+        };
+        \addplot [only marks, mark=o] table {
+        1 2
+        2 2
+        3 0
+        3 1
+        3 2
+        };
+        \addplot +[mark=none][dashed] coordinates {(-1, 2) (4, 2)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.2\textwidth}
+\raggedleft
+                $$D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             3,0,1 \\
+            \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             3,1,1 \\
+             \end{bmatrix} \\
+             \end{bmatrix}
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+
+        \vspace{1mm}
+         \begin{bmatrix}
+         1,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+\end{minipage}\quad
+\end{center}
+
+
+\section{The Full Tree}
+
+Let's build an entire decision tree.
+First, consider the following data.
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ x1 & x2 & y \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0 \\ 
+ 1 & 1 & 0 \\
+ 0 & 1 & 0 \\
+ 1 & 3 & 1 \\
+ 0 & 3 & 1 \\ 
+ 2 & 2 & 1 \\
+ 4 & 1 & 1 \\
+ 3 & 1 & 1 \\
+ 3 & 2 & 1 \\
+ \hline
+\end{tabular}
+\end{center}
+We graph it and calculate that $x1<2$ gives us the greatest information gain.
+\[I(D_p) = 1 - \left(\frac{4}{10} \right)^2 - \left(\frac{6}{10}\right)^2 = 1 - \frac{16}{100} - \frac{36}{100} = \frac{100-52}{100} = \frac{48}{100} = \frac{12}{25}\]
+\[I(D_{left}) = 1 - \left( \frac{4}{6}\right)^2 - \left(\frac{2}{6}\right)^2 = 1 - \frac{16}{36} - \frac{4}{36} = \frac{16}{36} = \frac{4}{9}\]
+\[I(D_{right}) = 1 - \left(\frac{4}{4}\right)^2 - \left(\frac{0}{4}\right)^2 = 1 - 1 = 0\]
+\[IG(D_p, f) = \frac{12}{25} - \frac{6}{10}*\frac{4}{9} - \frac{4}{10}*0 = \frac{12}{25} - \frac{4}{15} = \frac{36}{75} - \frac{20}{75} = \frac{16}{75}\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+]
+\addplot [only marks] table {
+0 0
+1 0
+1 1
+0 1
+};
+\addplot [only marks, mark=o] table {
+1 3
+0 3
+2 2
+3 1
+3 2
+4 1
+};
+\addplot +[mark=none][dashed] coordinates {(2, -1) (2, 4)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+The dataset is split:
+\begin{center}
+\noindent\begin{minipage}[t]{.5\textwidth}
+\begin{gather*}
+D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             0, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+            \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             0,1,0 \\
+             \end{bmatrix} \\
+             \vspace{1mm}
+             \begin{bmatrix}
+             0,3,1 \\
+             \end{bmatrix} \\
+             \vspace{1mm}
+             \begin{bmatrix}
+             1,3,1 \\
+             \end{bmatrix} \\
+             \end{bmatrix}
+\end{gather*}
+\end{minipage}%
+\noindent\begin{minipage}[t]{.5\textwidth}
+\begin{gather*}
+            D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         4,1,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}
+\end{gather*}
+\end{minipage}%
+\end{center}
+Now we make our next decision. We start with the left child, and it is obvious that $x2<3$ generates the greatest information gain. (Again, our thresholds are restricted to coordinates in our dataset).
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    xtick={-4, -3, -2, -1, 0, 1, 2, 3, 4}, ytick={-4, -3, -2, -1, 0, 1, 2, 3, 4}
+]
+\addplot [only marks] table {
+0 0
+1 0
+1 1
+0 1
+};
+\addplot [only marks, mark=o] table {
+1 3
+0 3
+2 2
+3 1
+3 2
+4 1
+};
+\addplot +[mark=none][dashed] coordinates {(2, -1) (2, 4)};
+\addplot +[mark=none][dashed] coordinates {(-1, 3) (2, 3)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+The data is now split
+$$D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             0, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+            \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             0,1,0 \\
+             \end{bmatrix} \\
+             \end{bmatrix}
+            $$
+
+            $$D_{right} = 
+        \begin{bmatrix}
+         \vspace{1mm}
+         \begin{bmatrix}
+         0,3,1 \\
+         \end{bmatrix} \\
+         \vspace{1mm}
+         \begin{bmatrix}
+         1,3,1 \\
+         \end{bmatrix} \\
+         \end{bmatrix}
+        $$
+We can now calculate the information gain. We know the impurity of the parent dataset, which was the impurity of the left child on the last split.
+\[I(D_p) = \frac{4}{9}\]
+Now, we calculate the children impurities to find our information gain:
+\[I(D_{left}) = 0\]
+\[I(D_{right}) = 0\]
+\[IG(D_p, f) = \frac{4}{9} - \frac{4}{6}*0 - \frac{2}{6}*0 = \frac{4}{9}\]
+
+All our data has been classified correctly, so the decision tree is done.
+We will leave it as an exercise to the reader to draw the decision tree.
+
+\section{Code}
+Here's how we recommend you structure your decision tree code for the competition. It should be noted: do not split recursively until all data is pure. You will overfit the testing data. Instead, set a baseline for your information gain. If the maximum information gain is less than, say, 0.1, then stop the recursion and make it a leaf of the tree. Play with this baseline to see how your training and testing accuracy change. Remember: your goal is the greatest testing accuracy.
+
+\inputminted{python}{smallshell.py}
+
+
+\section{Practice Problems}
+\begin{enumerate}
+    \item Calculate the information gain for each of the 7 decision trees in Section 4. The second decision tree has already been done for you in the example in Section 2.
+    \item Do the competition.
+\end{enumerate}
+
+\end{document}

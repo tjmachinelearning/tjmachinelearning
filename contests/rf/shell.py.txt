@@ -1,0 +1,32 @@
+import random
+
+def buildRandomForest():
+   # stores your trees for the random forest
+   # this is your model
+   trees = []
+
+   # k represents how many trees you have.
+   # This is the first hyperparameter to tune
+   for i in range(k): 
+      # n represents some proportion to split on (say .6?)
+      # this should also be tuned!
+      split = n 
+      X_bootstrap = []
+      for val in X:
+         if( random.uniform(0, 1) < split):
+            X.append(val)
+      
+      # train decision tree with X_bootstrap
+      # store this tree in your trees array
+   return trees
+
+def testRandomForest(trees, x_test):
+   y_test = []
+   for x_t in x_test:
+      votes = []
+      for tree in trees:
+         # pass x_t to each tree
+         # append its output in votes
+      # figure out what the most frequent output in votes is
+      # append this to y_test
+   return y_test

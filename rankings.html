@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
     <link rel="stylesheet" type="text/css" href="css/style1.css" />
+    <link href="css/table.css" rel="stylesheet">
     <script src="js/modernizr.custom.js"></script>
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -79,70 +81,35 @@
     </div>
     <section class="main-content">
 
-	    
-<h3>2017-2018 First Competition Instructions</h3>
-<h4>The Data</h4>
-<p> Welcome to the first contest of the year! Your job is to write the code to create a decision tree, train it on the training data, and use it to predict the classes of the testing data.
-We are trying to classify breast cancer data. The data we are using is actual data from breast cancer patients. 
-Your decision tree is supposed to classify the type of breast cancer they have (benign (0) or malignant (1)), based on 9 different metrics (features).
-The training data looks like this: </p>
-<p>
-<code>
-feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
-feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
-feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
-etc. (533 lines) <br></code>
-</p>
-<p>
-and the testing data looks like this: </p>
-<p>
-<code>
-feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9 <br>
-feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9 <br>
-feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9 <br>
-etc. (150 lines) <br>
-</code>
-</p>
-<p>
-Your end goal is to create a file which looks like: <br>
-<code>
-id, solution <br>
-1, predicted_class <br>
-2, predicted_class <br>
-3, predicted_class <br>
-4, predicted_class <br>
-etc. (150 lines) <br>
-</code>
-	
-For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file. </p>
-	    
-<h4>How to participate</h4>
-<p>
-	Our contests will be held on <a href="https://kaggle.com">Kaggle</a>, using <a href="https://inclass.kaggle.com">Kaggle InClass</a>. This allows us to upload data and competition instructions, as well as impose submission deadlines. It also ranks submissions automatically!
+<h3>2017-2018 Rankings</h3>
+<script src="js/google-sheets-html.js" type="text/javascript"></script>
+<div id="table">
+</div>
 
-	To participate:</p>
+<h3>Standard Competition Instructions</h3>
+<p>These instructions are common to almost every competition, so we're only listing them once.</p>
 <p>
-<ol><li>Create a Kaggle account by clicking "sign up" in the top right.
-</li><li>Click on <a href="https://www.kaggle.com/t/cb7c483774b8408582fd138a3a49b0d4">this link</a> (the competition link). 
-</li><li>Download the training and testing data. 
-</li><li>Download the I/O Code.
-</li><li>Write your algorithm and train it on the training data. 
-</li><li>Then, test it on the testing data, creating a submission file with the predicted ground truth in the format shown in the sample submission file. 
+<p><strong>To Participate:</strong></p>
+<ol>
+<li>Create a <a href="https://kaggle.com">Kaggle</a> account if you don't already have one by clicking "sign up" in the top right.
+</li><li>Click on the competition link, which will be posted in the lecture table on <a href="schedule.html">this page</a>.
+</li><li>Download the training and testing data.
+</li><li>Download any shell code from the website.
+</li><li>Write your algorithm and train it on the training data.
+</li><li>Then, test it on the testing data, creating a submission file with the predicted ground truth in the format shown in the sample submission file.
 </li><li>Upload your submission file and see your results!
 </li><li>Tweak your code, repeating steps 5-8 to improve your accuracy and move up the leaderboard.
 </ol>
-</p>
-<p>
-Some More Rules:
+<p><strong>Rules and Procedures</strong></p>
 <ol>
-<li>Use Python. Everything we do is in Python this year. Don't use a library, other than numpy. For this contest only, if you have no Python experience, you can use whatever language you are comfortable with.
-</li><li>The Competition ends at 11:59:00 PM next Monday, 9/25.
-</li><li>The leaderboard on Kaggle that you can see is the Public Leaderboard, which is your accuracy for 50% of the testing data. Your final rankings will be based on the Private leaderboard, which is based on the other 50% of the testing data and will become public as soon as the competition ends. This is to prevent you from just writing a decision tree that overfits the testing data, which defeats the purpose.
-</li></ol>
-</p>
-	    
-	    
-	    
+<li>Use Python. Everything we do is in Python this year. Unless otherwise specified, do not use any ML library other than numpy.
+</li><li>The Competition ends at 11:59:00 PM the following Tuesday.
+</li><li>The leaderboard on Kaggle that you can see is the Public Leaderboard, which is your accuracy for some percentage of the testing data.
+    Your final rankings will be based on the Private leaderboard, which is based on the other part of the testing data and will become public as soon as the competition ends. This is to prevent you from just writing a decision tree that overfits the testing data, which defeats the purpose.
+</li>
+</ol>
+
+
       <h3>
 <a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2016-2017 Overall Rankings</h3>
 2017-2018 rankings will be up once competitions start in October. Congratulations to our top 3 students from 2016-2017!
