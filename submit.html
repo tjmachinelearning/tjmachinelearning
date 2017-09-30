@@ -77,6 +77,57 @@
     		</div>
 
     <section class="main-content">
+        <h3>Random Forests Competition Instructions</h3>
+        <h4>The Data</h4>
+        <p><i>9/20/17 -&emsp;</i>Your job is to write the code to create a decision tree, train it on the training data, and use it to predict the classes of the testing data.
+        We are trying to classify survival of passengers on the Titanic. The data we are using are from actual passengers on the ship.
+        Your decision tree is supposed to classify whether a passenger survived (RIP (0) or Survived (1)), based on 7 different metrics (features).
+        The training data looks like this: </p>
+        <p>
+        <code>
+        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, survival<br>
+        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, survival<br>
+        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, survival<br>
+        etc. (501 lines) <br></code>
+        </p>
+        <p>
+        and the testing data looks like this: </p>
+        <p>
+        <code>
+        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7<br>
+        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7<br>
+        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7<br>
+        etc. (214 lines) <br>
+        </code>
+        </p>
+        <p>
+        Your end goal is to create a file which looks like: <br>
+        <code>
+        id, solution <br>
+        1, predicted_class <br>
+        2, predicted_class <br>
+        3, predicted_class <br>
+        4, predicted_class <br>
+        etc. (214 lines) <br>
+        </code>
+
+        For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file.
+        </p>
+        <p> In case you care, the features correspond to: </p>
+        <code>
+            pclass - Ticket class: 1 = 1st, 2 = 2nd, 3 = 3rd </br>
+            sex	- Sex: 0 = Male, 1 = Female <br>
+            Age - Age in years	<br>
+            sibsp - # of siblings / spouses aboard the Titanic	<br>
+            parch - # of parents / children aboard the Titanic	<br>
+            fare - passenger fare <br>
+            embarked - Port of Embarkation: 0 = Southampton, 1 = Cherbourg, 2 = Queenstown<br>
+            survival - Survival: 0 = No, 1 = Yes<br>
+        </code>
+        </p>
+        <p>Shell code is available on the <a href="schedule.html">lecture schedule page</a>.
+            The Data I/O code from the decision tree lecture will still be useful, but will need to be adapted for this data.
+        </p>
         <h3>2017-2018 First Competition Instructions</h3>
         <h4>The Data</h4>
         <p><i>9/20/17 -&emsp;</i>Welcome to the first contest of the year! Your job is to write the code to create a decision tree, train it on the training data, and use it to predict the classes of the testing data.
