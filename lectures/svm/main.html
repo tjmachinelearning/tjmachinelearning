@@ -13,17 +13,24 @@
 <p>To calculate the margin, first, let us take the difference between a positive support vector and a negative support vector.</p>
 <p><span class="math display">\[x_{pos} - x_{neg}\]</span></p>
 <p>Then, we need to multiply this by a unit vector perpendicular to the hyperplanes. We earlier defined <span class="math inline">\(\bm{w}\)</span> to be normal to the hyperplanes, so <span class="math inline">\(\frac{\bm{w}}{||\bm{w}||}\)</span> serves this purpose:</p>
-<p><span class="math display">\[\frac{\bm{w}(x_{pos} - x_{neg})}{||\bm{w}||}\]</span></p>
-<p>Using  [eq:hyperplanes], we arrive at:</p>
+<p><span class="math display">\[\frac{\bm{w}(x_{pos} - x_{neg})}{||\bm{w}||}\]</span> Using  [eq:hyperplanes], we arrive at:</p>
 <p><span class="math display">\[\frac{\bm{w}(x_{pos} - x_{neg})}{||\bm{w}||} = \frac{2}{||\bm{w}||}\]</span></p>
 <p>We must maximize <span class="math inline">\(\frac{2}{||\bm{w}||}\)</span> to maximize the margin. For mathematical convenience, we can minimize <span class="math inline">\(\frac{1}{2}{||\bm{w}||^2}\)</span> to achieve the same effect. The constraint for this optimization problem is that the samples are actually classified correctly:</p>
-<p><span class="math display">\[\bm{w \cdot x_{i}} + w_0 \geq 1 \text{ if $y_i = 1$}\]</span></p>
-<p><span class="math display">\[\bm{w \cdot x_{i}} + w_0 &lt; -1 \text{ if $y_i = -1$}\]</span></p>
-<p>where <span class="math inline">\(x_i\)</span> is a particular sample and <span class="math inline">\(y_i\)</span> is the class of the sample. More compactly:</p>
-<p><span class="math display">\[y_i(w_0 + \bm{w \cdot x_i}) \geq 1\]</span></p>
-<p>After maximizing the margin, our decision rule is:</p>
-<p><span class="math display">\[y_i = sign(\bm{w \cdot x_i} + w_0)\]</span></p>
-<p>That is, points to the left of the decision boundary are classified as negative while points to the right are classified as positive.</p>
+<p><span class="math display">\[\bm{w \cdot x_{i}} + w_0 = 1 \text{ if $y_i = 1$}\]</span></p>
+<p><span class="math display">\[\bm{w \cdot x_{i}} + w_0 = -1 \text{ if $y_i = -1$}\]</span> where <span class="math inline">\(x_i\)</span> is a particular sample and <span class="math inline">\(y_i\)</span> is the class of the sample. More compactly:</p>
+<p><span class="math display">\[y_i(w_0 + \bm{w \cdot x_i}) - 1 = 0\]</span> Using Lagrange multipliers, we calculate the following Lagrange function:</p>
+<p><span class="math display">\[L(\bm{w}, w_0) = \frac{1}{2}{||\bm{w}||^2} - \sum_i{a_i(y_i(w_0 + \bm{w \cdot x_i}) - 1)}\]</span> where <span class="math inline">\(a_i\)</span> is our Lagrange multiplier.</p>
+<p><span class="math display">\[\frac{\partial L}{\partial \bm{w}} = \bm{w} - \sum_i{{a_i}{\bm{x_i}}{y_i}} = 0\]</span> Thus, <span class="math display">\[\bm{w} = \sum_i{{a_i}{\bm{x_i}}{y_i}}\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial w_0} = -\sum_i{{a_i}{y_i}} = 0\]</span> Thus, <span class="math display">\[\sum_i{{a_i}{y_i}} = 0\]</span> Combining these equations finally yields <span class="math display">\[L = \sum_i{a_i}  - \frac{1}{2}{\sum_i{\sum_j{{a_i}{a_j}{y_i}{y_j}{(\bm{x_i \cdot x_j})}}}}\]</span> which we can optimize through quadratic programming.</p>
+<h1 id="soft-margin-classification">Soft-Margin Classification</h1>
+<p>Most of the time, our data will not be linearly separable. The standard method is to allow the SVM to misclassify some data points, and pay a cost for each misclassified point. We can accomplish this by adding a slack variable <span class="math inline">\(\xi\)</span>. Our optimization problem becomes minimizing <span class="math inline">\(\frac{1}{2}{||\bm{w}||^2} + C\sum_i{{{\xi}_i}}\)</span> with the constraint <span class="math inline">\(y_i(w_0 + \bm{w \cdot x_i}) \geq 1 - {\xi}_i\)</span>. <span class="math inline">\(C\)</span> is a regularization hyperparameter; if <span class="math inline">\(C\)</span> is set to be small, more misclassifications are allowed, but if <span class="math inline">\(C\)</span> is set to be large, less misclassifications are allowed.</p>
+<h1 id="non-binary-classification">Non-binary Classification</h1>
+<p>SVM’s are inherently useful for binary classification. However, they can also be used for data with more than two classes.</p>
+<h2 id="one-versus-the-rest">One versus the Rest</h2>
+<p>If we train an SVM to separated one class from all the other classes, and do this for each class, we can combine the SVMs for multi-class classification. <span class="math display">\[\mbox{argmax}\limits_{j=1 \dots M} g^j(x)\]</span></p>
+<p><span class="math display">\[g^j(x) = \sum_{i=1}^{m}y_i a_{i}^j k(x, x_i) + b^j\]</span></p>
+<h2 id="pairwise-classification">Pairwise Classification</h2>
+<p>If we train an SVM for every possible combination of pairs of classes, we will train <span class="math inline">\(\frac{n(n+1)}{2}\)</span> SVMs for a dataset with <span class="math inline">\(n\)</span> classes. Classify a point by running it through all the SVMs and adding up the number of times the point is classified into each class. The class with the most number is considered the label.</p>
 <h1 id="nonlinear-classification-using-kernels">Nonlinear Classification using Kernels</h1>
 <p>In the real world, data is usually not linearly separable, meaning that the support vector machine as cannot accurately separate the data. However, we can project the data onto a higher dimensional space where the data is linearly separable using a mapping function <span class="math inline">\(\phi{(\cdot)}\)</span> For example: <span class="math display">\[\phi{(x_1, x_2)} = (z_1, z_2, z_3) = (x_1, x_2, x_1^2 + x_2^2)\]</span> Using this mapping function allows us to separate the two classes below (indicated by red and blue) with a linear hyperplane. We can then project this back into two-dimensional space where the decision boundary becomes nonlinear.</p>
 <div class="figure">
@@ -34,3 +41,54 @@
 <p>One of the most popular kernel functions is the Radial Basis Function kernel (RBF kernel) or Gaussian kernel:</p>
 <p><span class="math display">\[k(\bm{x_i}, \bm{x_j}) = \exp{(-\gamma||\bm{x_i}-\bm{x_j}||^2})\]</span></p>
 <p><span class="math inline">\(\gamma\)</span> is a free parameter that can be optimized.</p>
+<h1 id="library">Library</h1>
+<p>To start off the year easy, we will be using Scikit-Learn, which has multi-class support built-in.</p>
+<h1 id="practice-problem">Practice Problem</h1>
+<p>Given the following data:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">out</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">-1</td>
+<td align="center">-2</td>
+<td align="center">-1</td>
+</tr>
+<tr class="even">
+<td align="center">-1</td>
+<td align="center">0</td>
+<td align="center">-1</td>
+</tr>
+<tr class="odd">
+<td align="center">-3</td>
+<td align="center">-5</td>
+<td align="center">-1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">-2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>Graphed on the following plane with the hyperplane <span class="math inline">\(y + 2x =0\)</span>.</p>
+<p>table <span> -1 -2 -1 0 -3 -5 </span>; table <span> 2 0 3 -2 1 1 </span>; ;</p>
+<ol>
+<li><p>Find the distance from the hyperplane to each of the points.</p></li>
+<li><p>Find the margin of the hyperplane.</p></li>
+</ol>
