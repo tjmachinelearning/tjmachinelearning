@@ -106,7 +106,14 @@
                 <br>pip install torchvision --user
             </code>
         </p>
-        <p>
+	    <h3>Installing Libraries on Your Own Linux Machine</h3>
+        <p>If you want to install these libraries on your own Linux computer, just remove the <code>--user</code> for the above commands, since you presumably have root.
+		If you have Python 3.5 on your machine, you can install Pytorch for Python3 like so: </br>
+	  	<code>pip3 install http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl</code><br>
+	  	<code>pip3 install torchvision</code><br>
+	  For Python 3.6, replace every "35" with a "36" in the above commands. Check for your specific configuration on  <a href="http://www.pytorch.org">the official website</a>.
+	  This assumes you have a CUDA 8.0 compatible GPU. If you don't, running any sort of deep learning model will take too long, and it is advisable you use the TJ GPU Cluster.
+	</p>
     <h3>Libraries on Windows Machines</h3>
       <p>Machine Learning Club recommends using Scikit-Learn for simple machine learning. For deep learning, ML Club highly recommends <a href="http://www.keras.io">Keras</a> with the
       <a href="https://www.tensorflow.org">Tensorflow</a> backend.</p>
