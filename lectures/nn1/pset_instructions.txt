@@ -1,9 +1,9 @@
 TJML Neural Networks Problem Set Instructions & Information
-
+-----------------------------------------------------------
 1. Print out the problem set. If you run out of room for an answer, staple your scratch paper to the worksheet.
-2 The problem set is due next Wednesday, 10/25/17, at the start of 8A. If you can't sign up or aren't signed up, find an officer and turn it in to them.
+2. The problem set is due next Wednesday, 10/25/17, at the start of 8A. If you can't sign up or aren't signed up, find an officer and turn it in to them.
 3. The pset has a total of 40 points, but will be weighted x2.5 (100 points) in our rankings.
 4. The pset shouldn't take longer than a standard competition to complete (~1hr)
-5. Refer to the lectures above if you have any questions. If things are still unclear, message an officer our email tjmachinelearning@gmail.com.
+5. Refer to the lectures above if you have any questions. If things are still unclear, message an officer or email tjmachinelearning@gmail.com.
 _____________________
 Last updated 10/20/17
