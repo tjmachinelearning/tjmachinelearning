@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Neural Networks: Mathematics of Backpropagation | TJHSST Machine Learning Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/component.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-105333430-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <h2 style="text-align:center"><a href="../../index.html"><img src="../../img/logo.svg" width="200px"></img></a></h2>
+         <section class="section section--menu" id="Alonso">
+             <span class="link-copy"></span>
+             <nav class="menu menu--alonso">
+                 <ul class="menu__list">
+                     <li class="menu__item"><a href="../../index.html" class="menu__link">Home</a></li>
+                     <li class="menu__item menu__item--current"><a href="../../schedule.html" class="menu__link">Lectures</a></li>
+                     <li class="menu__item "><a href="../../rankings.html" class="menu__link">Rankings</a></li>
+                     <li class="menu__item"><a href="../../resources.html" class="menu__link">Resources</a></li>
+                     <li class="menu__item"><a href="../../projects.html" class="menu__link">Projects</a></li>
+                     <li class="menu__item"><a href="../../submit.html" class="menu__link">Updates</a></li>
+                     <li class="menu__line"></li>
+                 </ul>
+             </nav>
+         </section>
+    </div>
+    <section class="main-content">
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Neural Networks: Mathematics of Backpropagation</h1>
+            <h3 style="text-align:center; color:#000">Sylesh Suresh and Nikhil Sardana</h2>
+            <h3 style="text-align:center; color:#000">October 2017</h2>
+                <h1 id="introduction">Introduction</h1>
+                <p>Recall our network from the previous lecture:</p>
+                <p style="text-align:center"><img src="network2.png" alt="Network 2" style="max-width:30em"/></p>
+                <p>Through forward propagation, we calculated our prediction <span class="math inline">\(x_2\)</span> for the input <span class="math inline">\(x_0\)</span>. Keep in mind, however, that this prediction is essentially a stab in the dark. We multiplied the input by randomly initialized weights and randomly initialized biases through each layer and calculated an output. At this stage, the output is simply a random guess and is probably very different from the target/true output <span class="math inline">\(y\)</span>. In order to make our neural network more accurate, we must change the weights and biases so that our predicted output <span class="math inline">\(x_2\)</span> gets as close to the target output <span class="math inline">\(y\)</span> as possible.</p>
+                <p>To accomplish this, we will use backpropagation. The first step is to quantify exactly how wrong our prediction is; in other words, we will use an error function. We define the error function as <span class="math display">\[E = \frac{1}{2}||x_2-y||^2\]</span> This makes sense; <span class="math inline">\(E\)</span> increases as the difference between <span class="math inline">\(x_2\)</span> and <span class="math inline">\(y\)</span> increases. The goal of backpropagation is to minimize this error, which will get <span class="math inline">\(x_2\)</span> and <span class="math inline">\(y\)</span> as close together as possible, making <span class="math inline">\(x_2\)</span> a better prediction.</p>
+                <p>To minimize <span class="math inline">\(E\)</span>, we must change the weights and biases accordingly. Unfortunately, there are many weights and biases (just look at the diagram above), so we can’t just test many different combinations weights and biases and see which one yields the least error. That said, we can use differentiation to help us. By taking the partial derivative of the error with respect to a particular weight, we will know how to change the weight in order to decrease the error; changing the weight in the direction of the negative partial derivative will decrease the error. Please see the “Neural Networks: Part 2”, Sections 4.1-4.3, for a more in-depth explanation as to why calculating the partial derivatives helps us minimize the error function.</p>
+                <h1 id="non-vectorized-backpropagation">Non-Vectorized Backpropagation</h1>
+                <p>We’ve already covered how to backpropagate in the vectorized form (Neural Networks: Part 2, Section 4.5). However, this can be confusing to many students, particularly the parts with matrix transformations and Hadamard products. To alleviate any confusion, let’s walk through backpropagation without any vectors at all.</p>
+                <h2 id="defining-the-network">Defining the Network</h2>
+                <p>Consider the following neural network:</p>
+                <p><img src="nn2.png" alt="image" /></p>
+                <p>Let’s take the partial derivative of the error with respect to a particular weight. Our target outputs are <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>. We define the value at each node <span class="math inline">\(i\)</span> to be <span class="math inline">\(n_i\)</span>. We define the bias of node <span class="math inline">\(i\)</span> to be <span class="math inline">\(b_i\)</span>. Note that input nodes do not have biases, they are simply input values into the network. We can thus rewrite the error function as:</p>
+                <p><span class="math display">\[E=\frac{1}{2}\left((n_8-y_1)^2 + (n_9-y_2)^2\right)\]</span></p>
+                <h2 id="a-simple-example">A Simple Example</h2>
+                <p>Let’s calculate <span class="math inline">\(\dfrac{\partial E}{\partial w_{48}}\)</span>. By the chain rule: <span class="math display">\[\dfrac{\partial E}{\partial w_{48}} = (n_8-y_1)\left(\frac{\partial{(n_8-y_1)}}{\partial w_{48}}\right)+(n_9-y_2)\left(\frac{\partial{(n_9-y_2)}}{\partial w_{48}}\right)\]</span></p>
+                <p>We know: <span class="math display">\[n_8 = \sigma(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8).\]</span> <span class="math display">\[n_9 = \sigma(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9).\]</span></p>
+                <p>Neither <span class="math inline">\(n_9\)</span> nor <span class="math inline">\(y_2\)</span>, a part of the target output, depend on <span class="math inline">\(w_{48}\)</span>, so the equation becomes:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{48}} = (n_8-y_1)\left(\frac{\partial{(n_8-y_1)}}{\partial w_{48}}\right)\]</span></p>
+                <p>Let’s look at <span class="math inline">\(\dfrac{\partial{(n_8-y_1)}}{\partial w_{48}}\)</span>. <span class="math inline">\(y_1\)</span> does not depend on <span class="math inline">\(w_{48}\)</span>. Looking at <span class="math inline">\(n_8\)</span>, we see that the only term in the sigmoid function that depends on <span class="math inline">\(w_{48}\)</span> is <span class="math inline">\(w_{48}n_4\)</span>. Thus: <span class="math display">\[\frac{\partial{(n_8-y_1)}}{\partial w_{48}} = \frac{\partial{(\sigma(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8))}}{\partial w_{48}}\]</span> <span class="math display">\[\frac{\partial{(n_8-y_1)}}{\partial w_{48}} = \sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)\frac{\partial{w_{48}n_4}}{\partial w_{48}}\]</span></p>
+                <p>We know: <span class="math display">\[n_4 = \sigma(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4).\]</span></p>
+                <p>This equation does not involve <span class="math inline">\(w_{48}\)</span>. So we get:</p>
+                <p><span class="math display">\[\frac{\partial{(n_8-y_1)}}{\partial w_{48}} = \sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)n_4\]</span></p>
+                <p>Substituting back in, we finally arrive at:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{48}} = (n_8-y_1)\sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)n_4\]</span></p>
+                <p>To shorten this expression, we’ll refer to <span class="math inline">\(\sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)\)</span> as <span class="math inline">\(\sigma_8&#39;\)</span>. <span class="math display">\[\dfrac{\partial E}{\partial w_{48}} = (n_8-y_1)\sigma_8&#39;n_4\]</span></p>
+                <h2 id="updating-weights">Updating Weights</h2>
+                <p>A network learns by changing its weights to minimize the error. Now that we’ve figured out the partial derivative of <span class="math display">\[w_{48}\]</span> with respect to the error, we simply update <span class="math display">\[w_{48}\]</span> according to the following rule:</p>
+                <p><span class="math display">\[w_{48} = w_{48} - \alpha\dfrac{\partial E}{\partial w_{48}}\]</span></p>
+                <p>Where <span class="math inline">\(\alpha\)</span> is the learning rate, or some constant.</p>
+                <h2 id="a-complex-example">A Complex Example</h2>
+                <p>Let’s begin calculating <span class="math inline">\(\dfrac{\partial E}{\partial w_{14}}\)</span>. We know that <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span> are just constants. We also know</p>
+                <p><span class="math display">\[n_8 = \sigma(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)\]</span> <span class="math display">\[n_9 = \sigma(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9)\]</span> <span class="math display">\[n_4 = \sigma(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4)\]</span></p>
+                <p>Nowhere else does <span class="math inline">\(w_{14}\)</span> appear in the network. Let’s begin chain-ruling.</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\left(\frac{\partial{(n_8-y_1)}}{\partial w_{14}}\right)+(n_9-y_2)\left(\frac{\partial{(n_9-y_2)}}{\partial w_{14}}\right)\]</span></p>
+                <h3 id="calculations">Calculations</h3>
+                <p>The process for calculating each of these partial derivatives is extraordinarily similar. Let’s just focus on the first part, or:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\left(\frac{\partial{(n_8-y_1)}}{\partial w_{14}}\right)\]</span> At the end, repeat the following process for the second partial.</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\frac{\partial{n_8}}{\partial w_{14}}\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\frac{\partial{(\sigma(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8))}}{\partial w_{14}}\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\left(\sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)\right)\frac{\partial{(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)}}{\partial w_{14}}\]</span></p>
+                <p>To make our expression shorter, lets just write <span class="math display">\[\sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)\]</span> as <span class="math inline">\(\sigma_8&#39;\)</span>. We can rewrite what we have so far as: <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;\frac{\partial{(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)}}{\partial w_{14}}\]</span> Let’s continue. Remember, only <span class="math inline">\(n_4\)</span> is dependent on <span class="math inline">\(w_{14}\)</span>.</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;\frac{\partial{w_{48}n_4}}{\partial w_{14}}\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;w_{48}\frac{\partial{(\sigma(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4))}}{\partial w_{14}}\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;w_{48}(\sigma&#39;(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4))\frac{\partial{(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 +b_4)}}{\partial w_{14}}\]</span></p>
+                <p>Again, lets just write <span class="math display">\[\sigma&#39;(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4)\]</span> as <span class="math inline">\(\sigma_4&#39;\)</span>. We can rewrite what we have so far as:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;w_{48}\sigma_4&#39;\frac{\partial{(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4)}}{\partial w_{14}}\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;w_{48}\sigma_4&#39;\frac{\partial{w_{14}n_1}}{\partial w_{14}}\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;w_{48}\sigma_4&#39;n_1\]</span></p>
+                <h3 id="the-final-expression">The Final Expression</h3>
+                <p>Let’s add back in the second partial. Repeating the calculations, we finally achieve: <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = (n_8-y_1)\sigma_8&#39;w_{48}\sigma_4&#39;n_1 + (n_9-y_2)\sigma_9&#39;w_{49}\sigma_4&#39;n_1\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{14}} = \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_1\]</span></p>
+                <p>Of course, in these equations, <span class="math display">\[\sigma_9&#39; = \sigma&#39;(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9)\]</span></p>
+                <h2 id="biases">Biases</h2>
+                <p>Let’s calculate the partial derivative of the error with respect to <span class="math inline">\(b_4\)</span>. As with the weights, let’s start chain ruling: <span class="math display">\[\dfrac{\partial E}{\partial b_4} = (n_8-y_1)\left(\frac{\partial{(n_8-y_1)}}{\partial b_4}\right)+(n_9-y_2)\left(\frac{\partial{(n_9-y_2)}}{\partial b_4}\right)\]</span></p>
+                <p>Recall that: <span class="math display">\[n_8 = \sigma(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)\]</span> <span class="math display">\[n_9 = \sigma(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9)\]</span> <span class="math display">\[n_4 = \sigma(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4)\]</span></p>
+                <p>Let’s look at <span class="math inline">\(\frac{\partial{(n_8-y_1)}}{\partial b_4}\)</span>. Looking at <span class="math inline">\(n_8\)</span>, we see that the only term in the sigmoid function that relies on <span class="math inline">\(b_4\)</span> is <span class="math inline">\(w_{48}n_4\)</span>, and <span class="math inline">\(w_{48}\)</span> is constant with respect to <span class="math inline">\(b_4\)</span>. Armed with this knowledge, we start chain-ruling:</p>
+                <p><span class="math display">\[\frac{\partial{(n_8-y_1)}}{\partial b_4} =  \sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8)(w_{48})\frac{\partial{n_4}}{\partial b_4}\]</span></p>
+                <p>Let’s break down <span class="math inline">\(\frac{\partial{n_4}}{\partial b_4}\)</span>. Looking at <span class="math inline">\(n_4\)</span>, we see that the only term inside the sigmoid function that relies on <span class="math inline">\(b_4\)</span> is <span class="math inline">\(b_4\)</span> itself, whose derivative is just <span class="math inline">\(1\)</span>. Thus:</p>
+                <p><span class="math display">\[\frac{\partial{n_4}}{\partial b_4} = \sigma&#39;(w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4)\]</span></p>
+                <p>Substituting and using our previous shorthand notation, we find: <span class="math display">\[\frac{\partial{(n_8-y_1)}}{\partial b_4} =  (\sigma_8&#39;)(\sigma_4&#39;)(w_{48})\]</span></p>
+                <p>We can use the same process to find that: <span class="math display">\[\frac{\partial{(n_9-y_2)}}{\partial b_4} = (\sigma_9&#39;)(\sigma_4&#39;)(w_{49})\]</span></p>
+                <p>Finally, we get: <span class="math display">\[\dfrac{\partial E}{\partial b_4} = \sigma_4&#39;((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49})\]</span></p>
+                <p>The process is simpler for the third layer. Take <span class="math inline">\(b_8\)</span> for example. We start the same way: <span class="math display">\[\dfrac{\partial E}{\partial b_8} = (n_8-y_1)\left(\frac{\partial{(n_8-y_1)}}{\partial b_8}\right)+(n_9-y_2)\left(\frac{\partial{(n_9-y_2)}}{\partial b_8}\right)\]</span></p>
+                <p><span class="math inline">\(n_9\)</span> does not depend on <span class="math inline">\(b_8\)</span>, so the right side of the expression evaluates to 0 and goes away. For the left side, again, <span class="math inline">\(y_1\)</span> is constant, so we find that: <span class="math display">\[\dfrac{\partial E}{\partial b_8} = (n_8-y_1)\frac{\partial{n_8}}{\partial b_8}\]</span> The only term in the sigmoid function in the expression for <span class="math inline">\(n_8\)</span> is <span class="math inline">\(b_8\)</span> itself. Thus: <span class="math display">\[\dfrac{\partial E}{\partial b_8} = (n_8-y_1)\sigma_8&#39;\]</span></p>
+                <h1 id="a-matrix-representation">A Matrix Representation</h1>
+                <p>Let’s first define the vectorized network (we’ve done this in “Neural Networks: Part 2” already). In this case:</p>
+                <p style="text-align:center"><img src="network2.png" alt="Network 2" style="max-width:30em"/></p>
+                <p><span class="math display">\[W_1 =
+                \begin{bmatrix}
+                    w_{14} &amp;&amp; w_{24} &amp;&amp; w_{34} \\
+                    w_{15} &amp;&amp; w_{25} &amp;&amp; w_{35} \\
+                    w_{16} &amp;&amp; w_{36} &amp;&amp; w_{36} \\
+                    w_{17} &amp;&amp; w_{27} &amp;&amp; w_{37} \\
+                \end{bmatrix}
+                \qquad
+                W_2 =
+                \begin{bmatrix}
+                    w_{48} &amp;&amp; w_{58} &amp;&amp; w_{68} &amp;&amp; w_{78}\\
+                    w_{49} &amp;&amp; w_{59} &amp;&amp; w_{69} &amp;&amp; w_{79}\\
+                \end{bmatrix}\]</span> <span class="math display">\[x_0 =
+                \begin{bmatrix}
+                    n_1 \\
+                    n_2 \\
+                    n_3 \\
+                \end{bmatrix}
+                \qquad
+                x_1 =
+                \begin{bmatrix}
+                    n_4 \\
+                    n_5 \\
+                    n_6 \\
+                    n_7 \\
+                \end{bmatrix}
+                \qquad
+                x_2 =
+                \begin{bmatrix}
+                    n_8 \\
+                    n_9 \\
+                \end{bmatrix}\]</span> <span class="math display">\[b_1 =
+                \begin{bmatrix}
+                    b_4 \\
+                    b_5 \\
+                    b_6 \\
+                    b_7 \\
+                \end{bmatrix}
+                \qquad
+                b_2 =
+                \begin{bmatrix}
+                    b_8 \\
+                    b_9 \\
+                \end{bmatrix}
+                \qquad
+                y =
+                \begin{bmatrix}
+                    y_1 \\
+                    y_2 \\
+                \end{bmatrix}\]</span></p>
+                <p>And from vectorized forward propagation, we know <span class="math display">\[x_1 = \sigma(W_1x_0 + b_1)\]</span> <span class="math display">\[x_2 = \sigma(W_2x_1 + b_2)\]</span></p>
+                <p>Note that</p>
+                <p><span class="math display">\[W_1x_0 =
+                \begin{bmatrix}
+                    w_{14} &amp;&amp; w_{24} &amp;&amp; w_{34} \\
+                    w_{15} &amp;&amp; w_{25} &amp;&amp; w_{35} \\
+                    w_{16} &amp;&amp; w_{36} &amp;&amp; w_{36} \\
+                    w_{17} &amp;&amp; w_{27} &amp;&amp; w_{37} \\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    n_1 \\
+                    n_2 \\
+                    n_3 \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4 \\
+                    w_{15}n_1 + w_{25}n_2 + w_{35}n_3 + b_5 \\
+                    w_{16}n_1 + w_{26}n_2 + w_{36}n_3 + b_6 \\
+                    w_{17}n_1 + w_{27}n_2 + w_{37}n_3 + b_7 \\
+                \end{bmatrix}\]</span></p>
+                <p><span class="math display">\[W_2x_1 =
+                \begin{bmatrix}
+                    w_{48} &amp;&amp; w_{58} &amp;&amp; w_{68} &amp;&amp; w_{78}\\
+                    w_{49} &amp;&amp; w_{59} &amp;&amp; w_{69} &amp;&amp; w_{79}\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    n_4 \\
+                    n_5 \\
+                    n_6 \\
+                    n_7 \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8 \\
+                    w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9 \\
+                \end{bmatrix}\]</span></p>
+                <h2 id="the-first-matrix">The First Matrix</h2>
+                <p>We can repeat the process outlined in Section 2.2 to calculate the partial derivative of the error function with respect to each weight. The final results for the weights between the second and third layers of nodes follow a similar pattern:</p>
+                <p><span class="math inline">\(\dfrac{\partial E}{\partial w_{48}} = (n_8-y_1)\sigma_8&#39;n_4\)</span> <span class="math inline">\(\dfrac{\partial E}{\partial w_{49}} = (n_9-y_2)\sigma_9&#39;n_4\)</span></p>
+                <p><span class="math inline">\(\dfrac{\partial E}{\partial w_{58}} = (n_8-y_1)\sigma_8&#39;n_5\)</span> <span class="math inline">\(\dfrac{\partial E}{\partial w_{59}} = (n_9-y_2)\sigma_9&#39;n_5\)</span></p>
+                <p><span class="math inline">\(\dfrac{\partial E}{\partial w_{68}} = (n_8-y_1)\sigma_8&#39;n_6\)</span> <span class="math inline">\(\dfrac{\partial E}{\partial w_{69}} = (n_9-y_2)\sigma_9&#39;n_6\)</span></p>
+                <p><span class="math inline">\(\dfrac{\partial E}{\partial w_{78}} = (n_8-y_1)\sigma_8&#39;n_7\)</span> <span class="math inline">\(\dfrac{\partial E}{\partial w_{79}} = (n_9-y_2)\sigma_9&#39;n_7\)</span></p>
+                <p>Hmmmm... these all look similar! I bet we could rearrange them to create a more compact matrix representation, which we will call <span class="math inline">\(\frac{\partial E}{\partial W_2}\)</span>. We wish to simplify weight updating to just</p>
+                <p><span class="math display">\[W_2 = W_2 - \alpha\dfrac{\partial E}{\partial W_2}\]</span> So, <span class="math inline">\(\dfrac{\partial E}{\partial W_2}\)</span> must be the same shape as <span class="math inline">\(W_2\)</span>, which is <span class="math inline">\(2 \times 4\)</span>.</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial W_2} =
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial w_{48}} &amp;&amp; \dfrac{\partial E}{\partial w_{58}}  &amp;&amp; \dfrac{\partial E}{\partial w_{68}}  &amp;&amp; \dfrac{\partial E}{\partial w_{78}} \\
+                    \dfrac{\partial E}{\partial w_{49}} &amp;&amp; \dfrac{\partial E}{\partial w_{59}}  &amp;&amp; \dfrac{\partial E}{\partial w_{69}}  &amp;&amp; \dfrac{\partial E}{\partial w_{79}} \\
+                \end{bmatrix}\]</span></p>
+                <p>Note that: <span class="math display">\[\begin{bmatrix}
+                    (n_8-y_1)\sigma_8&#39; \\
+                    (n_9-y_2)\sigma_9&#39; \\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    n_4 &amp;&amp; n_5 &amp;&amp; n_6 &amp;&amp; n_7 \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial w_{48}} &amp;&amp; \dfrac{\partial E}{\partial w_{58}}  &amp;&amp; \dfrac{\partial E}{\partial w_{68}}  &amp;&amp; \dfrac{\partial E}{\partial w_{78}} \\
+                    \dfrac{\partial E}{\partial w_{49}} &amp;&amp; \dfrac{\partial E}{\partial w_{59}}  &amp;&amp; \dfrac{\partial E}{\partial w_{69}}  &amp;&amp; \dfrac{\partial E}{\partial w_{79}} \\
+                \end{bmatrix}\]</span></p>
+                <p>We can also write this as: <span class="math display">\[\begin{bmatrix}
+                    n_8-y_1 \\
+                    n_9-y_2 \\
+                \end{bmatrix}
+                \odot
+                \begin{bmatrix}
+                    \sigma_8&#39; \\
+                    \sigma_9&#39; \\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    n_4 &amp;&amp; n_5 &amp;&amp; n_6 &amp;&amp; n_7 \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial w_{48}} &amp;&amp; \dfrac{\partial E}{\partial w_{58}}  &amp;&amp; \dfrac{\partial E}{\partial w_{68}}  &amp;&amp; \dfrac{\partial E}{\partial w_{78}} \\
+                    \dfrac{\partial E}{\partial w_{49}} &amp;&amp; \dfrac{\partial E}{\partial w_{59}}  &amp;&amp; \dfrac{\partial E}{\partial w_{69}}  &amp;&amp; \dfrac{\partial E}{\partial w_{79}} \\
+                \end{bmatrix}\]</span> Where <span class="math inline">\(\odot\)</span> is the Hadamard product, or element-wise multiplication. Let’s vectorize this more: <span class="math display">\[\begin{bmatrix}
+                    \sigma_8&#39; \\
+                    \sigma_9&#39; \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    \sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_9) \\
+                    \sigma&#39;(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9) \\
+                \end{bmatrix}
+                =
+                \sigma&#39;(W_2x_1)\]</span> <span class="math display">\[\begin{bmatrix}
+                    n_8-y_1 \\
+                    n_9-y_2 \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    n_8 \\
+                    n_9 \\
+                \end{bmatrix}
+                -
+                \begin{bmatrix}
+                    y_1 \\
+                    y_2 \\
+                \end{bmatrix}
+                =
+                x_2-y\]</span> <span class="math display">\[\begin{bmatrix}
+                    n_4 &amp;&amp; n_5 &amp;&amp; n_6 &amp;&amp; n_7 \\
+                \end{bmatrix}
+                =
+                x_1^T\]</span></p>
+                <p>Thus, we get <span class="math display">\[\dfrac{\partial E}{\partial W_2} = [(x_2 - y) \odot \sigma&#39;(W_2x_1)]x_1^T\]</span></p>
+                <p>For the sake of simplicity, we define <span class="math display">\[\delta_2 = (x_2 - y) \odot \sigma&#39;(W_2x_1)\]</span></p>
+                <p>Finally, we reach our old vectorized backpropagation formula: <span class="math display">\[\dfrac{\partial E}{\partial W_2} = \delta_2x_1^T\]</span></p>
+                <h2 id="the-second-matrix">The Second Matrix</h2>
+                <p>We can repeat the process outlined in Section 2.4 to calculate the partial derivative of the error function with respect to each weight. The final results for the weights between the first and second layers of nodes follow a similar pattern:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial w_{14}} =  \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_1\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{15}} =  \left((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}\right)\sigma_5&#39;n_1\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{16}} =  \left((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}\right)\sigma_6&#39;n_1\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{17}} =  \left((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}\right)\sigma_7&#39;n_1\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{24}} =  \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_2\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{25}} =  \left((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}\right)\sigma_5&#39;n_2\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{26}} =  \left((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}\right)\sigma_6&#39;n_2\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{27}} =  \left((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}\right)\sigma_7&#39;n_2\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{34}} =  \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_3\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{35}} =  \left((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}\right)\sigma_5&#39;n_3\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{36}} =  \left((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}\right)\sigma_6&#39;n_3\]</span> <span class="math display">\[\dfrac{\partial E}{\partial w_{37}} =  \left((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}\right)\sigma_7&#39;n_3\]</span></p>
+                <p>To update each respective weight, we would subtract these partials (multiplied by <span class="math inline">\(\alpha\)</span>) from their respective weights, just as we did for <span class="math inline">\(w_{14}\)</span> above.</p>
+                <p>Our matrix representation needs to look like this:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial W_1} =
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial w_{14}} &amp;&amp; \dfrac{\partial E}{\partial w_{24}}  &amp;&amp; \dfrac{\partial E}{\partial w_{34}}  \\
+                    \dfrac{\partial E}{\partial w_{15}} &amp;&amp; \dfrac{\partial E}{\partial w_{25}}  &amp;&amp; \dfrac{\partial E}{\partial w_{35}}  \\
+                    \dfrac{\partial E}{\partial w_{16}} &amp;&amp; \dfrac{\partial E}{\partial w_{26}}  &amp;&amp; \dfrac{\partial E}{\partial w_{36}}  \\
+                    \dfrac{\partial E}{\partial w_{17}} &amp;&amp; \dfrac{\partial E}{\partial w_{27}}  &amp;&amp; \dfrac{\partial E}{\partial w_{37}}  \\
+                \end{bmatrix}\]</span></p>
+                <p>We notice that: <span class="math display">\[\begin{bmatrix}
+                    w_{48} &amp; w_{49} \\
+                    w_{58} &amp; w_{59} \\
+                    w_{68} &amp; w_{69} \\
+                    w_{78} &amp; w_{79}
+                \end{bmatrix}
+                \begin{bmatrix}
+                    \sigma_8&#39;n_8-y_1 \\
+                    \sigma_9&#39;n_9-y_2
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    w_{48}\sigma_8&#39;(n_8-y_1) + w_{49}\sigma_9&#39;(n_9-y_2) \\
+                    w_{58}\sigma_8&#39;(n_8-y_1) + w_{59}\sigma_9&#39;(n_9-y_2) \\
+                    w_{68}\sigma_8&#39;(n_8-y_1) + w_{69}\sigma_9&#39;(n_9-y_2) \\
+                    w_{78}\sigma_8&#39;(n_8-y_1) + w_{79}\sigma_9&#39;(n_9-y_2) \\
+                \end{bmatrix}\]</span> Which can be vectorized and simplified as: <span class="math display">\[\begin{bmatrix}
+                    w_{48} &amp; w_{49} \\
+                    w_{58} &amp; w_{59} \\
+                    w_{68} &amp; w_{69} \\
+                    w_{78} &amp; w_{79}
+                \end{bmatrix}
+                \left(
+                \begin{bmatrix}
+                    \sigma_8&#39; \\
+                    \sigma_9&#39;
+                \end{bmatrix}
+                \odot
+                \begin{bmatrix}
+                    n_8-y_1 \\
+                    n_9-y_2
+                \end{bmatrix}
+                \right)
+                =
+                \begin{bmatrix}
+                    w_{48}\sigma_8&#39;(n_8-y_1) + w_{49}\sigma_9&#39;(n_9-y_2) \\
+                    w_{58}\sigma_8&#39;(n_8-y_1) + w_{59}\sigma_9&#39;(n_9-y_2) \\
+                    w_{68}\sigma_8&#39;(n_8-y_1) + w_{69}\sigma_9&#39;(n_9-y_2) \\
+                    w_{78}\sigma_8&#39;(n_8-y_1) + w_{79}\sigma_9&#39;(n_9-y_2) \\
+                \end{bmatrix}\]</span> <span class="math display">\[W_2^T[\sigma&#39;(W_2x_1) \odot (x_2-y)] =
+                \begin{bmatrix}
+                    w_{48}\sigma_8&#39;(n_8-y_1) + w_{49}\sigma_9&#39;(n_9-y_2) \\
+                    w_{58}\sigma_8&#39;(n_8-y_1) + w_{59}\sigma_9&#39;(n_9-y_2) \\
+                    w_{68}\sigma_8&#39;(n_8-y_1) + w_{69}\sigma_9&#39;(n_9-y_2) \\
+                    w_{78}\sigma_8&#39;(n_8-y_1) + w_{79}\sigma_9&#39;(n_9-y_2) \\
+                \end{bmatrix}\]</span> <span class="math display">\[W_2^T\delta_2 =
+                \begin{bmatrix}
+                    w_{48}\sigma_8&#39;(n_8-y_1) + w_{49}\sigma_9&#39;(n_9-y_2) \\
+                    w_{58}\sigma_8&#39;(n_8-y_1) + w_{59}\sigma_9&#39;(n_9-y_2) \\
+                    w_{68}\sigma_8&#39;(n_8-y_1) + w_{69}\sigma_9&#39;(n_9-y_2) \\
+                    w_{78}\sigma_8&#39;(n_8-y_1) + w_{79}\sigma_9&#39;(n_9-y_2) \\
+                \end{bmatrix}\]</span></p>
+                <p>This <span class="math inline">\(\delta_2\)</span> is the same as the one we defined when calculating the previous vectorized representation. Now, this is fine and dandy, but we’ve so far ignored the <span class="math inline">\(\sigma_4&#39;n_1\)</span> and the <span class="math inline">\(\sigma_5&#39;n_1\)</span> etc. sitting outside the parends of our partial derivative calculation. Let’s work those in. <span class="math display">\[\left(
+                \begin{bmatrix}
+                    w_{48}\sigma_8&#39;(n_8-y_1) + w_{49}\sigma_9&#39;(n_9-y_2) \\
+                    w_{58}\sigma_8&#39;(n_8-y_1) + w_{59}\sigma_9&#39;(n_9-y_2) \\
+                    w_{68}\sigma_8&#39;(n_8-y_1) + w_{69}\sigma_9&#39;(n_9-y_2) \\
+                    w_{78}\sigma_8&#39;(n_8-y_1) + w_{79}\sigma_9&#39;(n_9-y_2) \\
+                \end{bmatrix}
+                \odot
+                \begin{bmatrix}
+                    \sigma_4&#39; \\
+                    \sigma_5&#39; \\
+                    \sigma_6&#39; \\
+                    \sigma_7&#39; \\
+                \end{bmatrix}
+                \right)
+                \begin{bmatrix}
+                    n_1 &amp;&amp; n_2 &amp;&amp; n_3
+                \end{bmatrix}
+                =\]</span> <span class="math display">\[\begin{bmatrix}
+                    \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_1 &amp;&amp; \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_2  &amp;&amp; \left((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}\right)\sigma_4&#39;n_3  \\
+                     \left((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}\right)\sigma_5&#39;n_1 &amp;&amp; \left((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}\right)\sigma_5&#39;n_2  &amp;&amp;  \left((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}\right)\sigma_5&#39;n_3  \\
+                    \left((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}\right)\sigma_6&#39;n_1 &amp;&amp; \left((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}\right)\sigma_6&#39;n_2  &amp;&amp;  \left((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}\right)\sigma_6&#39;n_3  \\
+                     \left((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}\right)\sigma_7&#39;n_1 &amp;&amp; \left((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}\right)\sigma_7&#39;n_2  &amp;&amp;  \left((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}\right)\sigma_7&#39;n_3 \end{bmatrix}
+                \\\]</span> <span class="math display">\[=
+
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial w_{14}} &amp;&amp; \dfrac{\partial E}{\partial w_{24}}  &amp;&amp; \dfrac{\partial E}{\partial w_{34}}  \\
+                    \dfrac{\partial E}{\partial w_{15}} &amp;&amp; \dfrac{\partial E}{\partial w_{25}}  &amp;&amp; \dfrac{\partial E}{\partial w_{35}}  \\
+                    \dfrac{\partial E}{\partial w_{16}} &amp;&amp; \dfrac{\partial E}{\partial w_{26}}  &amp;&amp; \dfrac{\partial E}{\partial w_{36}}  \\
+                    \dfrac{\partial E}{\partial w_{17}} &amp;&amp; \dfrac{\partial E}{\partial w_{27}}  &amp;&amp; \dfrac{\partial E}{\partial w_{37}}  \\
+                \end{bmatrix}
+                =
+                \dfrac{\partial E}{\partial W_1}\]</span></p>
+                <p>Note that <span class="math display">\[\begin{bmatrix}
+                    \sigma_4&#39; \\
+                    \sigma_5&#39; \\
+                    \sigma_6&#39; \\
+                    \sigma_7&#39; \\
+                \end{bmatrix}
+                 =
+                 \sigma&#39;\left(
+                 \begin{bmatrix}
+                     w_{14}n_1 + w_{24}n_2 + w_{34}n_3 + b_4 \\
+                     w_{15}n_1 + w_{25}n_2 + w_{35}n_3 + b_5 \\
+                     w_{16}n_1 + w_{26}n_2 + w_{36}n_3 + b_6 \\
+                     w_{17}n_1 + w_{27}n_2 + w_{37}n_3 + b_7 \\
+                 \end{bmatrix}
+                 \right)
+                 =
+                 \sigma&#39;(W_1x_0)\]</span> <span class="math display">\[x_0^T = \begin{bmatrix}
+                    n_1 &amp;&amp; n_2 &amp;&amp; n_3
+                \end{bmatrix}\]</span></p>
+                <p>Thus, we get <span class="math display">\[\dfrac{\partial E}{\partial W_1} =
+                [W_2^T\delta_2 \odot \sigma&#39;(W_1x_0)]x_0^T\]</span></p>
+                <p>We denote <span class="math display">\[\delta_1 = W_2^T\delta_2 \odot \sigma&#39;(W_1x_0)\]</span> yielding <span class="math display">\[\dfrac{\partial E}{\partial W_1} = \delta_1x_0^T\]</span></p>
+                <h2 id="the-bias-vectors">The Bias Vectors</h2>
+                <p>For the second layer, the biases are: <span class="math display">\[\dfrac{\partial E}{\partial b_4} = \sigma_4&#39;((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49})\]</span> <span class="math display">\[\dfrac{\partial E}{\partial b_5} = \sigma_5&#39;((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59})\]</span> <span class="math display">\[\dfrac{\partial E}{\partial b_6} = \sigma_6&#39;((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69})\]</span> <span class="math display">\[\dfrac{\partial E}{\partial b_7} = \sigma_7&#39;((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79})\]</span> For the third layer, the biases are: <span class="math display">\[\dfrac{\partial E}{\partial b_8} = (n_8-y_1)\sigma_8&#39;\]</span> <span class="math display">\[\dfrac{\partial E}{\partial b_9} = (n_9-y_2)\sigma_9&#39;\]</span></p>
+                <p>We wish to have a simple way to express how to update the bias matrix, like so:</p>
+                <p><span class="math display">\[b_i = b_i - \alpha\dfrac{\partial E}{\partial b_i}\]</span></p>
+                <p>where <span class="math inline">\(b_i\)</span> is a matrix. In other words, we need to calculate <span class="math inline">\(\dfrac{\partial E}{\partial b_i}\)</span> Let’s look at the second layer first. <span class="math inline">\(b_1\)</span> is a 4 x 1 matrix, so <span class="math inline">\(\dfrac{\partial E}{\partial b_1}\)</span> must have the same dimensions. Without vectors, our update is:</p>
+                <p><span class="math display">\[b_j = b_j - \alpha\dfrac{\partial E}{\partial b_j}\]</span></p>
+                <p>where <span class="math inline">\(b_j\)</span> is the bias for a single node, i.e. an element of a bias matrix. Looking at the partials for the biases of the second layer, we can simply define <span class="math inline">\(b_1\)</span> as the 4 x 1 matrix of each bias like so:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial b_1} =
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial b_4} \\ \\
+                    \dfrac{\partial E}{\partial b_5} \\ \\
+                    \dfrac{\partial E}{\partial b_6} \\ \\
+                    \dfrac{\partial E}{\partial b_7} \\
+                \end{bmatrix}\]</span></p>
+                <p>Similarly, for the second bias matrix:</p>
+                <p><span class="math display">\[\dfrac{\partial E}{\partial b_2} =
+                \begin{bmatrix}
+                    \dfrac{\partial E}{\partial b_8} \\ \\
+                    \dfrac{\partial E}{\partial b_9} \\
+                \end{bmatrix}\]</span> To derive our equations for the bias update for vectorized backpropagation, let’s first look at the second bias matrix. If write out each element, we find: <span class="math display">\[\dfrac{\partial E}{\partial b_2} =
+                \begin{bmatrix}
+                    (n_8-y_1)\sigma_8&#39; \\ \\
+                    (n_9-y_2)\sigma_9&#39; \\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    (n_8-y_1)\sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8) \\ \\
+                    (n_9-y_2)\sigma&#39;(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9) \\
+                \end{bmatrix}\]</span> We can rewrite this as a Hadamard product: <span class="math display">\[\dfrac{\partial E}{\partial b_2} =
+                \begin{bmatrix}
+                    n_8-y_1 \\ \\
+                    n_9-y_2 \\
+                \end{bmatrix}
+                \odot
+                \begin{bmatrix}
+                    \sigma&#39;(w_{48}n_4 + w_{58}n_5 + w_{68}n_6 + w_{78}n_7 + b_8) \\ \\
+                    \sigma&#39;(w_{49}n_4 + w_{59}n_5 + w_{69}n_6 + w_{79}n_7 + b_9) \\
+                \end{bmatrix}\]</span> The first matrix can be written in vectorized form as <span class="math inline">\(x_2 - y\)</span>, and the second matrix can be written as <span class="math inline">\(\sigma&#39;(W_2x_1)\)</span>. We can then arrive at: <span class="math display">\[\dfrac{\partial E}{\partial b_2} = (x_2 - y) \odot (\sigma&#39;(W_2x_1))\]</span> Notice that this is the same as the <span class="math inline">\(\delta_2\)</span> we calculated for the weights earlier. We can write the bias formula as just: <span class="math display">\[\dfrac{\partial E}{\partial b_2} = \delta_2\]</span></p>
+                <p>Looking at the first bias matrix, we see that we can write it out as: <span class="math display">\[\dfrac{\partial E}{\partial b_1} =
+                \begin{bmatrix}
+                    \sigma_4&#39;((n_8-y_1)\sigma_8&#39;w_{48} + (n_9-y_2)\sigma_9&#39;w_{49}) \\ \\
+                    \sigma_5&#39;((n_8-y_1)\sigma_8&#39;w_{58} + (n_9-y_2)\sigma_9&#39;w_{59}) \\ \\
+                    \sigma_6&#39;((n_8-y_1)\sigma_8&#39;w_{68} + (n_9-y_2)\sigma_9&#39;w_{69}) \\ \\
+                    \sigma_7&#39;((n_8-y_1)\sigma_8&#39;w_{78} + (n_9-y_2)\sigma_9&#39;w_{79}) \\
+                \end{bmatrix}\]</span> Looking carefully at this matrix, we see that we can write it out as a product of two matrices including <span class="math inline">\(\dfrac{\partial E}{\partial b_2}\)</span>. <span class="math display">\[\dfrac{\partial E}{\partial b_1} =
+                \begin{bmatrix}
+                    \sigma&#39;_4w_{48} &amp;&amp; \sigma&#39;_4w_{49} \\
+                    \sigma&#39;_5w_{58} &amp;&amp; \sigma&#39;_5w_{59} \\
+                    \sigma&#39;_6w_{68} &amp;&amp; \sigma&#39;_6w_{69} \\
+                    \sigma&#39;_7w_{78} &amp;&amp; \sigma&#39;_7w_{79}
+                \end{bmatrix}
+                \begin{bmatrix}
+                    (n_8-y_1)\sigma_8&#39; \\ \\
+                    (n_9-y_2)\sigma_9&#39; \\
+                \end{bmatrix}\]</span> The first matrix looks very similar to some combination of <span class="math inline">\(W_2\)</span> and <span class="math inline">\(\sigma&#39;(W_2x_1)\)</span>. We can rewrite and rearrange the equation with the help of the Hadamard product: <span class="math display">\[\dfrac{\partial E}{\partial b_1} =
+                \begin{bmatrix}
+                    w_{48} &amp;&amp; w_{49} \\
+                    w_{58} &amp;&amp; w_{59} \\
+                    w_{68} &amp;&amp; w_{69} \\
+                    w_{78} &amp;&amp; w_{79}
+                \end{bmatrix}
+                \begin{bmatrix}
+                    (n_8-y_1)\sigma_8&#39; \\ \\
+                    (n_9-y_2)\sigma_9&#39; \\
+                \end{bmatrix}
+                \odot
+                \begin{bmatrix}
+                    \sigma&#39;_4 \\
+                    \sigma&#39;_5 \\
+                    \sigma&#39;_6 \\
+                    \sigma&#39;_7
+                \end{bmatrix}\]</span> This, in turn, can be written as <span class="math display">\[\dfrac{\partial E}{\partial b_1} =
+                W_2^T\dfrac{\partial E}{\partial b_2} \odot \sigma&#39;(W_2x_1)\]</span> <span class="math display">\[\dfrac{\partial E}{\partial b_1} =
+                W_2^T\delta_2 \odot \sigma&#39;(W_2x_1)\]</span></p>
+                <p>Hey…this is the same as <span class="math inline">\(\delta_1\)</span> from earlier! Now our equation is just: <span class="math display">\[\dfrac{\partial E}{\partial b_1} = \delta_1\]</span></p>
+                <h2 id="a-general-form">A General Form</h2>
+                <p>We can generalize this for any layer. The only difference is the delta for the last layer: <span class="math display">\[\delta_L = (x_L - y) \odot \sigma&#39;(W_{L}x_{L-1})\]</span></p>
+                <p>The delta for every other layer is: <span class="math display">\[\delta_i = W_{i+1}^T\delta_{i+1} \odot \sigma&#39;(W_ix_{i-1})\]</span></p>
+                <p>And the gradient for every weight matrix are calculated and the weight matrices are updated as follows: <span class="math display">\[\frac{\partial E}{\partial W_i} = \delta_i x_{i-1}^T\]</span></p>
+                <p><span class="math display">\[W_i =  W_i - \alpha \frac{\partial E}{\partial W_i}\]</span></p>
+                <p>For biases, the rule is simpler:</p>
+                <p><span class="math display">\[b_i =  b_i - \alpha \delta_i\]</span></p>
+                <p>That is the essence of backpropagation. Note that these formulas work for any activation function. The reason sigmoid is used to teach is because its derivative is fairly straightforward: <span class="math display">\[\sigma&#39;(x) = \sigma(x)(1-\sigma(x))\]</span></p>
+            </div>
+        <p><a href="../../schedule.html">&larr; Back to lectures</a>
+    </section>
+  </body>
+</html>
