@@ -17,4 +17,7 @@ $(document).ready(function() {
     $('#updatestitle').on('click',function(){
         $('#updates').toggle();
     });
+    $('#nntitle').on('click',function(){
+        $('#nn').toggle();
+    });
 });
