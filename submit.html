@@ -81,6 +81,40 @@
     <section class="main-content">
         <blockquote><h1 id=comptitle>Competition Instructions</h1></blockquote>
         <section id="comp" style="display:none">
+	    <h3 id=nntitle>Neural Networks Competition Instructions</h3>
+	    <section id="mm" style="display:none">
+		   <p><i>11/01/17 -&emsp;</i>Your job is to write the code to create an neural network, train it on the training data, and use it to predict the classes of the testing data. We are trying to images of handwritten digits. The data we are using is from the famous MNIST dataset. Your decision tree is supposed to classify which digit [0,1,2,3,4,5,6,7,8,9] the image is, and the inputs are the 784 values that make up the 28x28 images.</p>
+
+		    <p>The training data looks like this:</p>
+		<code>label, pixel 11, pixel 12, pixel 13, pixel 14, etc. (784 pixel values)<br>
+		label, pixel 21, pixel 22, pixel 23, pixel 24, etc. (784 pixel values)<br>
+		label, pixel 31, pixel 32, pixel 33, pixel 34, etc. (784 pixel values)<br>
+		etc. (60,000 lines)</code>
+
+		<p>The testing data looks like this:</p>
+		<p></p><code>pixel 11, pixel 12, pixel 13, pixel 14, etc. (784 pixel values)<br>
+		pixel 21, pixel 22, pixel 23, pixel 24, etc. (784 pixel values)<br>
+		pixel 31, pixel 32, pixel 33, pixel 34, etc. (784 pixel values)<br>
+		etc. (10,000 lines)</code></p>
+
+		<p>Where <code>pixel ij</code> is the pixel value in the <code>ith</code> row and <code>jth</code> column. Each image is 28x28. Each pixel value ranges from 0, black, to 255, white. The MNIST dataset is black and white, which is why each pixel value is a single value instead of an (R,G,B) triple.</p>
+
+		<p>Your end goal is to create a file which looks like:</p>
+		<p><code>id, solution <br>
+		1, predicted_label<br>
+		2, predicted_class <br>
+		3, predicted_class <br>
+		4, predicted_class<br>
+		etc. (10,000 lines)</code></p>
+
+		<p>All <a href="#standard">standard competition rules</a> apply. You are only allowed to use the numpy library. We highly recommend you use the library for vectors (bias vectors, etc.) and matrices (weights, partial matrices).</p>
+
+		 <p>We've written a <a href="lectures/nn3/nn_shell.py.txt">small shell</a>. The shell has a network class, and each network is made up of a list of layers (which are a separate class). Each layer is designed to have its own vectors and matrices (biases and weights, etc.). You don't have to structure your network this way by any means, or have a layer class at all. Most of the time when people write neural networks from scratch, they only have a single network class.</p>
+
+		<p>The competition ends in two weeks, at 11:59:59 p.m. on 11/14/17, since our next meeting is 11/15. Also, since writing a neural network from scratch is an involved process, the competition will be worth double in our rankings.</p>
+
+		 <p><a href="https://www.kaggle.com/c/nncontest2">Competition link</a></p>
+	    </section>
     	    <h3 id=svmtitle>Support Vector Machine Competition Instructions</h3>
             <section id="svm" style="display:none">
         	   <p><i>10/04/17 -&emsp;</i>Your job is to write the code to create an SVM, train it on the training data, and use it to predict the classes of the testing data.
