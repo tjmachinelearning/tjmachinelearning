@@ -92,14 +92,14 @@
 
             The input image is given in the last field of the data files, and consists of a list of pixels (ordered by row), as integers in (0,255). The images are 96x96 pixels.
 
-            <h2>Data files<h2>
+            <h2>Data files</h2>
             <ul>
             <li><strong>train.csv</strong>: list of training 5000 images. Each row contains the (x,y) coordinates for 15 keypoints, and image data as row-ordered list of pixels. The first row is the header and associates each column with the feature. There are 31 values in each row, with the first 30 being x value for feature 1, y value for feature 1, etc and the 31st value being the image. The first 30 should be the outputs of your network and the 31st (image) should be the input.</li>
             <li><strong>test.csv</strong>: list of 2049 test images. Each row contains ImageId and image data as row-ordered list of pixels.</li>
             <li><strong>samplesubmission.csv</strong>: list of keypoints to predict. Each row has an Id and a value. The Id corresponds to the image and feature in the format "ImageId.FeatureId" where featureId is based on the order in which they are sorted in the train file. For example, the first feature is left_eye_center_x so to predict left_eye_center_x for image 1, I would have "1.1 34.555" as the first row.</li>
             </ul>
 
-            <h2>Helpful tips<h2>
+            <h2>Helpful tips</h2>
             <ul>
             <li>There is sample code on the website!!!</li>
             <li>Use keras.</li>
@@ -151,7 +151,7 @@
 
 		 <p><a href="https://www.kaggle.com/c/nncontest3">Competition link</a></p>
 	    </section>
-        
+
     	    <h3 id=svmtitle>Support Vector Machine Competition Instructions</h3>
             <section id="svm" style="display:none">
         	   <p><i>10/04/17 -&emsp;</i>Your job is to write the code to create an SVM, train it on the training data, and use it to predict the classes of the testing data.

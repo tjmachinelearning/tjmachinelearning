@@ -20,4 +20,7 @@ $(document).ready(function() {
     $('#nntitle').on('click',function(){
         $('#nn').toggle();
     });
+    $('#cnntitle').on('click',function(){
+        $('#cnn').toggle();
+    });
 });
