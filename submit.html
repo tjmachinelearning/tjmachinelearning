@@ -81,6 +81,42 @@
     <section class="main-content">
         <blockquote><h1 id=comptitle>Competition Instructions</h1></blockquote>
         <section id="comp" style="display:none">
+
+        <h3 id=cnntitle>Convolutional Neural Networks Competition Instructions</h3>
+        <section id="cnn" style="display:none">
+           <p>Each predicted keypoint is specified by an (x,y) real-valued pair in the space of pixel indices. There are 15 keypoints, which represent the following elements of the face:</p>
+
+            <p>left_eye_center, right_eye_center, left_eye_inner_corner, left_eye_outer_corner, right_eye_inner_corner, right_eye_outer_corner, left_eyebrow_inner_end, left_eyebrow_outer_end, right_eyebrow_inner_end, right_eyebrow_outer_end, nose_tip, mouth_left_corner, mouth_right_corner, mouth_center_top_lip, mouth_center_bottom_lip</p>
+
+            <p>Left and right here refers to the point of view of the subject.</p>
+
+            The input image is given in the last field of the data files, and consists of a list of pixels (ordered by row), as integers in (0,255). The images are 96x96 pixels.
+
+            <h2>Data files<h2>
+            <ul>
+            <li><strong>train.csv</strong>: list of training 5000 images. Each row contains the (x,y) coordinates for 15 keypoints, and image data as row-ordered list of pixels. The first row is the header and associates each column with the feature. There are 31 values in each row, with the first 30 being x value for feature 1, y value for feature 1, etc and the 31st value being the image. The first 30 should be the outputs of your network and the 31st (image) should be the input.</li>
+            <li><strong>test.csv</strong>: list of 2049 test images. Each row contains ImageId and image data as row-ordered list of pixels.</li>
+            <li><strong>samplesubmission.csv</strong>: list of keypoints to predict. Each row has an Id and a value. The Id corresponds to the image and feature in the format "ImageId.FeatureId" where featureId is based on the order in which they are sorted in the train file. For example, the first feature is left_eye_center_x so to predict left_eye_center_x for image 1, I would have "1.1 34.555" as the first row.</li>
+            </ul>
+
+            <h2>Helpful tips<h2>
+            <ul>
+            <li>There is sample code on the website!!!</li>
+            <li>Use keras.</li>
+            <li>Start with a stadard neural network before moving on to a convolutional one. When you do use a convolutional network,
+             make sure to reshape your input to 96x96 instead of 1x9216 as it is right now. This is best done using numpy.</li>
+            <li>Use a linear activation in the final layer because the challenge is regression not classification. There should be 30 output nodes.</li>
+            <li>The Ids start at 1 not 0. Don't mix this up.</li>
+            <li>Don't forget your header in the submission file.</li>
+            </ul>
+
+            <p>To better understand the format, open the files in Excel. Feel free to ask any clarifying format questions to the officers.</p>
+
+         <p><a href="https://www.kaggle.com/c/tjmlfacialfeatures">Competition link</a></p>
+        </section>
+
+
+
 	    <h3 id=nntitle>Neural Networks Competition Instructions</h3>
 	    <section id="nn" style="display:none">
 		   <p><i>11/01/17 -&emsp;</i>Your job is to write the code to create an neural network, train it on the training data, and use it to predict the classes of the testing data. We are trying to images of handwritten digits. The data we are using is from the famous MNIST dataset. Your neural network is supposed to classify which digit (0,1,2,3,4,5,6,7,8, or 9) the image represents, and the inputs are the 784 values that make up the 28x28 images.</p>
@@ -115,6 +151,7 @@
 
 		 <p><a href="https://www.kaggle.com/c/nncontest3">Competition link</a></p>
 	    </section>
+        
     	    <h3 id=svmtitle>Support Vector Machine Competition Instructions</h3>
             <section id="svm" style="display:none">
         	   <p><i>10/04/17 -&emsp;</i>Your job is to write the code to create an SVM, train it on the training data, and use it to predict the classes of the testing data.
