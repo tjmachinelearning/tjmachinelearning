@@ -10,7 +10,7 @@ y = []
 for i in range(len(rows)):
     if i==0: # Skip header!
         continue
-    X.append(row[30])
+    X.append(row[30].split(" "))
     y.append(row[0:30])
     
 # split X and y into train and test set
