@@ -23,4 +23,7 @@ $(document).ready(function() {
     $('#cnntitle').on('click',function(){
         $('#cnn').toggle();
     });
+    $('#kaggletitle').on('click',function(){
+        $('#kaggle').toggle();
+    });
 });

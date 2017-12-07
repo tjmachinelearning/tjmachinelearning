@@ -143,6 +143,12 @@ p.caption {
       font-weight: bold;
       font-size: 1.2em;
 }
+.instructions h3 {
+    color: #000;
+    font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+}
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {

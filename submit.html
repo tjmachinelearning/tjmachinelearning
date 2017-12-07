@@ -79,43 +79,76 @@
     		</div>
 
     <section class="main-content">
+    <div class="instructions">
         <blockquote><h1 id=comptitle>Competition Instructions</h1></blockquote>
         <section id="comp" style="display:none">
+        <h3 id="kaggletitle">Iceberg Competition Instructions</h3>
+        <section id="kaggle" style="display:none">
+            <h4>Competition Introduction</h4>
+            <p>For the next few weeks, in lieu of our own internal competitions, you have the opportunity to participate in a public <a href="https://kaggle.com">Kaggle</a> competition. Your performance on this competition will be counted in our club rankings.</p>
 
+            <p>The competition we have chosen is the <a href="https://www.kaggle.com/c/statoil-iceberg-classifier-challenge">Statoil/C-CORE Iceberg Classifier Challenge</a>. Essentially, the goal is to classify ships vs. icebergs given images. Just like any of our previous competitions, you aim to achieve the highest accuracy and be at the top of the leaderboard.
+            The procedure for participating is also similar to our in-class competitions. Download the training and testing data, train on the training data, generate a submission file from the testing data, and upload the submission file for grading. The private leaderboard results determine final rankings, and are made available after the final deadline.</p>
+            <h4>Differences between Public and Private Kaggle Competitions</h4>
+            <p>However, there are a few differences between a public Kaggle competitions and our private classroom competitions:</p>
+
+            <ul>
+                <li>Anyone can enter a public Kaggle competition (obviously). There are currently 2,000+ teams in the Iceberg competition.</li>
+                <li>There are monetary prizes! They range from $10,000 to >$1,000,000. The iceberg competition in particular has prizes of $25,000 for 1st, $15,000 for 2nd, and $10,000 for 3rd.</li>
+            </ul>
+
+            <p>One might ask: Why are such large sums of money being given out for classifying ships vs. icebergs? Well, this competition is sponsored by a shipping company. So, telling an iceberg vs. another ship more accurately could prevent a collision and save them millions of dollars. However, they clearly don't want to hire a data scientists, so they essentially crowdsourcing their solution through Kaggle. They take the winner's model and use it for their business.</p>
+
+            <p>Some more differences between a public Kaggle competition and our in-class competitions:</p>
+            <ul>
+                <li>Data size tends to be much larger (sometimes on the order of 1 TB). We partially chose this competition due to the low data size (~1 GB).</li>
+                <li>Even with this relatively low data size for a public competition, you will need a complex model. If the answer was trivial and could be achieved simply, they wouldn't be offering $50,000.</li>
+                <li>Because you will need a complex model, you will need a GPU to run your models. You can begin writing your code now, and we will try to get more machines with GPUs running in the syslab soon. The machine "infosphere" currently has the only high-performance GPUs in the syslab.</li>
+                <li>Rather than viewing our website for information about the data and competition procedures, everything is directly on the competition site itself. The competition link is below.</li>
+                <li>Public competitions last months, not one week. This competition ends on January 21st, 2017. Do not delay. Begin as soon as possible. Everything takes far longer than expected to complete, especially when working with large amounts of data.</li>
+                <li>People discuss solutions and post code in the <a href="https://www.kaggle.com/c/statoil-iceberg-classifier-challenge/discussion">Discussion tab</a>. Of course, the leaders of competition aren't going to give to the world their winning solution while the competition is ongoing, but you can often find a half-decent model available. I recommend viewing and understanding what people have done and made available.</li>
+            </ul>
+            <h4>Tips</h4>
+            <p>Consider all the techniques we have recently covered: Convolutional networks, transfer learning, Inception and ResNet, image preprocessing, image normalization, data augmentation, etc. Some may be useful, others will not.</p>
+
+            <p>If you chose to use PyTorch, which is faster and lower-level but has less documentation, <a href="http://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html">this tutorial</a> on transfer learning may be helpful when starting out. If you use Keras, <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this tutorial</a> may be useful for beginners. If you're stuck, and can't figure out how to do something, Google it or check the documentation.</p>
+            <h4>Final words</h4>
+            <p>I will leave you with these final words: Public competitions are very hard. Don't be discouraged if you don't do well initially. Training, retraining, and tweaking your models are essential for your success. If you do well, say, in the top 5%, it is extremely impressive. I'm not aware of a high school student who has won any significant money from Kaggle competitions–think about it. Just as you will be working on this in your free time, so are PhD's, graduate students, and data scientists.</p>
+
+            <p>Good Luck!</p>
+
+            <a href="https://www.kaggle.com/c/statoil-iceberg-classifier-challenge">Competition Link</a>
+            <hr>
+        </section>
         <h3 id=cnntitle>Convolutional Neural Networks Competition Instructions</h3>
         <section id="cnn" style="display:none">
            <p>Each predicted keypoint is specified by an (x,y) real-valued pair in the space of pixel indices. There are 15 keypoints, which represent the following elements of the face:</p>
-
             <p>left_eye_center, right_eye_center, left_eye_inner_corner, left_eye_outer_corner, right_eye_inner_corner, right_eye_outer_corner, left_eyebrow_inner_end, left_eyebrow_outer_end, right_eyebrow_inner_end, right_eyebrow_outer_end, nose_tip, mouth_left_corner, mouth_right_corner, mouth_center_top_lip, mouth_center_bottom_lip</p>
-
             <p>Left and right here refers to the point of view of the subject.</p>
-
-            The input image is given in the last field of the data files, and consists of a list of pixels (ordered by row), as integers in (0,255). The images are 96x96 pixels.
-
+            <p>The input image is given in the last field of the data files, and consists of a list of pixels (ordered by row), as integers in (0,255). The images are 96x96 pixels.</p>
             <h2>Data files</h2>
             <ul>
-            <li><strong>train.csv</strong>: list of training 5000 images. Each row contains the (x,y) coordinates for 15 keypoints, and image data as row-ordered list of pixels. The first row is the header and associates each column with the feature. There are 31 values in each row, with the first 30 being x value for feature 1, y value for feature 1, etc and the 31st value being the image. The first 30 should be the outputs of your network and the 31st (image) should be the input.</li>
-            <li><strong>test.csv</strong>: list of 2049 test images. Each row contains ImageId and image data as row-ordered list of pixels.</li>
-            <li><strong>samplesubmission.csv</strong>: list of keypoints to predict. Each row has an Id and a value. The Id corresponds to the image and feature in the format "ImageId.FeatureId" where featureId is based on the order in which they are sorted in the train file. For example, the first feature is left_eye_center_x so to predict left_eye_center_x for image 1, I would have "1.1 34.555" as the first row.</li>
+                <li><strong>train.csv</strong>: list of training 5000 images. Each row contains the (x,y) coordinates for 15 keypoints, and image data as row-ordered list of pixels. The first row is the header and associates each column with the feature. There are 31 values in each row, with the first 30 being x value for feature 1, y value for feature 1, etc and the 31st value being the image. The first 30 should be the outputs of your network and the 31st (image) should be the input.</li>
+                <li><strong>test.csv</strong>: list of 2049 test images. Each row contains ImageId and image data as row-ordered list of pixels.</li>
+                <li><strong>samplesubmission.csv</strong>: list of keypoints to predict. Each row has an Id and a value. The Id corresponds to the image and feature in the format "ImageId.FeatureId" where featureId is based on the order in which they are sorted in the train file. For example, the first feature is left_eye_center_x so to predict left_eye_center_x for image 1, I would have "1.1 34.555" as the first row.</li>
             </ul>
 
             <h2>Helpful tips</h2>
             <ul>
-	    <li><a href="http://tjmachinelearning.com/contests/cnn/IO_sample.py.txt">Sample code</a></li>
-	    <li>Use Keras. Documentation available <a href="https://keras.io">here</a>. The first half of <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this tutorial</a> may come in handy. Our introductory lecture is available <a href="http://tjmachinelearning.com/lectures/library/keras.html">here</a>.</li>
-            <li>Start with a stadard neural network before moving on to a convolutional one. When you do use a convolutional network,
-             make sure to reshape your input to 96x96 instead of 1x9216 as it is right now. This is best done using numpy.</li>
-            <li>Use a linear activation in the final layer because the challenge is regression not classification. There should be 30 output nodes.</li>
-            <li>The Ids start at 1 not 0. Don't mix this up.</li>
-            <li>Don't forget your header in the submission file.</li>
+        	    <li><a href="http://tjmachinelearning.com/contests/cnn/IO_sample.py.txt">Sample code</a></li>
+        	    <li>Use Keras. Documentation available <a href="https://keras.io">here</a>. The first half of <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this tutorial</a> may come in handy. Our introductory lecture is available <a href="http://tjmachinelearning.com/lectures/library/keras.html">here</a>.</li>
+                <li>Start with a stadard neural network before moving on to a convolutional one. When you do use a convolutional network,
+                 make sure to reshape your input to 96x96 instead of 1x9216 as it is right now. This is best done using numpy.</li>
+                <li>Use a linear activation in the final layer because the challenge is regression not classification. There should be 30 output nodes.</li>
+                <li>The Ids start at 1 not 0. Don't mix this up.</li>
+                <li>Don't forget your header in the submission file.</li>
             </ul>
 
-            <p>To better understand the format, open the files in Excel. Feel free to ask any clarifying format questions to the officers.</p>
+                <p>To better understand the format, open the files in Excel. Feel free to ask any clarifying format questions to the officers.</p>
 
-         <p><a href="https://www.kaggle.com/c/tjmlfacialfeatures">Competition link</a></p>
+             <p><a href="https://www.kaggle.com/c/tjmlfacialfeatures">Competition link</a></p>
+             <hr>
         </section>
-
-
 
 	    <h3 id=nntitle>Neural Networks Competition Instructions</h3>
 	    <section id="nn" style="display:none">
@@ -150,6 +183,7 @@
 		<p>The competition ends in two weeks, at 11:59:59 p.m. on 11/14/17, since our next meeting is 11/15. Also, since writing a neural network from scratch is an involved process, the competition will be worth double in our rankings.</p>
 
 		 <p><a href="https://www.kaggle.com/c/nncontest3">Competition link</a></p>
+         <hr>
 	    </section>
 
     	    <h3 id=svmtitle>Support Vector Machine Competition Instructions</h3>
@@ -215,6 +249,7 @@
         	  </p>
         	    <p><a href="https://www.kaggle.com/t/84362979276c4a219871ba63161aadcc">Competition Link</a></p>
         	    <p><a href="#standard">Standard competition rules</a> apply, except for Rule #1, since we are using Scikit-Learn.</p>
+                <hr>
             </section>
             <h3 id=rftitle>Random Forests Competition Instructions</h3>
             <section id="rf" style="display:none">
@@ -269,6 +304,7 @@
             	<p>Shell code is available <a href="contests/rf/shell.py.txt">here</a>.
             	<a href="contests/dct/IO_sample.py.txt">The Data I/O code</a> from the decision tree lecture will still be useful, but will need to be adapted for this data.
                     </p>
+                    <hr>
             </section>
             <h3 id=firsttitle>2017-2018 First Competition Instructions</h3>
             <section id="first" style="display:none">
@@ -333,9 +369,10 @@
                 </li><li>The leaderboard on Kaggle that you can see is the Public Leaderboard, which is your accuracy for 50% of the testing data. Your final rankings will be based on the Private leaderboard, which is based on the other 50% of the testing data and will become public as soon as the competition ends. This is to prevent you from just writing a decision tree that overfits the testing data, which defeats the purpose.
                 </li></ol>
                 </p>
+                <hr>
             </section>
         </section>
-
+    </div>
         <blockquote><h1 id=standardtitle>Competition Rules and Procedures</h1></blockquote>
     	<section id="standard" style="display:none">
         	<p>These instructions are common to almost every competition, so we're only listing them once.</p>
@@ -415,7 +452,7 @@
                 <p><i>11/30/16 -&emsp;</i>We are sorry to everyone who couldn't sign up because all the slots were filled. We have gotten a 48-hour sign-up restriction, so sign up first thing Monday each week.
                 </p>
         </section>
-
+    <!--close main content-->
     </section>
 
 	<script src="js/classie.js"></script>
