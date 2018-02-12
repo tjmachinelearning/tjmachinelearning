@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Image Preprocesing | TJHSST Machine Learning Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/component.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-105333430-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <h2 style="text-align:center"><a href="../../index.html"><img src="../../img/logo.svg" width="200px"></img></a></h2>
+         <section class="section section--menu" id="Alonso">
+             <span class="link-copy"></span>
+             <nav class="menu menu--alonso">
+                 <ul class="menu__list">
+                     <li class="menu__item"><a href="../../index.html" class="menu__link">Home</a></li>
+                     <li class="menu__item menu__item--current"><a href="../../schedule.html" class="menu__link">Lectures</a></li>
+                     <li class="menu__item "><a href="../../rankings.html" class="menu__link">Rankings</a></li>
+                     <li class="menu__item"><a href="../../resources.html" class="menu__link">Resources</a></li>
+                     <li class="menu__item"><a href="../../projects.html" class="menu__link">Projects</a></li>
+                     <li class="menu__item"><a href="../../submit.html" class="menu__link">Updates</a></li>
+                     <li class="menu__line"></li>
+                 </ul>
+             </nav>
+         </section>
+    </div>
+    <section class="main-content">
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Image Preprocessing</h1>
+            <h3 style="text-align:center; color:#000">Mihir Patel</h2>
+            <h3 style="text-align:center; color:#000">January 2018</h2>
+                <h1 id="introduction">Introduction</h1>
+                <p>So far we have talked about how machine learning and deep learning architectures can be applied to image related problems. We now will address certain preprocessing and data science techniques we can use to improve performance.</p>
+                <h1 id="image-rescaling">Image Rescaling</h1>
+                <p>We aim to better normalize pixel values before feeding them into neural networks. If we feed in the raw values, they tend to be very high and varying (in most cases 0 to 255), which increases instability and forces the network to learn these artificial bounds in the first layer’s weights. This is particularly difficult given the distance of this layer from the output so we instead rectify this with preprocessing.</p>
+                <ol>
+                <li><p><strong>Mean Subtraction:</strong> Subtract the mean from each pixel value. This helps split the values evenly across zero, which is how networks typically transfer information.</p></li>
+                <li><p><strong>Normalization/Whitening:</strong> Subtract the mean and and divide by the standard deviation. This splits the values across zero and compresses the values to approximately -3 to 3, giving a better range of values.</p></li>
+                </ol>
+                <p>Sometimes, these two techniques are applied for each individual color channel instead of across the image if there is sizable variation within color channels.</p>
+                <h1 id="image-generator">Image Generator</h1>
+                <p>When feeding in images to networks, we want to make the information learned as generalizable as possible. For example, if we see a cat upside down, the network should still recognize that a cat is there. To do this we use the Keras ImageDataGenerator. The data generator takes in all of the images and certain hyperparameters are set. It then produces batches of data to be fed into the network which are a blend of original images and modified images. The hyperparameters/modifications made by the generator are:</p>
+                <ol>
+                <li><p><strong>Shift:</strong> Randomly shift image in x or y directions and fill empty space based on hyperparameter</p></li>
+                <li><p><strong>Zoom:</strong> Randomly zoom in or out on image and fill empty space based on hyperparameter</p></li>
+                <li><p><strong>Rotation:</strong> Randomly rotate image up to k degrees</p></li>
+                <li><p><strong>Flip:</strong> Flip image over x or y axis</p></li>
+                </ol>
+                <p>These all help the network better semantically learn the pattern in a more robust manner. However, as we shall later see with GANs, there are still many exploitable holes that remain even after these processing techniques.</p>
+                <h1 id="imagenet">ImageNet</h1>
+                <p>By far the most popular and largest dataset for images is ImageNet. This competition has driven most advances in object classification, detection, and segmentation and boasts over 10,000,000 annotated data points. Most transfer learning is done off a model trained on ImageNet as it does general classification. The primary dataset in ImageNet consists of 100,000 various objects that are used for classification purposes.</p>
+                <h1 id="coco-common-object-in-context">COCO: Common Object in Context</h1>
+                <p>COCO is another popular dataset that handles further analysis in images. As the figure below shows, COCO images contain pixel level segmentation so that advanced structures like Mask-RCNN and U-Nets can be trained. They also have 5 words associated with each image for image to text problems. There are approximately 200,000 annotated images.</p>
+                <p style="text-align:center"><img src="coco.PNG" alt="image" /></p>
+                <h1 id="pascal-voc">PASCAL VOC</h1>
+                <p>This is another dataset similar to COCO that has pixel level segmentation. It has about 30,000 images and is older (2012).</p>
+                <h1 id="map">mAP</h1>
+                <p>Something we haven’t addressed is how we get error for image segmentation, namely for datasets like COCO and PASCAL. The specific metric used is mAP, or mean average precision. To calculate this, we first state that an object is successfully classified if the IoU (Intersection of Union), which is the overlap percentage of the proposed box and the correct box, is greater than .5. We then get AP, the average precision by:</p>
+                <p><span class="math display">\[AP = \frac{True Positive}{True Positive + False Positive}\]</span></p>
+                <p>where true positive is a correctly classified object and a false positive is a proposed object that doesn’t actually exist. The mAP is simply the mean of this statistic across all of the classes. A further extension of this is to get mAP[.5, .95], which means we first calculate mAP for each threshold between .5 to .95 at .05 increments (the thresold is used for IoU) and then average it. The higher thresholds are more rigorous for obvious reasons and have lower mAPs.</p>
+
+            </div>
+        <p><a href="../../schedule.html">&larr; Back to lectures</a>
+    </section>
+  </body>
+</html>
