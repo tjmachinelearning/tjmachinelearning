@@ -52,38 +52,70 @@
         <div class="lecture">
             <h1 style="text-align:center; color:#000">Generative Adversarial Networks</h1>
             <h3 style="text-align:center; color:#000">Justin Zhang</h2>
-            <h3 style="text-align:center; color:#000">March 2018</h2>
+            <h3 style="text-align:center; color:#000">February 2018</h2>
+                <h1 id="introduction">Introduction</h1>
+                <p>Generative Adversarial Networks (GANs) are a seminal type of generative model, introduced in 2014 by the University of Montreal. GANs have been heavily used in various generative tasks with impressive results. GANs are most actively used for image generation tasks: plain image generation, image inpainting, super-resolution image generation, and text-to-image. However, they are beginning to see some use in other types of inputs (e.g. audio, video, etc). Since GAN’s first release, there have been multiple iterations on different types of GANs; here, we’ll cover the basics only.</p>
+                <h1 id="intuition">Intuition</h1>
+                <p>GANs consist of two neural networks: the generator and the discriminator. The generator is tasked with generating fake samples from random noise. The discriminator is tasked with distinguishing fake samples with real ones (from the dataset).</p>
+                <div class="figure" style="text-align:center">
+                <img src="gan.png" alt="The GAN pipeline." />
+                <p class="caption">The GAN pipeline.<span data-label="fig:gan"></span></p>
+                </div>
+                <p>In this way, the two networks play a game of cat-and-mouse; they each try to beat the other. Thoughout training, the goal is to have both networks simultaneously improve: the generator increasingly generates more convincing images to fool the discriminator, and the discriminator becomes better at separating real and fake samples as a result.</p>
+                <h1 id="training-specifics">Training specifics</h1>
+                <p>With regards to images, usually deep convolutional layers are used, for both the discriminator and the generator.</p>
+                <div class="figure" style="text-align:center">
+                <img src="dcgan.png" alt="The DCGAN pipeline." />
+                <p class="caption">The DCGAN pipeline.<span data-label="fig:dcgan"></span></p>
+                </div>
+                <p>Here, deconvolutional layers are used in the generator to produce the target <span class="math inline">\(64\)</span> by <span class="math inline">\(64\)</span> image. This image is then fed into the discriminator for classification.</p>
+                <p>A typical training pipeline would be to randomly initialize the two networks. Then, we would iterate over the dataset. At each iteration, we would generate the batch size number of fake images from the generator, so that we would have an equal number of fake and real images. Then, we could train the discriminator on these images with a binary cross-entropy loss. Finally, imagine the generator and discriminator to be one large network, going from noise (via uniform or gaussian) as input into the generator and discriminator to the binary output. In the perspective of the generator, we want to output the incorrect labels (i.e. always <span class="math inline">\(1\)</span>, the output is the probability of the input to the discriminator being a real image) in this concatenated network. In this way, we can freeze the discriminator weights and flow the gradients through it to train the generator. We can then repeat this for each batch, over a number of epochs, as per usual.</p>
+                <p>Note that GANs are notoriously difficult to train. This is because GANs are highly unstable; in order to train correctly, we need the generator and discriminator to be roughly on equal levels throughout the training process. If the discriminator overpowers the generator, there will be little gradient for the generator to learn upon; vice-versa, and we run into <em>mode collapse</em>, where the generator produces outputs with extremely low variety.</p>
+                <h1 id="applications">Applications</h1>
+                <p>GANs are not yet frequently used in applications, especially at the high school level – so finding a decent (novel) application for them could be a great project idea.</p>
+                <p>Here are some examples:</p>
+                <div class="figure" style="text-align:center">
+                <img src="image_generation.png" alt="Image generation." />
+                <p class="caption">Image generation.<span data-label="fig:image_generation"></span></p>
+                </div>
+                <p>This has been done with a variety of GANs (e.g. Wasserstein GAN), and can be done (with limited success) with vanilla GANs. There are also architectures that convert a caption to an image, with remarkable success (e.g. StackGAN++).</p>
+                <div class="figure" style="text-align:center">
+                <img src="caption_generation.png" alt="Caption generation." />
+                <p class="caption">Caption generation.<span data-label="fig:caption_generation"></span></p>
+                </div>
+                <p>Conditional GANs (as well as RNNs) have been used, to much success, for this task.</p>
+                <div class="figure" style="text-align:center">
+                <img src="pix2pix.jpg" alt="Image mapping." />
+                <p class="caption">Image mapping.<span data-label="fig:mapping"></span></p>
+                </div>
+                <p>Two prominent networks for this task are the pix2pix network (Conditional GAN) and the CycleGAN. The results, as you can see, are quite impressive, and can be extended to a variety of image-based tasks.</p>
+                <div class="figure" style="text-align:center">
+                <img src="superres.jpg" alt="Super-resolution." />
+                <p class="caption">Super-resolution.<span data-label="fig:super-resolution"></span></p>
+                </div>
+                <p>GANs have been used in the task of super-resolution, interpolating finer texture details that are lost in a low-res image. The most prominent architecture for this task is the SRGAN. The SRGAN has been used to moderate success (though MOS scores are subjective and difficult to validate).</p>
+                <h1 id="math">Math</h1>
+                <p>The gradient expression we train the discriminator on is as follows: <span class="math display">\[\nabla \frac{1}{m} \sum_{i=1}^m [\log D(x_i) + \log(1-D(G(z_i))]\]</span> where <span class="math inline">\(x\)</span> is the real data in a given batch, <span class="math inline">\(z\)</span> is the noise for the generator for the given batch, <span class="math inline">\(D\)</span> is the discriminator function, and <span class="math inline">\(G\)</span> is the generator. We want to maximize this expression. The first expression in the summation, <span class="math inline">\(\log D(x_i)\)</span>, corresponds to the discriminator output on real data; we clearly want to maximize this probability. The second is a bit more complicated: the <span class="math inline">\(D(G(z_i))\)</span> corresponds to the discriminator’s probability estimate that the generated data is real. We want to minimize this, so we make the term <span class="math inline">\(\log (1-D(G(z_i))\)</span>. If you haven’t taken multivariable calculus yet, think about the <span class="math inline">\(\nabla\)</span> as a derivative; we simply want to move in the direction that maximizes the summation.</p>
+                <p>The gradient expression we train the generator on is as follows: <span class="math display">\[\nabla \frac{1}{m} \sum_{i=1}^m \log(1-D(G(z_i))\]</span> We want to minimize this expression (i.e. we want to maximize <span class="math inline">\(D(G(z_i))\)</span>, the probability of the generated data being real, as determined by the discriminator).</p>
+                <h1 id="cyclegan">CycleGAN</h1>
+                <div class="figure" style="text-align:center">
+                <img src="cyclegan.jpg" alt="The CycleGAN." />
+                <p class="caption">The CycleGAN.<span data-label="fig:cyclegan"></span></p>
+                </div>
+                <p>The goal of the CycleGAN is to learn a mapping <span class="math inline">\(G\)</span> that translates a source domain <span class="math inline">\(X\)</span> to a target domain <span class="math inline">\(Y\)</span> given unpaired images.</p>
+                <p>However, the problem of learning <span class="math inline">\(G\)</span> such that <span class="math inline">\(G(X) \rightarrow Y\)</span> is that the mapping <span class="math inline">\(G\)</span> is very under-constrained (in other words, there are many ways that <span class="math inline">\(G\)</span> can minimize loss of the dataset as a whole while producing qualitatively not-very-good individual images). The basic approach of the CycleGAN, thus, is to ensure <em>cyclic consistency</em> by introducing an inverse mapping <span class="math inline">\(F\)</span> and a cyclic consistency loss that enforces <span class="math inline">\(F(G(X)) \approx X\)</span> and <span class="math inline">\(G(F(Y)) \approx Y\)</span>.</p>
+                <p>As usual, the loss for <span class="math inline">\(G\)</span> is <span class="math display">\[min_G\,max_{D_Y} \log D_Y(x_i) + \log(1-D_Y(G(z_i))\]</span> An analogous loss is used for <span class="math inline">\(F\)</span>.</p>
+                <p>However, a new term is introduced for cyclic consistency: <span class="math display">\[\lambda ||F(G(x)) - x||_1 + ||G(F(y)) - y||_1\]</span> The L1 norm was selected based on empirical data.</p>
+                <p>The final loss, then, is the sum of these three individual losses.</p>
+                <p>The CycleGAN’s architecture is based on pix2pix’s PatchGAN, which essentially uses a discriminator that classifies NxN patches. This helps to preserve smaller details, such as texture and style.</p>
+                <p>The architecture was evaluated with both qualitative (Amazon Mechanical Turk) and quantitative (FCN) scores, and achieved state-of-the-art results (though it was still soundly defeated by pix2pix, which relies on <em>paired</em> images).</p>
+                <h1 id="conclusion">Conclusion</h1>
+                <p>GANs are incredibly useful models; however, training them can be very difficult. GANs are continuously being improved to increase stability and to accommodate different types of input. Stay tuned for Nikhil’s lecture next week on newer GANs!</p>
+                <p>We hope to see more GAN projects in the coming months, and we’re confident that there are many unexplored uses for them.</p>
+                <p>For more tips on training a GAN, see <a href="https://github.com/soumith/ganhacks">this link</a>. Seriously. It’ll be useful.</p>
+                <p>For an example of a GAN, see <a href="https://github.com/jacobgil/keras-dcgan/blob/master/dcgan.py">this link</a>.</p>
+                <p>For a CycleGAN demo, see <a href="https://www.youtube.com/watch?v=9reHvktowLY">this video</a>.</p>
 
-              <h1 id="introduction">Introduction</h1>
-              <blockquote>Adversarial training is the coolest thing since sliced bread.
-                <footer>— Yann Lecun</footer>
-              </blockquote>
-              <p>Generative Adversarial Networks (GANs) are a seminal type of generative model, introduced in 2014 by the University of Montreal. GANs have been heavily used in various generative tasks with impressive results. GANs are most actively used for image generation tasks: plain image generation, image inpainting, super-resolution image generation, and text-to-image. However, they are beginning to see some use in other types of inputs (e.g. audio, video, etc). Since GAN’s first release, there have been multiple iterations on different types of GANs; here, we’ll cover the basics only.</p>
-              <h1 id="intuition">Intuition</h1>
-              <p>GANs consist of two neural networks: the generator and the discriminator. The generator is tasked with generating fake samples from random noise. The discriminator is tasked with distinguishing fake samples with real ones (from the dataset).</p>
-              <div class="figure">
-              <img src="gan.png" alt="The GAN pipeline." />
-              <p class="caption">The GAN pipeline.<span data-label="fig:gan"></span></p>
-              </div>
-              <p>In this way, the two networks play a game of cat-and-mouse; they each try to beat the other. Thoughout training, the goal is to have both networks simultaneously improve: the generator increasingly generates more convincing images to fool the discriminator, and the discriminator becomes better at separating real and fake samples as a result.</p>
-              <h1 id="training-specifics">Training specifics</h1>
-              <p>With regards to images, usually deep convolutional layers are used, for both the discriminator and the generator.</p>
-              <div class="figure">
-              <img src="dcgan.png" alt="The DCGAN pipeline." />
-              <p class="caption">The DCGAN pipeline.<span data-label="fig:dcgan"></span></p>
-              </div>
-              <p>Here, deconvolutional layers are used in the generator to produce the target <span class="math inline">\(64\)</span> by <span class="math inline">\(64\)</span> image. This image is then fed into the discriminator for classification.</p>
-              <p>A typical training pipeline would be to randomly initialize the two networks. Then, we would iterate over the dataset. At each iteration, we would generate the batch size number of fake images from the generator, so that we would have an equal number of fake and real images. Then, we could train the discriminator on these images with a binary cross-entropy loss. Finally, imagine the generator and discriminator to be one large network, going from noise (via uniform or gaussian) as input into the generator and discriminator to the binary output. In the perspective of the generator, we want to output the incorrect labels (i.e. always <span class="math inline">\(1\)</span>, the output is the probability of the input to the discriminator being a real image) in this concatenated network. In this way, we can freeze the discriminator weights and flow the gradients through it to train the generator. We can then repeat this for each batch, over a number of epochs, as per usual.</p>
-              <p>Note that GANs are notoriously difficult to train. This is because GANs are highly unstable; in order to train correctly, we need the generator and discriminator to be roughly on equal levels throughout the training process. If the discriminator overpowers the generator, there will be little gradient for the generator to learn upon; vice-versa, and we run into <em>mode collapse</em>, where the generator produces outputs with extremely low variety.</p>
-              <h1 id="math">Math</h1>
-              <p>The gradient expression we train the discriminator on is as follows: <span class="math display">\[\nabla \frac{1}{m} \sum_{i=1}^m [\log D(x_i) + \log(1-D(G(z_i))]\]</span> where <span class="math inline">\(x\)</span> is the real data in a given batch, <span class="math inline">\(z\)</span> is the noise for the generator for the given batch, <span class="math inline">\(D\)</span> is the discriminator function, and <span class="math inline">\(G\)</span> is the generator. We want to maximize this expression. The first expression in the summation, <span class="math inline">\(\log D(x_i)\)</span>, corresponds to the discriminator output on real data; we clearly want to maximize this probability. The second is a bit more complicated: the <span class="math inline">\(D(G(z_i))\)</span> corresponds to the discriminator’s probability estimate that the generated data is real. We want to minimize this, so we make the term <span class="math inline">\(\log (1-D(G(z_i))\)</span>. If you haven’t taken multivariable calculus yet, think about the <span class="math inline">\(\nabla\)</span> as a derivative; we simply want to move in the direction that maximizes the summation.</p>
-              <p>The gradient expression we train the generator on is as follows: <span class="math display">\[\nabla \frac{1}{m} \sum_{i=1}^m \log(1-D(G(z_i))\]</span> We want to minimize this expression (i.e. we want to maximize <span class="math inline">\(D(G(z_i))\)</span>, the probability of the generated data being real, as determined by the discriminator).</p>
-              <h1 id="conclusion">Conclusion</h1>
-              <p>GANs are incredibly powerful models; however, training them can be very difficult. GANs are continuously being improved to increase stability and to accommodate different types of input. Stay tuned for Nikhil’s lecture next week on newer GANs!<br />
-              For more tips on training a GAN, see <a href="https://github.com/soumith/ganhacks">this</a> link.<br />
-              For an example of a GAN, see <a href="https://github.com/jacobgil/keras-dcgan/blob/master/dcgan.py">this</a> link.<br />
-              GAN image from <a href="http://www.kdnuggets.com/2017/01/generative-adversarial-networks-hot-topic-machine-learning.html">here</a>.<br />
-              DCGAN image from <a href="http://www.timzhangyuxuan.com/project_dcgan/">here</a>.</p>
           </div>
         <p><a href="../../schedule.html">&larr; Back to lectures</a>
     </section>
