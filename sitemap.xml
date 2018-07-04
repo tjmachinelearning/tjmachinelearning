@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://tjmachinelearning.com/</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/schedule.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/rankings.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/projects.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/submit.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/SponsorshipInformation.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/index.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/old.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/overview/overview.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/overview/overview.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/intro/intro.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/intro/intro.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/dct/decision.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/dct/decision.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/dct/decision2.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/dct/IO_sample.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/dct/quiz.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/rf/rf.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/rf/randomforests.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/rf/IO_sample.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/rf/shell.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/svm/svm.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/svm/svm.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/bayes/bayes.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/kmeans/kmeans.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn1/nn1.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn1/nn1.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn1/Problem_Set_1.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn1/pset_instructions.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn2/nn2.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn2/nn2.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn3/nn3.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn3/nn3.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn3/nn_shell.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn4/nn4.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn4/nn4.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/nn5/nn5.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/library/keras.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/library/keras.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/keras/IO_sample.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/cnn/cnn.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/cnn/cnn.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/cnn/IO_sample.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/cnn/FacialRecognition_solution.py.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/deepconv/deepconv.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/deepconv/deepconv.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/deepconv/CNN_Quiz.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/deepconv/CNN_Quiz_Solutions.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/obj/obj.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/obj/obj.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/preprocess/preprocess.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/preprocess/preprocess.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/fcn/fcn.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/fcn/fcn.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/instance/instance.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/instance/instance.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/capsule/capsule.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/rnn/rnn.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/rnn/rnn.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/instructions/EEGInstructions.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/contests/rnn/rnn.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/word2vec/word2vec.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/gan/gan.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/gan/gan.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/instructions/GANInstructions.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/advgan/advgan.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/advgan/advgan.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/auto/auto.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/auto/autoencoder.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/instructions/DenoisingInstructions.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/data/DenoisingData.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/rl/rl.html</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/rl/rl.pdf</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/rnnadv/rnnadv.html</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/rnnadv/rnnadv.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/gen/gen.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/markov/markov.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/rl2/rl2.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/actor/actor.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/confidence/confidence.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/encoder/encoder.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/lectures/guest/boost/boost.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/scikitlearn.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/scikit.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/ssh.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/resources/vimandnano.txt</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/introduction.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/lecture1.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/DecisionTrees.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/decisiontreesinstructions.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/bupadata.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/SVM.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/BreastCancerInstructions.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/BreastCancerData.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/FlowerDataInstructions.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/FlowerData.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/NeuralNetworks.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/neuralnetworks_part1.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/NeuralNetworks2.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/nn/NN_instructions.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/nn/agaricus-lepiota.names.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/nn/agaricus-lepiota.data.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/DeepLearning.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/guest_lecture_1.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/regressiondata.txt</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/rl.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/presentations/rnn.pptx</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/1617/resources/rnn.pdf</loc>
+  <lastmod>2018-06-29T01:50:30+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://tjmachinelearning.com/schedule</loc>
+  <lastmod>2018-06-29T01:50:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
