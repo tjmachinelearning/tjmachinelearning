@@ -112,8 +112,8 @@
 }
 
 .menu--alonso .menu__item:nth-child(6).menu__item--current ~ .menu__line {
-	-webkit-transform: translate3d(500%, 0, 0);
-	transform: translate3d(500%, 0, 0);
+	-webkit-transform: translate3d(512%, 0, 0);
+	transform: translate3d(512%, 0, 0);
 }
 
 @media screen and (max-width:55em) {

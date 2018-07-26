@@ -143,11 +143,29 @@ p.caption {
       font-weight: bold;
       font-size: 1.2em;
 }
-.instructions h3 {
+.instructions h6 {
     color: #000;
     font-weight: bold;
       font-size: 1.2em;
       text-align: center;
+}
+.instructheader h4 {
+  color: #D94F5D;
+  list-style: none;
+  display: block;
+  cursor: pointer;
+  min-height: 3rem;
+  line-height: 3rem;
+  background-color: #fff;
+  margin-bottom: 0.1rem;
+}
+.box {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0.5rem 0 1rem 0;
+    padding: 0 1rem;
 }
 .main-content p {
   margin-bottom: 1em; }
@@ -272,6 +290,7 @@ p.caption {
 
 .site-footer {
   padding-top: 2rem;
+  padding-bottom: 1.3rem;
   margin-top: 2rem;
   border-top: solid 1px #eff0f1; }
 
