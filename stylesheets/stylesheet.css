@@ -154,9 +154,10 @@ p.caption {
   list-style: none;
   display: block;
   cursor: pointer;
-  min-height: 3rem;
-  line-height: 3rem;
+  min-height: 1rem;
+  line-height: 1.5rem;
   background-color: #fff;
+  padding: 0.75rem 0rem 0.75rem 0rem;
   margin-bottom: 0.1rem;
 }
 .box {
