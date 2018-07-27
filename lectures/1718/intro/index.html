@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Introduction to Machine Learning | TJHSST Machine Learning Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/component.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
+    <link rel="manifest" href="../../../manifest.json">
+    <link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-105333430-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <h2 style="text-align:center"><a href="../../../"><img src="../../../img/logo.svg" width="200px"></img></a></h2>
+         <section class="section section--menu" id="Alonso">
+             <span class="link-copy"></span>
+             <nav class="menu menu--alonso">
+                 <ul class="menu__list">
+                     <li class="menu__item"><a href="../../../" class="menu__link">Home</a></li>
+                     <li class="menu__item menu__item--current"><a href="../../../schedule/1718" class="menu__link">Lectures</a></li>
+                     <li class="menu__item "><a href="../../../rankings" class="menu__link">Rankings</a></li>
+                     <li class="menu__item"><a href="../../../resources" class="menu__link">Resources</a></li>
+                     <li class="menu__item"><a href="../../../research" class="menu__link">Research</a></li>
+                     <li class="menu__item"><a href="../../../competitions/1718" class="menu__link">Competitions</a></li>
+                     <li class="menu__line"></li>
+                 </ul>
+             </nav>
+         </section>
+    </div>
+    <section class="main-content">
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Introduction to Machine Learning</h1>
+            <h3 style="text-align:center; color:#000">Sylesh Suresh</h2>
+            <h3 style="text-align:center; color:#000">September 2017</h2>
+                <h1 id="introduction">Introduction</h1>
+                <p>Machine Learning is a subfield of computer science focusing on programming computers to learn from data without being explicitly programmed. Machine learning algorithms learn and recognize patterns in seen data (<em>training data</em>) and use these patterns to predict characteristics of unseen data.</p>
+                <h1 id="types-of-machine-learning">Types of Machine Learning</h1>
+                <p>Machine learning algorithms generally fall into one of the three categories: Supervised Learning, Unsupervised Learning, and Reinforcement Learning.</p>
+                <h2 id="supervised-learning">Supervised Learning</h2>
+                <p>Supervised learning algorithms analyze known training data with labels, the characteristics of the data that we want to predict, to predict the labels of unseen data. For example, an e-mail spam filtering algorithm would analyze previously seen e-mails that are already labeled as being spam or non-spam to predict whether new, unseen e-mails are spam or non-spam. A supervised learning problem where the class labels are discrete (i.e. are made up of separate categories), such as the spam filter example, is called a classification task. Regression is another type of supervised task where the predicted value is continuous (e.g. predicting a student’s SAT score based on their GPA).</p>
+                <h2 id="unsupervised-learning">Unsupervised Learning</h2>
+                <p>Unsupervised learning algorithms analyze unlabeled training data. One common unsupervised learning task is clustering, which creates different groups for data and categorizes similar data into each group. An example might be categorizing similar visitors of your website into different groups.</p>
+                <h2 id="reinforcement-learning">Reinforcement Learning</h2>
+                <p>Reinforcement learning is a different subset of Machine Learning where the learning system (agent) can perform different actions and receives rewards or penalties in return and must learn the correct policy, which dictates which action the agent should take in a given situation, to get the most rewards over time.</p>
+                <h1 id="vocabulary">Vocabulary</h1>
+                <p>Here we have listed a few important words that we will use throughout the year.</p>
+                <ul>
+                <li><p><strong>Classification</strong> - Taking each instance and assigning it to a particular class. Ex: If I have MRI scans of tumors, classifying these might be assigning each image to the category “benign” or “malignant”.</p></li>
+                <li><p><strong>Regression</strong> - Instead of having discrete classes, like classification, the “class” to be predicted is made up of continuous numerical values.</p></li>
+                <li><p><strong>Clustering</strong> - For data without pre-labeled classes, clustering is the act of grouping similar data points together. A form of unsupervised learning.</p></li>
+                <li><p><strong>Training Data</strong> - Set of data used to discover potentially predictive relationships. It’s what your machine learning algorithm “trains” on and learns patterns from</p></li>
+                <li><p><strong>Testing Data</strong> - Set of data used to assess the strength and utility of predictive relationship.</p></li>
+                <li><p><strong>Error</strong> - Difference between algorithm’s prediction and ground-truth values</p></li>
+                <li><p><strong>Ground Truth</strong> - Data that is known to be correct. A datset’s labels.</p></li>
+                </ul>
+
+            </div>
+        <p><a href="../../../schedule/1718">&larr; Back to lectures</a></p>
+</section>
+<footer class="site-footer" style="background-image:linear-gradient(120deg, #272d39, #272d39);">
+    <section class="main-content">
+        <table style="border: 0px; width=100%;">
+            <tr style="border: 0px">
+                <td style="border:0px">
+                    <a href="https://tjmachinelearning.com"><img src="../../../img/logo_alt.svg" width="150em" style="vertical-align:middle; margin-right:1em"></img></a>
+                </td>
+                <td style="border:0px; text-align: left">
+                    <p style="color:#fff">TJ Machine Learning Club<br>6560 Braddock Rd, Alexandria, VA 22312<br><code style="background-color:#000"><a href="https://github.com/nikhilsardana/tjmachinelearning">Open-source</a></code></p>
+                </td>
+          </tr>
+        </table>
+    </section>
+</footer>
+  </body>
+</html>

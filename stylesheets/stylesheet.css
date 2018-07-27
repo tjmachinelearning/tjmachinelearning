@@ -289,6 +289,11 @@ p.caption {
     padding: 2rem 1rem;
     font-size: 1rem; } }
 
+
+.content {
+    min-height: calc(100vh - 12rem);
+}
+
 .site-footer {
   padding-top: 2rem;
   padding-bottom: 1.3rem;

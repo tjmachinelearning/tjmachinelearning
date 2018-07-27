@@ -1,7 +1,7 @@
-// This file is used for competitions.html
+// This file is used for competitions
 //With 2 sections: Competition Instructions and Competition Procedures
 //And within Competition Instructions section, expandable subsections for each specific competition
-//Inside compeitions.html, in order for this expand.js to work, the line <script src="js/expand.js"></script> was necessary
+//Inside compeitions, in order for this expand.js to work, the line <script src="js/expand.js"></script> was necessary
 //as well as <section id="______" style="display:none"> ... </section> around expandable content,
 //where ______ can be found in each $('#______').toggle(); line below.
 

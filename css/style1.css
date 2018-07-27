@@ -18,7 +18,8 @@
 	top: 1em;
 	overflow: hidden;
 	border: none;
-	background: url(../img/cross.png) no-repeat center center;
+	background: url(../img/cross.svg) no-repeat center center;
+	background-size: 2em 2em;
 	text-indent: 200%;
 	color: transparent;
 	outline: none;
@@ -104,14 +105,36 @@
 	transform: translateY(25%) rotateX(-35deg);
 }
 @media screen and (max-width:55em) {
+	.mobile-menu {
+		background-color: #333;
+		overflow: hidden;
+	}
+
 	.mobile-menu button {
-		display:inline-block;
+		display:block;
+	}
+
+	.mobileyear {
+		display:block;
+	}
+
+	.desktopyear {
+		display:none;
 	}
 }
 @media screen and (min-width:55em) {
 	.mobile-menu button {
 		display:none;
 	}
+
+	.mobileyear {
+		display:none;
+	}
+
+	.desktopyear{
+		display:block;
+	}
+
 }
 @media screen and (max-height: 30.5em) {
 	.overlay nav {
