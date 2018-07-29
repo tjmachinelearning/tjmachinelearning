@@ -26,4 +26,4 @@ If you want to transfer anything between 1GB and 10GB, you can use the /tmp/ dir
 
 Please delete your file.zip off /tmp/ once it's on an hpc machine so it's not wasting hard drive space.
 
-If you want to transfer anything larger than 10GB, you can try the /tmp/ method. Otherwise, you can try running scp through ssh tunneling. A small write-up is available here: https://www.urbaninsight.com/article/running-scp-through-ssh-tunnel. If for some reason you can't get that working, you can always try a service like https://transfer.sh/ which allow you to upload large files (albeit slowly) and download them using curl.
+If you want to transfer anything larger than 10GB, you can try the /tmp/ method. Otherwise, you can try running scp through ssh tunneling. A small write-up is available here: https://www.urbaninsight.com/article/running-scp-through-ssh-tunnel. If for some reason you can't get that working, you can always try a service like https://transfer.sh/ which allows you to upload large files (albeit slowly) and download them using curl.
