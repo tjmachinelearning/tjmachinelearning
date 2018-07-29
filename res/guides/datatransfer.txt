@@ -1,0 +1,29 @@
+TRANSFERRING DATA ONTO THE TJHSST HIGH PERFORMANCE COMPUTING CLUSTER
+---------------------------------------------------------------------
+
+If you want to use one of the high performance computing clusters, there's a good chance you also want to transfer large quantities of data to the machine. This is tricky, because you can only access these machines through remote.tjhsst.edu. (You MUST ssh username@remote.tjhsst.edu, then ssh username@machinename, you cannot just ssh username@machinename.tjhsst.edu). 
+
+Obviously, if your data is available online or hosted on some web server (this includes Google Drive or Dropbox), just directly download it onto the hpc machine using wget or curl. The following instructions are for locally stored data only.
+
+[It is at this point that I recommend Windows users install Ubuntu on Windows https://docs.microsoft.com/en-us/windows/wsl/install-win10 and do everything below through the program. Mac users can continue to use the terminal. Linux users probably don't need this guide.]
+
+Back to the original question. How do I get my locally stored files onto the hpc machine so I can run my code on the data and take advantage of all those sweet CPU cores? 
+
+You might ask: well, why can't I just transfer my data to my account on remote.tjhsst.edu, then transfer it to the hpc machine? This works for small quantities of data. Your remote.tjhsst.edu account is the same as your syslab account. It holds 1GB. Max. Your hpc account has, as far as I can tell, unlimited storage (please don't abuse this). So you can do the following for any data <1GB:
+
+1. scp my/local/file.zip yourusername@remote.tjhsst.edu:~/
+2. ssh yourusername@remote.tjhsst.edu
+3. scp file.zip yourusername@hpc1:~/
+
+[for details on using scp, see https://kb.iu.edu/d/agye]
+
+If you want to transfer anything between 1GB and 10GB, you can use the /tmp/ directory on remote. This will hold up to 10GB (it is unclear if this is a hard limit or just a guideline), which you can then transfer to an hpc machine. The /tmp/ directory is not your account folder - it is the folder containing "temporary files" on the remote.tjhsst.edu server. These files are deleted periodically, and are read/write accessible by anyone. Thus, for data between 1GB and 10GB, do the following:
+
+1. scp my/local/file.zip yourusername@remote.tjhsst.edu:/tmp/
+2. ssh yourusername@remote.tjhsst.edu
+3. cd /tmp/
+4. scp file.zip yourusername@hpc1:~/
+
+Please delete your file.zip off /tmp/ once it's on an hpc machine so it's not wasting hard drive space.
+
+If you want to transfer anything larger than 10GB, you can try the /tmp/ method. Otherwise, you can try running scp through ssh tunneling. A small write-up is available here: https://www.urbaninsight.com/article/running-scp-through-ssh-tunnel. If for some reason you can't get that working, you can always try a service like https://transfer.sh/ which allow you to upload large files (albeit slowly) and download them using curl.

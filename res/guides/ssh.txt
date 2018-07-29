@@ -1,8 +1,18 @@
 To ssh into the syslab computers:
 
-Step 1 (Mac): open terminal and type "ssh yourusername@remote.tjhsst.edu"
-Step 1 (Windows): install putty. Open it and in the box type "yourusername@remote.tjhsst.edu" and then click Enter
-Step 2: type in your password
-Step 3: ssh into a machine by typing "ssh machinename" (Machines include "lucario", "link", "peach", "mario" and many more. choose any one.)
-Step 4: enter your password again
-Step 5: To edit code, use your favorite text editor
+Step 1 (Windows): Install Putty (available at https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), and open it
+Step 1 (Mac): Open terminal, and type in "ssh yourusername@remote.tjhsst.edu"
+Step 2 (Windows): Type in yourusername@remote.tjhsst.edu into the "Host Name (or IP Address)" box in PuTTY and click 'Open'.
+Step 3: type in your password
+
+If you want to SSH into one of the syslab desktop machines:
+-----------------------------------------------------------
+Step 4: ssh into a machine by typing "ssh machinename" (Machines include "lucario", "link", "peach", "mario" and many more. choose any one.)
+Step 5: enter your password again
+Step 6: To edit code, use your favorite text editor
+
+If you want to SSH into one of the high performance computing (hpc) clusters:
+-----------------------------------------------------------------------------
+Step 4: ssh into a machine by typing "ssh machinename" (Machines include "hpc1", "hpc2", "hpc3", ..., "hpc6", and "hpcgpu" a.k.a "zoidberg" a.k.a "infosphere". choose "hpc1" through "hpc6" for CPU intensive work, or "hpcgpu" for GPU intensive work.)
+Step 5: enter your password again
+Step 6: To edit code, use your favorite text editor.
