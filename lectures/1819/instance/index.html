@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Instance Segmentation | TJHSST Machine Learning Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../../../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/component.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
+    <link rel="manifest" href="../../../manifest.json">
+    <link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-105333430-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <h2 style="text-align:center"><a href="../../../"><img src="../../../img/logo.svg" width="200px"></img></a></h2>
+         <section class="section section--menu" id="Alonso">
+             <span class="link-copy"></span>
+             <nav class="menu menu--alonso">
+                 <ul class="menu__list">
+                     <li class="menu__item"><a href="../../../" class="menu__link">Home</a></li>
+                     <li class="menu__item menu__item--current"><a href="../../../schedule/1718" class="menu__link">Lectures</a></li>
+                     <li class="menu__item "><a href="../../../rankings" class="menu__link">Rankings</a></li>
+                     <li class="menu__item"><a href="../../../resources" class="menu__link">Resources</a></li>
+                     <li class="menu__item"><a href="../../../research" class="menu__link">Research</a></li>
+                     <li class="menu__item"><a href="../../../competitions/1718" class="menu__link">Competitions</a></li>
+                     <li class="menu__line"></li>
+                 </ul>
+             </nav>
+         </section>
+    </div>
+    <section class="main-content">
+        <div class="lecture">
+            <h1 style="text-align:center; color:#000">Instance Segmentation</h1>
+            <h3 style="text-align:center; color:#000">Nikhil Sardana</h2>
+            <h3 style="text-align:center; color:#000">December 2017</h2>
+                <h1 id="introduction">Introduction</h1>
+                <p>Instance Segmentation is one of the most difficult image-based computer vision tasks. It combines elements of semantic segmentation (pixel-level classification) and object detection (instance recognition). Essentially, at every pixel, we wish to classify not only the type of object (or background) the pixel is part of, but also determine which instance the pixel is part of.</p>
+                <p style="text-align:center"><img src="tasks.PNG" alt="image" /></p>
+                <p>Not unsurprisingly, instance segmentation networks rely heavily on existing object detection networks. This lecture will cover one particular instance segmentation network, called Mask R-CNN. Mask R-CNN modifies the Faster R-CNN architecture and adapts it for instance segmentation with minimal overhead. Mask R-CNN is the current leader in instance segmentation performance.</p>
+                <p>This lecture is designed for students with understanding of object detection networks. If you are unfamiliar with R-CNN, Fast R-CNN, or Faster R-CNN, read our lecture “Object Detection&quot; before proceeding.</p>
+                <h1 id="mask-r-cnn">Mask R-CNN</h1>
+                <p>Mask R-CNN is a modification of the Faster R-CNN architecture. The authors noticed that a previous “fully convolutional instance segmentation&quot; (FCIS) solutions, which performed segmentation, classification, and bounding-box regression simultaneously, although they ran fast, exhibited low segmentation accuracy, especially on overlapping objects. Mask R-CNN therefore takes a different approach, <em>decoupling</em> segmentation from classification and bounding-box regression. Mask R-CNN thus adds a separate mask “head&quot; to the Faster R-CNN network. This is shown in the diagram below.</p>
+                <p>The mask “head&quot; is simply a small fully convolutional network that outputs an <span class="math inline">\(m\times m\)</span> mask for each region proposal. We use a fully convolutional network rather than fully connected layers so we do not lose spatial information. A fully convolutional solution requires fewer parameters than previous fully connected solutions while simultaneously increasing accuracy.</p>
+                <p>The two diagrams at the bottom of Page 2 show a different visualization of Faster R-CNN and Mask R-CNN. Besides the additional “mask&quot; head of Mask R-CNN, you may have noticed RoIAlign replacing RoI Pooling. We will cover this in the next section.</p>
+                <p style="text-align:center"><img src="masknetwork.png" alt="image" /></p>
+                <p style="text-align:center"><img src="fasterrcnn.PNG" alt="image"  style="width:60.0%"/></p>
+                <p style="text-align:center"><img src="maskrcnn.PNG" alt="image"  style="width:60.0%" /></p>
+                <h2 id="roialign">RoIAlign</h2>
+                <p>If you are unfamiliar or have forgotten RoI Pooling, please refer back to Section 3.2 in our lecture “Object Detection&quot;. RoAlign is simply a more precise version of RoI Pooling.</p>
+                <p style="text-align:center"><img src="roialign1.PNG" alt="image" style="width:50.0%" /></p>
+                <p style="text-align:center"><img src="roialign2.PNG" alt="image" style="width:50.0%" /></p>
+                <div class="figure" style="text-align:center">
+                <img src="roialign3.PNG" alt="2\times2 values per cell." style="width:50.0%" />
+                </div>
+                <p style="text-align:center">
+                <img src="roialign4.PNG" alt="2\times2 values per cell." style="width:30.0%" />
+                <img src="roialign5.PNG" alt="image" style="width:20.0%"/></p>
+                <p>Simply put, if an <span class="math inline">\(N\times N\)</span> output is desired, the proposed region (black rectangle in the second image) is divided into an <span class="math inline">\(N\times N\)</span> grid. Unlike RoI Pooling, these regions will contain the exact same number of pixels, so we will often have fractional pixels. From each grid cell, we sample four regions as shown by the red <span class="math inline">\(\times\)</span> marks in the third image. We then subdivide each grid cell into four subcells, each centered on an <span class="math inline">\(\times\)</span>. We perform bilinear interpolation to get a single value for each subregion, or four values for each cell. These values are shown in the fourth image. Finally, we perform a simple max pooling on the bilinear interpolated values, taking the maximum value per cell to reach an <span class="math inline">\(N\times N\)</span> output. This output is then passed through the fully connected layers for bounding-box regression and classification, and through the small Fully Convolutional Network (FCN) that makes up our masking head.</p>
+                <p>Of course, you should have one question remaining: What exactly is bilinear interpolation?</p>
+                <h3 id="bilinear-interpolation">Bilinear Interpolation</h3>
+                <p>Bilinear interpolation is fairly trivial. It is best understood visually. Simply put, the bilinearly interpolated value at the black spot is the sum of the values of each of the four colors multiplied by the areas of their respective rectangles, divided by the total area.</p>
+                <p style="text-align:center">
+                <img src="bilinear.png" alt="Bilinear interpolation for RoIAlign." style="width:35.0%" />
+                <img src="roibilinear.PNG" alt="Bilinear interpolation for RoIAlign." style="width:55.0%" /></p>
+                <p>Note how in the figure on the left, the red pixel value corresponds to the smaller area opposite the pixel. This is because closer pixels (like the yellow one) have greater weighting. The figure on the right makes it clear how bilinear interpolation is implementaed in RoIAlign. At each blue dot (represented with a red <span class="math inline">\(\times\)</span> in the figures on the previous page), we take the closest 4 pixel values and multiply them by the respective areas.</p>
+                <p>And that’s all RoIAlign is. It achieves the same goal as RoI Pooling, which is to take a region of any shape and create a fixed output. However, because we are using fractional pixels, we can get much better alignment. This simple change resulted in considerable accuracy improvements for Mask R-CNN.</p>
+                <h2 id="mask-head">Mask Head</h2>
+                <p>Depending on the network backbone, the mask head differs for Mask R-CNN. Below is a look at the two different heads. Both are trivial FCNs.</p>
+                <p style="text-align:center"><img src="backbones.PNG" alt="image" /></p>
+                <p>In the diagram above, FPN standds for “Feature Pyramid Network&quot;. You should already be familiar with ResNet.</p>
+                <p>There are a few important things to know about this mask head. First, like we said earlier, our output is an <span class="math inline">\(m\times m\)</span> mask. However, the authors found it beneficial to have binary masks. In other words, we predict <span class="math inline">\(K\)</span> <span class="math inline">\(m\times m\)</span> masks for each RoI, where <span class="math inline">\(K\)</span> is the number of classes. One mask per class. Thus, the mask branch has a <span class="math inline">\(Km^2\)</span>-dimensional output for each region of interest.</p>
+                <p>Our loss function is now different. Previously, we had <span class="math inline">\(L = L_{boundingbox} + L_{classification}\)</span>. We’ve covered the details of classification and bounding-box loss in our object detection, for both the region proposal network (RPN) and the network itself. For Mask R-CNN, we add another loss, <span class="math inline">\(L_{mask}\)</span>. For some region <span class="math inline">\(r\)</span>, if the ground truth class is <span class="math inline">\(k\)</span>, we apply a per-pixel sigmoid on <em>only</em> the <span class="math inline">\(k\)</span>th mask. This allows us to define <span class="math inline">\(L_{mask}\)</span> as the average binary cross-entropy loss. Thus, the masks for classes that don’t correspond to the ground truth aren’t calculated. (remember, we have one mask per class for every region).</p>
+                <p>By computing one mask per class, we are decoupling classification and segmentation. We simply don’t care what class the object is when we segment it. Previous practices, like FCNs for semantic segmentation, use multi-class cross-entropy losses and per-pixel softmax. These allows for competition between classes, which Mask R-CNN eliminates.</p>
+                <h2 id="training-and-testing">Training and Testing</h2>
+                <p>When training, Mask R-CNN shares similarities with its object detection cousins. Hyperparameters were set to the same values. Positive RoIs have IoU of at least 0.5 with the ground truth box. In addition, <span class="math inline">\(L_{mask}\)</span> is defined only on positive RoIs. The mask target is the intersection between an RoI and its associated ground-truth mask.</p>
+                <p>At test time, after non-maximum supression is applied, the masking branch is applied on only the top 100 RoIs. If an region was classified into class <span class="math inline">\(k\)</span>, we simply choose the <span class="math inline">\(k\)</span>th mask. The mask is then resized to the size of the region of interest. By reducing segmentation computation to only 100 regions, we dramatically decrease the amount of overhead. In fact, Mask R-CNN runs at 5 fps, compared to Faster R-CNN’s 7 fps.</p>
+                <h2 id="model-performance">Model Performance</h2>
+                <p>The Mask R-CNN paper not only provides evidence that their model outperforms all previous models, but also conducted various ablation experiments to show that RoIAlign, segmentation decoupling, and fully convolutional mask heads each individually improve accuracy. The results are shown in the tables below.</p>
+                <p style="text-align:center"><img src="moreroialigncomparison.PNG" alt="image" style="width:80.0%" /></p>
+                <p style="text-align:center"><img src="binarymaskcomparison.PNG" alt="image" style="width:50.0%" /></p>
+                <p style="text-align:center"><img src="fcncomparison.PNG" alt="image" /></p>
+                <p>In addition, Mask R-CNN performs better with a deeper backbone CNN. However, it should be noted that the 5 fps speed was achieved using the shallow ResNet-50 network as a backbone.</p>
+                <p style="text-align:center"><img src="backbonecomparison.PNG" alt="image" style="width:50.0%" /></p>
+                <p>The results on the COCO and Cityscapes benchmarks are shown below. Mask R-CNN performs with state-of-the-art accuracy on both.</p>
+                <div class="figure" style="text-align:center">
+
+                <img src="cocoresults.PNG" alt="COCO results." style="width:85.0%" />
+                <p class="caption">COCO results.</p>
+                </div>
+                <div class="figure" style="text-align:center">
+
+                <img src="cityscapesresults.PNG" alt="Cityscapes results." style="width:100.0%" />
+                <p class="caption">Cityscapes results.</p>
+                </div>
+                <p>Some segmentation examples from the two benchmarks are provided below. Segmentation examples from COCO are the top eight images; examples from Cityscapes are the bottom six.</p>
+                <p style="text-align:center"><img src="cocoexamples.PNG" alt="image" style="width:100.0%" /></p>
+                <p style="text-align:center"><img src="cityscapes.PNG" alt="image" style="width:100.0%" /></p>
+                <p>Mask R-CNN can also be sued for human pose estimation. We refer readers to the Mask R-CNN paper.</p>
+                <h1 id="conclusion">Conclusion</h1>
+                <p>Mask R-CNN leaps ahead of the competition in terms of pure instance segmentation performance. However, no current instance segmentation method can achieve great results while operating in real-time (60 FPS). In the future, look for networks which dramatically improve segmentation speed as well as accuracy.</p>
+
+
+            </div>
+        <p><a href="../../../schedule/1718">&larr; Back to lectures</a></p>
+</section>
+<footer class="site-footer" style="background-image:linear-gradient(120deg, #272d39, #272d39);">
+    <section class="main-content">
+        <table style="border: 0px; width=100%;">
+            <tr style="border: 0px">
+                <td style="border:0px">
+                    <a href="https://tjmachinelearning.com"><img src="../../../img/logo_alt.svg" width="150em" style="vertical-align:middle; margin-right:1em"></img></a>
+                </td>
+                <td style="border:0px; text-align: left">
+                    <p style="color:#fff">TJ Machine Learning Club<br>6560 Braddock Rd, Alexandria, VA 22312<br><code style="background-color:#000"><a href="https://github.com/nikhilsardana/tjmachinelearning">Open-source</a></code></p>
+                </td>
+          </tr>
+        </table>
+    </section>
+</footer>
+  </body>
+</html>

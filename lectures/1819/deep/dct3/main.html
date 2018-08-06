@@ -1,0 +1,599 @@
+<h1 id="introduction">Introduction</h1>
+<p>Part 1 of this lecture covered the mathematics of decision trees. This lecture will transition you from graphs and mathematics to writing the actual code for the competition.</p>
+<h1 id="review">Review</h1>
+<p>Decision trees are created by splitting on a threshold of a feature which results in the most information gain, and recursively continuing this process for each of the children.</p>
+<p>Let us review Information Gain with an example. Remember, the equation is:</p>
+<p><span class="math display">\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\]</span></p>
+<p>We will use the Gini Impurity measure:</p>
+<p><span class="math display">\[I(i) = 1 - \sum_{k=1}^{c} p(k|i)^2\]</span></p>
+<p>Consider the following data. We have two features, <span class="math inline">\(x1\)</span> and <span class="math inline">\(x2\)</span>. Our label is <span class="math inline">\(y\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s graph this data. Let the <span class="math inline">\( \newmoon = 0\)</span> and <span class="math inline">\(\circ = 1\)</span>.</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>;</p>
+<p>We want to draw a vertical or horizontal line that best separates the data (ie has the greatest information gain). Since we are restricted to the coordinates of data points, a human will look at the graph and choose:</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(2, -1) (2, 4)</span>;</p>
+<p>Since we are classifying things based on whether they are less than the threshold (<span class="math inline">\(x&lt;2\)</span>), the point in the middle goes with the right side.</p>
+<p>The decision tree that goes with this is:</p>
+<p>[<span class="math inline">\(x_1&lt;2\)</span> [<span><span class="math inline">\(Yes\)</span></span> [0 0 1] ] [<span class="math inline">\(No\)</span> [1 1 1 1] ] ]</p>
+<p>We can calculate the information gain.</p>
+<p><span class="math display">\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\]</span> <span class="math display">\[N_{left} = 3\]</span> <span class="math display">\[N_{right} = 4\]</span> <span class="math display">\[N_p = 7\]</span></p>
+<p>Now we need the impurities.</p>
+<p><span class="math display">\[I(i) = 1 - \sum_{k=1}^{c} p(k|i)^2\]</span></p>
+<p>For the parent, we calculate the impurity of the entire dataset, which is:</p>
+<p><span class="math display">\[I(D_p) = 1 - \left(\frac{2}{7} \right)^2 - \left(\frac{5}{7}\right)^2 = 1 - \frac{4}{49} - \frac{25}{49} = \frac{49-4-25}{49} = \frac{20}{49}\]</span></p>
+<p>And for the children:</p>
+<p><span class="math display">\[I(D_{left}) = 1 - \left( \frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 1 - \frac{4}{9} - \frac{1}{9} = \frac{4}{9}\]</span> <span class="math display">\[I(D_{right}) = 1 - \left(\frac{4}{4}\right)^2 - \left(\frac{0}{4}\right)^2 = 1 - 1 = 0\]</span></p>
+<p>Note that the most pure data <span class="math inline">\(I(i)=0\)</span> is all one type.</p>
+<p>Finally, we get the information gain: <span class="math display">\[IG(D_p, f) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\]</span> <span class="math display">\[IG(D_p, f) = \frac{20}{49} - \frac{3}{7}*\frac{4}{9} - \frac{4}{7}*0 = \frac{20}{49} - \frac{12}{63} = \frac{1}{7}*\left(\frac{20}{7} - \frac{12}{9} \right) = \frac{1}{7}*\left(\frac{180}{63} - \frac{84}{63}\right)\]</span> <span class="math display">\[IG(D_p, f) = \frac{1}{7}*\frac{96}{63} = \frac{96}{441}\]</span></p>
+<h1 id="data-structure">Data Structure</h1>
+<p>Let’s go back to the example from Section 2.1.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>How will we represent this data in our code? It’s simple! We’ll use a list of lists, with each column a feature.</p>
+<p><span class="math display">\[\begin{bmatrix}
+\vspace{1mm}
+\begin{bmatrix}
+ 1, 0, 0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,1,0 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,2,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 2,2,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,0,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,1,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,2,1 \\
+\end{bmatrix} \\
+\end{bmatrix}\]</span></p>
+<p>Alternatively, you can make the labels their own list. Our sample I/O code has it this way:</p>
+<p><span class="math display">\[\begin{gathered}
+Features = 
+\begin{bmatrix}
+\vspace{1mm}
+\begin{bmatrix}
+ 1, 0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,2 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 2,2 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,2 \\
+\end{bmatrix} \\
+\end{bmatrix}\end{gathered}\]</span></p>
+<p><span class="math display">\[\begin{gathered}
+Labels = 
+ \begin{bmatrix}
+ 0 \\
+ 0 \\
+ 1 \\
+ 1 \\
+ 1 \\
+ 1 \\
+ 1 \\
+\end{bmatrix}\end{gathered}\]</span></p>
+<p>To find the best information gain, we loop through each of the features (columns), and each of the thresholds, splitting the matrix and calculating the information gain. For example, in the previous example, we split on <span class="math inline">\(x1&lt;2\)</span>, so our left child matrix would be:</p>
+<p><span class="math display">\[\begin{bmatrix}
+\vspace{1mm}
+\begin{bmatrix}
+ 1, 0, 0 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,1,0 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 1,2,1 \\ 
+ \end{bmatrix} \\
+ \end{bmatrix}\]</span></p>
+<p>and the right child matrix:</p>
+<p><span class="math display">\[\begin{bmatrix}
+\vspace{1mm}
+ \begin{bmatrix}
+ 2,2,1 \\ 
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,0,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,1,1 \\
+ \end{bmatrix} \\
+\vspace{1mm}
+ \begin{bmatrix}
+ 3,2,1 \\
+\end{bmatrix} \\
+ \end{bmatrix}\]</span></p>
+<h1 id="summary">Summary</h1>
+<p>To ensure complete understanding and summarize the topics we’ve covered, lets loop through all the features and each of the possible thresholds, splitting the matrix for each one.</p>
+<p>[<span class="math inline">\(x_1&lt;1\)</span> [<span><span class="math inline">\(Yes\)</span></span> ] [<span class="math inline">\(No\)</span> [0 0 1 1 1 1 1] ] ]</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(1, -1) (1, 4)</span>;</p>
+<p><span class="math display">\[D_{left} = [ ]\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\]</span></p>
+<p>[<span class="math inline">\(x_1&lt;2\)</span> [<span><span class="math inline">\(Yes\)</span></span> [0 0 1] ] [<span class="math inline">\(No\)</span> [1 1 1 1] ] ]</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(2, -1) (2, 4)</span>;</p>
+<p><span class="math display">\[D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+             \end{bmatrix}\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\]</span></p>
+<p>[<span class="math inline">\(x_1&lt;3\)</span> [<span><span class="math inline">\(Yes\)</span></span> [0 0 1 1] ] [<span class="math inline">\(No\)</span> [1 1 1] ] ]</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(3, -1) (3, 4)</span>;</p>
+<p><span class="math display">\[D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             2,2,1 \\ 
+             \end{bmatrix} \\
+             \end{bmatrix}\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\]</span></p>
+<p>[<span class="math inline">\(x_2&lt;0\)</span> [<span><span class="math inline">\(Yes\)</span></span> ] [<span class="math inline">\(No\)</span> [0 0 1 1 1 1 1] ] ]</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(-1, -0.01) (4, -0.01)</span>;</p>
+<p><span class="math display">\[D_{left} = [ ]\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             1,2,1 \\ 
+             \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,0,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\]</span></p>
+<p>[<span class="math inline">\(x_2&lt;1\)</span> [<span><span class="math inline">\(Yes\)</span></span> [0 1] ] [<span class="math inline">\(No\)</span> [0 1 1 1 1] ] ]</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(-1, 1) (4, 1)</span>;</p>
+<p><span class="math display">\[D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             3,0,1 \\
+            \end{bmatrix} \\
+
+             \end{bmatrix}\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+        \begin{bmatrix}
+         1,1,0 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         1,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\]</span></p>
+<p>[<span class="math inline">\(x_2&lt;2\)</span> [<span><span class="math inline">\(Yes\)</span></span> [0 1 0 1] ] [<span class="math inline">\(No\)</span> [1 1 1] ] ]</p>
+<p>table <span> 1 0 1 1 </span>; table <span> 1 2 2 2 3 0 3 1 3 2 </span>; +[mark=none][dashed] coordinates <span>(-1, 2) (4, 2)</span>;</p>
+<p><span class="math display">\[D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             3,0,1 \\
+            \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             3,1,1 \\
+             \end{bmatrix} \\
+             \end{bmatrix}\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+
+        \vspace{1mm}
+         \begin{bmatrix}
+         1,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\]</span></p>
+<h1 id="the-full-tree">The Full Tree</h1>
+<p>Let’s build an entire decision tree. First, consider the following data.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>We graph it and calculate that <span class="math inline">\(x1&lt;2\)</span> gives us the greatest information gain. <span class="math display">\[I(D_p) = 1 - \left(\frac{4}{10} \right)^2 - \left(\frac{6}{10}\right)^2 = 1 - \frac{16}{100} - \frac{36}{100} = \frac{100-52}{100} = \frac{48}{100} = \frac{12}{25}\]</span> <span class="math display">\[I(D_{left}) = 1 - \left( \frac{4}{6}\right)^2 - \left(\frac{2}{6}\right)^2 = 1 - \frac{16}{36} - \frac{4}{36} = \frac{16}{36} = \frac{4}{9}\]</span> <span class="math display">\[I(D_{right}) = 1 - \left(\frac{4}{4}\right)^2 - \left(\frac{0}{4}\right)^2 = 1 - 1 = 0\]</span> <span class="math display">\[IG(D_p, f) = \frac{12}{25} - \frac{6}{10}*\frac{4}{9} - \frac{4}{10}*0 = \frac{12}{25} - \frac{4}{15} = \frac{36}{75} - \frac{20}{75} = \frac{16}{75}\]</span></p>
+<p>table <span> 0 0 1 0 1 1 0 1 </span>; table <span> 1 3 0 3 2 2 3 1 3 2 4 1 </span>; +[mark=none][dashed] coordinates <span>(2, -1) (2, 4)</span>;</p>
+<p>The dataset is split:</p>
+<p><span class="math display">\[\begin{gathered}
+D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             0, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+            \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             0,1,0 \\
+             \end{bmatrix} \\
+             \vspace{1mm}
+             \begin{bmatrix}
+             0,3,1 \\
+             \end{bmatrix} \\
+             \vspace{1mm}
+             \begin{bmatrix}
+             1,3,1 \\
+             \end{bmatrix} \\
+             \end{bmatrix}\end{gathered}\]</span></p>
+<p><span class="math display">\[\begin{gathered}
+            D_{right} = 
+        \begin{bmatrix}
+        \vspace{1mm}
+         \begin{bmatrix}
+         2,2,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,1,1 \\ 
+         \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         3,2,1 \\
+        \end{bmatrix} \\
+        \vspace{1mm}
+         \begin{bmatrix}
+         4,1,1 \\
+        \end{bmatrix} \\
+         \end{bmatrix}\end{gathered}\]</span></p>
+<p>Now we make our next decision. We start with the left child, and it is obvious that <span class="math inline">\(x2&lt;3\)</span> generates the greatest information gain. (Again, our thresholds are restricted to coordinates in our dataset).</p>
+<p>table <span> 0 0 1 0 1 1 0 1 </span>; table <span> 1 3 0 3 2 2 3 1 3 2 4 1 </span>; +[mark=none][dashed] coordinates <span>(2, -1) (2, 4)</span>; +[mark=none][dashed] coordinates <span>(-1, 3) (2, 3)</span>;</p>
+<p>The data is now split <span class="math display">\[D_{left} = 
+            \begin{bmatrix}
+            \vspace{1mm}
+            \begin{bmatrix}
+             0, 0, 0 \\
+             \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1, 0, 0 \\
+            \end{bmatrix} \\
+            \vspace{1mm}
+            \begin{bmatrix}
+             1,1,0 \\ 
+             \end{bmatrix} \\
+            \vspace{1mm}
+             \begin{bmatrix}
+             0,1,0 \\
+             \end{bmatrix} \\
+             \end{bmatrix}\]</span></p>
+<p><span class="math display">\[D_{right} = 
+        \begin{bmatrix}
+         \vspace{1mm}
+         \begin{bmatrix}
+         0,3,1 \\
+         \end{bmatrix} \\
+         \vspace{1mm}
+         \begin{bmatrix}
+         1,3,1 \\
+         \end{bmatrix} \\
+         \end{bmatrix}\]</span> We can now calculate the information gain. We know the impurity of the parent dataset, which was the impurity of the left child on the last split. <span class="math display">\[I(D_p) = \frac{4}{9}\]</span> Now, we calculate the children impurities to find our information gain: <span class="math display">\[I(D_{left}) = 0\]</span> <span class="math display">\[I(D_{right}) = 0\]</span> <span class="math display">\[IG(D_p, f) = \frac{4}{9} - \frac{4}{6}*0 - \frac{2}{6}*0 = \frac{4}{9}\]</span></p>
+<p>All our data has been classified correctly, so the decision tree is done. We will leave it as an exercise to the reader to draw the decision tree.</p>
+<h1 id="code">Code</h1>
+<p>Here’s how we recommend you structure your decision tree code for the competition. It should be noted: do not split recursively until all data is pure. You will overfit the testing data. Instead, set a baseline for your information gain. If the maximum information gain is less than, say, 0.1, then stop the recursion and make it a leaf of the tree. Play with this baseline to see how your training and testing accuracy change. Remember: your goal is the greatest testing accuracy.</p>
+<h1 id="practice-problems">Practice Problems</h1>
+<ol>
+<li><p>Calculate the information gain for each of the 7 decision trees in Section 4. The second decision tree has already been done for you in the example in Section 2.</p></li>
+<li><p>Do the competition.</p></li>
+</ol>
