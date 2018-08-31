@@ -10,7 +10,7 @@ body {
   color: #606c71; }
 
 .lecture p, .lecture ol, .lecture ul {
-    font-family: 'Lora', serif;
+    font-family: Georgia, "Bitstream Charter", "Charis SIL", Utopia, "URW Bookman L", serif;
     font-size: 20px;
     line-height: 33px;
 }
