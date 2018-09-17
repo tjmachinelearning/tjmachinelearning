@@ -11,8 +11,8 @@ body {
 
 .lecture p, .lecture ol, .lecture ul {
     font-family: Georgia, "Bitstream Charter", "Charis SIL", Utopia, "URW Bookman L", serif;
-    font-size: 20px;
-    line-height: 33px;
+    font-size: 1.2rem;
+    line-height: 2.0rem;
 }
 
 a {
