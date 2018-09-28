@@ -109,6 +109,80 @@
         </div>
 
         <!--Begin Competition Content-->
+                <div class="box">
+                    <div class="instructheader"><h4 id=firsttitle>Decision Trees Competition</h4></div>
+                    <section id="first" style="display:none">
+                        <hr>
+                        <h4>The Data</h4>
+                        <p><i>9/27/18 -&emsp;</i>Welcome to the first contest of the year! Your job is to write the code to create a decision tree, train it on the training data, and use it to predict the classes of the testing data.
+                        We are trying to classify breast cancer data. The data we are using is actual data from breast cancer patients.
+                        Your decision tree is supposed to classify the type of breast cancer they have (benign (0) or malignant (1)), based on 9 different metrics (features).
+                        The training data looks like this: </p>
+                        <p>
+                        <code>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
+                        etc. (533 lines) <br></code>
+                        </p>
+                        <p>
+                        and the testing data looks like this: </p>
+                        <p>
+                        <code>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9 <br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9 <br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9 <br>
+                        etc. (150 lines) <br>
+                        </code>
+                        </p>
+                        <p>
+                        Your end goal is to create a file which looks like: <br>
+                        <code>
+                        id, solution <br>
+                        1, predicted_class <br>
+                        2, predicted_class <br>
+                        3, predicted_class <br>
+                        4, predicted_class <br>
+                        etc. (150 lines) <br>
+                        </code>
+
+                        For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file. </p>
+                        <p>Basic shell code is available <a href="../contests/1819/dct/decisionTreeShell.py.txt">here</a>.
+                            The Data I/O code from the decision tree lecture will still be useful, but will need to be adapted for this data.
+                        </p>
+                        <h4>How to participate</h4>
+                        <p>
+                            Our contests will be held on <a href="https://kaggle.com">Kaggle</a>, using <a href="https://inclass.kaggle.com">Kaggle InClass</a>. This allows us to upload data and competition instructions, as well as impose submission deadlines. It also ranks submissions automatically!
+
+                            To participate:</p>
+                        <p>
+                        <ol><li>Create a Kaggle account by clicking "sign up" in the top right.
+                        </li><li>Click on <a href="https://www.kaggle.com/c/decisiontrees">this link</a> (the competition link).
+                        </li><li>Download the training and testing data.
+                        </li><li>Download the I/O Code.
+                        </li><li>Write your algorithm and train it on the training data.
+                        </li><li>Then, test it on the testing data, creating a submission file with the predicted ground truth in the format shown in the sample submission file.
+                        </li><li>Upload your submission file and see your results!
+                        </li><li>Tweak your code, repeating steps 5-8 to improve your accuracy and move up the leaderboard.
+                        </ol>
+                        </p>
+                        <p>
+                        <h4>Some More Guidelines:</h4>
+                        <ol>
+                        <li>We recommend that you use Python. Everything we do is in Python this year, and it's the main language used for machine learning in general. Don't use any external libraries, other than numpy and pandas. These packages are very useful for data processing and manipulation, so it's a good idea to learn them if you can. If you're unfamiliar with Python, for this competition, you can use whichever language you want to, but in the future it will be much more difficult.
+
+                        If it's your first time using Python, check out these links for a jumpstart:
+                        <a href="https://developers.google.com/edu/python/">Google's Python course</a>, 
+                        <a href="https://www.learnpython.org/">LearnPython.org</a>, and
+                        <a href="https://thepythonguru.com/">The Python Guru</a>.
+
+                        </li><li>The Competition ends at 11:59:00 PM, October 9th. For this competition, we're giving an extra week than we normally do, so be sure to try it out!
+                        </li><li>The leaderboard on Kaggle that you can see is the Public Leaderboard, which is your accuracy for 50% of the testing data. Your final rankings will be based on the Private leaderboard, which is based on the other 50% of the testing data and will become public as soon as the competition ends. This is to prevent you from just writing a decision tree that overfits the testing data, which defeats the purpose.
+                        </li></ol>
+                        </p>
+                    </section>
+                </div>
+            </br>
           <p>This year, in collaboration with professors at John Hopkins, we will hold a series of long-term competitions for club members to participate. Based on the rankings for these competitions, we will select interested members for machine learning internships with these professors during the coming summer. Because this competition ends very early on in the year, when we select the final members for the internship, we will take into account that new members have not had the sufficient experience to perform well in this competition when considering the rankings. New members are welcome to participate, but this competition is primarily for advanced, returning members. Please see the individual competition instructions below.</p> 
           <div class="instructions">
                 <div class="box">
@@ -127,6 +201,7 @@
                             <a href="https://www.kaggle.com/c/rsna-pneumonia-detection-challenge/">Competition Link</a>
                     </section>
                 </div>
+            </div>
         <!--End Competition Content-->
 
 
