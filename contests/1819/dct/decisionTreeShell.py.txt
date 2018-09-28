@@ -3,7 +3,7 @@
 #for testing data (no labels)
 def getDataUnlabeled():
     x = []
-    input = open("test.csv").read().split("\n")
+    input = open("testing.csv").read().split("\n")
     for index, i in enumerate(input):
         inputArray = i.split(",")
         if(index==0):
@@ -19,7 +19,7 @@ def getDataUnlabeled():
 def getDataLabeled():
     x = []
     y = []
-    input = open("train.csv").read().split("\n")
+    input = open("training.csv").read().split("\n")
     for i in input:
         inputArray = i.split(",")
         if(len(inputArray)==10): #number of features + number of labels        
