@@ -28,7 +28,7 @@ def getDataLabeled():
 #pass array of labels and method will generate output txt
 def generateOutputFile(y_test):
     with open('out.txt', 'w') as f:
-        f.write("id,solution\n")
+        f.write("id,class\n")
         for i in range(len(y_test)):
             f.write(str(i+1)+","+str(y_test[i]+"\n"))
 
