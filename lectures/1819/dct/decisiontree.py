@@ -10,12 +10,10 @@ def impurity(node):
         ginisum += ratio*ratio
             
     return (1.0 - ginisum)
-
-def information_gain(parent, leftchild, rightchild):
+ def information_gain(parent, leftchild, rightchild):
     return impurity(parent) - (len(leftchild)/len(parent))*impurity(leftchild) \
            - (len(rightchild)/len(parent))*impurity(rightchild)
-
-def split(parent, feature, threshold):
+ def split(parent, feature, threshold):
     left = []
     right = []
     for row in parent:
@@ -24,8 +22,7 @@ def split(parent, feature, threshold):
         else:
             right.append(row)
     return left, right
-
-def best_split(parent):
+ def best_split(parent):
     leftchild = None #placeholders
     rightchild = None
     ig = 0.0
@@ -42,5 +39,3 @@ def best_split(parent):
                 leftchild, rightchild = split(parent, feature, threshold)
                 ig = information_gain(parent, leftchild, rightchild)
     return leftchild, rightchild
-    
-        
