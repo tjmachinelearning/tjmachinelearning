@@ -16,7 +16,7 @@ var visualization;
 
 function drawVisualization() {
     var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=1ueMyiUtdXf3G3g-FRrgPdkI-LftwsoOt_SyKKJ52quU&output=html&usp=sharing');
-    query.setQuery('SELECT A, B, C label A "Name", B "Decision Trees", C "Overall"');
+    query.setQuery('SELECT A, B, C, D label A "Name", B "Decision Trees", C "Random Forests", D "Overall"');
     query.send(handleQueryResponse);
 }
 
