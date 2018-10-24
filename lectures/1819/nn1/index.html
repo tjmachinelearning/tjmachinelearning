@@ -38,11 +38,11 @@
              <nav class="menu menu--alonso">
                  <ul class="menu__list">
                      <li class="menu__item"><a href="../../../" class="menu__link">Home</a></li>
-                     <li class="menu__item menu__item--current"><a href="../../../schedule/1718" class="menu__link">Lectures</a></li>
+                     <li class="menu__item menu__item--current"><a href="../../../schedule/1819" class="menu__link">Lectures</a></li>
                      <li class="menu__item "><a href="../../../rankings" class="menu__link">Rankings</a></li>
                      <li class="menu__item"><a href="../../../resources" class="menu__link">Resources</a></li>
                      <li class="menu__item"><a href="../../../research" class="menu__link">Research</a></li>
-                     <li class="menu__item"><a href="../../../competitions/1718" class="menu__link">Competitions</a></li>
+                     <li class="menu__item"><a href="../../../competitions/1819" class="menu__link">Competitions</a></li>
                      <li class="menu__line"></li>
                  </ul>
              </nav>
@@ -51,8 +51,8 @@
     <section class="main-content">
         <div class="lecture">
             <h1 style="text-align:center; color:#000">Neural Networks: Introduction and Overview</h1>
-            <h3 style="text-align:center; color:#000">Nikhil Sardana</h2>
-            <h3 style="text-align:center; color:#000">November 2017</h2>
+            <h3 style="text-align:center; color:#000">Alan Zheng</h2>
+            <h3 style="text-align:center; color:#000">October 2018</h2>
 
               <h1 id="introduction">Introduction</h1>
               <p>Neural networks are fundamental to modern machine learning. In order to understand Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Generative Adversarial Networks (GANs), not only is it essential to understand the theory behind standard Neural Networks, but also the mathematics. To ensure complete understanding, we only use numpy to build our network, removing any reliance on a library.</p>
@@ -155,6 +155,7 @@
               <p>Let perceptron 1 model <span class="math inline">\(y + x - 1.5 = 0\)</span> (the upper line), and perceptron 2 model <span class="math inline">\(y + x - 0.5 = 0\)</span> (the lower line). Because the weights are the coefficients of these functions, <span class="math inline">\(w_1 = 1, w_2 = 1, w_3 = 1, w_4 = 1\)</span> and the biases <span class="math inline">\(b_1 = -1.5\)</span> and <span class="math inline">\(b_2 = -0.5\)</span>.</p>
               <p>The output of Perceptron 1 will be a 1 for points above the upper line, and a 0 for the points below the upper line. The output of Perceptron 2 will be a 1 for points above the lower line, and a 0 for points below the lower line. Thus, above both lines, we get 2. In between the lines, we get 1. Below the lines, we get 0. However, in order to create a threshold to separate the points between the lines from the points outside, we would like the outputs for points between the lines to be additive.</p>
               <p>In other words, we would like the inputs of Perceptron 3 to cancel outside the lines, and have a maximum for points inside the lines. Thus, we let <span class="math inline">\(w_6 = 1\)</span> and <span class="math inline">\(w_5 = -1\)</span>. This gives us an output of 1 for points between the lines, and an output of 0 for points outside the lines. Thus, we can set the bias for Perceptron 3: <span class="math inline">\(b_3 = -0.5\)</span>.</p>
+              <p>Next time, we'll be looking at more complex Neural Networks and also more complex activation functions, such as the sigmoid function. It will be much more calculus/math-heavy than this lecture.</p>
               <h1 id="problems">Problems</h1>
               <ol>
               <li><p>Write out the weights, biases, and structure of the Perceptron that classifies the function OR.</p></li>
@@ -162,7 +163,7 @@
               <li><p>Write an implementation of the XOR Multi-Layer Perceptron in Python.</p></li>
               </ol>
           </div>
-        <p><a href="../../../schedule/1718">&larr; Back to lectures</a></p>
+        <p><a href="../../../schedule/1819">&larr; Back to lectures</a></p>
 </section>
 <footer class="site-footer" style="background-image:linear-gradient(120deg, #272d39, #272d39);">
     <section class="main-content">
