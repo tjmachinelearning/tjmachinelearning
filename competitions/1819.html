@@ -139,6 +139,13 @@
 
                         <p>As always, only use Python for this competition. The only external libraries allowed for this competition is Numpy. We highly recommend you use the library for vectors (bias vectors, etc.) and matrices (weights, partial matrices).</p>
                         <p>We've written a <a href="../lectures/1819/nn3/nn_shell.py.txt">small shell</a>. The shell has a network class, and each network is made up of a list of layers (which are a separate class). Each layer is designed to have its own vectors and matrices (biases and weights, etc.). You don't have to structure your network this way by any means, or have a layer class at all. Most of the time when people write neural networks from scratch, they only have a single network class.</p>
+
+                        <p>Some important tips for the competition: 
+                        <ol>
+                            <li>Weight initialization - We didn't cover this really, but there are many ways to determine your starting weights. In general, we suggest using guassian dist from -1 to 1.</li>
+                            <li>One hot encoding - Since you have 10 output nodes, make sure you convert your expected y value to 10 values. For example, 3 would go to (0 0 0 1 0 0 0 0 0 0) for the network's output where each node refers to if a specific digit is present. One hot encoding is used as a representation for categorical variables, which in this case would be a digit. Check <a href="https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f" target="_blank">this post</a> out if you want to read more into it.</li>
+                        </ol>    
+                        </p>
                         <p>The competition ends in a week and a half, at 11:59:59 p.m. on 12/5/18. Also, since writing a neural network from scratch is harder than previous competitions, this competition will be worth double in our rankings.</p>
                         <p><a href="https://www.kaggle.com/c/nn3">Competition link</a></p>
                     </section>
