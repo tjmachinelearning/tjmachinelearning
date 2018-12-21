@@ -111,6 +111,36 @@
                 <h4 style="margin-top: 0vh;">Beginner Series Competitions</h4>
 
                 <div class="box">
+                    <div class="instructheader"><h4 id=cnntitle>Convolutional Neural Networks Competition Instructions</h4></div>
+                    <section id="cnn" style="display:none">
+                        <hr>
+                        <p><i>12/21/18 -&emsp;</i>Your job is to write a CNN that predicts the lcocation of facial features on an image. Each predicted keypoint is specified by an (x,y) real-valued pair in the space of pixel indices. There are 15 keypoints, which represent the following elements of the face:</p>
+                        <p>left_eye_center, right_eye_center, left_eye_inner_corner, left_eye_outer_corner, right_eye_inner_corner, right_eye_outer_corner, left_eyebrow_inner_end, left_eyebrow_outer_end, right_eyebrow_inner_end, right_eyebrow_outer_end, nose_tip, mouth_left_corner, mouth_right_corner, mouth_center_top_lip, mouth_center_bottom_lip</p>
+                        <p>Left and right here refers to the point of view of the subject.</p>
+                        <p>The input image is given in the last field of the data files, and consists of a list of pixels (ordered by row), as integers in (0,255). The images are 96x96 pixels.</p>
+                        <h4>Data files</h4>
+                        <ul>
+                            <li><strong>train.csv</strong>: list of training 5000 images. Each row contains the (x,y) coordinates for 15 keypoints, and image data as row-ordered list of pixels. The first row is the header and associates each column with the feature. There are 31 values in each row, with the first 30 being x value for feature 1, y value for feature 1, etc and the 31st value being the image. The first 30 should be the outputs of your network and the 31st (image) should be the input.</li>
+                            <li><strong>test.csv</strong>: list of 2049 test images. Each row contains ImageId and image data as row-ordered list of pixels.</li>
+                            <li><strong>samplesubmission.csv</strong>: list of keypoints to predict. Each row has an Id and a value. The Id corresponds to the image and feature in the format "ImageId.FeatureId" where featureId is based on the order in which they are sorted in the train file. For example, the first feature is left_eye_center_x so to predict left_eye_center_x for image 1, I would have "1.1 34.555" as the first row.</li>
+                        </ul>
+                        <h4>Helpful tips</h4>
+                        <ul>
+                            <li><a href="../contests/1819/cnn/io_sample.py.txt">Sample code</a></li>
+                            <li>Use Keras. Documentation available <a href="https://keras.io">here</a>. The first half of <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this tutorial</a> may come in handy. Our introductory lecture on Keras is available <a href="https://tjmachinelearning.com/lectures/1819/library/Intro_to_Keras.pdf">here</a>.</li>
+                            <li>Start with a standard neural network before moving on to a convolutional one. When you do use a convolutional network,
+                             make sure to reshape your input to 96x96 instead of 1x9216 as it is right now. This is best done using numpy.</li>
+                            <li>Use a linear activation in the final layer because the challenge is regression not classification. There should be 30 output nodes.</li>
+                            <li>The Ids start at 1 not 0. Don't mix this up.</li>
+                            <li>Don't forget your header in the submission file.</li>
+                            <li>To better understand the format, open the files in Excel.</li>
+                        </ul>
+                        <p>The competition end Friday night at 11:59:59 p.m. on 1/11/19. Feel free to ask any clarifying format questions to the officers.</p>
+                        <p><a href="https://www.kaggle.com/c/cnn">Competition link</a></p>
+                    </section>
+                </div>
+
+                <div class="box">
                    <div class="instructheader"><h4 id="nntitle">Neural Networks Competition Instructions</h4></div>
                    <section id="nn" style="display:none">
                        <hr>
