@@ -1,60 +1,155 @@
 <h1 id="introduction">Introduction</h1>
-<p>Recurrent Neural Networks (RNNs) are a type of neural network that specializes on sequential data; that is, data that is dependant on prior data. For instance, RNNs are often used for natural language processing, because a given word is more likely to appear depending on the prior words. In this vein, RNNs have been applied to tasks like machine translation, image caption generation, and word prediction. However, RNNs have also seen moderate successes in image generation and audio generation.</p>
-<h1 id="basic-rnns">Basic RNNs</h1>
-<p>In order to handle sequential data, a recurrent neural network has to be able to take in vectors of variable lengths. To do this, we design our network in the appropriate way. A RNN might look like the following:</p>
+<p>Recurrent Neural Networks, or RNNs, are a type of neural network that uses sequential data within its model. RNNs aren’t a new topic; they’ve been around since the 1980s. But with more data and computational power, they’ve been relevant in the fields of natural language processing, image generation, and image captioning.</p>
+<h1 id="rnns-review">RNNs Review</h1>
+<p>The main purpose of an RNN is to handle sequential data, so accordingly it should use the previous states that it outputs. In order to account for the sequential data, the RNN structure looks like this:</p>
 <div class="figure">
-<img src="rnn.jpg" alt="An unrolled RNN." />
-<p class="caption">An unrolled RNN.<span data-label="fig:rnn"></span></p>
+<img src="basic_rnn.jpg" alt="A standard RNN" />
+<p class="caption">A standard RNN<span data-label="fig:basic_rnn"></span></p>
 </div>
-<p>The figure above shows a RNN being <em>unrolled</em>, that is, being written out for the entire sequence <span class="math inline">\(x\)</span>. If, for example, we had a sentence composed of five words, we would have the network be unrolled into five layers, one for each word. Note that the number of layers in the network matches the length of the sequence, so we can handle variable-length vectors unlike standard feedfoward neural networks. Moreover, the hidden state <span class="math inline">\(s_t\)</span> depends on not only <span class="math inline">\(x_t\)</span> but also the state of the previous layer <span class="math inline">\(s_{t-1}\)</span>, allowing RNNs to process sequential data better than feedforward networks. The output of a layer, <span class="math inline">\(o_t\)</span>, is calculated from the layer’s hidden state and is thus likewise reliant on the previous hidden state. Specifically, <span class="math display">\[s_t = f(Ux_t + Ws_{t-1})\]</span> where U and W are weight matrices. The first hidden state <span class="math inline">\(s_0\)</span> is usually initialized to <span class="math inline">\(f(Ux_0)\)</span>. The function <span class="math inline">\(f\)</span> is typically the tanh function or the ReLU function. The output <span class="math inline">\(o_t\)</span> is calculated as such: <span class="math display">\[o_t = softmax(Vs_t)\]</span> where V is also a weight matrix. Note that U, V, and W are the same matrices for each layer as we are performing essentially the same operation at each time step <span class="math inline">\(t\)</span>, meaning we only need to learn a few parameters. Also note that although we have an output for each layer, we may not necessarily use every one. For example, in sentiment analysis, we would only want the final output, the sentiment of the entire sentence, not the sentiment after each individual word.</p>
-<h2 id="backpropagation-through-time">Backpropagation Through Time</h2>
-<p>The equations for the hidden state <span class="math inline">\(s_t\)</span> and predicted output <span class="math inline">\(o_t\)</span> are: <span class="math display">\[s_t=\tanh(U x_t+W s_{t-1})\]</span> <span class="math display">\[o_t= softmax(V s_t)\]</span></p>
-<p>Our total loss (error) function is:</p>
-<p><span class="math display">\[\label{loss}
-    L(y,\hat{y})=\sum_{t} E_t\]</span></p>
-<p>This is simply the sum of the losses at each time step. We can define the loss at each time step as: <span class="math display">\[\label{oneloss}
-    E_t=-y_t\log o_t.\]</span> where <span class="math inline">\(y_t\)</span> is the ground truth at a particular time step <span class="math inline">\(t\)</span>. Note that the loss functions are dot products between the vectors <span class="math inline">\(y_t\)</span> and the resulting vector of the element-wise logarithm of <span class="math inline">\(o_t\)</span>. The weight matrices to be trained are <span class="math inline">\(U\)</span>, <span class="math inline">\(V\)</span>, and <span class="math inline">\(W\)</span>. For <span class="math inline">\(V\)</span>, by the chain rule, we find: <span class="math display">\[\frac{\partial E_t}{\partial V} = \frac{\partial E_t}{\partial o_t}\frac{\partial o_t}{\partial (V s_t)}\frac{\partial (V s_t)}{\partial V}\]</span> From this, we can derive: <span class="math display">\[\frac{\partial E_t}{\partial V} = (o_t - y_t) \times s_t\]</span> Where <span class="math inline">\(\times\)</span> is the cross product. For <span class="math inline">\(W\)</span>, we can similarly apply the chain rule: <span class="math display">\[\frac{\partial E_t}{\partial W} = \frac{\partial E_t}{\partial o_t}\frac{\partial o_t}{\partial s_t}\frac{\partial s_t}{\partial W}\]</span> We can use the chain rule on the <span class="math inline">\(\frac{\partial s_t}{\partial W}\)</span> term again as <span class="math inline">\(s_t\)</span> depends on <span class="math inline">\(s_{t-1}\)</span> and we find: <span class="math display">\[\frac{\partial E_t}{\partial W} = \frac{\partial E_t}{\partial o_t}\frac{\partial o_t}{\partial s_t}\sum_{i=0}^t \frac{\partial s_t}{\partial s_i}\frac{\partial s_i}{\partial W}\]</span> From this, we can derive: <span class="math display">\[\frac{\partial E_t}{\partial W} = (o_t - y_t)V\sum_{i=0}^t \frac{\partial s_t}{\partial s_i}\frac{\partial s_i}{\partial W}\]</span> The partial derivative with respect to <span class="math inline">\(U\)</span> is essentially identical: <span class="math display">\[\frac{\partial E_t}{\partial U} = (o_t - y_t)V\sum_{i=0}^t \frac{\partial s_t}{\partial s_i}\frac{\partial s_i}{\partial U}\]</span></p>
-<h2 id="problems-with-long-term-dependency">Problems with Long-term Dependency</h2>
-<p>The <span class="math inline">\(\sum_{i=0}^t \frac{\partial s_t}{\partial s_i}\frac{\partial s_i}{\partial W}\)</span> term causes the vanishing gradient problem, which means that the network tends to forget words over time, which can prove troublesome. Let’s take a word predictor, for instance. Given part of a sentence, predict the next word. This structure would work quite well for a sentence like “I ate some delicious ice ____”; “ice” provides a significant cue that the next word might be “cream.” However, given a sentence like “I went to the ice cream store, but I forgot to bring my ____”, it will likely have trouble guessing “wallet.”</p>
-<p>This is the problem of long-term dependencies; the network will “forget” words over time. We can remedy this issue with other types of RNNs such as LSTMs, which we will cover later on.</p>
-<h1 id="types-of-rnns">Types of RNNs</h1>
+<p>What makes an RNN different from standard networks is that the previous hidden state from the last input is passed into the function for the current state. For example, with the sentence “I like dogs”, the word “I” is passed through the network and results in some output like normal. The previous hidden state that was computed for “I” is passed into the function to calculate the hidden state for “like”, and so forth. This can be modeled with the equation:</p>
+<p><span class="math display">\[s_{t} = f(Ws_{t-1},Ux_{t})\]</span></p>
+<p>where <span class="math inline">\(W\)</span> and <span class="math inline">\(U\)</span> are weight matrices, <span class="math inline">\(s_{t}\)</span> is the state, <span class="math inline">\(s_{t-1}\)</span> is the previous state, and <span class="math inline">\(x_{t}\)</span> is the input vector. The function that the two parameters are passed into is an activation function like ReLU or tanh.</p>
+<p>The output for each input is given through the function:</p>
+<p><span class="math display">\[o_{t} = g(Vs_{t})\]</span></p>
+<p>where <span class="math inline">\(V\)</span> is a weight matrix and the function is another activation function for classification, like softmax. All the weight matrices, <span class="math inline">\(W\)</span>, <span class="math inline">\(U\)</span>, and <span class="math inline">\(V\)</span>, are the same for each layer because we basically perform the same operation at each step. Another important thing to notice is that although we can produce an output at each stage, we can choose to only use the ones we want. This comes to be helpful in scenarios like sentiment analysis where we want to model a many inputs to one output scenario.</p>
+<h2 id="backpropagation">Backpropagation</h2>
+<p>Backpropagation in RNNs are similar to neural networks, involving the chain rule as it takes a step back in time. If you want to see the full math behind it, check out the other RNN lecture. A problem arises in normal backpropagation when we consider our loss function:</p>
+<p><span class="math display">\[Loss(y,\hat{y}) = \sum_{i=0}^{t}{E_{i}}\]</span></p>
+<p>In order to calculate the loss, we would have to find the loss by propagating through the entire RNN and summing all of those errors for every single gradient step. For really long RNNs, like training on the entirety of Wikipedia, this can take a long time. This inspires the idea of <em>truncated backpropagation through time</em>.</p>
 <div class="figure">
-<img src="LSTM.png" alt="An LSTM cell." />
-<p class="caption">An LSTM cell.<span data-label="fig:lstm"></span></p>
+<img src="truncated_backprop.png" alt="Truncated Backpropagation Through Time" />
+<p class="caption">Truncated Backpropagation Through Time<span data-label="fig:truncated_backprop"></span></p>
 </div>
-<p>An Long Short Term Memory network (LSTM) attempts to alleviate this issue by having a “forget gate,” which allows the network to select parts of an input vector to “remember” (i.e. pass on to the next cell) or “forget.” It additionally has a mechanism to store and update the cell state. Let’s walk through the cell step-by-step.</p>
-<h2 id="lstm-walk-through">LSTM walk-through</h2>
+<p>Rather than propagating and then backpropagating on the entire network, we handle it in chunks. After calculating the loss for the subset of the network that we’re working with, we update the weights accordingly. A good way of thinking of this is like mini-batch; the data is taken in chunks and allows the model to converge more quickly.</p>
+<h2 id="lstms">LSTMs</h2>
+<p>Our original RNN cell looked like this:</p>
 <div class="figure">
-<img src="LSTM0.png" alt="Cell state." />
-<p class="caption">Cell state.<span data-label="fig:lstm0"></span></p>
+<img src="lstm/rnn_basic_cell.png" alt="Original RNN Cell" />
+<p class="caption">Original RNN Cell<span data-label="fig:rnn_basic_cell"></span></p>
 </div>
-<p>First off, the cell state. This is the pathway in which information flows from cell-to-cell. It was designed so that this would have little interaction, so as to store long-term data with little change.</p>
+<p>Notice how only the input and the hidden state are controlling the outputs of the cell.</p>
+<p>Unfortunately, in practice, RNNs are susceptible to the vanishing gradient and the exploding gradient problem. Essentially, through backpropagation, earlier layers either face an exponentially small gradient or large gradient. This means that in sequences of data, at the current time <em>t</em>, the RNN is likely to forget relevant data from long before.</p>
+<p>An LSTM, or Long-short term memory network, seeks to solve these problems. There are four main parts to an LSTM: the cell state (<span class="math inline">\(c_{t}\)</span>), the input gate (<span class="math inline">\(i_{t}\)</span>), the forget gate (<span class="math inline">\(f_{t}\)</span>), and the output gate (<span class="math inline">\(o_{t}\)</span>).</p>
 <div class="figure">
-<img src="LSTM1.png" alt="The forget gate." />
-<p class="caption">The forget gate.<span data-label="fig:lstm1"></span></p>
+<img src="lstm/lstm_main.png" alt="Overview of an LSTM Cell" />
+<p class="caption">Overview of an LSTM Cell<span data-label="fig:lstm_main"></span></p>
 </div>
-<p>This is the forget gate. We use a sigmoid activation conditioned on the input and prior output, which gives us outputs between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Since we’re multiplying this value to the cell state, an output of <span class="math inline">\(0\)</span> would correspond to completely forgetting everything, <span class="math inline">\(1\)</span> remembering everything. This is done so as to update old information with more the more recent context.</p>
+<p>This cell looks a lot more complicated than the vanilla RNN we saw before. However, these added aspects improve the RNN by a lot so lets walk through them.</p>
 <div class="figure">
-<img src="LSTM2.png" alt="Updating the cell state." />
-<p class="caption">Updating the cell state.<span data-label="fig:lstm2"></span></p>
+<img src="lstm/lstm_cellstate.png" alt="LSTM Cell State" />
+<p class="caption">LSTM Cell State<span data-label="fig:lstm_cellstate"></span></p>
 </div>
+<p>The cell state serves as the main flow across the cells. The gates modify the information that is passed through the cell state. Note, the <span class="math inline">\(X\)</span> denotes element-wise multiplication (also known as the Hadamard product) and the <span class="math inline">\(+\)</span> denotes element-wise addition.</p>
 <div class="figure">
-<img src="LSTM3.png" alt="Outputting the cell state." />
-<p class="caption">Outputting the cell state.<span data-label="fig:lstm3"></span></p>
+<img src="lstm/lstm_forget.png" alt="LSTM Forget Gate" />
+<p class="caption">LSTM Forget Gate<span data-label="fig:lstm_forget"></span></p>
 </div>
-<p>Next, we add a vector to the cell state based on the input and previous output, so as to update the state. Note that we’re adding values between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>; <span class="math inline">\(\tanh\)</span> outputs <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span>, and the sigmoid outputs <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span>, which determines the magnitude of the update.</p>
+<p>The forget gate chooses whether or not the information should be added to the cell state. This gate is a sigmoid layer that takes in <span class="math inline">\(h_{t-1}\)</span> and <span class="math inline">\(x_{t}\)</span>. This forget gate output will be multiplied into the cell state, so if the forget gate has values of 0, then it would forget the information and if it has values of 1, then it would remember all the information.</p>
 <div class="figure">
-<img src="LSTM4.png" alt="Outputting the final value." />
-<p class="caption">Outputting the final value.<span data-label="fig:lstm4"></span></p>
+<img src="lstm/lstm_input.png" alt="LSTM Input Gate" />
+<p class="caption">LSTM Input Gate<span data-label="fig:lstm_input"></span></p>
 </div>
-<p>Lastly, we want to output <span class="math inline">\(h_i\)</span>. This is determined by the cell state, which is run through <span class="math inline">\(\tanh\)</span> to bound the values between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. The sigmoid, whose output is conditioned on the previous cell output and current input, allows the cell to select which parts of the cell state to output (the sigmoid will output <span class="math inline">\(0\)</span> for the parts it does not want to output, and vice-versa).</p>
-<p>Then, the process repeats, with the next input.</p>
+<p>Next is the input gate. This passes the input from the <span class="math inline">\(h_{t-1}\)</span> and <span class="math inline">\(x_{t}\)</span> values and combines it with the <span class="math inline">\(\tilde{C}_{t}\)</span>, or new candidate values. <span class="math inline">\(\tilde{C}_{t}\)</span> takes in the inputs and looks to find new values that are possible. Notice that this is a hyperbolic tan function, which outputs values from -1 to 1. This allows the layer to give negative correlations to a value as well.</p>
+<div class="figure">
+<img src="lstm/lstm_combine.png" alt="LSTM Combining Values" />
+<p class="caption">LSTM Combining Values<span data-label="fig:lstm_combine"></span></p>
+</div>
+<p>These values are all combined and put into the cell state which passes the values through.</p>
+<div class="figure">
+<img src="lstm/lstm_output.png" alt="LSTM Output Gate" />
+<p class="caption">LSTM Output Gate<span data-label="fig:lstm_output"></span></p>
+</div>
+<p>Lastly, there is the output gate. This is just another sigmoid layer, which is combined with the tanh of the cell state to give the <span class="math inline">\(h_{t}\)</span> final value that gets passed into the next cell.</p>
+<p>All these gates would be trained through backpropagation as they’re just layers in a network. However, with all the layers, LSTMs can be computationally expensive, which leads us into our next section.</p>
 <h2 id="grus">GRUs</h2>
 <div class="figure">
-<img src="GRU.png" alt="A GRU cell." />
-<p class="caption">A GRU cell.<span data-label="fig:gru"></span></p>
+<img src="GRU.png" alt="GRU Cell" />
+<p class="caption">GRU Cell<span data-label="fig:gru"></span></p>
 </div>
-<p>A Gated Recurrent Unit (GRU) is an alternative to an LSTM that is computationally simpler. It opts to combine the update and forget mechanisms into an “update” mechanism, and also combines the hidden state and the cell state. GRUs are becoming increasingly popular as the perform as well as LSTMs on some tasks at a significantly lower computational cost.</p>
+<p>GRUs, or Gated recurrent units, combine the forget and input gate into one “update” gate. Additionally, it merges the cell state and the hidden state, and adds other changes for efficiency. Fewer layers to train means a faster model.</p>
+<p>GRUs are a relatively new concept as well, being discovered by Cho, et al. in 2014. LSTMs, on the other hand, have been around since 1997, from the discovery by Hochreiter and Schmidhuber.</p>
+<h1 id="language-modeling">Language Modeling</h1>
+<p>Now that we understand common RNNs, we can see actual applications. There are two primary ways we can model language, either character by character or word by word. For the character by character method, we would have a list of characters that are available in our vocabulary. For example, using English, we would have 26 characters plus whatever punctuation and numbers needed in our vocabulary. The same thing applies for the word by word method, but our vocabulary would comprise of all the words available.</p>
+<p>The question then becomes how we represent this data. We can do so through <em>one-hot encoding</em>. One-hot encoding means that our input vectors would be of size 1 by our vocabulary size.</p>
+<div class="figure">
+<img src="one-hot-encode.png" alt="One-hot Encoding" />
+<p class="caption">One-hot Encoding<span data-label="fig:one-hot_encode"></span></p>
+</div>
+<p>The reason we do this is because if we were to set each vector to be of size 1 by 1 and increment the value based on whatever is in our vocabulary, it would learn certain pieces of data to be closer than others. For example, if we had the vocabulary of [a, b, c] and set the vectors for each one respectively to be [0], [1], and [2], our model would think that “a” and “b” are closer together than “a” and “c”, which obviously doesn’t make sense.</p>
+<p>Another question with RNNs becomes how can we generate new text to continuously go on. The way this works is we pass in a seed value for the <span class="math inline">\(x_{0}\)</span>, or the initial value that goes in. From that we get some output from the softmax function, which we take the maximum of as our value. To continue this chain, we pass this output as the <span class="math inline">\(x_{t+1}\)</span> input vector.</p>
+<p>For this, when we choose what to pass in as the next input vector, we can either just pass the highest value from our softmax, or alternatively, we can sample from the softmax probabilities and pass that for the next input. The reason as to why we do this is to generate multiple new types of output sequences giving more diversity to the model.</p>
+<h2 id="sequence-to-sequence-models">Sequence to Sequence Models</h2>
+<p>The goal of a sequence to sequence model is to map one sequence to another sequence. This can be done by having two RNNs, one as an <em>encoder</em> and the other as a <em>decoder</em>. The encoder takes in a sequence and maps it to one output vector and the decoder takes that one output vector and maps it to another sequence. In other words, an encoder is in the format of a many to one structure and the decoder is in the format of a one to many structure.</p>
+<div class="figure">
+<img src="seq2seq.png" alt="A Seq2Seq Model" />
+<p class="caption">A Seq2Seq Model<span data-label="fig:seq2seq"></span></p>
+</div>
+<p>In the figure above, we can see that this model can be used for chat bots and also for machine translation, meaning we take words of one language and convert them into words of another language.</p>
+<p>How does the model know when to stop translating? In training, there would be an end of sequence token appended onto the end of the translated text, like <span class="math inline">\(&lt;EOS&gt;\)</span>, which signifies that the translation should stop.</p>
+<h2 id="autoencoders">Autoencoders</h2>
+<p>An autoencoder attempts to compress a vast amount of information into one dense object, without losing any of the information. The middle part of an autoencoder is the compressed version of the data.</p>
+<div class="figure">
+<img src="autoencoder.jpg" alt="An Autoencoder" />
+<p class="caption">An Autoencoder<span data-label="fig:autoencoder"></span></p>
+</div>
+<p>When coding this model, in Keras for example, everything is done the same as if making a standard model, but we run <span class="math inline">\(Model.fit(X,X)\)</span> instead of <span class="math inline">\(Model.fit(X,Y)\)</span>. This is so the model can map the same value to itself, while compressing it inside the image.</p>
+<p>The reason this can prove to be useful in Seq2Seq models is because when in the task of machine translation, the middle part represents a universal part of the text. So when translating between English and German, the RNN could encode the data into one vector with the information, and pass that to a decoder to translate the original text.</p>
+<h2 id="attention">Attention</h2>
+<p>As great as sequence to sequence models are, we are relying on the last token of the encoder to contain all the information for the entire output sequence. Each part of the input sequence should play a different role for each part of the output sequences.</p>
+<div class="figure">
+<img src="attention_rnn.png" alt="Attentional RNN" />
+<p class="caption">Attentional RNN<span data-label="fig:attention_rnn"></span></p>
+</div>
+<p>Into each RNN cell, we pass in a weighted combination of the input states, which allows each output result to attend to different parts of the input sequence. This concept, accordingly so, is called <em>attention</em>. For each state of the decoder at a time step, <span class="math inline">\(s_{t}\)</span>, the sum of each weight multiplied by its respective input hidden state is added. In other words, the attention added for each state <em>i</em> is generally in the structure:</p>
+<p><span class="math display">\[a = \sum_{i=1}^{t}a_{i,t}*h_{i}\]</span></p>
+<p>Visualizing the weight matrix <span class="math inline">\(a\)</span> lets us see what input words contribute to each output word:</p>
+<div class="figure">
+<img src="attention_example.png" alt="Attention Visualized" />
+<p class="caption">Attention Visualized<span data-label="fig:attention_example"></span></p>
+</div>
+<p>In this visualization of a translation of a French sequence to an English sequence, the squares that are brighter show where the attention is activated. For example, the first box on the top left shows that “La” contributes to the output of “Destruction”. The overarching trend shows that the model goes through the inputs in order for the most part when generating the output. However, we can see attention really working in examples like when both the inputs “la” and “Syrie” contribute to the output term “Syria”.</p>
+<p>An important concept in attention is this idea of <em>hard attention</em> versus <em>soft attention</em>. Hard attention focuses on one fixed area of the input, whereas soft attention takes in a weighted distribution of where to look.</p>
+<div class="figure">
+<img src="softvhard_attention.png" alt="Soft vs. Hard Attention" />
+<p class="caption">Soft vs. Hard Attention<span data-label="fig:softvhard_attention"></span></p>
+</div>
+<p>Notice how in the top row of images, each image shows a distribution of the regions that are being looked at but in the bottom row images, each image shows a direct location that is being looked at. The problem with hard attention is that it isn’t differentiable, so different techniques have to be applied to work around that.</p>
+<p>Even though attention seems to be really helpful, when the input sizes and the output sizes increase, the amount of values for attention needed increases by a lot as well. This can also be inefficient for long character by character models. A possible solution for this is using reinforcement learning to filter out areas where the attention isn’t needed.</p>
+<h1 id="pixelrnn">PixelRNN</h1>
+<p>A cool application of RNNs is for filling in areas of an occluded image. The interesting part of the paper which this concept was the introduction of a 2D RNN.</p>
+<p>The two main techniques employed were the Row LSTM and the Diagonal BiLSTM. This lecture won’t get into the specifics of how each was used, but the general concept was that the Row LSTM went pixel by pixel horizontally, and the Diagonal BiLSTM accordingly goes pixel by pixel on the diagonals, with a convolution kernel size of 2.</p>
+<div class="figure">
+<img src="pixelrnn.png" alt="PixelRNN Outputs" />
+<p class="caption">PixelRNN Outputs<span data-label="fig:pixelrnn"></span></p>
+</div>
+<p>On the left are the images that would be passed in, with the occlusion, and on the right are the ground truth images. All the images in between are the generation by the network. From some distance away, it sortof looks accurate, but close-up, the images are obviously not perfect.</p>
+<h1 id="draw-network">DRAW Network</h1>
+<p>DRAW, or the Deep Recurrent Attentive Writer, is an RNN for image generation, but does so in a way that tries to mimic the way humans create images.</p>
+<div class="figure">
+<img src="draw_structure.jpg" alt="DRAW Model" />
+<p class="caption">DRAW Model<span data-label="fig:draw_structure"></span></p>
+</div>
+<p>Although this seems like an autoencoder, it’s actually a different type of autoencoder than mentioned earlier in the lecture. This network specifically uses a <em>variational autoencoder</em> (VAE). VAEs are essentially generative autoencoders; the encoder creates a latent vector that has a probability distribution, which the decoder samples from to create the generated image. Why go through this? This makes sure that different images can be generated through the same input image, because the model learns the underlying distribution.</p>
+<p>Now we have an RNN that can sequentially make the generated image over time. But looking at the sequence of generated images at each time step, the model is drawing on the entire image and making small changes each time. We would rather have the model work in one area and move around as if it was actually drawing it by hand. This is where attention comes in.</p>
+<div class="figure">
+<img src="draw_attention.png" alt="DRAW with Attention" />
+<p class="caption">DRAW with Attention<span data-label="fig:draw_attention"></span></p>
+</div>
+<p>To keep things simple, basically there’s an added attention gate, which tells the model where to focus on. This continuously shifts at each time step, until the model finishes the image. The end result of these images is pretty successful.</p>
+<div class="figure">
+<img src="draw_streetview.png" alt="DRAW Generated Street View House Numbers" />
+<p class="caption">DRAW Generated Street View House Numbers<span data-label="fig:draw_streetview"></span></p>
+</div>
+<p>These generated images of house numbers looks really accurate, and basically indistinguishable from real pictures of house numbers.</p>
 <h1 id="conclusion">Conclusion</h1>
-<p>There are many other types of RNNs; LSTMs and GRUs are two of the most popular. Additionally, there have been advancements on RNNs themselves; “attention” mechanisms are popular in tasks such as machine translation and caption generation.</p>
-<p>For NLP tasks, we recommend investigating word vectors (Word2Vec, skip-thought vectors, etc.) to encode words to vectors. Also, using RNNs as the basis for an encoder/decoder model is widely used to translate sequences (e.g. machine translation). We encourage you to further investigate these areas!</p>
+<p>There’s a lot within the field of RNNs, and is growing rapidly as it sees applications all over. This lecture should have given you a glimpse into RNNs and the advancements that are currently happening.</p>
+<h1 id="acknowledgements">Acknowledgements</h1>
+<p>I did not create any diagrams or images in this lecture. All credits go to their respective owners. Here are most of the sources I used:</p>
+<ul>
+<li><p><a href="http://www.youtube.com/watch?v=6niqTuYFZLQ">Stanford RNN CS231n Lecture</a></p></li>
+<li><p><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">Christopher Olah’s LSTM Walkthrough</a></p></li>
+<li><p><a href="https://arxiv.org/pdf/1601.06759v2.pdf">PixelRNN Paper</a></p></li>
+<li><p><a href="https://arxiv.org/pdf/1502.03044.pdf">Attention Paper</a></p></li>
+<li><p><a href="https://arxiv.org/pdf/1502.04623.pdf">DRAW Paper</a></p></li>
+<li><p><a href="http://kvfrans.com/what-is-draw-deep-recurrent-attentive-writer/">Kevin Fran’s DRAW Walkthrough</a></p></li>
+</ul>
