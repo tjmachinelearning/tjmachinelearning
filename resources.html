@@ -82,14 +82,14 @@
     	<p>If you've read through our lectures and want to learn more, we recommend reading the lecture notes or watching the videos of the <a href="http://cs229.stanford.edu/">CS229</a> and <a href="http://cs231n.stanford.edu/">CS231n</a> courses.
     		CS229 takes a more mathematical look at standard machine learning methods, while CS231n focuses on deep learning algorithms for visual processing.</p>
 	<p>If you're interested in learning more about Reinforcement Learning, we recommend viewing the <a href="http://web.stanford.edu/class/cs234/index.html">CS234</a> course notes, slides, or <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">videos</a>. If you want to learn more about generative models,
-		slides and <a href="https://deepgenerativemodels.github.io/notes/index.html">notes</a> are available from the <a href="https://deepgenerativemodels.github.io/">CS236</a> course, but no lecture recordings are available. 
-		Unfortunately, few other courses on generative models exist, and none seem to have lecture videos available either.</p>
+		slides and <a href="https://deepgenerativemodels.github.io/notes/index.html">notes</a> are available from the <a href="https://deepgenerativemodels.github.io/">CS236</a> course, but no lecture recordings are available. Other interesting courses include <a href="http://web.stanford.edu/class/cs224n/">CS224n</a>, which covers natural language processing, and <a href="https://cs228.stanford.edu/">CS228</a>: Probabilistic Graphical Models.
+    </p>
     		<p>In addition, if you need to brush up on your calculus knowledge, a good book is <a href="https://artofproblemsolving.com/store/item/calculus">AOPS Calculus</a>. The TJ BC Calculus material is also available to anyone for free on Blackboard.
     		If you need work on your multivariable calculus knowledge, the TJ multi teachers use the Stewart Multivariable Calculus book, but Dr. Osborne's notes cover the much of the material in a more concise fashion.</p>
             <h3>Computational Resources
             </h3>
             <p>Unfortunately, TJ has a severe lack of GPUs. When the Computer Systems lab was upgraded a few years ago, the aging CPUs were replaced with then-modern i5-4690s. However, the GPUs remain GT 730s.
-                If you would like to run your code on TJ machines, we recommend you use the computer called <code>zoidberg</code>, which is the only computer with a modern GPU. Simply ssh using the following commands:
+                If you would like to run your code on TJ machines, we recommend you use the computer called <code>zoidberg</code>, which has modern GPUs. Simply ssh using the following commands:
             <br><code>ssh username@remote.tjhsst.edu<br>
                      ssh zoidberg
                 </code>
@@ -99,8 +99,8 @@
       <a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing Libraries on TJ Linux Machines</h3>
 
             <p>
-            All the necessary dependencies (CUDA, CuDNN) have been installed for Tensorflow, Keras, and PyTorch on the Linux machines.
-            Due to user restrictions, each user must install the library themselves. Use these commands on <code>zoidberg</code> for Tensorflow and Keras, respectively:
+            All the necessary dependencies (CUDA, cuDNN) have been installed for <a href="https://www.tensorflow.org">TensorFlow</a>, <a href="https://keras.io">Keras</a>, and <a href="https://pytorch.org">PyTorch</a> on the Linux machines.
+            Assuming the library you want hasn't already been installed, you'll need to install it with the <code>--user</code> flag. Use these commands on machines with GPUs for TensorFlow and Keras, respectively:
             <br>
             <code>
                      pip3 install tensorflow-gpu --user
@@ -108,37 +108,30 @@
             </code>
         </p>
         <p>
-            For PyTorch, check the latest commands on <a href="http://www.pytorch.org">the official website</a>. Select Python 2.7 and CUDA 8.0.
-            You must use Python 2 for PyTorch on <code>zoidberg</code> because <code>zoidberg</code> has Python 2.7 and 3.4, but PyTorch supports
-                Python 2.7, 3.5, and 3.6. The commands as of right now are:
-                <br>
-                <code>pip install http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp27-none-linux_x86_64.whl --user
-                    <br>pip install torchvision --user
-    	    </code>
+            Note that Keras requires a backend engine (TensorFlow is recommended).
+        </p>
+        <p>
+             For PyTorch, check the latest commands on <a href="http://www.pytorch.org">the website</a>. Select the proper Python and CUDA versions. You can check your python version by typing <code>python</code> and the CUDA version with <code>nvcc --version</code>.
     	 </p>
     	 <p>
-    	    If you are working on a Linux machine that is not <code>zoidberg</code> or <code>duke</code> (in other words, a standard workstation without powerful GPUs), you will need to install the CPU version of PyTorch.
-    	    Simply go to <a href="http://www.pytorch.org">the official site</a>, select "Linux" for the OS, "pip" for the package manager, "3.5" or "2.7" depending on whether you want to use Python 3 or Python 2, and "None" for the CUDA version. Copy and paste the commands shown.
-    	    Note, you will still need to add <code> --user</code> to all commands.
+    	    If you are working on a standard Linux machine without a decent GPU, you'll need to install the CPU versions of these libraries.
+    	    For TensorFlow, installation instructions are available <a href="https://www.tensorflow.org/install">here</a>. For Pytorch, ensure you select "None" for the CUDA version.
+    	    As always, you will need to add <code> --user</code> to all commands if you aren't working in a virtual environment, or don't have root.
     	 </p>
     	    <h3>Installing Libraries on Your Own Linux Machine</h3>
             <p>If you want to install these libraries on your own Linux computer, just remove the <code>--user</code> for the above commands, since you presumably have root.
-    		If you have Python 3.5 on your machine, you can install Pytorch for Python3 like so: </br>
-    	  	<code>pip3 install http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl</code><br>
-    	  	<code>pip3 install torchvision</code><br>
-    	  For Python 3.6, replace every "35" with a "36" in the above commands. Check for your specific configuration on  <a href="http://www.pytorch.org">the official website</a>.
-    	  This assumes you have a CUDA 8.0 compatible GPU. If you don't, running any sort of deep learning model will take too long, and it is advisable you use the TJ GPU Cluster.
+                If you don't have a half-decent Nvidia GPU, running large deep learning models will take unreasonably long, and it is advisable you use the TJ GPU cluster. If you do have a GPU, make sure you have <a href="https://docs.nvidia.com/cuda/index.html">CUDA</a> and <a href="https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html">cuDNN</a> configured beforehand.
     	</p>
         <h3>Libraries on Windows Machines</h3>
-          <p>Machine Learning Club recommends using Scikit-Learn for simple machine learning. For deep learning, ML Club highly recommends <a href="http://www.keras.io">Keras</a> with the
-          <a href="https://www.tensorflow.org">Tensorflow</a> backend.</p>
+          <p>Most machine learning libraries are compatible with Windows, especially CPU versions. GPU-dependent deep learning libraries are often slower and less reliable on Windows, so use Linux if you can.
+          <p>Machine Learning Club recommends using Scikit-Learn for simple machine learning.</p>
           <p><a href = "res/install/scikitlearn.txt">Instructions for installing Scikit-learn on your computer</a></p>
-          <p>If you are trying to run on TJ windows machines, a bit of a workaround is required due to restrictions. Follow these instructions for scikit-learn.</p>
+          <p>If you are trying to run on TJ Windows machines, a bit of a workaround is required due to restrictions. Follow these instructions for scikit-learn.</p>
           <p><a href= "res/install/scikit_tj_windows.txt">Instructions for installing Scikit-learn on TJHSST Windows Machines</a></p>
           <p>If you can't get that to work, use our <a href = "res/guides/ssh.txt">Instructions for ssh'ing into the syslab</a></p>
           <p><a href = "res/guides/vimandnano.txt">Basic Vim and Nano Instructions</a></p>
           <h3>Python 2 or 3?</h3>
-          <p>Machine Learning Club recommends Python 3 whenever possible. Almost all libraries have support for Python 3.5 and 3.6.
+          <p>Machine Learning Club recommends Python 3 whenever possible. Almost all libraries have support for the latest version.
           Even though most support Python 2.7 as well, Python 2 support ends in <a href="https://pythonclock.org/">2020</a>, so make the switch if you haven't already!</p>
         </section>
     <!--close all non-footer content-->
