@@ -76,16 +76,18 @@
         </div>
 
         <section class="main-content">
-    	<h3>Recommended Courses</h3>
-    	<p>If you've read through our lectures and want to learn more, we recommend reading the lecture notes or watching the videos of the <a href="http://cs229.stanford.edu/">CS229</a> and <a href="http://cs231n.stanford.edu/">CS231n</a> courses.
-    		CS229 takes a more mathematical look at standard machine learning methods, while CS231n focuses on deep learning algorithms for visual processing.</p>
-	<p>If you're interested in learning more about Reinforcement Learning, we recommend viewing the <a href="http://web.stanford.edu/class/cs234/index.html">CS234</a> course notes, slides, or <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">videos</a>. If you want to learn more about generative models,
-		slides and <a href="https://deepgenerativemodels.github.io/notes/index.html">notes</a> are available from the <a href="https://deepgenerativemodels.github.io/">CS236</a> course, but no lecture recordings are available. Other interesting courses include <a href="http://web.stanford.edu/class/cs224n/">CS224n</a>, which covers natural language processing, and <a href="https://cs228.stanford.edu/">CS228</a>: Probabilistic Graphical Models.
-    </p>
+        	<h3>Recommended Courses</h3>
+        	<p>If you've read through our lectures and want to learn more, we recommend reading the lecture notes or watching the videos of the <a href="http://cs229.stanford.edu/">CS229</a> and <a href="http://cs231n.stanford.edu/">CS231n</a> courses.
+        		CS229 takes a more mathematical look at standard machine learning methods, while CS231n focuses on deep learning algorithms for visual processing. The rigorous <a href="http://cs229.stanford.edu/notes/">lecture notes</a> for CS229 are especially helpful.</p>
+    	    <p>If you're interested in reinforcement learning, we recommend viewing the <a href="http://web.stanford.edu/class/cs234/index.html">CS234</a> course notes, slides, or <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">videos</a>. If you want to learn more about generative models,
+    		   slides and <a href="https://deepgenerativemodels.github.io/notes/index.html">notes</a> are available from the <a href="https://deepgenerativemodels.github.io/">CS236</a> course, but no lecture recordings are available. Other interesting courses include <a href="http://web.stanford.edu/class/cs224n/">CS224n</a>, which covers natural language processing, and <a href="https://cs228.stanford.edu/">CS228</a>: Probabilistic Graphical Models.
+            </p>
+            <p>
+                If some materials are unavailable because a course is currently in session, look for archived versions of previous offerings. Most courses should also have lecture videos from a previous year publicly available on YouTube.
+            </p>
     		<p>In addition, if you need to brush up on your calculus knowledge, a good book is <a href="https://artofproblemsolving.com/store/item/calculus">AOPS Calculus</a>. The TJ BC Calculus material is also available to anyone for free on Blackboard.
     		If you need work on your multivariable calculus knowledge, the TJ multi teachers use the Stewart Multivariable Calculus book, but Dr. Osborne's notes cover the much of the material in a more concise fashion.</p>
-            <h3>Computational Resources
-            </h3>
+            <h3>Computational Resources</h3>
             <p>Unfortunately, TJ has a severe lack of GPUs. When the Computer Systems lab was upgraded a few years ago, the aging CPUs were replaced with then-modern i5-4690s. However, the GPUs remain GT 730s.
                 If you would like to run your code on TJ machines, we recommend you use the computer called <code>zoidberg</code>, which has modern GPUs. Simply ssh using the following commands:
             <br><code>ssh username@remote.tjhsst.edu<br>
@@ -109,7 +111,7 @@
             Note that Keras requires a backend engine (TensorFlow is recommended).
         </p>
         <p>
-             For PyTorch, check the latest commands on <a href="http://www.pytorch.org">the website</a>. Select the proper Python and CUDA versions. You can check your python version by typing <code>python</code> and the CUDA version with <code>nvcc --version</code>.
+             For PyTorch, check the latest commands on <a href="https://pytorch.org/get-started/locally/">the website</a>. Select the proper Python and CUDA versions. You can check your python version by typing <code>python</code> and the CUDA version with <code>nvcc --version</code>.
     	 </p>
     	 <p>
     	    If you are working on a standard Linux machine without a decent GPU, you'll need to install the CPU versions of these libraries.
@@ -122,10 +124,14 @@
     	</p>
         <h3>Libraries on Windows Machines</h3>
           <p>Most machine learning libraries are compatible with Windows, especially CPU versions. GPU-dependent deep learning libraries are often slower and less reliable on Windows, so use Linux if you can.
-          <p>Machine Learning Club recommends using Scikit-Learn for simple machine learning.</p>
-          <p><a href = "res/install/scikitlearn.txt">Instructions for installing Scikit-learn on your computer</a></p>
+          <p>Machine Learning Club recommends using <a href="https://scikit-learn.org/stable/index.html">scikit-learn</a> for simple machine learning. You can install it using:
+              <br>
+              <code>
+                  pip3 install -U scikit-learn
+              </code>
+          </p>
           <p>If you are trying to run on TJ Windows machines, a bit of a workaround is required due to restrictions. Follow these instructions for scikit-learn.</p>
-          <p><a href= "res/install/scikit_tj_windows.txt">Instructions for installing Scikit-learn on TJHSST Windows Machines</a></p>
+          <p><a href= "res/install/scikit_tj_windows.txt">Instructions for installing scikit-learn on TJHSST Windows Machines</a></p>
           <p>If you can't get that to work, use our <a href = "res/guides/ssh.txt">Instructions for ssh'ing into the syslab</a></p>
           <p><a href = "res/guides/vimandnano.txt">Basic Vim and Nano Instructions</a></p>
           <h3>Python 2 or 3?</h3>
