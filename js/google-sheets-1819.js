@@ -7,6 +7,10 @@
  *
  * The Google document's sharing must be set to public
  *
+ * For privacy purposes, remove the Google document ID
+ * at the end of each year, and comment out query.send()
+ * Replace the full rankings at year's end with a list
+ * of the top three students.
  */
 
 google.load('visualization', '1', {
@@ -15,9 +19,9 @@ google.load('visualization', '1', {
 var visualization;
 
 function drawVisualization() {
-    var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=1ueMyiUtdXf3G3g-FRrgPdkI-LftwsoOt_SyKKJ52quU&output=html&usp=sharing');
+    var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=***removed_since_year_is_over***&output=html&usp=sharing');
     query.setQuery('SELECT A, B, C, D, E, F, G, H, I, J, K label A "Name", B "Decision Trees", C "Random Forests", D "SVMs", E "NN Pset", F "NN", G "CNN", H "CNN Quiz", I "RNN Challenge", J "RL Pacman", K "Overall"');
-    query.send(handleQueryResponse);
+    /*commented out since year is over*/ //query.send(handleQueryResponse);
 }
 
 function handleQueryResponse(response) {
