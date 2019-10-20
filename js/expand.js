@@ -31,7 +31,10 @@ $(document).ready(function() {
     $('#cnntitle').on('click',function(){
         $('#cnn').toggle();
     });
-    $('#kaggletitle').on('click',function(){
-        $('#kaggle').toggle();
+    $('#cloudtitle').on('click',function(){
+        $('#cloud').toggle();
+    });
+    $('#dttitle').on('click',function(){
+        $('#dt').toggle();
     });
 });
