@@ -109,16 +109,139 @@
             </section>
         </div>
                 <h4 style="margin-top: 0vh;">Beginner Series Competitions</h4>
+                <div class="box">
+                       <div class="instructheader"><h4 id=svmtitle>Support Vector Machines Competition Instructions</h4></div>
+                       <section id="svm" style="display:none">
+                       <hr>
+                       <p><i>10/23/19 -&emsp;</i>This competition is a harder version of the Random Forests competition.
+                           Your job is to write the code to create an SVM, train it on the training data, and use it to predict the classes of the testing data.
+                           The goal is to classify survival of passengers on the Titanic, and the data we are using are from actual passengers on the ship.
+                           Your random forest is supposed to classify whether a passenger survived <code>RIP (0) or Survived (1)</code>, based on 11 different metrics (features).</p>
+                       <p>The purpose of this contest is not to test your ability to write an SVM. Instead, this contests mostly tests:</p>
+                      <ol>
+                          <li>Your ability to use Scikit-Learn</li>
+                          <li>Your ability to work with real-world data</li>
+                      </ol>
+                      <p>The second is far more important (and difficult) than the first.</p>
+
+                      <h4>The Data</h4>
+                      <p>With that in mind, the training data now looks like this:</p>
+                        <p>
+                         <code>
+                            feature 1, survival, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                            feature 1, survival, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                            feature 1, survival, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                            etc. (636 lines) <br></code>
+                        </p>
+                        <p>and the testing data looks like this: </p>
+                        <p>
+                        <code>
+                            feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                            feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                            feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                            etc. (255 lines) <br>
+                        </code>
+                            </p>
+                       <p>Your end file should be a <code>.csv</code> like this:<br>
+                        <code>
+                        id, solution <br>
+                        1, predicted_class <br>
+                        2, predicted_class <br>
+                        3, predicted_class <br>
+                        4, predicted_class <br>
+                        etc. (255 lines) <br>
+                        </code>
+                        (For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file.)</p>
+
+                        <h4>Guidelines</h4>
+                        <p><strong>There are missing data points. Some features are not useful. </strong> The difficult part of this contest is formatting the data given, determining which features are useful, which ones should be trained on, and how to deal with the missing data.</p>
+                        <p>You are allowed to (and should) use <a href="http://www.scikit-learn.org">Scikit-Learn</a> to create your SVM. Scikit has detailed instructions on how to write an SVM using the library <a href="http://scikit-learn.org/stable/modules/svm">here</a>.</p>
+                        <p>We highly recommend you open both the training and testing csv files in a program like Excel, which will help you modify columns of data and perform calculations quickly.</p>
+                        <p><a href="../contests/1920/dct/decisionTreeShell.py.txt">The Data I/O code</a> from the decision tree competition may still be useful.</p>
+                        <p><a href="https://github.com/tjmachinelearning/yogurt-svm">This jupyter notebook</a>, which applies an SVM to the trivial problem of differentiating greek yogurt from regular yogurt, might also be helpful.</p>
+                        <p><a href="https://www.kaggle.com/c/tjml1920-svm/">Competition Link</a></p>
+                        <p>As always, only use Python for this competition. The only external libraries allowed are Scikit-Learn, Numpy, and Pandas. This competition will end at 11:59 PM on Tuesday, November 5th. If it's your first time competing, check out how to participate under the Decision Trees Competition link on this page.</p>
+                    </section>
+                </div>
+                <div class="box">
+                    <div class="instructheader"><h4 id=rftitle>Random Forests Competition Instructions</h4></div>
+                    <section id="rf" style="display:none">
+                        <hr>
+                        <p><i>10/20/19 -&emsp;</i>Welcome to the (surprise) second competition of the year!
+                        Your job is to write the code to create a random forest, train it on the training data, and use it to predict the classes of the testing data.
+                        The goal is to classify survival of passengers on the Titanic, and the data we are using are from actual passengers on the ship.
+                        Your random forest is supposed to classify whether a passenger survived <code>RIP (0) or Survived (1)</code>, based on 7 different metrics (features).
+                        </p>
+
+                        <h4>The Data</h4>
+                        <p>The training data looks like this: </p>
+                        <p>
+                        <code>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, survival<br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, survival<br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, survival<br>
+                        etc. (500 lines) <br></code>
+                        </p>
+                        <p>
+                        and the testing data looks like this: </p>
+                        <p>
+                        <code>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7<br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7<br>
+                        feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7<br>
+                        etc. (214 lines) <br>
+                        </code>
+                        </p>
+                        <p>
+                        Your end file should be a <code>.csv</code> like this: <br>
+                        <code>
+                        id, solution <br>
+                        1, predicted_class <br>
+                        2, predicted_class <br>
+                        3, predicted_class <br>
+                        4, predicted_class <br>
+                        etc. (214 lines) <br>
+                        </code>
+
+                        (For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file.)
+                        </p>
+
+                        <h4>Guidelines</h4>
+                        <p>No external libraries allowed other than numpy. The competition <a href="https://www.kaggle.com/c/tjml-2019-20-random-forests/">(here)</a> closes at 11:59 PM on 10/29/19.
+                            The leaderboard calculations, Python resources, and participation steps apply to this competition too.</p>
+
+                        <p>Shell code is available <a href="../contests/1920/rf/shell.py.txt">here</a>, should you want it.
+                        <a href="../contests/1920/dct/decisionTreeShell.py.txt">The Data I/O code</a> from the decision tree lecture will still be useful, but will need to be adapted for this data.
+                        Good luck!</p>
+
+                        <h4>Footnote</h4>
+                        <p> The features correspond to: </p>
+                        <code>
+                            pclass - Ticket class: 1 = 1st, 2 = 2nd, 3 = 3rd </br>
+                            sex - Sex: 0 = Male, 1 = Female <br>
+                            Age - Age in years  <br>
+                            sibsp - # of siblings / spouses aboard the Titanic  <br>
+                            parch - # of parents / children aboard the Titanic  <br>
+                            fare - passenger fare <br>
+                            embarked - Port of Embarkation: 0 = Southampton, 1 = Cherbourg, 2 = Queenstown<br>
+                            survival - Survival: 0 = No, 1 = Yes<br>
+                        </code>
+                        though this isn't necessary to know for the competition.
+                        </p>
+                    </section>
+                </div>
 
                 <div class="box">
-                    <div class="instructheader"><h4 id=firsttitle>Decision Trees Competition</h4></div>
-                    <section id="first" style="display:none">
+                    <div class="instructheader"><h4 id=dttitle>Decision Trees Competition</h4></div>
+                    <section id="dt" style="display:none">
                         <hr>
-                        <h4>The Data</h4>
                         <p><i>10/2/19 -&emsp;</i>Welcome to the first contest of the year! Your job is to write the code to create a decision tree, train it on the training data, and use it to predict the classes of the testing data.
                         We are trying to classify breast cancer data. The data we are using is actual data from breast cancer patients.
                         Your decision tree is supposed to classify the type of breast cancer they have (benign (0) or malignant (1)), based on 9 different metrics (features).
-                        The training data looks like this: </p>
+                        </p>
+
+                        <h4>The Data</h4>
+                        <p>The training data looks like this: </p>
                         <p>
                         <code>
                         feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, class <br>
@@ -189,12 +312,53 @@
             <h4>Advanced Series Competitions</h4>
               <div class="instructions">
                 <div class="box">
-                    <div class="instructheader"><h4 id="kaggletitle">Cloud Identification Competition Instructions</h4></div>
-                    <section id="kaggle" style="display:none; padding: 0rem 0rem 1rem 0rem">
+                    <div class="instructheader"><h4 id="cloudtitle">Cloud Identification Competition Instructions</h4></div>
+                    <section id="cloud" style="display:none; padding: 0rem 0rem 1rem 0rem">
                         <hr>
-                        <h4>Competition Introduction</h4>
-                            <p>Our advanced members can compete in the <a href="https://www.kaggle.com/c/understanding_cloud_organization" target="_blank">Cloud Identification competition</a>. Detailed rules and instructions can be found on the Kaggle competition page. Basically, the goal is to submit a model in your team that is able to classify cloud patterns in the sky. More information to come soon!</p>
-                           <!--  <p>There are two stages to the competition.</p>
+                            <p><i>10/2/19 -&emsp;</i>Our advanced members can compete in the Cloud Identification competition.
+                                Detailed rules and instructions can be found on the <a href="https://www.kaggle.com/c/understanding_cloud_organization" target="_blank">Kaggle competition page</a>.
+                                Basically, the goal is to submit a model in your team that is able to classify cloud patterns in the sky.</p>
+                            <p>
+                                As a starting point, check out<a href = "https://www.kaggle.com/artgor/segmentation-in-pytorch-using-convenient-tools"> this public notebook</a> which will help you manipulate the images in the dataset.
+                            </p>
+                            <p>
+                                <h4>Guidelines</h4>
+                                <ol>
+                                    <li>
+                                        At least one member from each team should be present at the advanced group every meeting.
+                                    </li>
+                                    <li>
+                                        Have a working submission (score > 0) on Kaggle by 10/16. (This can be the .csv from the sample Kaggle notebook.)
+                                    </li>
+                                    <li>
+                                        Improve on previous submission to a higher score by 11/13.
+                                    </li>
+                                    <li>
+                                        Final deadline for competition is 11/18.
+                                    </li>
+                                </ol>
+                            </p>
+                            <p>
+                                    <h4>Points Breakdown</h4>
+                                    <ol>
+                                        <li>
+                                            Having at least one member of the team present at every club meeting will score one point.
+                                        </li>
+                                        <li>
+                                            Meeting the 10/16 and 11/13 submission deadlines will score one point each.
+                                        </li>
+                                        <li>
+                                            Overall competition scores will be by competition rank, relative to other teams in the club:
+                                            <br>
+                                            1st place - 5 pts
+                                            <br>
+                                            2nd place - 4 pts
+                                            <br>
+                                            etc.
+                                        </li>
+                                    </ol>
+                                </p>
+                            <!--  <p>There are two stages to the competition.</p>
                             <p><strong>Stage 1: Until 10/5</strong></p>
                             <p>Members submit models individually</p>
                             <p><strong>Stage 2: Until 10/15</strong></p>
