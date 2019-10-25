@@ -20,8 +20,8 @@ var visualization;
 
 function drawVisualization() {
     var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=1e6Fpo3WnBqhIcU1wx4q9IvDdizmHDo98v9aNVWEdJfU&output=html&usp=sharing');
-    query.setQuery('SELECT A, B label A "Name", label B "Decision Trees Pset" ');
-    /*commented out since year is over*/ //query.send(handleQueryResponse);
+    query.setQuery('SELECT A, B, C, D label A "Name", label B "Decision Trees Pset", label C "Decision Trees Comp", label D "Total"');
+    query.send(handleQueryResponse);
 }
 
 function handleQueryResponse(response) {
