@@ -20,7 +20,7 @@ var visualization;
 
 function drawVisualization() {
     var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=12NkLjtRTn3SqNNk7kTh76EbS-MUSm0ZOo9mLtOKMZto&output=html&usp=sharing');
-    query.setQuery('SELECT A, G, H, I, J, K, L, M, N, O label A "Team Name", G "10/2", H "10/9", I "10/23", J "10/30", K "Other", L "10/16 Submission", M "11/13 Submission", N "Attendance", O "Final Score"');
+    query.setQuery('SELECT A, B label A "Team Name", B "Cloud Comp"');
     query.send(handleQueryResponse);
 }
 
