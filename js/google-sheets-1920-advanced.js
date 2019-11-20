@@ -19,7 +19,7 @@ google.load('visualization', '1', {
 var visualization;
 
 function drawVisualization() {
-    var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=12NkLjtRTn3SqNNk7kTh76EbS-MUSm0ZOo9mLtOKMZto&output=html&usp=sharing');
+    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1waFrvLATeykSTLgOfiXQDko8QPvgiVdliI0ons_j3Lg/edit?usp=sharing');
     query.setQuery('SELECT A, B label A "Team Name", B "Cloud Comp"');
     query.send(handleQueryResponse);
 }
