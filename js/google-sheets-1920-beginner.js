@@ -20,7 +20,7 @@ var visualization;
 
 function drawVisualization() {
     var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=1e6Fpo3WnBqhIcU1wx4q9IvDdizmHDo98v9aNVWEdJfU&output=html&usp=sharing');
-    query.setQuery('SELECT A, B, C, D, E label A "Name", B "Decision Trees Pset", C "Decision Trees Comp", D "Random Forest Comp", E "Total"');
+    query.setQuery('SELECT A, B, C, D, E, F label A "Name", B "Decision Trees Pset", C "Decision Trees Comp", D "Random Forest Comp", E "SVM Comp", F "Total"');
     query.send(handleQueryResponse);
 }
 
