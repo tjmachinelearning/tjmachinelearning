@@ -110,6 +110,57 @@
         </div>
                 <h4 style="margin-top: 0vh;">Beginner Series Competitions</h4>
                 <div class="box">
+                       <div class="instructheader"><h4 id=svmtitle>Neural Networks Competition Instructions</h4></div>
+                       <section id="nn" style="display:none">
+                       <hr>
+                       <p><i>12/11/19 -&emsp;</i>
+                           Your job is to write the code to create an neural network, train it on the training data, and use it to predict the classes of the testing data.
+                           The goal is to classify a single handwritten numerical digit from a "28x28 pixel image", represented by 784 different features, each representing one pixel of the image.
+                           Your neural network should return a number from <code>0-9</code>, based on these 784 pixel features. Each pixel is described by a single <code>0-255</code> number representing its intensity (0 being a completely white pixel, 125 being a gray-ish pixel, and 255 being a fully black pixel). Note: the numbers represented will probably contain relatively intense pixels near the center of the stroke, but have pixels fading in intensity on the borders of the stroke of the number.</p>
+                      <h4>The Data</h4>
+                      <p>With that in mind, the training data now looks like this:</p>
+                        <p>
+                         <code>
+                            class (digit), n1, n2, n3, n4 ... n784<br>
+                            0, 0, 0, 130, 255 ... 120<br>
+                            9, 0, 10, 101, 87 ... 9<br>
+                            3, 230, 0, 5, 35 ... 1<br>
+                            1, 90, 0, 0, 90 ... 23<br>
+                            1, 80, 70, 100, 5 ... 167<br>
+                            etc. (27629 lines) <br>
+                        </code>
+                        </p>
+                        <p>and the testing data looks like this: </p>
+                        <p>
+                        <code>
+                            id, n1, n2, n3, n4 ... n784<br>
+                            1, 0, 0, 130, 255 ... 120<br>
+                            2, 0, 10, 101, 87 ... 9<br>
+                            3, 230, 0, 5, 35 ... 1<br>
+                            4, 90, 0, 0, 90 ... 23<br>
+                            5, 80, 70, 100, 5 ... 167<br>
+                            etc. (10000 lines) <br>
+                        </code>
+                            </p>
+                       <p>Your end file should be a <code>.csv</code> like this:<br>
+                        <code>
+                        id, number <br>
+                        1, predicted_class <br>
+                        2, predicted_class <br>
+                        3, predicted_class <br>
+                        4, predicted_class <br>
+                        etc. (10000 lines) <br>
+                        </code>
+                        (For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file.)</p>
+
+                        <h4>Guidelines</h4>
+                        <p>We highly recommend you open both the training and testing csv files in a program like Excel, which will help you modify columns of data and perform calculations quickly.</p>
+                        <p><a href="../contests/1920/dct/decisionTreeShell.py.txt">The Data I/O code</a> from the decision tree competition may still be useful.</p>
+                        <p><a href="https://www.kaggle.com/c/nn4/overview">Competition Link</a></p>
+                        <p>As always, only use Python for this competition. The only external libraries allowed are Scikit-Learn, Numpy, and Pandas. This competition will end at 11:59 PM on Jan 15th, 2020. If it's your first time competing, check out how to participate under the Decision Trees Competition link on this page.</p>
+                    </section>
+                </div>
+                <div class="box">
                        <div class="instructheader"><h4 id=svmtitle>Support Vector Machines Competition Instructions</h4></div>
                        <section id="svm" style="display:none">
                        <hr>
