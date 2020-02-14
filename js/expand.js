@@ -10,6 +10,9 @@ $(document).ready(function() {
     $('#comptitle').on('click',function(){
         $('#comp').toggle();
     });
+    $('#kaggletitle').on('click',function(){
+        $('#kaggle').toggle();
+    });
     $('#svmtitle').on('click',function(){
         $('#svm').toggle();
     });
