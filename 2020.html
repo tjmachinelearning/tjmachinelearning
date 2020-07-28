@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>National Machine Learning Open</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="./css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="./css/component.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style1.css" />
+    <script src="./js/modernizr.custom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="./js/expand.js"></script>
+    <script src="./js/expand_nmlo.js"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href=./"manifest.json">
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="theme-color" content="#ffffff">
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	  ga('create', 'UA-105333430-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+
+  </head>
+  <body>
+    <div class="content">
+    
+    <section class="nmlo-page-header">
+        <img src="./nmlo/tjml_stanfordacm_logos.png" style="height:40%;max-height:150px;">
+        <h1 class="project-name" style="color:#fff">National Machine Learning Open</h1>
+        <section>
+            <h1 class="nmlo-project-tagline" style="color:#fff">To Inspire, Educate, and Engage High-School Students Nationwide with an Exciting One-Week Machine Learning Competition</h1>
+        </section>
+        <p id="countdownTimer" class="countdown-timer-tagline" style="color:#fff"></p>
+        <a href="https://forms.gle/Ljdw1kRXaYZkJ2p46" class="nmlo-btn" style="color:#fff">RSVP / Sign Up Today</a>
+        <!-- <section style="min-height:100%;padding-top:2rem;">
+            <i style="color:#ffffff;font-size:3.5rem;padding-bottom:2rem;" class="fa fa-angle-double-down" aria-hidden="true"></i>
+        </section> -->
+        <!-- <section>
+            <h2 class="nmlo-project-tagline" style="color:#fff">Learn More </h2>
+        </section> -->
+    </section>
+
+    <script>
+        // credit: https://www.w3schools.com/howto/howto_js_countdown.asp
+        var countDownDate = new Date("Aug 17, 2020 0:00:00").getTime();
+        var x = setInterval(function() {
+          var now = new Date().getTime();
+          var distance = countDownDate - now;
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          document.getElementById("countdownTimer").innerHTML = days + " days, " + hours + "h "
+          + minutes + "m " + seconds + "s";
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdownTimer").innerHTML = "Contest has Started! Join Today!";
+          }
+        }, 100);
+    </script>
+
+    <section class="main-content">
+
+        <h3 class="nmlo-project-header">Learn More:</h3>
+
+                <!-- <h4 style="margin-top: 0vh;text-align: center;">Who Are We?</h4> -->
+
+                <div class="box">
+                       <div class="nmlo-instructheader"><h4 id=whotitle>Who Are We?</h4></div>
+                       <section id="who" style="display:all">
+                       <hr>
+                       <p>
+                        We are a <a href="https://tjmachinelearning.com">group of students</a> from the <a href="https://tjhsst.fcps.edu">Thomas Jefferson High School for Science and Technology</a> who are interested in machine learning. In partnership with <a href="http://stanfordacm.org/">Stanford ACM</a>, we are proud to put on an annual Machine Learning competition open to high-schoolers across the nation to futher their knowledge in Machine Learning and compete in a series of interesting, fun contests. 
+                       </p>
+                    </section>
+                </div>
+
+                <div class="box">
+                       <div class="nmlo-instructheader"><h4 id=whattitle>What is this Competition?</h4></div>
+                       <section id="what" style="display:all">
+                       <hr>
+                       <p>
+                           The <a>National Machine Learning Open</a> is an annual competition where high-schoolers nationwide compete in a series of eight contests over the course of one week. The 2020 NMLO will run from <a>August 17-23rd, 2020</a>, beginning on midnight of the first day, ending at 11:59PM of the last. 
+                       </p>
+                       <p>
+                           There will be eight contests within the competition, varying in difficulty. Participants can choose to attempt the contests in any given order, and there is no restriction on which contests must be attempted/completed. Contest #1 will touch on very fundamental ML concepts, and the difficulty of the contests will progress to Contest #8. 
+                       </p>
+                       <p>
+                           Each of the contests in the 2020 NMLO will involve a different Machine Learning skill, and the competition will cover Machine Learning concepts/topics from simple neural networks, to more complex problems involving classification, language, images, videos, games, and more. 
+                       </p>
+                    </section>
+                </div>
+
+                <div class="box">
+                       <div class="nmlo-instructheader"><h4 id=eligibilitytitle>Who can Participate?</h4></div>
+                       <section id="eligibility" style="display:all">
+                       <hr>
+                       <p>
+                           Anyone! While our competition is open to all participants who want to test out & further their Machine Learning knowledge and experience, the NMLO will only consider <a>high-school participants</a> for judging eligibility. 
+                       </p>
+                       <p>
+                           We welcome participants with any amount of Machine Learning experience, from novices to more experienced Machine Learning practitioners. By <a href="#">RSVP-ing above</a>, we will add you to a pre-competition week email list, where we will distribute a myriad of resources to help you become familiar with the Machine Learning concepts that will be covered in the NMLO. 
+                       </p>
+                       <p>
+                           While we encourage collaborative learning prior to the beginning of competition week, the NMLO is an independent, individual contest, and participants will have to ensure any work submitted is entirely their own.
+                       </p>
+                    </section>
+                </div>
+
+                <div class="box">
+                       <div class="nmlo-instructheader"><h4 id=howtitle>How will this Competition Run?</h4></div>
+                       <section id="how" style="display:all">
+                       <hr>
+                       <p>
+                           This competition will be primarily hosted virtually with the help of Kaggle InClass, where participants will be able to submit their code to evaluate accuracy and receive a score. 
+                       </p>
+                       <p>
+                           
+                       </p>
+                    </section>
+                </div>
+
+                <div class="box">
+                       <div class="nmlo-instructheader"><h4 id=signuptitle>How do I Get Started?</h4></div>
+                       <section id="signup" style="display:all">
+                       <hr>
+                       <p>
+                           To sign up for our pre-competition mailing list, <a href="#">RSVP above</a>! 
+                       </p>
+                       <p>
+                           
+                       </p>
+                    </section>
+                </div>
+
+                <div class="box">
+                    <div class="nmlo-instructheader"><h4 id=contacttitle>Contact Us:</h4></div>
+                    <section id="contact" style="display:all">
+                    <hr>
+                    <p>
+                        Any further questions? Need help registering? Feel free to email us at <a href="mailto:tjmachinelearning@gmail.com">tjmachinelearning@gmail.com</a>, and we'll be sure to get back to you promptly. 
+                    </p>
+                 </section>
+                </div>
+
+                <div class="box">
+                    <div class="nmlo-instructheader"><h4 id=contacttitle>Thank You to our Advisors & Sponsors!</h4></div>
+                    <section id="contact" style="display:all">
+                    <hr>
+                    <p>
+                        <a href="http://stanfordacm.org/">Stanford ACM</a>
+                    </p>
+                    <p>
+                        <a href="http://yext.com/">Yext</a>
+                    </p>
+                 </section>
+                </div>
+
+        <!--End Competition Content-->
+
+
+    <!--close main content-->
+    </section>
+    <!--close all non-footer content-->
+    </div>
+	<footer class="site-footer" style="background-image:linear-gradient(120deg, #ffffff, #ffffff);">
+    <section class="main-content">
+        <table style="border: 0px; width=100%;">
+            <tr style="border: 0px">
+                <td style="border:0px">
+                    <a href="https://tjmachinelearning.com"><img src="./img/logo.svg" width="150em" style="vertical-align:middle; margin-right:1em"></img></a>
+                </td>
+                <td style="border:0px; text-align: left">
+                    <p style="color:#4e86ec">TJ Machine Learning Club<br>6560 Braddock Rd, Alexandria, VA 22312<br><code style="background-color:#fff"><a href="https://github.com/nikhilsardana/tjmachinelearning">Open-source</a></code>&nbsp;
+
+                        <code style="background-color:#fff"><a href="https://github.com/tjmachinelearning">Github</a></code></p>
+                </td>
+          </tr>
+        </table>
+    </section>
+    </footer>
+    <script src="./js/classie.js"></script>
+	<script src="./js/demo1.js"></script>
+  </body>
+</html>
