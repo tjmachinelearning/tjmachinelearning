@@ -44,7 +44,7 @@ a {
   display: inline-block;
   margin-bottom: 1rem;
   color: rgba(0,0,0, 0.7);
-  background-color: rgba(78, 134, 236, 0.7);
+  background-color: rgba(47, 112, 233, 0.7);
   border-color: rgba(255, 255, 255, 0.3);
   border-style: solid;
   border-width: 1px;
@@ -123,7 +123,7 @@ a {
   .nmlo-page-header {
     padding-top: 5rem;
     /* padding-bottom: 15rem; */
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
     padding-left: 1rem;
     padding-right: 1rem; } }
 
@@ -131,7 +131,7 @@ a {
   .nmlo-page-header {
     padding-top: 5rem;
     /* padding-bottom: 15rem; */
-    padding-bottom: 15rem;
+    padding-bottom: 2rem;
     padding-left: 0.1rem;
     padding-right: 0.1rem; } }
 
