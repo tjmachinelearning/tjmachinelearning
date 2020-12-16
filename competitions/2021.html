@@ -140,6 +140,83 @@
 
                 <h4 style="margin-top: 0vh;">Beginner Series Competitions</h4>
 
+                <div class="box">
+                       <div class="instructheader"><h4 id=svmtitle>Support Vector Machines Competition Instructions</h4></div>
+                       <section id="svm" style="display:none">
+                       <hr>
+                       <p><i>10/23/19 -&emsp;</i>This competition is a harder version of the Random Forests competition.
+                           Your job is to write the code to create an SVM, train it on the training data, and use it to predict the classes of the testing data.
+                           The goal is to classify survival of passengers on the Titanic, and the data we are using are from actual passengers on the ship.
+                           Your random forest is supposed to classify whether a passenger survived <code>RIP (0) or Survived (1)</code>, based on 11 different metrics (features).</p>
+                       <p>The purpose of this contest is not to test your ability to write an SVM. Instead, this contests mostly tests:</p>
+                      <ol>
+                          <li>Your ability to use Scikit-Learn</li>
+                          <li>Your ability to work with real-world data</li>
+                      </ol>
+                      <p>The second is far more important (and difficult) than the first.</p>
+
+                      <h4>The Data</h4>
+                      <p>With that in mind, the training data now looks like this:</p>
+                        <p>
+                        <code>
+                           feature 1, survival, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                           feature 1, survival, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                           feature 1, survival, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                           etc. (636 lines) <br></code>
+                        </p>
+                        <p>and the testing data looks like this: </p>
+                        <p>
+                        <code>
+                           feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                           feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                           feature 1, feature 2, feature 3, feature 4, feature 5, feature 6, feature 7, feature 8, feature 9, feature 10, feature 11<br>
+                           etc. (255 lines) <br>
+                        </code>
+                           </p>
+                       <p>Your end file should be a <code>.csv</code> like this:<br>
+                        <code>
+                        id, solution <br>
+                        1, predicted_class <br>
+                        2, predicted_class <br>
+                        3, predicted_class <br>
+                        4, predicted_class <br>
+                        etc. (255 lines) <br>
+                        </code>
+                        (For every set of features in line N in the training data, you should have a line <code>N, predicted_class</code> in your submission file.)</p>
+
+                        <h4>Guidelines</h4>
+                        <p><strong>There are missing data points. Some features are not useful. </strong> The difficult part of this contest is formatting the data given, determining which features are useful, which ones should be trained on, and how to deal with the missing data.</p>
+                        <p>You are allowed to (and should) use <a href="http://www.scikit-learn.org">Scikit-Learn</a> to create your SVM. Scikit has detailed instructions on how to write an SVM using the library <a href="http://scikit-learn.org/stable/modules/svm">here</a>.</p>
+                        <p>We highly recommend you open both the training and testing csv files in a program like Excel, which will help you modify columns of data and perform calculations quickly.</p>
+                        <p><a href="../contests/1920/dct/decisionTreeShell.py.txt">The Data I/O code</a> from the decision tree competition may still be useful.</p>
+                        <p><a href="https://github.com/tjmachinelearning/yogurt-svm">This jupyter notebook</a>, which applies an SVM to the trivial problem of differentiating greek yogurt from regular yogurt, might also be helpful.</p>
+                        <p><a href="https://www.kaggle.com/c/tjml1920-svm/">Competition Link</a></p>
+                        <p>As always, only use Python for this competition. The only external libraries allowed are Scikit-Learn, Numpy, and Pandas. This competition will end at 11:59 PM on Tuesday, November 5th. If it's your first time competing, check out how to participate under the Decision Trees Competition link on this page.</p>
+                    </section>
+                </div>
+
+
+                <div class="box">
+                       <div class="instructheader"><h4 id=svmtitle>Support Vector Machines Competition Instructions</h4></div>
+                       <section id="svm" style="display:none">
+                       <hr>
+                    </section>
+                </div>
+
+
+
+
+
+                <div class="box">
+                   <div class="instructheader"><h4 id=svmtitle>Decision Trees/Random Forests</h4></div>
+                   <section id="svm" style="display:none">
+                   <hr>
+                        <p>In this competition, participants use medical information to predict whether a patient has a cardiovascular problem.
+                           You can view the competition at this <a href="https://www.kaggle.com/c/decision-treesrandom-forests-2020/overview/description">link</a>.
+                         </p>
+                      </section>
+                  </div>
+
             <h4>Advanced Series Competitions</h4>
 
     <!--close main content-->
