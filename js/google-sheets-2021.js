@@ -21,7 +21,7 @@ var visualization;
 function drawVisualization() {
 //     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1BbZ6ddViIMufL0mj3NMDkljT7QlmQYxlZZe26y6L254/edit?usp=sharing');
     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1BbZ6ddViIMufL0mj3NMDkljT7QlmQYxlZZe26y6L254/gviz/tq?output=html');
-    query.setQuery('SELECT A, B, C, D, E, F label A "Name", B "Decision Trees/Random Forests", C "Support Vector Machines", D "Neural Networks", E "Convolutional Neural Networks", F "Total"');
+    query.setQuery('SELECT A, B, C, D, E, F, G label A "Name", B "Decision Trees/Random Forests", C "Support Vector Machines", D "Neural Networks", E "Convolutional Neural Networks", F "Recurrent Neural Networks", G "Total"');
     query.send(handleQueryResponse);
 }
 
