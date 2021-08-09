@@ -86,32 +86,32 @@
 	transition-timing-function: cubic-bezier(1, 0.01, 0, 1.22);
 }
 
-.menu--alonso .menu__item:nth-child(1).menu__item--current ~ .menu__line {
+.menu--alonso .menu__item:nth-child(1).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
 
-.menu--alonso .menu__item:nth-child(2).menu__item--current ~ .menu__line {
+.menu--alonso .menu__item:nth-child(2).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(100%, 0, 0);
 	transform: translate3d(100%, 0, 0);
 }
 
-.menu--alonso .menu__item:nth-child(3).menu__item--current ~ .menu__line {
+.menu--alonso .menu__item:nth-child(3).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(200%, 0, 0);
 	transform: translate3d(200%, 0, 0);
 }
 
-.menu--alonso .menu__item:nth-child(4).menu__item--current ~ .menu__line {
+.menu--alonso .menu__item:nth-child(4).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(300%, 0, 0);
 	transform: translate3d(300%, 0, 0);
 }
 
-.menu--alonso .menu__item:nth-child(5).menu__item--current ~ .menu__line {
+.menu--alonso .menu__item:nth-child(5).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(400%, 0, 0);
 	transform: translate3d(400%, 0, 0);
 }
 
-.menu--alonso .menu__item:nth-child(6).menu__item--current ~ .menu__line {
+.menu--alonso .menu__item:nth-child(6).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(512%, 0, 0);
 	transform: translate3d(512%, 0, 0);
 }
@@ -121,27 +121,27 @@
 		top: 3em;
 	}
 
-	.menu--alonso .menu__item:nth-child(1).menu__item--current ~ .menu__line {
+	.menu--alonso .menu__item:nth-child(1).menu__item--current~.menu__line {
 		-webkit-transform: translate3d(0, 0, 0);
 		transform: translate3d(0, 0, 0);
 	}
 
-	.menu--alonso .menu__item:nth-child(2).menu__item--current ~ .menu__line {
+	.menu--alonso .menu__item:nth-child(2).menu__item--current~.menu__line {
 		-webkit-transform: translate3d(0, 3em, 0);
 		transform: translate3d(0, 3em, 0);
 	}
 
-	.menu--alonso .menu__item:nth-child(3).menu__item--current ~ .menu__line {
+	.menu--alonso .menu__item:nth-child(3).menu__item--current~.menu__line {
 		-webkit-transform: translate3d(0, 6em, 0);
 		transform: translate3d(0, 6em, 0);
 	}
 
-	.menu--alonso .menu__item:nth-child(4).menu__item--current ~ .menu__line {
+	.menu--alonso .menu__item:nth-child(4).menu__item--current~.menu__line {
 		-webkit-transform: translate3d(0, 9em, 0);
 		transform: translate3d(0, 9em, 0);
 	}
 
-	.menu--alonso .menu__item:nth-child(5).menu__item--current ~ .menu__line {
+	.menu--alonso .menu__item:nth-child(5).menu__item--current~.menu__line {
 		-webkit-transform: translate3d(0, 12em, 0);
 		transform: translate3d(0, 12em, 0);
 	}
@@ -200,32 +200,32 @@
 	transition-timing-function: cubic-bezier(1, 0.01, 0, 1.22);
 }
 
-.menu--yearnav .menu__item:nth-child(1).menu__item--current ~ .menu__line {
+.menu--yearnav .menu__item:nth-child(1).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
 
-.menu--yearnav .menu__item:nth-child(2).menu__item--current ~ .menu__line {
+.menu--yearnav .menu__item:nth-child(2).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(100%, 0, 0);
 	transform: translate3d(100%, 0, 0);
 }
 
-.menu--yearnav .menu__item:nth-child(3).menu__item--current ~ .menu__line {
+.menu--yearnav .menu__item:nth-child(3).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(200%, 0, 0);
 	transform: translate3d(200%, 0, 0);
 }
 
-.menu--yearnav .menu__item:nth-child(4).menu__item--current ~ .menu__line {
+.menu--yearnav .menu__item:nth-child(4).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(300%, 0, 0);
 	transform: translate3d(300%, 0, 0);
 }
 
-.menu--yearnav .menu__item:nth-child(5).menu__item--current ~ .menu__line {
+.menu--yearnav .menu__item:nth-child(5).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(400%, 0, 0);
 	transform: translate3d(400%, 0, 0);
 }
 
-.menu--yearnav .menu__item:nth-child(6).menu__item--current ~ .menu__line {
+.menu--yearnav .menu__item:nth-child(6).menu__item--current~.menu__line {
 	-webkit-transform: translate3d(500%, 0, 0);
 	transform: translate3d(500%, 0, 0);
 }
@@ -234,8 +234,8 @@
 	.menu--yearnav .menu__link {
 		width: 5em;
 	}
+
 	.menu--yearnav .menu__line {
 		width: 5em;
 	}
-
 }
