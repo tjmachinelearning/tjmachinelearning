@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\title{ResNet Problem Set \\ Total Points: 10}
+\author{Tarushii Goel}
+\date{2020}
+
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+	\item (8 points) Calculate the output of the following 2-layer residual block: 
+	\begin{equation}
+	x = \begin{bmatrix}
+		1 \\
+		7 \\
+		4 \\
+		\end{bmatrix},
+	w_1 = \begin{bmatrix}
+		2 & 5 & 2\\
+		10 & 8 & 9\\
+		2 & 6 & 1\\
+		\end{bmatrix},
+	b_1 = \begin{bmatrix}
+		6 \\
+		9 \\
+		4 \\
+		\end{bmatrix},
+	w_2 = \begin{bmatrix}
+		1 & 1 & 1\\
+		10 & 10 & 10\\
+		3 & 3 & 3\\
+		\end{bmatrix},
+	b_2= \begin{bmatrix}
+		7 \\
+		3 \\
+		2 \\
+		\end{bmatrix},
+	\sigma(x) = \tanh(x)
+	\end{equation}
+	For work, you must at least show all operations you applied on $x$ to get your answer and the final matrix. However, you do not need to show intermediate matrices and may use a calculator to calculate them. 
+	(For clarity, the weights are structured as: 
+		$$ \begin{bmatrix}
+		w_{11} & w_{21} & w_{31}\\
+		w_{12} & w_{22} & w_{32}\\
+		w_{13} & w_{23} & w_{33}\\
+		\end{bmatrix} $$
+		where for $w_{xy}$, $x$ is the number of the input node and $y$ is the number of the output node)
+	\pagebreak 
+	\item (2 points) Why do we use ResNets? 
+
+\end {enumerate}
+\end{document}
