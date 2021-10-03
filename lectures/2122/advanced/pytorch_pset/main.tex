@@ -53,9 +53,9 @@
 \begin{center}
 \fbox{\fbox{\parbox{5.5in}{\centering
 Problem Set: Pytorch \\
-Due date:  9/29/19\\
+Due date:  10/13/21\\
 Total Points: 15\\
-If you run out of room for an answer, use scratch paper and staple it to this sheet.}}}
+Send your code and writeup to tjmachinelearning@gmail.com}}}
 \end{center}
  
 \vspace{5mm}
@@ -65,14 +65,9 @@ If you run out of room for an answer, use scratch paper and staple it to this sh
 \vspace{5mm}
 
 \begin{enumerate}
-	\item (10 points) Using what you learned about Pytorch in the lecture, as well as your own exploration of the torch.nn and torch.optim modules, write a program that classifies objects in the CIFAR-10 dataset. You will find that you can tackle this problem, which is much harder than fitting the sine curve, in only a few lines of extra code. Attach a copy of your code as well as a short reflection. Guiding Questions: What did you learn about Pytorch through this exercise? What architecture did you use? What was your accuracy? What steps did you take to increase the accuracy? How long did you need to train? Did you perform and image preprocessing or data augmentation, and if you did, how did that affect accuracies? \\ 
-	You will want to use these lines to access the dataset:
-	\begin{lstlisting}
-	from torchvision import datasets
-	cifar10 = datasets.CIFAR10(root='data/', train=True, download=True)
-	cifar10_val = datasets.CIFAR10(root='data/', train=False, download=True) \end{lstlisting}
+	\item (10 points) Using what you learned about Pytorch in the lecture, as well as your own exploration of the torch.nn and torch.optim modules, train a CNN to classify objects in the CIFAR-10 dataset. Attach a copy of your code as well as a short reflection in your email. Guiding Questions: What did you learn about Pytorch through this exercise? What architecture did you use? What was your accuracy? What steps did you take to increase the accuracy? How long did you need to train? Did you perform and image preprocessing or data augmentation, and if you did, how did that affect accuracies? \\ 
 	\pagebreak
-	\item (5 points) Replicate these two CNN architectures and train them on the CIFAR-10 Dataset (you may need to change input/output layer dimensions, do this as you like). How do the accuracies compare? Why do you think that is? You can attach your code for this as well. 
+	\item (5 points) Replicate these two CNN architectures and train them on the CIFAR-10 Dataset (you will need to change input/output layer dimensions slightly, do this as you like but don't change the architecture significantly). How do the accuracies compare? Why do you think that is? Attach your code and writeup in the email. 
 \begin{center}
 \includegraphics[scale=0.3]{networks.svg}
 \end{center}
