@@ -10,7 +10,7 @@
     pdfpagemode=FullScreen,
     }
 
-\title{Residual Connections and Inception Modules}
+\title{Advanced CNN Architectures \\ ResNets, Inception Modules, \& Xception}
 \author{Tarushii Goel\footnote{This lecture is adapted from Justin Zhang's 2017 lecture on ResNets and Inception}}
 \date{2020}
 
@@ -24,14 +24,14 @@
 
 \maketitle
 
-\section{Residual Connections}
+\section{ResNets}
 \subsection{Motivation}
 For many years, the trend in machine learning was to add more layers, since larger networks can capture more complexity (case in point, VGGs). However, one big issue that arises with this approach is the {\bf vanishing gradient}. Since gradients are calculated by multplying partial derivatives, if the partial derivatives are small, as is often the case in practice, the gradients become exponentially smaller, or vanish, as you back propogate to the initial layers to your network. This results in initial layers recieving very small updates. For example, the derivatives of the hyperbolic tangent function are in the range (0,1), so backpropogation through this function will always cause the gradient to decrease. The initial layers train so slowly that the benefit of having them quickly declines. In fact, the initial layers can start to hurt the accuracy of the model. To solve these issues, researchers invented residual connections, which are "skip" connections that fuction as information highways for passing gradient information and prevent a vanishing gradient. 
 \begin{center}
 \includegraphics[scale=0.2]{tanh.png}
 \end{center}
 
-\subsection{Idea}
+\subsection{Residual Blocks}
 \begin{center}
 \includegraphics[scale=0.5]{resnet.jpg}
 \end{center}
@@ -84,8 +84,28 @@ Another major improvement made in recent years in image classification is the us
     \end{enumerate}
     
  Generally, Inception modules are only used in the beginning of a convolutional network, for memory efficiency. 
-    
-   
+
+\section{Xception}
+Xception is like Inception in most regards, but differs in one integral aspect: it uses depthwise seperable convolutions instead of standard convolutions. 
+\subsection{Our Standard Convolution}
+\begin{center}
+\includegraphics[scale=0.5]{normal-conv.png}
+
+\end{center}
+
+\subsection{The Depthwise Convolution}
+In a depthwise convoution, rather than apply a 3d kernel on a 3d input, the 3d input is split, depthwise, into 2d inputs, and a 2d kernel is applied on each of the 2d inputs. The 2d outputs for each input are concatenated at the end. 
+\begin{center}
+\includegraphics[scale=0.35]{depthwise-conv.png}
+\end{center}
+
+\subsection{The Depthwise Separable Convolution}
+The depthwise separable convolution extends the concept of the depthwise convolution by adding one extra step. After the outputs are concatenated, a $n * 1 * 1$ standard convolution is applied to them ($n$ is the number of input channels). This step combines the outputs depthwise.   
+\begin{center}
+\includegraphics[scale=0.35]{depthwise-seperable.png}
+\end{center}
+The key advantage of the depthwise seperable convolution is that it requires fewer parameters than the standard convolution. To transform a $3 * 8 * 8$ input to a $n * 8 * 8$ output, a depthwise seperable convolution world require $27 + 3*n$ parameters. $27$ parameters are used in the depthwise convolution (three $1 * 3 * 3$ kernels), and n $3 *1 * 1$ kernels are used to apply the last step, with each $3 * 1 *1$ kernel generating one of the output channels. On the other hand, a standard convolution requires $27 * n$ parameters, a much larger number when $n > 1$. Note that we are using zero padding in these examples.  
+
 \section{Sources}
 \begin{itemize}
 	\item \href{https://tjmachinelearning.com/lectures/1718/deepconv/deepconv.pdf}{Justin Zhang's Lecture} 
