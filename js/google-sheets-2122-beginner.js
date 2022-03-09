@@ -6,7 +6,7 @@ var visualization;
 function drawVisualization() {
     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1_EwDSD-7_bvCrScRyoMe6reckFCzHZ-exUJw8yTnxoA/gviz/tq?output=html&sheet=Beginner');
     //query.setQuery('SELECT A, B, C, D, E, F, G, H, I, J label A "Name", B "Decision Trees", C "Quiz", D "Random Forests", E "SVM", F "NN Pset", G "NN", H "CNN", I "CNN Quiz", J "Overall"');
-    query.setQuery('SELECT A, B, C, D, E label A "Name", B "Decision Trees PSET", C "Decision Trees Competition", D "SVM Competition", E "Total"');
+    query.setQuery('SELECT A, B, C, D, E, F label A "Name", B "Decision Trees PSET", C "Decision Trees Competition", D "SVM Competition", E "NN Competition", F "Total"');
     query.send(handleQueryResponse);
 }
 
