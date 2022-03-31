@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>Research | TJ Machine Learning Club</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,23 +20,30 @@
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-	  ga('create', 'UA-105333430-1', 'auto');
-	  ga('send', 'pageview');
+        ga('create', 'UA-105333430-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
 
-	</script>
-  </head>
-  <body>
-      <div class="content">
+<body>
+    <div class="content">
         <div class="mobile-menu">
-          <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
-            <img src="img/menu.png" alt="Menu" style="max-width:2em">
-          </button>
+            <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
+                <img src="img/menu.png" alt="Menu" style="max-width:2em">
+            </button>
         </div>
 
         <section class="page-header">
@@ -44,124 +52,226 @@
         </section>
 
         <div class="overlay overlay-hugeinc">
-          <button type="button" class="overlay-close">Close</button>
-          <nav>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="schedule/2021">Lectures</a></li>
-              <li><a href="rankings">Rankings</a></li>
-              <li><a href="resources">Resources</a></li>
-              <li><a href="#">Research</a></li>
-              <li><a href="competitions/2021">Competitions</a></li>
-            </ul>
-          </nav>
+            <button type="button" class="overlay-close">Close</button>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="schedule/2021">Lectures</a></li>
+                    <li><a href="rankings">Rankings</a></li>
+                    <li><a href="resources">Resources</a></li>
+                    <li><a href="#">Research</a></li>
+                    <li><a href="competitions/2021">Competitions</a></li>
+                </ul>
+            </nav>
         </div>
 
         <div class="container">
-             <section class="section section--menu" id="Alonso">
-                 <span class="link-copy"></span>
-                 <nav class="menu menu--alonso">
-                     <ul class="menu__list">
-                         <li class="menu__item"><a href="/" class="menu__link">Home</a></li>
-                         <li class="menu__item"><a href="schedule/2021" class="menu__link">Lectures</a></li>
-                         <li class="menu__item"><a href="rankings" class="menu__link">Rankings</a></li>
-                         <li class="menu__item"><a href="resources" class="menu__link">Resources</a></li>
-                         <li class="menu__item menu__item--current"><a href="#" class="menu__link">Research</a></li>
-                         <li class="menu__item"><a href="competitions/2021" class="menu__link">Competitions</a></li>
-                         <li class="menu__line"></li>
-                     </ul>
-                 </nav>
-             </section>
+            <section class="section section--menu" id="Alonso">
+                <span class="link-copy"></span>
+                <nav class="menu menu--alonso">
+                    <ul class="menu__list">
+                        <li class="menu__item"><a href="/" class="menu__link">Home</a></li>
+                        <li class="menu__item"><a href="schedule/2021" class="menu__link">Lectures</a></li>
+                        <li class="menu__item"><a href="rankings" class="menu__link">Rankings</a></li>
+                        <li class="menu__item"><a href="resources" class="menu__link">Resources</a></li>
+                        <li class="menu__item menu__item--current"><a href="#" class="menu__link">Research</a></li>
+                        <li class="menu__item"><a href="competitions/2021" class="menu__link">Competitions</a></li>
+                        <li class="menu__line"></li>
+                    </ul>
+                </nav>
+            </section>
         </div>
-    <section class="main-content">
-        <h3><a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Machine Learning Research</h3>
-            <p>Machine Learning Club proudly supports ML research at TJ. We encourage our members to apply the knowledge they've gained from the lectures and competitions to real-world data: from biology to computer security, the applications are endless!</p>
-	       <p>Here is a brief sample of the many projects, both completed and ongoing, we have helped mentor.</p>
-       <h4>
-           Real-time Object Search and Detection for the Visually Impaired
-       </h4>
-           <p><i>Irfan Nafi, Raffu Khondaker, and Eugene Choi</i></p>
-	    <!-- Link the following line to the project abstract (https://abstracts.societyforscience.org/) when available. -->
-           <p><a href="#">&#9733;&#9733;&#9733; Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
-           <p>
-               There are over 289 million people with visual disabilities worldwide and that number is expected to grow to 579 million in only 3 decades. Current techniques to aid the visually disabled are expensive and limited in their ability, with limited and low accuracy computer vision. With ensemble learning we were able to get accuracies as high as 88% with four CV architectures trained on COCO and OIDv4. Furthermore, with an inexpensive camera-vibration interface, combined with an app, we were able effectively guide a user to a designated object in real-time using several onboard microcontrollers.
+        <section class="main-content">
+            <h3><a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning"
+                    aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Machine Learning
+                Research</h3>
+            <p>Machine Learning Club proudly supports ML research at TJ. We encourage our members to apply the knowledge
+                they've gained from the lectures and competitions to real-world data: from biology to computer security,
+                the applications are endless!</p>
+            <p>Here is a brief sample of the many projects, both completed and ongoing, we have helped mentor.</p>
+
+            <h4>
+                An Accessible Parkinson's and Alzheimer's Novel Diagnostic Framework Using Vision-Based Handwriting
+                Kinematic Analysis and Machine Learning
+            </h4>
+            <p><i>Ron Nachum</i></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ISEFYears=2021%2C&Category=Any%20Category&Finalist=nachum&AllAbstracts=False&FairCountry=Any%20Country&FairState=Any%20State&ProjectId=20862"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>
+                PANDwriting is a novel system for diagnostic assessment of neurodegenerative diseases (NDs) using
+                handwriting kinematic analysis, particularly targeted to increase Alzheimer's Disease (AD) and
+                Parkinson's Disease (PD) diagnostic access in lower-income areas and resource-poor health systems. An
+                ensemble classifier consisting of a neural network, support vector machine, and random forest was
+                trained with 10-fold cross-validation, achieving a classification accuracy of 74% in distinguishing PD
+                patients from healthy controls (n=75).
             </p>
-        <h4>
-            Alternative to Echocardiography: Using Deep Learning to Diagnose Heart Murmurs
-        </h4>
+            <hr>
+            <h4>
+                Decentralized Shared Intelligence of Autonomous Vehicles with Real-Time Multi-Agent Reinforcement
+                Learning
+            </h4>
+            <p><i>Irfan Nafi, Raffu Khondaker, and Eugene Choi</i></p>
+            <p><a href="#">&#9733;&#9733;&#9733;
+                    Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>
+                Over 1.3 million people are killed each year in road traffic crashes worldwide. Autonomous vehicles are
+                the future of transportation. We devised an autonomous system for navigating highways using multi-agent
+                reinforcement learning (MARL) using a shared intelligence system, allowing each agent (in this case the
+                vehicles) to avoid collisions and efficiently move through traffic. We tested our algorithm first on a
+                simulator, then generalized it to the real world where we trained our agent on varying parameters using
+                a technique called active domain randomization.
+            </p>
+            <hr>
+            <h4>
+                3D Sound Localization and Classification for the Deaf and Hard of Hearing
+            </h4>
+            <p><i>Irfan Nafi, Raffu Khondaker, and Eugene Choi</i></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?Category=Any%20Category&Finalist=nafi&AllAbstracts=False&FairCountry=Any%20Country&FairState=Any%20State&ProjectId=21609"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>
+                Current devices geared towards the deaf and hard of hearing, such as hearing aids, struggle to localize
+                and transmit sounds to those with severe hearing impairments. Our goal was to convey the
+                directionality, pitch, amplitude, sound classification, and speech recognition of multiple sound sources
+                to those with hearing impairments through a low-cost device. We localized sounds with the SRP-PHAT-HSDA
+                algorithm calculated on incoming audio captured by a 6-microphone array. We classified
+                each source in real-time using a stacked generalization ensemble trained on an augmented audio dataset.
+            </p>
+            <hr>
+            <h4>
+                Real-time Object Search and Detection for the Visually Impaired
+            </h4>
+            <p><i>Irfan Nafi, Raffu Khondaker, and Eugene Choi</i></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?Category=Any%20Category&Finalist=nafi&AllAbstracts=True&FairCountry=Any%20Country&FairState=Any%20State&ProjectId=19656"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>
+                There are over 289 million people with visual disabilities worldwide and that number is expected to grow
+                to 579 million in only 3 decades. Current techniques to aid the visually disabled are expensive and
+                limited in their ability, with limited and low accuracy computer vision. With ensemble learning we were
+                able to get accuracies as high as 88% with four CV architectures trained on COCO and OIDv4. Furthermore,
+                with an inexpensive camera-vibration interface, combined with an app, we were able effectively guide a
+                user to a designated object in real-time using several onboard microcontrollers.
+            </p>
+            <hr>
+            <h4>
+                Alternative to Echocardiography: Using Deep Learning to Diagnose Heart Murmurs
+            </h4>
             <p><i>George Tang, Sylesh Suresh, and Ankit Gupta</i></p>
             <p>
-              Cardiovascular disease (CD) is the number one leading cause of death worldwide, accounting for more than 17 million deaths in 2015. Based on a simple interface and machine learning, HeartFit allows users to administer diagnoses themselves. The model consists of a deep recurrent convolutional neural network trained on 132 pre-labeled heartbeat audio samples. After the model was validated on a previously unseen set of 44 heartbeat audio samples, it achieved an f-beta score of 0.93 and an accuracy of 93.1%. This value exceeds that of clinical examination accuracy, which is around 83%, demonstrating the effectiveness of the HeartFit platform.
+                Cardiovascular disease (CD) is the number one leading cause of death worldwide, accounting for more than
+                17 million deaths in 2015. Based on a simple interface and machine learning, HeartFit allows users to
+                administer diagnoses themselves. The model consists of a deep recurrent convolutional neural network
+                trained on 132 pre-labeled heartbeat audio samples. After the model was validated on a previously unseen
+                set of 44 heartbeat audio samples, it achieved an f-beta score of 0.93 and an accuracy of 93.1%. This
+                value exceeds that of clinical examination accuracy, which is around 83%, demonstrating the
+                effectiveness of the HeartFit platform.
             </p>
-        <h4>
-            Parameter Study of a Kernel-Based Approach to Anomaly Detection in Multispectral Imaging
-        </h4>
+            <hr>
+            <h4>
+                Parameter Study of a Kernel-Based Approach to Anomaly Detection in Multispectral Imaging
+            </h4>
             <p><i>Neal Bayya</i></p>
             <p>
-              The purpose of this parametric study is to improve upon the US Navy's
-ability to detect illegal ships. Building on Dr. Hoffman's work, Neal, along with Dr. Colin Olsen and Dr. Timothy Doster,
-propose methods using kPCA, which outperforms current RX methods.
-In addition, he constructs an object-level analysis of anomaly detection performance, which is more
-intuitive and representative of the success in identifying ships rather than
-the contemporary pixel-level analysis. This research was originally conducted at a naval research lab, and Neal continued his work under the guidance of TJML.
+                The purpose of this parametric study is to improve upon the US Navy's
+                ability to detect illegal ships. Building on Dr. Hoffman's work, Neal, along with Dr. Colin Olsen and
+                Dr. Timothy Doster,
+                propose methods using kPCA, which outperforms current RX methods.
+                In addition, he constructs an object-level analysis of anomaly detection performance, which is more
+                intuitive and representative of the success in identifying ships rather than
+                the contemporary pixel-level analysis. This research was originally conducted at a naval research lab,
+                and Neal continued his work under the guidance of TJML.
             </p>
-	       <h4>
-        Breast Cancer Classification and Recurrence Prediction Using Machine Learning and Java
-        </h4>
+            <hr>
+            <h4>
+                Breast Cancer Classification and Recurrence Prediction Using Machine Learning and Java
+            </h4>
             <p><i>Min Kang</i></p>
             <p>
-              Min explored a possible use of breast cancer classification models as a prediction tool in clinical settings.  This empirical research had three phases: discriminating tumor type, classifying recurrence outcome within 1, 2, 3, and 5 years after surgery, and creating a predictive application with Java. The SMO models classified tumor types with 98% accuracy and recurrence outcomes with 91%, 83%, 78%, and 69% accuracy within 1, 2, 3, and 5 years, respectively. Lastly, a Java application implementing the SMO models was created to predict recurrence outcome for each year’s end with a specific data input.
+                Min explored a possible use of breast cancer classification models as a prediction tool in clinical
+                settings. This empirical research had three phases: discriminating tumor type, classifying recurrence
+                outcome within 1, 2, 3, and 5 years after surgery, and creating a predictive application with Java. The
+                SMO models classified tumor types with 98% accuracy and recurrence outcomes with 91%, 83%, 78%, and 69%
+                accuracy within 1, 2, 3, and 5 years, respectively. Lastly, a Java application implementing the SMO
+                models was created to predict recurrence outcome for each year’s end with a specific data input.
             </p>
+            <hr>
             <h4>
-            Retinal Image Segmentation
-        </h4>
+                Retinal Image Segmentation
+            </h4>
             <p><i>Nithin Dass</i></p>
             <p>
-            	Retinal image analysis has many applications, from checking the health of the eye to using it as indicators for other more severe diseases.
-		In order to provide valuable insights to eye doctors as well as those looking for symptons in eyes, this project aims to automatically segment retinal images.
-		Several important features will be filtered out, such as blood vessels, which can be fed into more complex, application specific machine learning structures.
+                Retinal image analysis has many applications, from checking the health of the eye to using it as
+                indicators for other more severe diseases.
+                In order to provide valuable insights to eye doctors as well as those looking for symptons in eyes, this
+                project aims to automatically segment retinal images.
+                Several important features will be filtered out, such as blood vessels, which can be fed into more
+                complex, application specific machine learning structures.
             </p>
+            <hr>
 
-	    <h4>EEG-Controlled Exoskeleton</h4>
+            <h4>EEG-Controlled Exoskeleton</h4>
             <p><i>Nithin Dass, Yash Bollisetty, and Srinidhi Krishnamurthy</i></p>
-            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=9009">&#9733;&#9733;&#9733; Intel ISEF Finalist &#9733;&#9733;&#9733;</a></p>
-            <p>Modern exoskeletons cost thousands of dollars and are far too expensive for the majority of the paralyzed population.
-              This project set out to create an inexpensive exoskeleton that a paralyzed patient could control with their brain, and they turned to machine learning to classify EEG signals.
-              Using a Discrete Wavelength Transform to convert EEG signals into vectors, they then used a support vector machine to differentiate the EEG signals into two classes of motion.
-              This allowed for a basic exoskeleton to allow for upperbody movement and body stabilization.
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=9009"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Intel ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>Modern exoskeletons cost thousands of dollars and are far too expensive for the majority of the paralyzed
+                population.
+                This project set out to create an inexpensive exoskeleton that a paralyzed patient could control with
+                their brain, and they turned to machine learning to classify EEG signals.
+                Using a Discrete Wavelength Transform to convert EEG signals into vectors, they then used a support
+                vector machine to differentiate the EEG signals into two classes of motion.
+                This allowed for a basic exoskeleton to allow for upperbody movement and body stabilization.
             </p>
-        <h4>
-            Diagnosing Diabetic Retinopathy
-        </h4>
+            <hr>
+            <h4>
+                Diagnosing Diabetic Retinopathy
+            </h4>
             <p><i>Justin Zhang, Kavya Kopparapu, and Neeyanth Kopparapu</i></p>
-            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=8946">&#9733;&#9733;&#9733; Intel ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=8946"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Intel ISEF Finalist &#9733;&#9733;&#9733;</a></p>
             <p>
-              Blindness related to diabetes, formally known as diabetic retinopathy, is a common condition in poor regions where difficult access to medical care prevents diagnosis.
-              After this project, all you need to diagnose diabetic retinopathy is a smartphone, an inexpensive lens system, and a convolutional neural network trained on tens of thousands of images.
-              Justin used Keras to create the deep learning model, taking advantage of the power of transfer learning with ResNet-50 pretrained on ImageNet.
+                Blindness related to diabetes, formally known as diabetic retinopathy, is a common condition in poor
+                regions where difficult access to medical care prevents diagnosis.
+                After this project, all you need to diagnose diabetic retinopathy is a smartphone, an inexpensive lens
+                system, and a convolutional neural network trained on tens of thousands of images.
+                Justin used Keras to create the deep learning model, taking advantage of the power of transfer learning
+                with ResNet-50 pretrained on ImageNet.
             </p>
-        <h4>
-            Automating Plagarism Detection
-        </h4>
+            <hr>
+            <h4>
+                Automating Plagarism Detection
+            </h4>
             <p><i>Yuki Oyama and Arvind Srinivasan</i></p>
             <p>
-            	Detecting certain characteristics of writing related to style is very difficult using traditional methods.
-		However, using machine learning, this project was able to associate authors with 72 different linguistic parameters characterizing writing style.
-		They turned to Scikit-Learn for a quick and fast network which yielded impressive results.
-		This apporach can be used as an improved way for preventing plagarism versus traditional methods.
+                Detecting certain characteristics of writing related to style is very difficult using traditional
+                methods.
+                However, using machine learning, this project was able to associate authors with 72 different linguistic
+                parameters characterizing writing style.
+                They turned to Scikit-Learn for a quick and fast network which yielded impressive results.
+                This apporach can be used as an improved way for preventing plagarism versus traditional methods.
             </p>
-        <h4>
-            Detecting Terrorism on Social Media
-        </h4>
-          <p><i>Mihir Patel and Nikhil Sardana</i></p>
-          <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=8815">&#9733;&#9733;&#9733; Intel ISEF Finalist &#9733;&#9733;&#9733;</a></p>
-          <p>Many extremists such as ISIS have used social media to recruit and influence thousands of potential jihadists and foreign fighters.
-          TerroristTracker aims to stop this form of propaganda by turning the techniques these organizations use against them.
-          By following specific symbols, such as the ISIS flag, using computer vision techniques and convolutional neural networks, a new system has been developed to track image features with 93.5% accuracy.
-          These features, along with those extracted from caption analysis and user content, has allowed for classification with an SVM with 90.5% accuracy for identifying terrorist accounts.
-          </p>
-    </section>
-    <!--close all non-footer content-->
+            <hr>
+            <h4>
+                Detecting Terrorism on Social Media
+            </h4>
+            <p><i>Mihir Patel and Nikhil Sardana</i></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=8815"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Intel ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>Many extremists such as ISIS have used social media to recruit and influence thousands of potential
+                jihadists and foreign fighters.
+                TerroristTracker aims to stop this form of propaganda by turning the techniques these organizations use
+                against them.
+                By following specific symbols, such as the ISIS flag, using computer vision techniques and convolutional
+                neural networks, a new system has been developed to track image features with 93.5% accuracy.
+                These features, along with those extracted from caption analysis and user content, has allowed for
+                classification with an SVM with 90.5% accuracy for identifying terrorist accounts.
+            </p>
+        </section>
+        <!--close all non-footer content-->
     </div>
 
     <footer class="site-footer" style="background-image:linear-gradient(120deg, #272d39, #272d39);">
@@ -169,20 +279,25 @@ the contemporary pixel-level analysis. This research was originally conducted at
             <table style="border: 0px; width=100%;">
                 <tr style="border: 0px">
                     <td style="border:0px">
-                        <a href="https://tjmachinelearning.com"><img src="img/logo_alt.svg" width="150em" style="vertical-align:middle; margin-right:1em"></img></a>
+                        <a href="https://tjmachinelearning.com"><img src="img/logo_alt.svg" width="150em"
+                                style="vertical-align:middle; margin-right:1em"></img></a>
                     </td>
                     <td style="border:0px; text-align: left">
-                        <p style="color:#fff">TJ Machine Learning Club<br>6560 Braddock Rd, Alexandria, VA 22312<br><code style="background-color:#000"><a href="https://github.com/nikhilsardana/tjmachinelearning">Open-source</a></code>&nbsp;
+                        <p style="color:#fff">TJ Machine Learning Club<br>6560 Braddock Rd, Alexandria, VA
+                            22312<br><code style="background-color:#000"><a
+                                    href="https://github.com/nikhilsardana/tjmachinelearning">Open-source</a></code>&nbsp;
 
-                        <code style="background-color:#000"><a href="https://github.com/tjmachinelearning">Github</a></code></p>
+                            <code style="background-color:#000"><a
+                                    href="https://github.com/tjmachinelearning">Github</a></code></p>
 
                     </td>
-              </tr>
+                </tr>
             </table>
         </section>
     </footer>
 
     <script src="js/classie.js"></script>
     <script src="js/demo1.js"></script>
-  </body>
+</body>
+
 </html>
