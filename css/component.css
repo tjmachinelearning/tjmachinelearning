@@ -56,6 +56,10 @@
 	transition: color 0.3s;
 }
 
+.menu--alonso .menu__link[href~="opportunities"], .menu--alonso .menu__link[for~="opportunities"], .menu--alonso .menu__link[href~="../opportunities"] {
+	margin-right: 25px;
+}
+
 .menu--alonso .menu__link:hover,
 .menu--alonso .menu__link:focus {
 	color: #929292;
@@ -107,13 +111,18 @@
 }
 
 .menu--alonso .menu__item:nth-child(5).menu__item--current~.menu__line {
-	-webkit-transform: translate3d(400%, 0, 0);
-	transform: translate3d(400%, 0, 0);
+	-webkit-transform: translate3d(412%, 0, 0);
+	transform: translate3d(412%, 0, 0);
 }
 
 .menu--alonso .menu__item:nth-child(6).menu__item--current~.menu__line {
-	-webkit-transform: translate3d(512%, 0, 0);
-	transform: translate3d(512%, 0, 0);
+	-webkit-transform: translate3d(520%, 0, 0);
+	transform: translate3d(520%, 0, 0);
+}
+
+.menu--alonso .menu__item:nth-child(7).menu__item--current~.menu__line {
+	-webkit-transform: translate3d(632%, 0, 0);
+	transform: translate3d(632%, 0, 0);
 }
 
 @media screen and (max-width:55em) {
