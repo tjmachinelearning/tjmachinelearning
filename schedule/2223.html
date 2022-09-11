@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>2022-2023 Lectures | TJ Machine Learning Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../css/component.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style1.css" />
+    <script src="../js/modernizr.custom.js"></script>
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-105333430-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="mobile-menu">
+            <button id="trigger-overlay" type="button" style="background:none; border:none; position: fixed;">
+                <img src="../img/menu.png" alt="Menu" style="max-width:2em">
+          </button>
+        </div>
+        <section class="page-header">
+            <h1 class="project-name" style="color:#fff">TJ Machine Learning Club</h1>
+            <h2 class="project-tagline" style="color:#fff">Making AI more accessible</h2>
+        </section>
+        <div class="overlay overlay-hugeinc">
+            <button type="button" class="overlay-close">Close</button>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Lectures</a></li>
+                    <li><a href="../rankings">Rankings</a></li>
+                    <li><a href="../resources">Resources</a></li>
+                    <li><a href="../opportunities">Opportunities</a></li>
+                    <li><a href="../research">Research</a></li>
+                    <li><a href="../competitions/2021">Competitions</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="../container">
+            <section class="section section--menu" id="Alonso">
+                <span class="link-copy"></span>
+                <nav class="menu menu--alonso">
+                    <ul class="menu__list">
+                        <li class="menu__item"><a href="../" class="menu__link">Home</a></li>
+                        <li class="menu__item  menu__item--current"><a href="#" class="menu__link">Lectures</a></li>
+                        <li class="menu__item"><a href="../rankings" class="menu__link">Rankings</a></li>
+                        <li class="menu__item"><a href="../resources" class="menu__link">Resources</a></li>
+                        <li class="menu__item"><a href="../opportunities" class="menu__link">Opportunities</a></li>
+                        <li class="menu__item"><a href="../research" class="menu__link">Research</a></li>
+                        <li class="menu__item"><a href="../competitions/2021" class="menu__link">Competitions</a></li>
+                        <li class="menu__line"></li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+        <section class="main-content">
+            <h3><a id="welcome-to-tjhsst-machine-learning" class="anchor" href="#welcome-to-tjhsst-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Schedule</h3>
+            <div class="mobileyear">
+                <section class="section section--menu" id="yearnav">
+                    <span class="link-copy"></span>
+                    <nav class="menu menu--yearnav">
+                        <ul class="menu__list">
+                            <li class="menu__item menu__item--current"><a class="menu__link" href="#">22&ndash;23</a></li>
+                            <li class="menu__item"><a class="menu__link" href="2223">21&ndash;22</a></li>
+                            <li class="menu__item"><a class="menu__link" href="2021">20&ndash;21</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1920">19&ndash;20</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1819">18&ndash;19</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1718">17&ndash;18</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1617">16&ndash;17</a></li>
+                            <li class="menu__line"></li>
+                        </ul>
+                    </nav>
+                </section>
+            </div>
+            <div class="desktopyear">
+                <section class="section section--menu" id="yearnav">
+                    <span class="link-copy"></span>
+                    <nav class="menu menu--yearnav">
+                        <ul class="menu__list">
+                            <li class="menu__item  menu__item--current"><a class="menu__link" href="#">2022&ndash;2023</a></li>
+                            <li class="menu__item"><a class="menu__link" href="2122">2021&ndash;2022</a></li>
+                            <li class="menu__item"><a class="menu__link" href="2021">2020&ndash;2021</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1920">2019&ndash;2020</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1819">2018&ndash;2019</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1718">2017&ndash;2018</a></li>
+                            <li class="menu__item"><a class="menu__link" href="1617">2016&ndash;2017</a></li>
+                            <li class="menu__line"></li>
+                        </ul>
+                    </nav>
+                </section>
+            </div>
+            <div class="splittrack">
+                <section class="section section--menu" id="yearnav">
+                    <span class="link-copy"></span>
+                    <nav class="menu menu--yearnav">
+                        <ul class="menu__list">
+                            <li class="menu__item  menu__item--current"><a class="menu__link" href="#">Beginner</a></li>
+                            <li class="menu__item"><a class="menu__link" href="2223Advanced">Advanced</a></li>
+                            <li class="menu__line"></li>
+                        </ul>
+                    </nav>
+                </section>
+            </div>
+
+            <!--Lecture Content-->
+            <!-- spreadsheet (needs debugging)
+            <script src="js/google-sheets-2122-beginner.js" type="text/javascript"></script>
+            <div id="sched" style="width:100%">
+            </div>
+            -->
+            <br>
+            <!-- spreadsheet (debug)
+            <script src="js/google-sheets-2122-beginner.js" type="text/javascript"></script>
+            <div id="sched" style="width:100%">
+            </div>
+            -->
+            <table style="width:100%">
+
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Course Materials</th>
+                </tr>
+
+                <tr>
+                    <td>September 14, 2022</td>
+                    <td>Machine Learning Club Overview</td>
+                    <td>
+                       <!-- <a href="../lectures/2122/beginner/Beginner_Intro.pdf" target="_blank">Overview PDF</a>
+                       <br>
+                       <a href="https://docs.google.com/presentation/d/1yU4a-m-5YFPTnNzH39uHMSNxhz5ds9rbsAm4rTH-XH0/edit?usp=sharing" target="_blank">Slides</a> -->
+                    </td>
+                </tr>
+
+                <!-- <tr>
+                    <td>September 22, 2021</td>
+                    <td>Intro to Python and Kaggle</td>
+                    <td>
+                        <a href="../lectures/2122/beginner/python/Intro_to_Python.pdf" target="_blank">PDF</a>
+                       <br> 
+                       <a href="https://docs.google.com/presentation/d/19Ab2CJSqPo0dcHgP6hxaaSzuMzy546yjh16bWiFlrfM/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>September 29, 2021</td>
+                    <td>Decision Trees 1</td>
+                    <td>
+                        <a href="../lectures/2122/beginner/Decision_Trees.pdf" target="_blank">PDF</a>
+                       
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>October 6, 2021</td>
+                    <td>Decision Trees 2</td>
+                    <td>
+                        <a href="../lectures/2122/beginner/Decision_Trees.pdf" target="_blank">PDF</a>
+                        <br>
+                        <a href="../lectures/2122/beginner/Decision_Trees_Problem_Set.pdf" target="_blank">Problem Set</a>
+                        <br>
+                        <a href="https://www.kaggle.com/c/decision-trees-2021" target="_blank">Competition</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>October 20, 2021</td>
+                    <td>Intro to Research</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1ms6XpPwOlezonKJixyT49GPTPSR4a_ejMLnyODUpBEU/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>October 27, 2021</td>
+                    <td>Random Forest Classifiers</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Random_Forests___Shortened_Version.pdf" target="_blank">PDF</a>
+                       <br>
+                       <a href="https://docs.google.com/presentation/d/1gOkCHU19Xeiv9pnGSGMqBGxW1mnUGYl7Cm2uTxbhrYI/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>November 10, 2021</td>
+                    <td>SVMs and Decision Trees Competition Work Day (AMC)</td>
+                    <td>
+                       <a href="https://www.youtube.com/watch?v=LvQY_O-N56s" target="_blank">Video</a>
+                       <br>
+                       <a href="../lectures/2021/beginner/support vector machines/Support_Vector_Machines.pdf" target="_blank">PDF</a>
+                       <br>
+                       <a href="../lectures/2021/beginner/support vector machines/Support_Vector_Machines_Slides.pdf" target="_blank">Slides</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>November 17, 2021</td>
+                    <td>Support Vector Machines</td>
+                    <td>
+                       <a href="https://www.kaggle.com/c/tjml-2021-22-titanic-survivor-challenge/overview" target="_blank">Competition</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>November 22, 2021</td>
+                    <td>Naive Bayes</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Naive_Bayes.pdf" target="_blank">PDF</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>December 1, 2021</td>
+                    <td>K-Nearest Neighbors</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/KNNs.pdf" target="_blank">PDF</a>
+                       <br>
+                       <a href="../lectures/2122/beginner/KNN Slides.pdf" target="_blank">Slides</a>
+                       <br>
+                       <a href="https://colab.research.google.com/drive/1zUpzh6ebUaoPdkMBp1hQ1VKLB841czUU?usp=sharing" target="_blank">Colab</a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>December 8, 2021</td>
+                    <td>Neural Networks: An Intuitive Introduction</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Neural Networks_ An Intuitive Introduction.pdf" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>December 15, 2021</td>
+                    <td>Neural Networks: Neurons and Forward Propogation</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1pSdEUFN93JGQDT8GgHpv51PVCxjT0vm8l6SXpzpVa6Q/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>January 12, 2022</td>
+                    <td>Neural Networks: Backpropogation</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1ZiXu37w-MBjbz-MsqF_mCSUTFyG0tcYbbj6-HCUMYy0/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>January 19, 2022</td>
+                    <td>Neural Networks: Hyperparameters</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1YMCjCBBk3IYi9_j961OGU8SOrH3x080QuO6bZT-6vho/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>February 2, 2022</td>
+                    <td>Intro to TensorFlow</td>
+                    <td>
+                       <a href="https://colab.research.google.com/drive/19Cs-bcl43zlrxNoHCXCE1vlTyKsX2HYL?usp=sharing" target="_blank">Lab</a>
+                       <br>
+                       <a href="https://www.kaggle.com/c/tjml-2021-2022-neural-network-competition/overview" target="_blank">Competition</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>February 9, 2022</td>
+                    <td>Neural Networks Competition Shell Code</td>
+                    <td>
+                       <a href="https://www.kaggle.com/saumandas/reading-in-code" target="_blank">Kaggle Notebook</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>February 16, 2022</td>
+                    <td>Convolutional Neural Networks: The Convolution</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1K0kkYC5rjOY02BP_tFhpNFyOXnKryz1iIJG1LKb-ViE/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>February 23, 2022</td>
+                    <td>Bioinformatics Society Collaboration: Omics</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/2_23_22 TJML x TJ Bioinformatics Workshop (Beginner).pdf" target="_blank">Slides</a>
+                       <br>
+                       <a href="https://colab.research.google.com/drive/1Awq3vkTUOvayvrVf588q5ZHOA0ypP-jt?usp=sharing" target="_blank">Lab</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>March 2, 2022</td>
+                    <td>Convolutional Neural Networks: The Network</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1XE0Q2q05Z4a9uxeIYJAIK0pOCoYNJRpFWUwIP27P9XI/edit?usp=sharing" target="_blank">Slides</a>
+                       <a href="https://www.kaggle.com/c/tjml-2021-2022-cnn-competition" target="_blank">Competition</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>March 9, 2022</td>
+                    <td>Recurrent Neural Networks</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1JZ4kpXMMoBfz0VhSXG6Svx0rlZ-wQ8Wh-dltMaY17V0/edit?usp=sharing" target="_blank">Slides</a>
+                       <br>
+                       <a href="https://github.com/2022tgoel/Pytorch_Examples/blob/main/RNNs_to_Transformers.ipynb" target="_blank">Lab</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>March 16, 2022</td>
+                    <td>Generative Adversarial Networks (GANs)</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/GANs.pdf" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>March 23, 2022</td>
+                    <td>Ensemble Learning</td>
+                    <td>
+                       <a href="https://docs.google.com/presentation/d/1w3pojtNjkVMuRfS3ORN0jlMbSDIkW9EBba5G3GNo9ZA/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>March 30, 2022</td>
+                    <td>Dimensionality Reduction & Autoencoders</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Autoencoder Slides.pdf" target="_blank">Slides</a>
+                        <br>
+                       <a href="https://www.kaggle.com/code/saumandas/intro-to-autoencoders" target="_blank">Lab</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>April 13, 2022</td>
+                    <td>Reinforcement Learning</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Reinforcement Learning Slides.pdf" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <td colspan="3" style="text-align: center" id="guest"><strong><br>Guest Lectures</strong></td>
+                <tr>
+                    <td>April 20, 2022</td>
+                    <td>Machine Learning for Healthcare and Biology</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/tjml_april_2022_bio_ml_guest_lecture.pdf" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>April 27, 2022</td>
+                    <td>Pytorch and fast.ai</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Pytorch Lecture Document - Sachin Satishkumar.pdf" target="_blank">PDF</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>May 10, 2022</td>
+                    <td>Regularization</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Regularization.pdf" target="_blank">PDF</a>
+                       <br>
+                       <a href=" https://docs.google.com/presentation/d/19rWNaPr8qOKfClaY5PX0jpBm3KaPqf8dwTsWG5jY4P8/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>May 18, 2022</td>
+                    <td>Generative Algorithms</td>
+                    <td>
+                       <a href="../lectures/2122/beginner/Generative_Adversarial_Networks.pdf" target="_blank">PDF</a>
+                       <br>
+                       <a href="https://docs.google.com/presentation/d/1LwUAr6vbhNOkFQIeB7ZqZuCBqzQTKiyTmjjF3R84Fqk/edit?usp=sharing" target="_blank">Slides</a>
+                    </td>
+                </tr> -->
+
+            </table>
+            <!--Lecture content-->
+        </section>
+        <!--close all non-footer content-->
+    </div>
+    <footer class="site-footer" style="background-image:linear-gradient(120deg, #272d39, #272d39);">
+        <section class="main-content">
+            <table style="border: 0px; width:100%;">
+                <tr style="border: 0px">
+                    <td style="border:0px">
+                        <a href="https://tjmachinelearning.com"><img src="../img/logo_alt.svg" width="150em" style="vertical-align:middle; margin-right:1em"></img></a>
+                    </td>
+                    <td style="border:0px; text-align: left">
+                        <p style="color:#fff">TJ Machine Learning Club<br>6560 Braddock Rd, Alexandria, VA 22312<br><code style="background-color:#000"><a href="https://github.com/nikhilsardana/tjmachinelearning">Open-source</a></code>
+                        &nbsp;<code style="background-color:#000"><a href="https://github.com/tjmachinelearning">GitHub</a></code></p>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        </footer>
+        <script src="../js/classie.js"></script>
+        <script src="../js/demo1.js"></script>
+</body>
+
+</html>
