@@ -92,6 +92,54 @@
                 the applications are endless!</p>
             <p>Here is a brief sample of the many projects, both completed and ongoing, we have helped mentor.</p>
 
+			<h4>
+                A Novel Framework Using Generative Adversarial Networks (GANs) to Create Land Resource Management Strategy through Economic-Environmental Payoff Optimization
+            </h4>
+            <p><i>Sanchali Banerjee</i></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=25470"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>
+                This study proposes a generative AI procedure for managing land resources to optimize the payoff between economic and
+                environmental benefit. Randomly selected land usage images in the northeastern United States were obtained from the
+                Multi-Resolution Land Characteristics (MRLC) Consortium, classifying pixels into 16 land classes. Economic and environmental
+                attributes, including GDP, employment, and air quality index, were acquired from the Bureau of Economic Analysis and Environmental
+                Protection Agency. A conditional generative adversarial network (cGAN) performing picture translation (Pix2Pix) was trained to
+                generate land layout images in the following procedure: (1) The generator model produced layout images that were sent to the
+                discriminator model. (2) The economic-environmental payoff was balanced via a custom loss function in the discriminator using
+                a deep neural network. (3) After training, a user-provided aerial image of land was passed to the model; the image was segmented
+                by land type using a U-Net trained on MRLC land maps and Landsat satellite imagery. (4) The model output an optimal land usage
+                layout aligning with geographic constraints of the user's area of interest (ex. water bodies, urbanized regions). The neural network
+                yields an average R^2 of 80.2% across the economic/environmental characteristics, and the U-Net has a pixel classification accuracy of
+                88.1%. The GAN achieves a Frechet Inception Distance of 10.4, indicating that it successfully generates realistic land layouts comparable
+                to real-world standards. The findings demonstrate a robust framework that recommends the optimal allocation of land resources to sustain
+                economic growth without compromising environmental sustainability.
+            </p>
+            <hr>
+            
+            <h4>
+                Diffusion-Based Conditional Mesh Synthesis for Rapid 3D Visual Design
+            </h4>
+            <p><i>Sritan Motati, Anant Khandelwal, and Siddhant Sood</i></p>
+            <p><a href="https://abstracts.societyforscience.org/Home/FullAbstract?ProjectId=25944"
+                    target="_blank">&#9733;&#9733;&#9733;
+                    Regeneron ISEF Finalist &#9733;&#9733;&#9733;</a></p>
+            <p>
+                As digital design has become ubiquitous over the last few decades, 3D creations have become much more advanced through Computer-Aided Design (CAD).
+                However, this approach can be tedious, time-consuming, and inaccessible, especially when creating the kinds of smooth and curved designs necessary
+                in art. To accelerate 3D artwork, this research presents CloudGen, a revolutionary text-to-3D printing pipeline to create 3D models from natural
+                language prompts, allowing artists to shape objects using text. To this end, a Latent Diffusion Model (LDM) was implemented to generate print-ready
+                3D structures based on text inputs. First, an encoder-decoder mechanism transforms point clouds into functions which parametrize 3D shapes. Then,
+                using pre-trained CLIP embeddings to convert text prompts into numerical representations, a vision transformer creates such 3D shapes, repeatedly
+                iterating upon the object embedding towards the shape designated by the prompt. Once the initial synthesis is complete, the shape generated is smoothed
+                using the bilateral filter algorithm, thereby removing any inconsistencies and instabilities. Further, to enable users to modify their generations, a
+                novel editing framework was developed to retrace diffusion steps and incorporate feedback prompts. The end-to-end generation architecture has been
+                implemented in a user-friendly web interface paired with a virtual reality-powered design viewer. Both quantitative and qualitative experiments validate
+                the efficacy of the proposed text-to-3D printing pipeline. With this research, CloudGen establishes the foundation for human-in-the-loop creation of 3D
+                art pieces.
+            </p>
+            <hr>
+
             <h4>
                 HypeFL: A Novel Blockchain-Based Architecture Using Federated Learning and Cooperative Perception for a Fully-Connected Autonomous Vehicle System
             </h4>
